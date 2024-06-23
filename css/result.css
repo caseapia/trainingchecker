@@ -1,14 +1,3 @@
-header {
-    padding-top: 5%;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-}
-header h1 {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-}
 main {
     position: absolute;
     left: 50%;
@@ -35,12 +24,13 @@ div.info-container {
     border: 1px solid #242830;
     transition: .3s;
 }
-.hiddencopyalert {
+.hiddenalert {
     opacity: 0;
     transition: opacity .2s ease-in;
 }
-.hiddencopyalert.nothide {
+.hiddenalert.nothide {
     opacity: 1;
+    z-index: 99999;
 }
 @media screen and (max-width: 767px) {
     div.info-container {

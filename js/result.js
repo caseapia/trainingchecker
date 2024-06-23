@@ -8,9 +8,7 @@ async function fetchUserData() {
             throw new Error('Network response was not ok');
         }
         const result = await response.json();
-        console.log('API Response:', result);
         const data = result.data;
-        console.log('Extracted Data:', data);
         displayUserData(data);
     } catch (error) {
         console.error('Error fetching user data:', error);
@@ -18,7 +16,6 @@ async function fetchUserData() {
 }
 
 function displayUserData(data) {
-    console.log('Data keys:', Object.keys(data));
 
     document.getElementById('userid').textContent = data.id || '0';
     document.getElementById('nickname').textContent = data.login || 'Error';
@@ -53,9 +50,22 @@ function copyToClipboard(elementId) {
     const alert = document.getElementById('copyalert');
     navigator.clipboard.writeText(text).then(() => {
         alert.classList.add('nothide')
+        alert.innerHTML = `Данные были добавлены в буфер обмена`
+        setTimeout(() => {
+            alert.classList.remove('nothide')
+        }, 3000);
     }).catch(err => {
         console.error('Failed to copy in clipboard:', err)
     });
+}
+
+function update() {
+    const alert = document.getElementById('updatealert')
+    fetchUserData();
+    alert.classList.add('nothide');
+    setTimeout(() => {
+        alert.classList.remove('nothide')
+    }, 3000);
 }
 
 function goback() {

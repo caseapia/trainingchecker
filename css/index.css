@@ -1,14 +1,3 @@
-header {
-    padding-top: 5%;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-}
-header h1 {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-}
 main {
     position: absolute;
     left: 50%;
@@ -58,9 +47,12 @@ small#cyrillic-symbols {
     opacity: 0;
     transition: opacity .2s;
 }
-
 small#cyrillic-symbols.visible {
     opacity: 1;
+}
+ul#navbar {
+    display: flex;
+    flex-direction: row;
 }
 input#playername.error {
     border: 1px solid var(--text-block)
