@@ -22,9 +22,9 @@ function displayUserData(data) {
 
     document.getElementById('userid').textContent = data.id || '0';
     document.getElementById('nickname').textContent = data.login || 'Error';
-    document.getElementById('access').textContent = data.access || '0';
-    document.getElementById('admin').textContent = data.moder || '0';
-    document.getElementById('verify').textContent = data.verify || '0';
+    document.getElementById('access').textContent = data.access || 'Нет';
+    document.getElementById('admin').textContent = data.moder || 'Игрок';
+    document.getElementById('verify').textContent = data.verify || 'Нет';
     document.getElementById('verifytext').textContent = data.verifyText || 'Нет';
     document.getElementById('mute').textContent = data.mute || '0';
     document.getElementById('online').textContent = data.online ? 'В сети' : 'Не в сети';
