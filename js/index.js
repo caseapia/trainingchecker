@@ -32,3 +32,27 @@ function redirect() {
         window.location.href = './result.html';
     });
 }
+
+const username = '1dontkillme';
+const repo = 'trainingchecker';
+const apiUrl = `https://api.github.com/repos/${username}/${repo}/commits`;
+
+async function getLastCommitDate() {
+    try {
+        const response = await fetch(apiUrl);
+        const commits = await response.json();
+
+        if (Array.isArray(commits) && commits.length > 0) {
+            const lastCommitDate = commits[0].commit.committer.date;
+            const lastUpdate = new Date(lastCommitDate).toLocaleString();
+            document.getElementById('lastUpdate').innerHTML = `${lastUpdate}`;
+        } else {
+            document.getElementById('lastUpdate').innerHTML = `<span style="color: var(--text-block)">Нет доступных обновлений</span>`;
+        }
+    } catch (error) {
+        console.error('Error when parsing data:', error);
+        document.getElementById('lastUpdate').innerHTML = `<span style="color: var(--text-block)">Ошибка при получении данных о последнем обновлении.</span>`;
+    }
+}
+
+getLastCommitDate();

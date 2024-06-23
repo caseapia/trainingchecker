@@ -10,6 +10,9 @@ main {
     top: 50%;
     transform: translate(-50%, -50%);
 }
+div.container {
+    height: 70dvh;
+}
 .bi-clipboard {
     cursor: pointer;
 }
