@@ -23,7 +23,21 @@ function displayUserData(data) {
     document.getElementById('userid').textContent = data.id || '0';
     document.getElementById('nickname').textContent = data.login || 'Error';
     document.getElementById('access').textContent = data.access || 'Нет';
-    document.getElementById('admin').textContent = data.moder || 'Игрок';
+    if (data.moder === 0) {
+        document.getElementById('admin').textContent = 'Игрок';
+    }
+    if (data.moder === 1) {
+        document.getElementById('admin').textContent = 'Мини-модератор';
+    }
+    if (data.moder === 2) {
+        document.getElementById('admin').textContent = 'Модератор';
+    }
+    if (data.moder > 3 > 999) {
+        document.getElementById('admin').textContent = 'Старший модератор'
+    }
+    if (data.moder === 999) {
+        document.getElementById('admin').textContent = 'Разработчик'
+    }
     document.getElementById('verify').textContent = data.verify || 'Нет';
     document.getElementById('verifytext').textContent = data.verifyText || 'Нет';
     document.getElementById('mute').textContent = data.mute || '0';
