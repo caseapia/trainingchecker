@@ -32,6 +32,45 @@ div.info-container {
     opacity: 1;
     z-index: 99999;
 }
+div.badge {
+    border: 1px solid #ffffff;
+    border-radius: 200px;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    width: fit-content;
+    padding: 4px;
+    font-size: 20px;
+    transform: translateY(0px);
+    transition: .3s;
+        &.sitestaff {
+            background: #2aaa686c;
+            display: none;
+        }
+        &.trainingstaff {
+            background: #0f4c816c;
+            display: none;
+        }
+        &.trainingdeveloper {
+            background: #B72A2A6c;
+            display: none;
+        }
+        &.oldplayer {
+            background: #00a5a26c;
+            display: none;
+        }
+}
+div.badge:hover {
+    transform: scale(1.2,1.2);
+}
+div.badges {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+li#staffbadge {
+    display: none;
+}
 @media screen and (max-width: 767px) {
     div.info-container {
         top: 55%;

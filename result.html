@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <!-- Meta Tags -->
     <meta charset="UTF-8">
@@ -53,6 +53,22 @@
                     <li><label for="serverid">ID на сервере:</label> <span id="serverid">Please, wait...</span> <i class="bi bi-clipboard" onclick="copyToClipboard('serverid')"></i></li>
                     <li><label for="regdate">Дата регистрации:</label> <span id="regdate">Please, wait...</span> <i class="bi bi-clipboard" onclick="copyToClipboard('regdate')"></i></li>
                     <li><label for="lastlogin">Дата последнего входа:</label> <span id="lastlogin">Please, wait...</span> <i class="bi bi-clipboard" onclick="copyToClipboard('lastlogin')"></i></li>
+                    <li id="staffbadge">
+                        <div class="badges">
+                            <div class="badge sitestaff" id="sitestaff" data-bs-toggle="tooltip" title="Разработчик TRAINING CHECKER">
+                                <span style="z-index: 9999;filter: none;"><i class="bi bi-braces"></i></span>
+                            </div>
+                            <div class="badge trainingdeveloper" id="trainingdev" data-bs-toggle="tooltip" title="Разработчик TRAINING SERVER">
+                                <span style="z-index: 9999;filter: none;"><i class="bi bi-gear-fill"></i></span>
+                            </div>
+                            <div class="badge trainingstaff" id="trainingstaff" data-bs-toggle="tooltip" title="Персонал TRAINING SERVER">
+                                <span style="z-index: 9999;filter: none;"><i class="bi bi-shield-shaded"></i></span>
+                            </div>
+                            <div class="badge oldplayer" id="oldplayer" data-bs-toggle="tooltip" title="Ветеран — входит в первые 130000 игроков сервера">
+                                <span style="z-index: 9999;filter: none;"><i class="bi bi-award"></i></span>
+                            </div>
+                        </div>
+                    </li>
                     <!-- <li><label for="warns">Предупреждения:</label> <span id="warns">Please, wait...</span> <i class="bi bi-clipboard" onclick="copyToClipboard('userid')"></i></li></li> -->
                 </ul>
             </div>

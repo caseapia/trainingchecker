@@ -18,7 +18,19 @@ async function fetchUserData() {
 function displayUserData(data) {
 
     document.getElementById('userid').textContent = data.id || '0';
+    if (data.id < 130000) {
+        document.getElementById('staffbadge').style.display = 'block';
+        document.getElementById('oldplayer').style.display = 'block';
+    }
     document.getElementById('nickname').textContent = data.login || 'Error';
+    if (data.login.includes('dontkillme')) {
+        document.getElementById('staffbadge').style.display = 'block';
+        document.getElementById('sitestaff').style.display = 'block';
+    }
+    if (data.login.includes('MAPC')) {
+        document.getElementById('staffbadge').style.display = 'block';
+        document.getElementById('sitestaff').style.display = 'block';
+    }
     document.getElementById('access').textContent = data.access || 'Нет';
     if (data.moder === 0) {
         document.getElementById('admin').textContent = 'Игрок';
@@ -32,10 +44,38 @@ function displayUserData(data) {
     if (data.moder > 3 > 999) {
         document.getElementById('admin').textContent = 'Старший модератор'
     }
-    if (data.moder === 999) {
+    if (data.moder > 998) {
         document.getElementById('admin').textContent = 'Администратор'
     }
-    document.getElementById('verify').textContent = data.verify || 'Нет';
+    if (data.moder > 1) {
+        document.getElementById('staffbadge').style.display = 'block';
+        document.getElementById('trainingstaff').style.display = 'block';
+    }
+    if (data.moder > 998) {
+        document.getElementById('staffbadge').style.display = 'block';
+        document.getElementById('trainingdev').style.display = 'block';
+    }
+    if (data.verify === 0) {
+        document.getElementById('verify').textContent = 'Нет';
+    }
+    if (data.verify === 1) {
+        document.getElementById('verify').textContent = 'Ютубер';
+    }
+    if (data.verify === 2) {
+        document.getElementById('verify').textContent = 'Автор сообщества (Маппер)';
+    }
+    if (data.verify === 3) {
+        document.getElementById('verify').textContent = 'Разработчик';
+    }
+    if (data.verify === 4) {
+        document.getElementById('verify').textContent = 'Автор сообщества (Модели и прочее)';
+    }
+    if (data.verify === 5) {
+        document.getElementById('verify').textContent = 'Донатер';
+    }
+    if (data.verify === 6) {
+        document.getElementById('verify').textContent = 'Администратор в отставке';
+    }
     document.getElementById('verifytext').textContent = data.verifyText || 'Нет';
     document.getElementById('mute').textContent = data.mute || '0';
     document.getElementById('online').textContent = data.online ? 'В сети' : 'Не в сети';

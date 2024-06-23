@@ -96,7 +96,7 @@ async function getLastCommit(username, repo) {
 
 getLastCommit(username, repo)
     .then(commitMessage => {
-        // document.getElementById('lastUpdate').title = `${commitMessage}`
+        document.getElementById('lastUpdate').title = `${commitMessage}`
     }) .catch (error => {
         console.error('Error:', error)
     })
