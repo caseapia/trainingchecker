@@ -39,7 +39,12 @@ const apiUrl = `https://api.github.com/repos/${username}/${repo}/commits`;
 
 async function getLastCommitDate() {
      try {
-         const response = await fetch(apiUrl);
+        const response = await fetch(apiUrl, {
+            headers: {
+                'Authorization': `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`,
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        });
 
          if (!response.ok) {
              throw new Error(`HTTP error! status: ${response.status}`);
@@ -69,6 +74,7 @@ async function getLastCommit(username, repo) {
     
     const response = await fetch(apiUrl, {
         headers: {
+            'Authorization': `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`,
             'Accept': 'application/vnd.github.v3+json'
         }
     });
@@ -94,3 +100,45 @@ getLastCommit(username, repo)
     }) .catch (error => {
         console.error('Error:', error)
     })
+
+async function getAllCommits(username, repo) {
+    const apiUrl = `https://api.github.com/repos/${username}/${repo}/commits`;
+    let allCommits = [];
+    let page = 1;
+
+    while(true) {
+        const response = await fetch(`${apiUrl}?page=${page}`, {
+            headers: {
+                'Authorization': `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`,
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status}`)
+        }
+        const commits = await response.json();
+        if (commits.length === 0) {
+            break;
+        }
+        allCommits = allCommits.concat(commits.map(commit => commit.commit.message));
+        page++;
+    }
+
+
+    return allCommits
+}
+
+getAllCommits(username, repo)
+    .then(commitMessages => {
+        const listElement = document.getElementById('allupdates');
+        listElement.innerHTML = '';
+        commitMessages.forEach(message => {
+            const listItem = document.createElement('li');
+            listItem.textContent = message;
+            listElement.appendChild(listItem);
+        });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
