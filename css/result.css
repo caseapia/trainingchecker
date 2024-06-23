@@ -4,6 +4,11 @@ header {
     left: 50%;
     transform: translate(-50%);
 }
+header h1 {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
 main {
     position: absolute;
     left: 50%;
@@ -17,12 +22,18 @@ div.container {
     cursor: pointer;
 }
 div.info-container {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
     border-radius: 5px;
     padding: 10px;
-    width: 100%;
-    max-width: 100%;
+    width: 150%;
+    min-height: 50%;
+    max-width: 300%;
     line-height: 2.225rem;
     border: 1px solid #242830;
+    transition: .3s;
 }
 .hiddencopyalert {
     opacity: 0;
@@ -30,4 +41,24 @@ div.info-container {
 }
 .hiddencopyalert.nothide {
     opacity: 1;
+}
+@media screen and (max-width:767px) {
+    div.info-container {
+        top: 60%;
+    }
+}
+@media screen and (max-width:320px) {
+    div.info-container {
+        top: 100%;
+    }
+}
+@media screen and (max-width:360px) {
+    div.info-container {
+        top: 70%;
+    }
+}
+@media screen and (min-width:1024px) {
+    div.info-container {
+        top: 63%;
+    }
 }

@@ -4,6 +4,11 @@ header {
     left: 50%;
     transform: translate(-50%);
 }
+header h1 {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
 main {
     position: absolute;
     left: 50%;
@@ -59,4 +64,24 @@ small#cyrillic-symbols.visible {
 }
 input#playername.error {
     border: 1px solid var(--text-block)
+}
+@media screen and (max-width:767px) {
+    div.container {
+        height: 54dvh;
+    }
+}
+@media screen and (min-width:768px) and (max-width:1023px) {
+    div.container {
+        height: 70dvh;
+    }
+}
+@media screen and (min-width:1024px) {
+    div.container {
+        height: 61dvh;
+    }
+}
+@media screen and (max-height:701px) {
+    div.container {
+        height: 40dvh;
+    }
 }
