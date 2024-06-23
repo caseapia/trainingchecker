@@ -33,38 +33,37 @@ function redirect() {
     });
 }
 
-const username = '1dontkillme';
-const repo = 'trainingchecker';
-const token = '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'
-const apiUrl = `https://api.github.com/repos/${username}/${repo}/commits`;
+// const username = '1dontkillme';
+// const repo = 'trainingchecker';
+// const apiUrl = `https://api.github.com/repos/${username}/${repo}/commits`;
 
-async function getLastCommitDate() {
-    try {
-        const response = await fetch(apiUrl, {
-            headers: {
-                'Authorization': `token ${token}`
-            }
-        });
+// async function getLastCommitDate() {
+//     try {
+//         const response = await fetch(apiUrl, {
+//             headers: {
+//                 'Authorization': `token ${token}`
+//             }
+//         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+//         if (!response.ok) {
+//             throw new Error(`HTTP error! status: ${response.status}`);
+//         }
 
-        const commits = await response.json();
-        console.log('Commits:', commits);
+//         const commits = await response.json();
+//         console.log('Commits:', commits);
 
-        if (Array.isArray(commits) && commits.length > 0) {
-            const lastCommitDate = commits[0].commit.committer.date;
-            console.log('Last commit date:', lastCommitDate);
-            const lastUpdate = new Date(lastCommitDate).toLocaleString();
-            document.getElementById('lastUpdate').innerHTML = `${lastUpdate}`;
-        } else {
-            document.getElementById('lastUpdate').innerHTML = `<span style="color: var(--text-block)">Нет доступных обновлений</span>`;
-        }
-    } catch (error) {
-        console.error('Error when parsing data:', error);
-        document.getElementById('lastUpdate').innerHTML = `<span style="color: var(--text-block)">Ошибка при получении данных о последнем обновлении.</span>`;
-    }
-}
+//         if (Array.isArray(commits) && commits.length > 0) {
+//             const lastCommitDate = commits[0].commit.committer.date;
+//             console.log('Last commit date:', lastCommitDate);
+//             const lastUpdate = new Date(lastCommitDate).toLocaleString();
+//             document.getElementById('lastUpdate').innerHTML = `${lastUpdate}`;
+//         } else {
+//             document.getElementById('lastUpdate').innerHTML = `<span style="color: var(--text-block)">Нет доступных обновлений</span>`;
+//         }
+//     } catch (error) {
+//         console.error('Error when parsing data:', error);
+//         document.getElementById('lastUpdate').innerHTML = `<span style="color: var(--text-block)">Ошибка при получении данных о последнем обновлении.</span>`;
+//     }
+// }
 
-getLastCommitDate();
+// getLastCommitDate();
