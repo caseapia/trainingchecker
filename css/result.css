@@ -43,21 +43,18 @@ div.badge {
     font-size: 20px;
     transform: translateY(0px);
     transition: .3s;
+    display: none;
         &.sitestaff {
             background: #2aaa686c;
-            display: none;
         }
         &.trainingstaff {
             background: #0f4c816c;
-            display: none;
         }
         &.trainingdeveloper {
             background: #B72A2A6c;
-            display: none;
         }
         &.oldplayer {
             background: #00a5a26c;
-            display: none;
         }
 }
 div.badge:hover {

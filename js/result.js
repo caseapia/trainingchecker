@@ -18,6 +18,10 @@ async function fetchUserData() {
 function displayUserData(data) {
 
     document.getElementById('userid').textContent = data.id || '0';
+    if (data.id === 1) {
+        document.getElementById('staffbadge').style.display = 'block';
+        document.getElementById('trainingcreator').style.display = 'block';
+    }
     if (data.id < 130000) {
         document.getElementById('staffbadge').style.display = 'block';
         document.getElementById('oldplayer').style.display = 'block';
