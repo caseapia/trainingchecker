@@ -9,7 +9,7 @@ async function fetchUserData() {
         }
         const result = await response.json();
         console.log('API Response:', result);
-        const data = result.data; // Извлекаем данные из ключа 'data'
+        const data = result.data;
         console.log('Extracted Data:', data);
         displayUserData(data);
     } catch (error) {
@@ -45,6 +45,7 @@ function displayUserData(data) {
     document.getElementById('serverid').textContent = data.playerid || '0';
     document.getElementById('regdate').textContent = data.regdate || 'Error';
     document.getElementById('lastlogin').textContent = data.lastlogin || 'Error';
+    // document.getElementById('warns').textContent = data.warn.map(warn => JSON.stringify(warn)).join(', ') || 'No warnings';
 }
 
 function copyToClipboard(elementId) {
