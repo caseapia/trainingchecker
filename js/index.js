@@ -35,7 +35,7 @@ function redirect() {
 
 const username = '1dontkillme';
 const repo = 'trainingchecker';
-const token = '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'
+const token = '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'
 const apiUrl = `https://api.github.com/repos/${username}/${repo}/commits`;
 
 async function getLastCommitDate() {
