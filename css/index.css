@@ -1,0 +1,59 @@
+header {
+    padding-top: 5%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+main {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+input#playername {
+    width: 100%;
+    max-width: 100%;
+    padding: .625rem;
+    background: #27272a;
+    border: 0;
+    border-radius: 12px;
+    outline: none;
+    color: var(--text-color);
+    transition: .3s;
+}
+input#playername::placeholder, input#playername::-moz-placeholder, input#playername::-webkit-input-placeholder {
+    color: var(--text-muted-color);
+}
+input#playername:hover {
+    background-color: #3f3f46;
+}
+button#searchsubmit {
+    padding: .625rem;
+    width: 100%;
+    color: rgba(255, 255, 255, 0.473);
+    background-color: #003878;
+    cursor: not-allowed;
+    border-radius: 12px;
+    border: 0;
+    transition: .2s;
+}
+button#searchsubmit.allg {
+    cursor: pointer;
+    background-color: #0070f0;
+    color: var(--text-color);
+}
+button#searchsubmit.allg:hover {
+    background-color: #0065d8;
+}
+small#cyrillic-symbols {
+    color: var(--text-block);
+    opacity: 0;
+    transition: opacity .2s;
+}
+
+small#cyrillic-symbols.visible {
+    opacity: 1;
+}
+input#playername.error {
+    border: 1px solid var(--text-block)
+}

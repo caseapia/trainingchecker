@@ -1,0 +1,30 @@
+header {
+    padding-top: 5%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+main {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.bi-clipboard {
+    cursor: pointer;
+}
+div.info-container {
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    max-width: 100%;
+    line-height: 2.225rem;
+    border: 1px solid #242830;
+}
+.hiddencopyalert {
+    opacity: 0;
+    transition: opacity .2s ease-in;
+}
+.hiddencopyalert.nothide {
+    opacity: 1;
+}
