@@ -24,7 +24,7 @@ function displayUserData(data) {
         document.getElementById('admin').textContent = 'Игрок';
     }
     if (data.moder === 1) {
-        document.getElementById('admin').textContent = 'Мини-модератор';
+        document.getElementById('admin').textContent = 'Младший модератор';
     }
     if (data.moder === 2) {
         document.getElementById('admin').textContent = 'Модератор';
@@ -33,7 +33,7 @@ function displayUserData(data) {
         document.getElementById('admin').textContent = 'Старший модератор'
     }
     if (data.moder === 999) {
-        document.getElementById('admin').textContent = 'Разработчик'
+        document.getElementById('admin').textContent = 'Администратор'
     }
     document.getElementById('verify').textContent = data.verify || 'Нет';
     document.getElementById('verifytext').textContent = data.verifyText || 'Нет';
@@ -41,6 +41,9 @@ function displayUserData(data) {
     document.getElementById('online').textContent = data.online ? 'В сети' : 'Не в сети';
     document.getElementById('serverid').textContent = data.playerid || '0';
     document.getElementById('regdate').textContent = data.regdate || 'Error';
+    if (data.regdate.includes(1970)) {
+        document.getElementById('regdate').textContent = 'Зарегистрирован до 2018 года'
+    }
     document.getElementById('lastlogin').textContent = data.lastlogin || 'Error';
     // document.getElementById('warns').textContent = data.warn.map(warn => JSON.stringify(warn)).join(', ') || 'No warnings';
 }

@@ -96,7 +96,7 @@ async function getLastCommit(username, repo) {
 
 getLastCommit(username, repo)
     .then(commitMessage => {
-        document.getElementById('lastUpdateMessage').textContent = `${commitMessage}`;
+        // document.getElementById('lastUpdate').title = `${commitMessage}`
     }) .catch (error => {
         console.error('Error:', error)
     })
@@ -135,7 +135,7 @@ getAllCommits(username, repo)
         listElement.innerHTML = '';
         commitMessages.forEach(message => {
             const listItem = document.createElement('li');
-            listItem.textContent = message;
+            listItem.textContent = `${message};`;
             listElement.appendChild(listItem);
         });
     })

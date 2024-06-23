@@ -33,6 +33,7 @@ button#searchsubmit {
     border-radius: 12px;
     border: 0;
     transition: .2s;
+    margin-bottom: 2rem;
 }
 button#searchsubmit.allg {
     cursor: pointer;
@@ -54,8 +55,23 @@ ul#navbar {
     display: flex;
     flex-direction: row;
 }
+div#card-bg {
+    background: transparent !important;
+    transition: .2s;
+    border: 1px solid #3f3f4657;
+}
+div#card-bg:hover {
+    box-shadow: #525258 1px 1px 16px !important;
+    border: 1px solid #3f3f46;
+}
 input#playername.error {
     border: 1px solid var(--text-block)
+}
+span#lastUpdate {
+    color: var(--text-warning);
+    cursor: pointer;
+    transition: .2s;
+    text-decoration: underline dotted;
 }
 @media screen and (max-width:767px) {
     div.container {
