@@ -35,15 +35,27 @@ function redirect() {
 
 const username = '1dontkillme';
 const repo = 'trainingchecker';
+const token = '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'
 const apiUrl = `https://api.github.com/repos/${username}/${repo}/commits`;
 
 async function getLastCommitDate() {
     try {
-        const response = await fetch(apiUrl);
+        const response = await fetch(apiUrl, {
+            headers: {
+                'Authorization': `token ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const commits = await response.json();
+        console.log('Commits:', commits);
 
         if (Array.isArray(commits) && commits.length > 0) {
             const lastCommitDate = commits[0].commit.committer.date;
+            console.log('Last commit date:', lastCommitDate);
             const lastUpdate = new Date(lastCommitDate).toLocaleString();
             document.getElementById('lastUpdate').innerHTML = `${lastUpdate}`;
         } else {

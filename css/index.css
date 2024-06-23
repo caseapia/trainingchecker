@@ -75,11 +75,6 @@ input#playername.error {
         height: 70dvh;
     }
 }
-@media screen and (min-width:1024px) {
-    div.container {
-        height: 61dvh;
-    }
-}
 @media screen and (max-height:701px) {
     div.container {
         height: 40dvh;
