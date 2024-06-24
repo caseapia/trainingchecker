@@ -8,10 +8,12 @@ function cyrillicSymbols(event) {
         cyrillicsymbols.classList.add('visible');
         input.classList.add('error')
         button.classList.remove('allg');
+        button.disabled = true;
     } else {
         cyrillicsymbols.classList.remove('visible');
         input.classList.remove('error')
         button.classList.add('allg');
+        button.disabled = false;
     }
     if (inputText === '') {
         button.classList.remove('allg');

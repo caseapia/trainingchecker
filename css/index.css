@@ -77,7 +77,6 @@ span#lastUpdate {
     color: var(--text-warning);
     cursor: pointer;
     transition: .2s;
-    text-decoration: underline dotted;
 }
 @media screen and (max-width:767px) {
     div.container {
