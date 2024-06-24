@@ -71,8 +71,6 @@ async function getLastCommitDate() {
      }
 }
 
-getLastCommitDate();
-
 async function getLastCommit(username, repo) {
     const apiUrl = `https://api.github.com/repos/${username}/${repo}/commits`
     
@@ -166,4 +164,5 @@ async function getReadme(username, repo) {
     }
 }
 
-getReadme(username, repo)
+getReadme(username, repo);
+getLastCommitDate();
