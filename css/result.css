@@ -57,6 +57,9 @@ div.badge {
         &.oldplayer {
             background: #00a5a26c;
         }
+        &.devhelp {
+            background: #952aaa6c;
+        }
 }
 div.badge:hover {
     transform: scale(1.2,1.2);

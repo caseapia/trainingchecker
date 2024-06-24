@@ -27,13 +27,13 @@ function displayUserData(data) {
         document.getElementById('oldplayer').style.display = 'block';
     }
     document.getElementById('nickname').textContent = data.login || 'Error';
-    if (data.login.includes('dontkillme')) {
+    if (data.id === 113145) {
         document.getElementById('staffbadge').style.display = 'block';
         document.getElementById('sitestaff').style.display = 'block';
     }
-    if (data.login.includes('MAPC')) {
+    if (data.id === 125043 || data.id === 459129) {
         document.getElementById('staffbadge').style.display = 'block';
-        document.getElementById('sitestaff').style.display = 'block';
+        document.getElementById('devhelp').style.display = 'block';
     }
     document.getElementById('access').textContent = data.access || 'Нет';
     if (data.moder === 0) {
