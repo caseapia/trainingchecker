@@ -35,7 +35,6 @@ function displayUserData(data) {
         document.getElementById('staffbadge').style.display = 'block';
         document.getElementById('devhelp').style.display = 'block';
     }
-    document.getElementById('access').textContent = data.access || 'Нет';
     if (data.moder === 0) {
         document.getElementById('admin').textContent = 'Игрок';
     }
