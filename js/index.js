@@ -63,7 +63,9 @@ async function getLastCommitDate() {
          }
      } catch (error) {
          console.error('Error when parsing data:', error);
-         document.getElementById('lastUpdate').innerHTML = `<span style="color: var(--text-block)">Ошибка при получении данных о последнем обновлении.</span>`;
+         document.getElementById('lastUpdate').innerHTML = `<a href="https://docs.github.com/ru/rest/using-the-rest-api/rate-limits-for-the-rest-api" target="_blank"><span style="color: var(--text-block)">Ошибка при получении данных о последнем обновлении. Возможно API токен был приостановлен из-за лимита запросов. Если вы считаете, что причина другая - свяжитесь с владельцем сайта.<br><br>Это не влияет на работу TRAINING API.</span></a>`;
+         document.getElementById('lastUpdate').style.textDecoration = 'none';
+         document.getElementById('pLastUpdate').remove();
      }
 }
 
@@ -101,44 +103,44 @@ getLastCommit(username, repo)
         console.error('Error:', error)
     })
 
-async function getAllCommits(username, repo) {
-    const apiUrl = `https://api.github.com/repos/${username}/${repo}/commits`;
-    let allCommits = [];
-    let page = 1;
+// async function getAllCommits(username, repo) {
+//      const apiUrl = `https://api.github.com/repos/${username}/${repo}/commits`;
+//      let allCommits = [];
+//      let page = 1;
 
-    while(true) {
-        const response = await fetch(`${apiUrl}?page=${page}`, {
-            headers: {
-                'Authorization': `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`,
-                'Accept': 'application/vnd.github.v3+json'
-            }
-        });
+//      while(true) {
+//          const response = await fetch(`${apiUrl}?page=${page}`, {
+//              headers: {
+//                  'Authorization': `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`,
+//                  'Accept': 'application/vnd.github.v3+json'
+//              }
+//          });
 
-        if (!response.ok) {
-            throw new Error(`Error: ${response.status}`)
-        }
-        const commits = await response.json();
-        if (commits.length === 0) {
-            break;
-        }
-        allCommits = allCommits.concat(commits.map(commit => commit.commit.message));
-        page++;
-    }
+//          if (!response.ok) {
+//              throw new Error(`Error: ${response.status}`)
+//          }
+//          const commits = await response.json();
+//          if (commits.length === 0) {
+//              break;
+//          }
+//          allCommits = allCommits.concat(commits.map(commit => commit.commit.message));
+//          page++;
+//      }
 
 
-    return allCommits
-}
+//      return allCommits
+// }
 
-getAllCommits(username, repo)
-    .then(commitMessages => {
-        const listElement = document.getElementById('allupdates');
-        listElement.innerHTML = '';
-        commitMessages.forEach(message => {
-            const listItem = document.createElement('li');
-            listItem.textContent = `${message};`;
-            listElement.appendChild(listItem);
-        });
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+// getAllCommits(username, repo)
+//     .then(commitMessages => {
+//         const element = document.getElementById('allupdatesp');
+//         element.innerHTML = ''; // Очищаем элемент перед добавлением нового содержимого
+//         commitMessages.forEach(message => {
+//             const p = document.createElement('p');
+//             p.innerText = message; // Используем innerText для безопасного добавления текста
+//             element.appendChild(p);
+//         });
+//     })
+//     .catch(error => {
+//         console.error('Error:', error);
+//     });

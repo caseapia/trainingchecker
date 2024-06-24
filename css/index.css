@@ -55,6 +55,12 @@ ul#navbar {
     display: flex;
     flex-direction: row;
 }
+div.card-body {
+    text-overflow: ellipsis;
+}
+p#allupdatesp {
+    text-overflow: ellipsis;
+}
 div#card-bg {
     background: transparent !important;
     transition: .2s;
@@ -86,7 +92,7 @@ span#lastUpdate {
 @media screen and (max-width:701px) {
     div.container {
         height: 60dvh;
-        width: 154%;
+        width: 150%;
     }
     main {
         left: 34%;

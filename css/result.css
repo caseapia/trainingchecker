@@ -22,7 +22,6 @@ div.info-container {
     max-width: 300%;
     line-height: 2.225rem;
     border: 1px solid #242830;
-    transition: .3s;
 }
 .hiddenalert {
     opacity: 0;
@@ -39,11 +38,13 @@ div.badge {
     justify-content: center;
     vertical-align: middle;
     width: fit-content;
+    max-width: fit-content;
     padding: 4px;
     font-size: 20px;
     transform: translateY(0px);
     transition: .3s;
     display: none;
+    cursor: pointer;
         &.sitestaff {
             background: #2aaa686c;
         }
@@ -70,7 +71,7 @@ li#staffbadge {
 }
 @media screen and (max-width: 767px) {
     div.info-container {
-        top: 55%;
+        top: 65%;
     }
 }
 @media screen and (max-width: 360px) {
@@ -90,6 +91,11 @@ li#staffbadge {
 }
 @media screen and (max-width:360px) and (max-height:780px) {
     div.info-container {
-        height: 126dvh;
+        position: relative;
+        /* height: 93dvh; */
+        top: 15%;
+    }
+    header {
+        width: 160% !important;
     }
 }
