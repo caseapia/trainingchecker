@@ -59,30 +59,36 @@ function displayUserData(data) {
         document.getElementById('trainingdev').style.display = 'block';
     }
     if (data.verify === 0) {
-        document.getElementById('verify').textContent = 'Нет';
+        document.getElementById('verify').textContent = `Нет (ID: ${data.verify})`;
     }
     if (data.verify === 1) {
-        document.getElementById('verify').textContent = 'Ютубер';
+        document.getElementById('verify').textContent = `Ютубер (ID: ${data.verify})`;
     }
     if (data.verify === 2) {
-        document.getElementById('verify').textContent = 'Автор сообщества (Маппер)';
+        document.getElementById('verify').textContent = `Автор сообщества (Маппер) (ID: ${data.verify})`;
     }
     if (data.verify === 3) {
-        document.getElementById('verify').textContent = 'Разработчик';
+        document.getElementById('verify').textContent = `Разработчик (ID: ${data.verify})`;
     }
     if (data.verify === 4) {
-        document.getElementById('verify').textContent = 'Автор сообщества (Модели и прочее)';
+        document.getElementById('verify').textContent = `Автор сообщества (Модели и прочее) (ID: ${data.verify})`;
     }
     if (data.verify === 5) {
-        document.getElementById('verify').textContent = 'Донатер';
+        document.getElementById('verify').textContent = `Донатер (ID: ${data.verify})`;
     }
     if (data.verify === 6) {
-        document.getElementById('verify').textContent = 'Администратор в отставке';
+        document.getElementById('verify').textContent = `Администратор в отставке (ID: ${data.verify})`;
+    }
+    if (data.verify > 6) {
+        document.getElementById('verify').textContent = `Неизвестно (ID: ${data.verify})`;
     }
     document.getElementById('verifytext').textContent = data.verifyText || 'Нет';
-    document.getElementById('mute').textContent = data.mute || '0';
+    document.getElementById('mute').textContent = `${data.mute * 60} минут` || '0';
     document.getElementById('online').textContent = data.online ? 'В сети' : 'Не в сети';
     document.getElementById('serverid').textContent = data.playerid || '0';
+    if (data.online === 0) {
+        document.getElementById('getonl').style.display = 'none';
+    }
     document.getElementById('regdate').textContent = data.regdate || 'Error';
     if (data.regdate.includes(1970)) {
         document.getElementById('regdate').textContent = 'Зарегистрирован до 2018 года'
