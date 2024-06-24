@@ -95,8 +95,8 @@ function copyToClipboard(elementId) {
     const text = document.getElementById(elementId).textContent;
     const alert = document.getElementById('copyalert');
     navigator.clipboard.writeText(text).then(() => {
+        alert.innerHTML = `"${text}" добавлено в буфер обмена`
         alert.classList.add('nothide')
-        alert.innerHTML = `Данные были добавлены в буфер обмена`
         setTimeout(() => {
             alert.classList.remove('nothide')
         }, 3000);
@@ -107,10 +107,12 @@ function copyToClipboard(elementId) {
 
 function update() {
     const alert = document.getElementById('updatealert')
+    const inputText = localStorage.getItem('inputValue');
     fetchUserData();
     alert.classList.add('nothide');
     setTimeout(() => {
         alert.classList.remove('nothide')
+        alert.innerHTML = `Данные о ${inputText} были обновлены`
     }, 3000);
 }
 
