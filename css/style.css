@@ -5,6 +5,7 @@
     --text-bold-color: #ffffff;
     --text-warning: #FFA500e7;
     --text-block: #f01f4be7;
+    --text-access: #91ec66e7;
 }
 * {
     box-sizing: border-box;

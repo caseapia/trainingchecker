@@ -83,8 +83,11 @@ function displayUserData(data) {
         document.getElementById('verify').textContent = `Неизвестно (ID: ${data.verify})`;
     }
     document.getElementById('verifytext').textContent = data.verifyText || 'Нет';
-    document.getElementById('mute').textContent = `${data.mute * 60} минут` || '0';
-    document.getElementById('online').textContent = data.online ? 'В сети' : 'Не в сети';
+    document.getElementById('mute').innerHTML = `<span style="color:var(--text-block);">Да</span> (${data.mute})`;
+    if (data.mute === 0) {
+        document.getElementById('mute').innerHTML = `<span style="color:var(--text-access);">Нет</span>`;
+    }
+    document.getElementById('online').innerHTML = data.online ? `<span style="color:var(--text-access)">В сети</span>` : `<span style="color:var(--text-block);">Не в сети</span>`;
     document.getElementById('serverid').textContent = data.playerid || '0';
     if (data.online === 0) {
         document.getElementById('getonl').style.display = 'none';
