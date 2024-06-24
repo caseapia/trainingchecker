@@ -1,3 +1,7 @@
+const username = '1dontkillme';
+const repo = 'trainingchecker';
+const apiUrl = `https://api.github.com/repos/${username}/${repo}/commits`;
+
 function cyrillicSymbols(event) {
     const inputText = event.target.value;
     const cyrillicsymbols = document.getElementById('cyrillic-symbols');
@@ -34,10 +38,6 @@ function redirect() {
         window.location.href = './result.html';
     });
 }
-
-const username = '1dontkillme';
-const repo = 'trainingchecker';
-const apiUrl = `https://api.github.com/repos/${username}/${repo}/commits`;
 
 async function getLastCommitDate() {
      try {
@@ -146,3 +146,24 @@ getLastCommit(username, repo)
 //     .catch(error => {
 //         console.error('Error:', error);
 //     });
+
+async function getReadme(username, repo) {
+    try {
+        const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/README.md`, {
+            headers: {
+                'Accept': 'application/vnd.github.v3.raw'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error fetching the README file: ${response.statusText}`);
+        }
+
+        const content = await response.text();
+        document.getElementById("aboutSite").innerHTML = content;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+getReadme(username, repo)
