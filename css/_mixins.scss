@@ -1,0 +1,27 @@
+@mixin inputs ($width: 100%, $padding: .625rem, $color: #27272a, $radius: 12px, $anims-time: .3s) {
+    width: $width;
+    max-width: $width;
+    padding: $padding;
+    background: $color;
+    border: 0;
+    border-radius: $radius;
+    outline: none;
+    color: var(--text-color);
+    transition: $anims-time;
+        &::placeholder {
+            color: var(--text-muted-color);
+        }
+        &:hover {
+            background-color: #3f3f46;
+        }
+}
+@mixin buttons ($padding: .625rem, $width: 100%, $color: #0070f0, $cursor: pointer, $radius: 12px, $anims-time: .2s) {
+    padding: $padding;
+    width: $width;
+    background-color: #003878;
+    cursor: not-allowed;
+    border-radius: $radius;
+    border: 0;
+    transition: $anims-time;
+    margin-bottom: 2rem;
+}

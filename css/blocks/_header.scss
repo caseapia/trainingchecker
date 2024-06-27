@@ -4,9 +4,9 @@ header {
     left: 50%;
     transform: translate(-50%);
     width: 40%;
-}
-header h1, h3 {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
+        h1 {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+        }
 }

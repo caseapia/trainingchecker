@@ -1,83 +1,70 @@
+@import '../mixins';
+
 main {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
 }
-div.container {
+.container {
     height: 30dvh;
 }
-input#playername {
-    width: 100%;
-    max-width: 100%;
-    padding: .625rem;
-    background: #27272a;
-    border: 0;
-    border-radius: 12px;
-    outline: none;
-    color: var(--text-color);
-    transition: .3s;
+#playername {
+    @include inputs();
 }
-input#playername::placeholder, input#playername::-moz-placeholder, input#playername::-webkit-input-placeholder {
-    color: var(--text-muted-color);
-}
-input#playername:hover {
-    background-color: #3f3f46;
-}
-button#searchsubmit {
-    padding: .625rem;
-    width: 100%;
-    color: rgba(255, 255, 255, 0.473);
+#searchsubmit {
+    @include buttons();
     background-color: #003878;
     cursor: not-allowed;
-    border-radius: 12px;
-    border: 0;
-    transition: .2s;
-    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.473);
 }
-button#searchsubmit.allg {
+#searchsubmit.allg {
     cursor: pointer;
     background-color: #0070f0;
     color: var(--text-color);
+        &:hover {
+            background-color: #0066db;
+            transform: scale(0.991,0.991);
+        }
 }
-button#searchsubmit.allg:hover {
-    background-color: #0065d8;
-}
-small#cyrillic-symbols {
+#cyrillic-symbols {
     color: var(--text-block);
     opacity: 0;
     transition: opacity .2s;
 }
-small#cyrillic-symbols.visible {
+#cyrillic-symbols.visible {
     opacity: 1;
 }
-ul#navbar {
+#navbar {
     display: flex;
     flex-direction: row;
 }
-div.card-body {
+.card-body {
     text-overflow: ellipsis;
 }
-p#allupdatesp {
+#allupdatesp {
     text-overflow: ellipsis;
 }
-div#card-bg {
+#card-bg {
     background: transparent !important;
     transition: .2s;
     border: 1px solid #3f3f4657;
+        &:hover {
+            box-shadow: #525258 1px 1px 16px !important;
+            border: 1px solid #3f3f46;
+        }
 }
-div#card-bg:hover {
-    box-shadow: #525258 1px 1px 16px !important;
-    border: 1px solid #3f3f46;
-}
-input#playername.error {
+#playername.error {
     border: 1px solid var(--text-block)
 }
-span#lastUpdate {
+#lastUpdate {
     color: var(--text-warning);
     cursor: pointer;
     transition: .2s;
 }
+
+// Adaptive
+
 @media screen and (max-width:767px) {
     div.container {
         height: 54dvh;

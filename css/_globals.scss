@@ -37,10 +37,10 @@ a, a:link, a:visited {
     background-color: transparent;
     text-decoration: none;
     transition: .3s;
-}
-a:hover {
-    color: #ccc;
-    text-decoration: none;
+        &:hover {
+            color: #ccc;
+            text-decoration: none;
+        }
 }
 h1 {
     color: var(--text-bold-color);

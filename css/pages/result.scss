@@ -4,13 +4,10 @@ main {
     top: 50%;
     transform: translate(-50%, -50%);
 }
-div.container {
+.container {
     height: 70dvh;
 }
-.bi-clipboard {
-    cursor: pointer;
-}
-div.info-container {
+.info-container {
     top: 50%;
     left: 50%;
     position: absolute;
@@ -23,15 +20,20 @@ div.info-container {
     line-height: 2.225rem;
     border: 1px solid #242830;
 }
+.bi-clipboard {
+    cursor: pointer;
+}
 .hiddenalert {
     opacity: 0;
     transition: opacity .2s ease-in;
+        &.nothide {
+            .hiddenalert.nothide {
+                opacity: 1;
+                z-index: 99999;
+            }
+        }
 }
-.hiddenalert.nothide {
-    opacity: 1;
-    z-index: 99999;
-}
-div.badge {
+.badge {
     border: 1px solid #ffffff;
     border-radius: 200px;
     display: flex;
@@ -60,18 +62,20 @@ div.badge {
         &.devhelp {
             background: #952aaa6c;
         }
+            &:hover {
+                transform: scale(1.2,1.2);
+            }
 }
-div.badge:hover {
-    transform: scale(1.2,1.2);
-}
-div.badges {
+.badges {
     display: flex;
     flex-direction: row;
     gap: 12px;
 }
-li#staffbadge {
+#staffbadge {
     display: none;
 }
+
+// Adaptive
 @media screen and (max-width: 767px) {
     div.info-container {
         top: 65%;
