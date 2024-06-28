@@ -118,10 +118,10 @@ function update() {
     const alert = document.getElementById('updatealert')
     const inputText = localStorage.getItem('inputValue');
     fetchUserData();
+    alert.innerHTML = `Данные о ${inputText} были обновлены`
     alert.classList.add('nothide');
     setTimeout(() => {
         alert.classList.remove('nothide')
-        alert.innerHTML = `Данные о ${inputText} были обновлены`
     }, 3000);
 }
 

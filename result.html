@@ -38,19 +38,39 @@
             <div class="info-container">
                 <button class="btn btn-primary btn-sm" onclick="update()"><i class="bi bi-arrow-repeat"></i> Обновить</button>&nbsp;<button class="btn btn-primary btn-sm" onclick="goback()"><i class="bi bi-arrow-left-circle"></i> Вернуться</button>
                 <ul style="list-style-type: none;padding: 0;" id="info">
-                    <li><label for="userid">ID:</label> <span id="userid">Please, wait...</span> <i class="bi bi-clipboard" onclick="copyToClipboard('userid')"></i></li>
-                    <li><label for="nickname">Никнейм:</label> <span id="nickname">Please, wait...</span> <i class="bi bi-clipboard" onclick="copyToClipboard('nickname')"></i></li>
-                    <li><label for="admin">Должность:</label> <span id="admin">Please, wait...</span></li>
-                    <li><label for="verify">Верификация:</label> <span id="verify">Please, wait...</span></li>
-                    <li><label for="verifytext">Текст верификации:</label> <span id="verifytext">Please, wait...</span> <i class="bi bi-clipboard" onclick="copyToClipboard('verifytext')"></i></li>
-                    <li><label for="mute">Время мута:</label> <span id="mute">Please, wait...</span></li>
-                    <li><label for="online">Статус:</label> <span id="online">Please, wait...</span></li>
-                    <li id="getonl"><label for="serverid">ID на сервере:</label> <span id="serverid">Please, wait...</span> <i class="bi bi-clipboard" onclick="copyToClipboard('serverid')"></i></li>
-                    <li><label for="regdate">Дата регистрации:</label> <span id="regdate">Please, wait...</span> <i class="bi bi-clipboard" onclick="copyToClipboard('regdate')"></i></li>
-                    <li><label for="lastlogin">Дата последнего входа:</label> <span id="lastlogin">Please, wait...</span> <i class="bi bi-clipboard" onclick="copyToClipboard('lastlogin')"></i></li>
+                    <li><label for="userid">ID:</label> <span id="userid">
+                        <div class="spinner-border spinner-border-sm" role="status" data-bs-toggle="tooltip" title="Загрузка информации..."></div>
+                    </span> <i class="bi bi-clipboard" onclick="copyToClipboard('userid')"></i></li>
+                    <li><label for="nickname">Никнейм:</label> <span id="nickname">
+                        <div class="spinner-border spinner-border-sm" role="status" data-bs-toggle="tooltip" title="Загрузка информации..."></div>
+                    </span> <i class="bi bi-clipboard" onclick="copyToClipboard('nickname')"></i></li>
+                    <li><label for="admin">Должность:</label> <span id="admin">
+                        <div class="spinner-border spinner-border-sm" role="status" data-bs-toggle="tooltip" title="Загрузка информации..."></div>
+                    </span></li>
+                    <li><label for="verify">Верификация:</label> <span id="verify">
+                        <div class="spinner-border spinner-border-sm" role="status" data-bs-toggle="tooltip" title="Загрузка информации..."></div>
+                    </span></li>
+                    <li><label for="verifytext">Текст верификации:</label> <span id="verifytext">
+                        <div class="spinner-border spinner-border-sm" role="status" data-bs-toggle="tooltip" title="Загрузка информации..."></div>
+                    </span> <i class="bi bi-clipboard" onclick="copyToClipboard('verifytext')"></i></li>
+                    <li><label for="mute">Время мута:</label> <span id="mute">
+                        <div class="spinner-border spinner-border-sm" role="status" data-bs-toggle="tooltip" title="Загрузка информации..."></div>
+                    </span></li>
+                    <li><label for="online">Статус:</label> <span id="online">
+                        <div class="spinner-border spinner-border-sm" role="status" data-bs-toggle="tooltip" title="Загрузка информации..."></div>
+                    </span></li>
+                    <li id="getonl"><label for="serverid">ID на сервере:</label> <span id="serverid">
+                        <div class="spinner-border spinner-border-sm" role="status" data-bs-toggle="tooltip" title="Загрузка информации..."></div>
+                    </span> <i class="bi bi-clipboard" onclick="copyToClipboard('serverid')"></i></li>
+                    <li><label for="regdate">Дата регистрации:</label> <span id="regdate">
+                        <div class="spinner-border spinner-border-sm" role="status" data-bs-toggle="tooltip" title="Загрузка информации..."></div>
+                    </span> <i class="bi bi-clipboard" onclick="copyToClipboard('regdate')"></i></li>
+                    <li><label for="lastlogin">Дата последнего входа:</label> <span id="lastlogin">
+                        <div class="spinner-border spinner-border-sm" role="status" data-bs-toggle="tooltip" title="Загрузка информации..."></div>
+                    </span> <i class="bi bi-clipboard" onclick="copyToClipboard('lastlogin')"></i></li>
                     <li id="staffbadge">
                         <hr>
-                        <h5>Бейджи</h5>
+                        <h5>Значки</h5>
                         <div class="badges">
                             <div class="badge trainingcreator" id="trainingcreator" data-bs-toggle="tooltip" title="Создатель TRAINING SERVER">
                                 <span style="z-index: 9999;filter: none;"><i class="bi bi-tools"></i></span>
