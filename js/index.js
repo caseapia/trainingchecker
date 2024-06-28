@@ -12,17 +12,23 @@ function cyrillicSymbols(event) {
         cyrillicsymbols.classList.add('visible');
         input.classList.add('error')
         button.classList.remove('allg');
-        button.disabled = true;
     } else {
         cyrillicsymbols.classList.remove('visible');
         input.classList.remove('error')
         button.classList.add('allg');
+        document.getElementById('icon').classList.add('visible');
         button.disabled = false;
     }
     if (inputText === '') {
         button.classList.remove('allg');
     } else {
         button.classList.add('allg');
+    }
+    if(inputText != '') {
+        document.getElementById('icon').classList.add('visible');
+    } else {
+        document.getElementById('icon').classList.remove('visible');
+        button.disabled = true;
     }
 }
 

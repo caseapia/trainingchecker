@@ -6,6 +6,7 @@
     border: 0;
     border-radius: $radius;
     outline: none;
+    height: fit-content;
     color: var(--text-color);
     transition: $anims-time;
         &::placeholder {
@@ -15,7 +16,7 @@
             background-color: #3f3f46;
         }
 }
-@mixin buttons ($padding: .625rem, $width: 100%, $color: #0070f0, $cursor: pointer, $radius: 12px, $anims-time: .2s) {
+@mixin buttons ($padding: .625rem, $width: 100%, $cursor: pointer, $radius: 12px, $anims-time: .2s) {
     padding: $padding;
     width: $width;
     background-color: #003878;

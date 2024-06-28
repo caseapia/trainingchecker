@@ -48,7 +48,9 @@
             <div class="form-container">
                 <form action="./result.html" id="input-form">
                     <small id="cyrillic-symbols">Запрещен ввод символов кириллицы, разрешены только латинские буквы и цифры</small>
-                    <input type="search" oninput="cyrillicSymbols(event)" required placeholder="Введите никнейм игрока" id="playername" maxlength="32">
+                    <div class="input-group">
+                        <input type="text" oninput="cyrillicSymbols(event)" required placeholder="Введите никнейм игрока" id="playername" maxlength="32"><span class="icon" id="icon"><button type="reset" id="clear"><i class="bi bi-x-circle-fill"></i></button></span>
+                    </div>
                     <br><br>
                     <button type="submit" id="searchsubmit" onclick="redirect()" disabled><i class="bi bi-search"></i> Найти</button>
                 </form>

@@ -11,29 +11,49 @@ main {
 }
 #playername {
     @include inputs();
+    border: 1px solid transparent;
+}
+#clear {
+    border: 0;
+    background-color: transparent;
+    color: white;
+}
+.input-group {
+    display: inline-block;
+}
+.icon {
+    position: absolute;
+    top: 50%;
+    left: 96%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: all .2s;
+        &.visible {
+            opacity: 1;
+        }
 }
 #searchsubmit {
     @include buttons();
     background-color: #003878;
     cursor: not-allowed;
-    color: rgba(255, 255, 255, 0.473);
-}
-#searchsubmit.allg {
-    cursor: pointer;
-    background-color: #0070f0;
-    color: var(--text-color);
-        &:hover {
-            background-color: #0066db;
-            transform: scale(0.991,0.991);
+    color: rgba(255, 255, 255, 0.473); 
+        &.allg {
+            cursor: pointer;
+            background-color: #0070f0;
+            color: var(--text-color);
+                &:hover {
+                    background-color: #0066db;
+                    transform: scale(0.991,0.991);
+                }
         }
 }
 #cyrillic-symbols {
     color: var(--text-block);
     opacity: 0;
     transition: opacity .2s;
-}
-#cyrillic-symbols.visible {
-    opacity: 1;
+        &.visible {
+            opacity: 1;
+        }
 }
 #navbar {
     display: flex;
@@ -82,5 +102,8 @@ main {
     }
     main {
         left: 34%;
+    }
+    .icon {
+        left: 90%;
     }
 }
