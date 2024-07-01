@@ -72,6 +72,30 @@ main {
 #staffbadge {
     display: none;
 }
+.redbutton {
+    $padding-sides: .4375rem;
+    $padding-topbottom: .1rem;
+    padding-left: $padding-sides;
+    padding-right: $padding-sides;
+    padding-bottom: $padding-topbottom;
+    padding-top: $padding-topbottom;
+    background-color: #f01f4be7;
+    border-radius: 10px;
+    border: 0;
+    transition: .3s;
+    font-size: 15px;
+    color: white;
+    outline: none;
+        &:hover {
+            background-color: #f01f4bb7;
+        }
+        &:active {
+            transform: scale(0.99,0.99);
+        }
+        &:focus-visible {
+            box-shadow: 0 0 0 0.25rem rgba(225, 83, 97, 0.5);
+        }
+}
 
 // Adaptive
 @media screen and (max-width: 767px) {

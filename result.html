@@ -1,4 +1,25 @@
 <!DOCTYPE html>
+<!--
+                 ,▄▄▓██████▓▄▄,
+             ▄▓███████████████████▄
+          ▄████████▀▀▀╙╙╙╙▀▀▀████████▄
+        ▄██████▀└              └▀██████▄
+       ██████└                    └▀█████
+      █████▀                        ╙█████µ
+     █████¬                    ▄█▓    █████
+    ╟████⌐      ╓▄           ╓███▀     ████▌
+    █████       ███▌        ▓███─      █████
+    █████        ▀███,,▓▓ ╓███▀        ╟████
+    █████         └██████████`         █████
+    ╙████▌          ▀██▀███▀          ▐████▌
+     ╟████▄                          ╓█████
+      ▀█████                        ▓█████
+       ╙██████,                  ,▄█████▀
+         ▀██████▓▄            ▄▓██████▀
+           ╙████████████████████████▀
+              ╙▀████████████████▀╙
+                    └╙╙╙╙╙╙└─
+-->
 <html lang="en" data-bs-theme="dark">
 <head>
     <!-- Meta Tags -->
@@ -36,7 +57,11 @@
                 <span>Данные об игроке были обновлены.</span>
             </div>
             <div class="info-container">
-                <button class="btn btn-primary btn-sm" onclick="update()"><i class="bi bi-arrow-repeat"></i> Обновить</button>&nbsp;<button class="btn btn-primary btn-sm" onclick="goback()"><i class="bi bi-arrow-left-circle"></i> Вернуться</button>
+                <!-- <button class="btn btn-primary btn-sm" onclick="update()"><i class="bi bi-arrow-repeat"></i> Обновить</button>&nbsp;<button class="btn btn-primary btn-sm" onclick="goback()"><i class="bi bi-arrow-left-circle"></i> Вернуться</button> -->
+                    <div id="button-container">
+                        <button class="redbutton" onclick="update()"><i class="bi bi-arrow-repeat"></i> Обновить</button>
+                        <button class="redbutton" onclick="goback()"><i class="bi bi-arrow-left-circle"></i> Вернуться</button>
+                    </div>
                 <ul style="list-style-type: none;padding: 0;" id="info">
                     <li><label for="userid">ID:</label> <span id="userid">
                         <div class="spinner-border spinner-border-sm" role="status" data-bs-toggle="tooltip" title="Загрузка информации..."></div>
@@ -97,9 +122,6 @@
             </div>
         </div>
     </main>
-    <footer>
-        <a href="" target="_blank" rel="noopener noreferrer"></a>
-    </footer>
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="./js/script.js"></script>
