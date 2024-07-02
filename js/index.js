@@ -32,6 +32,13 @@ function cyrillicSymbols(event) {
     }
 }
 
+function HideButtonOnClick() {
+    document.addEventListener('click', function() {
+        const icon = document.getElementById('icon');
+        icon.classList.toggle('visible');
+    });
+}
+
 function containsCyrillic(text) {
     return /[а-яё]/i.test(text);
 }

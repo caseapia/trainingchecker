@@ -16,7 +16,7 @@ main {
 #clear {
     border: 0;
     background-color: transparent;
-    color: white;
+    color: var(--text-muted-color);
 }
 .input-group {
     display: inline-block;
