@@ -16,7 +16,11 @@ main {
 #clear {
     border: 0;
     background-color: transparent;
-    color: var(--text-muted-color);
+    color: #ffffffab;
+    transition: all .2s;
+        &:hover {
+            color: white;
+        }
 }
 .input-group {
     display: inline-block;
@@ -27,7 +31,7 @@ main {
     left: 96%;
     transform: translateY(-50%);
     opacity: 0;
-    transition: all .2s;
+    transition: all .3s;
         &.visible {
             opacity: 1;
         }
