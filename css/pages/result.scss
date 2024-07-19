@@ -103,6 +103,16 @@ main {
             --bs-table-bg: inherit;
                 td, th {
                     text-align: center;
+                    transition: .2s;
+                        &.dotted {
+                            text-decoration: underline;
+                            text-underline-offset: 4px;
+                            text-decoration-color: rgba(255, 255, 255, 0.233);
+                            transition: .2s;
+                                &:hover {
+                                    text-decoration-color: white;
+                                }
+                        }
                 }
         }
 }

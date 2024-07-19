@@ -113,6 +113,16 @@ main {
 }
 .modal-content .table td, .modal-content .table th {
   text-align: center;
+  transition: 0.2s;
+}
+.modal-content .table td.dotted, .modal-content .table th.dotted {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(255, 255, 255, 0.233);
+  transition: 0.2s;
+}
+.modal-content .table td.dotted:hover, .modal-content .table th.dotted:hover {
+  text-decoration-color: white;
 }
 
 .i7d1 {

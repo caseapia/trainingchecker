@@ -121,7 +121,8 @@ function displayUserData(data) {
             const adminCell = row.insertCell();
             const reasonCell = row.insertCell();
             const dateCell = row.insertCell();
-            dateCell.textContent = warn.bantime ? formatDate(warn.bantime) : 'N/A';
+            dateCell.innerHTML = warn.bantime ? `${formatDate(warn.bantime)}` : 'N/A';
+            dateCell.className = 'dotted';
             reasonCell.textContent = warn.reason || 'N/A';
             adminCell.textContent = warn.admin || 'N/A';
             dateCell.title = warn.bantime;
