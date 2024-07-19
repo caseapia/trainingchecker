@@ -1,5 +1,5 @@
 function formatDate(dateString) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const options = { dateStyle: 'medium' };
     const date = new Date(dateString);
     return date.toLocaleDateString('ru-RU', options);
 }
@@ -107,9 +107,9 @@ function displayUserData(data) {
         document.getElementById('warnloader').style.display = 'none';
         document.getElementById('showwarns').style.display = 'block';
         const table = document.createElement('table');
-        table.className = 'warn-table table';
+        table.className = 'warn-table table table-hover';
         const headerRow = table.insertRow();
-        const headers = ['Дата', 'Причина', 'Администратор'];
+        const headers = ['Модератор', 'Причина', 'Дата'];
         headers.forEach(headerText => {
             const headerCell = document.createElement('th');
             headerCell.textContent = headerText;
@@ -118,12 +118,13 @@ function displayUserData(data) {
 
         data.warn.forEach(warn => {
             const row = table.insertRow();
-            const dateCell = row.insertCell();
-            const reasonCell = row.insertCell();
             const adminCell = row.insertCell();
+            const reasonCell = row.insertCell();
+            const dateCell = row.insertCell();
             dateCell.textContent = warn.bantime ? formatDate(warn.bantime) : 'N/A';
             reasonCell.textContent = warn.reason || 'N/A';
             adminCell.textContent = warn.admin || 'N/A';
+            dateCell.title = warn.bantime;
         });
 
         warnsContainer.appendChild(table);
