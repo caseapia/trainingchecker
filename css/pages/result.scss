@@ -100,7 +100,10 @@ main {
 .modal-content {
     background-color: #0b0c0c;
         .table {
-            --bs-table-bg: inherit
+            --bs-table-bg: inherit;
+                td, th {
+                    text-align: center;
+                }
         }
 }
 .i7d1 {

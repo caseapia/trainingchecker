@@ -109,7 +109,10 @@ main {
   background-color: #0b0c0c;
 }
 .modal-content .table {
-  --bs-table-bg: inherit ;
+  --bs-table-bg: inherit;
+}
+.modal-content .table td, .modal-content .table th {
+  text-align: center;
 }
 
 .i7d1 {
