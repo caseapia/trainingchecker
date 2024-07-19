@@ -1,3 +1,9 @@
+function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('ru-RU', options);
+}
+
 async function fetchUserData() {
     const inputText = localStorage.getItem('inputValue');
     const url = `https://training-server.com/api/user/${inputText}`;
@@ -16,7 +22,6 @@ async function fetchUserData() {
 }
 
 function displayUserData(data) {
-
     document.getElementById('userid').textContent = data.id || '0';
     if (data.id === 1) {
         document.getElementById('staffbadge').style.display = 'block';
@@ -45,10 +50,10 @@ function displayUserData(data) {
         document.getElementById('admin').textContent = 'Модератор';
     }
     if (data.moder > 3 > 999) {
-        document.getElementById('admin').textContent = 'Старший модератор'
+        document.getElementById('admin').textContent = 'Старший модератор';
     }
     if (data.moder > 998) {
-        document.getElementById('admin').textContent = 'Администратор'
+        document.getElementById('admin').textContent = 'Администратор';
     }
     if (data.moder > 1) {
         document.getElementById('staffbadge').style.display = 'block';
@@ -94,34 +99,66 @@ function displayUserData(data) {
     }
     document.getElementById('regdate').textContent = data.regdate || 'Error';
     if (data.regdate.includes(1970)) {
-        document.getElementById('regdate').textContent = 'Зарегистрирован до 2018 года'
+        document.getElementById('regdate').textContent = 'Зарегистрирован до 2018 года';
     }
     document.getElementById('lastlogin').textContent = data.lastlogin || 'Error';
-    // document.getElementById('warns').textContent = data.warn.map(warn => JSON.stringify(warn)).join(', ') || 'No warnings';
+
+    // Добавление таблицы варнов
+    const warnsContainer = document.getElementById('warns');
+    if (data.warn && data.warn.length > 0) {
+        document.getElementById('warnloader').style.display = 'none';
+        document.getElementById('showwarns').style.display = 'block';
+        const table = document.createElement('table');
+        table.className = 'warn-table table';
+        const headerRow = table.insertRow();
+        const headers = ['Дата', 'Причина', 'Администратор'];
+        headers.forEach(headerText => {
+            const headerCell = document.createElement('th');
+            headerCell.textContent = headerText;
+            headerRow.appendChild(headerCell);
+        });
+
+        data.warn.forEach(warn => {
+            console.log(`Processing warn: ${JSON.stringify(warn)}`);
+            const row = table.insertRow();
+            const dateCell = row.insertCell();
+            const reasonCell = row.insertCell();
+            const adminCell = row.insertCell();
+            dateCell.textContent = warn.bantime ? formatDate(warn.bantime) : 'N/A';
+            reasonCell.textContent = warn.reason || 'N/A';
+            adminCell.textContent = warn.admin || 'N/A';
+        });
+
+        warnsContainer.appendChild(table);
+    } else {
+        document.getElementById('warnloader').style.display = 'none';
+        document.getElementById('showwarns').style.display = 'none'
+        document.getElementById('nowarns').style.display = 'block';
+    }
 }
 
 function copyToClipboard(elementId) {
     const text = document.getElementById(elementId).textContent;
     const alert = document.getElementById('copyalert');
     navigator.clipboard.writeText(text).then(() => {
-        alert.innerHTML = `"${text}" добавлено в буфер обмена`
-        alert.classList.add('nothide')
+        alert.innerHTML = `"${text}" добавлено в буфер обмена`;
+        alert.classList.add('nothide');
         setTimeout(() => {
-            alert.classList.remove('nothide')
+            alert.classList.remove('nothide');
         }, 3000);
     }).catch(err => {
-        console.error('Failed to copy in clipboard:', err)
+        console.error('Failed to copy in clipboard:', err);
     });
 }
 
 function update() {
-    const alert = document.getElementById('updatealert')
+    const alert = document.getElementById('updatealert');
     const inputText = localStorage.getItem('inputValue');
     fetchUserData();
-    alert.innerHTML = `Данные о ${inputText} были обновлены`
+    alert.innerHTML = `Данные о ${inputText} были обновлены`;
     alert.classList.add('nothide');
     setTimeout(() => {
-        alert.classList.remove('nothide')
+        alert.classList.remove('nothide');
     }, 3000);
 }
 

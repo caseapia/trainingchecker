@@ -48,6 +48,21 @@
     <header>
         <a href="https://forum.training-server.com/d/19854-training-checker-training-api-tolko-s-interfeysom" target="_blank" rel="noopener noreferrer"><h1>TRAINING <span style="color: #f01f4be7;">CHECKER</span></h1></a>
     </header>
+    <div class="modal fade" id="punishModal" tabindex="-1" aria-labelledby="punishModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="punishModalLabel">Список предупреждений игрока</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <section id="warns">
+                
+              </section>
+            </div>
+          </div>
+        </div>
+    </div>
     <main>
         <div class="container">
             <div class="alert alert-success hiddenalert" role="alert" id="copyalert" style="position: fixed;">
@@ -57,7 +72,6 @@
                 <span>Данные об игроке были обновлены.</span>
             </div>
             <div class="info-container">
-                <!-- <button class="btn btn-primary btn-sm" onclick="update()"><i class="bi bi-arrow-repeat"></i> Обновить</button>&nbsp;<button class="btn btn-primary btn-sm" onclick="goback()"><i class="bi bi-arrow-left-circle"></i> Вернуться</button> -->
                     <div id="button-container">
                         <button class="redbutton" onclick="update()"><i class="bi bi-arrow-repeat"></i> Обновить</button>
                         <button class="redbutton" onclick="goback()"><i class="bi bi-arrow-left-circle"></i> Вернуться</button>
@@ -117,7 +131,13 @@
                             </div>
                         </div>
                     </li>
-                    <!-- <li><label for="warns">Предупреждения:</label> <span id="warns">Please, wait...</span> <i class="bi bi-clipboard" onclick="copyToClipboard('userid')"></i></li></li> -->
+                    <section id="warns">
+                        <hr style="border-style:double;border-color: white;">
+                        <h5>Наказания</h5>
+                        <div class="spinner-border spinner-border-lg" role="status" data-bs-toggle="tooltip" title="Загрузка информации..." id="warnloader"></div>
+                        <span class="i7d1" id="nowarns" style="display: none;">У игрока отсутствуют предупреждения</span>
+                        <button type="button" class="redbutton" id="showwarns" data-bs-toggle="modal" data-bs-target="#punishModal" style="display: none;">Просмотреть</button>
+                    </section>
                 </ul>
             </div>
         </div>

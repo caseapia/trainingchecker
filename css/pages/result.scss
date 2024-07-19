@@ -79,7 +79,8 @@ main {
     padding-right: $padding-sides;
     padding-bottom: $padding-topbottom;
     padding-top: $padding-topbottom;
-    background-color: #f01f4be7;
+    // background-color: #f01f4be7;
+    background-color: rgba(255, 255, 255, 0.13);
     border-radius: 10px;
     border: 0;
     transition: .3s;
@@ -87,14 +88,25 @@ main {
     color: white;
     outline: none;
         &:hover {
-            background-color: #f01f4bb7;
+            background-color: rgba(255, 255, 255, 0.226);
         }
         &:active {
             transform: scale(0.99,0.99);
         }
         &:focus-visible {
-            box-shadow: 0 0 0 0.25rem rgba(225, 83, 97, 0.5);
+            box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.507);
         }
+}
+.modal-content {
+    background-color: #0b0c0c;
+        .table {
+            --bs-table-bg: inherit
+        }
+}
+.i7d1 {
+    color: #ad4e4e;
+    text-align: center;
+    vertical-align: middle;
 }
 
 // Adaptive
