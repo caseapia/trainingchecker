@@ -102,8 +102,6 @@ function displayUserData(data) {
         document.getElementById('regdate').textContent = 'Зарегистрирован до 2018 года';
     }
     document.getElementById('lastlogin').textContent = data.lastlogin || 'Error';
-
-    // Добавление таблицы варнов
     const warnsContainer = document.getElementById('warns');
     if (data.warn && data.warn.length > 0) {
         document.getElementById('warnloader').style.display = 'none';
@@ -119,7 +117,6 @@ function displayUserData(data) {
         });
 
         data.warn.forEach(warn => {
-            console.log(`Processing warn: ${JSON.stringify(warn)}`);
             const row = table.insertRow();
             const dateCell = row.insertCell();
             const reasonCell = row.insertCell();
