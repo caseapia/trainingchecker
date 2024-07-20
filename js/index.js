@@ -66,11 +66,11 @@ async function getLastCommitDate() {
          }
 
          const commits = await response.json();
-         console.log('Commits:', commits);
+         console.debug('Commits:', commits);
 
          if (Array.isArray(commits) && commits.length > 0) {
              const lastCommitDate = commits[0].commit.committer.date;
-             console.log('Last commit date:', lastCommitDate);
+             console.debug('Last commit date:', lastCommitDate);
              const lastUpdate = new Date(lastCommitDate).toLocaleString();
              document.getElementById('lastUpdate').innerHTML = `${lastUpdate}`;
          } else {

@@ -7,6 +7,9 @@ function formatDate(dateString) {
 async function fetchUserData() {
     const inputText = localStorage.getItem('inputValue');
     const url = `https://training-server.com/api/user/${inputText}`;
+    if (inputText.includes('HeroIAm')) {
+        window.location.href = './error.html';
+    }
 
     try {
         const response = await fetch(url);
@@ -138,16 +141,10 @@ function displayUserData(data) {
 
 function copyToClipboard(elementId) {
     const text = document.getElementById(elementId).textContent;
-    const alert = document.getElementById('copyalert');
-    navigator.clipboard.writeText(text).then(() => {
-        alert.innerHTML = `"${text}" добавлено в буфер обмена`;
-        alert.classList.add('nothide');
-        setTimeout(() => {
-            alert.classList.remove('nothide');
-        }, 3000);
-    }).catch(err => {
-        console.error('Failed to copy in clipboard:', err);
-    });
+    const alert = document.getElementById('notify');
+    navigator.clipboard.writeText(text)
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+    toastBootstrap.show();
 }
 
 function update() {
