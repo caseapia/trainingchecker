@@ -86,11 +86,11 @@ main {
     cursor: pointer;
     transition: .2s;
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-underline-offset: 4px;
     text-decoration-color: rgba(255, 165, 0, 0.3);
-}
-#lastUpdate::hover {
-    text-decoration-color: var(--text-warning);
+        &:hover {
+            text-decoration-color: var(--text-warning);
+        }
 }
 
 // Adaptive
