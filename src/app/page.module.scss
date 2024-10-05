@@ -1,0 +1,23 @@
+.container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+}
+.inputcontainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.lastCommit {
+    color: var(--text-warning);
+    cursor: pointer;
+    transition: .2s;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: rgba(255, 165, 0, 0.3);
+        &:hover {
+            text-decoration-color: var(--text-warning);
+        }
+}

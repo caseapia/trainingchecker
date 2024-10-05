@@ -1,0 +1,71 @@
+.button {
+    $padding: 10px;
+    $width: 100%;
+    $radius: 12px;
+    $anims-time: .3s;
+    padding: $padding;
+    width: $width;
+    border: 1px solid transparent;
+    border-radius: $radius;
+    transition: $anims-time;
+    cursor: pointer;
+    display: flex;
+    vertical-align: middle;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    &__primary {
+        background-color: #0070f0;
+        &:hover {
+            opacity: .9;
+        }
+        &:active {
+            transform: scale(.992);
+        }
+    }
+    &__outlined {
+        border: 1px solid #0070f0;
+        background: transparent;
+            &:hover {
+                border: 1px solid transparent;
+                background-color: #0070f0;
+            }
+            &:active {
+                transform: scale(.992);
+            }
+    }
+    &__secondary {
+        background-color: #8686866c;
+            &:hover {
+                opacity: .9;
+            }
+            &:active {
+                transform: scale(.992);
+            }
+    }
+    &__blured {
+        background-color: #0070f0;
+        filter: blur(.5px);
+            &:hover {
+                opacity: .9;
+            }
+            &:active {
+                transform: scale(.992);
+            }
+    }
+    &__danger {
+        background-color: #f01f4be7;
+            &:hover {
+                opacity: .9;
+            }
+            &:active {
+                transform: scale(.992);
+            }
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: .5;
+    }
+}

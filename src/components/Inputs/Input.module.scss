@@ -1,0 +1,32 @@
+.input {
+    $width: 100%; 
+    $padding: .625rem; 
+    $color: #27272a; 
+    $radius: 12px; 
+    $anims-time: .3s;
+    width: $width;
+    max-width: $width;
+    padding: $padding;
+    background: $color;
+    border: 1px solid transparent;
+    border-radius: $radius;
+    outline: none;
+    height: 2.7rem;
+    color: var(--text-color);
+    transition: $anims-time;
+    font-size: 15px;
+        &::placeholder {
+            color: var(--text-muted-color);
+        }
+        &:hover {
+            background-color: #3f3f46;
+        }
+}
+.inptcontainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.error {
+    border: 1px solid #f01f4be7;
+}
