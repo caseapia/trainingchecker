@@ -1,0 +1,54 @@
+@keyframes hoveranimation {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.redspan {
+  color: #f01f4b;
+}
+.header {
+  display: grid;
+  place-items: center;
+  margin-top: 40px;
+}
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  background: #1a17175c;
+  border-radius: 15px;
+  padding: 10px;
+    li {
+      margin-right: 25px;
+        &:last-of-type {
+          margin-right: 0;
+        }
+        a {
+          &:not(.active) {
+            &:hover {
+              &::after {
+                content: "";
+                margin-top: 4px;
+                height: 3px;
+                border-radius: 99px;
+                background: linear-gradient(90deg, hsla(347, 87%, 53%, 1) 0%, hsla(347, 46%, 41%, 1) 56%);
+                display: block;
+                animation: hoveranimation .5s;
+              }
+            }
+          }
+          &.active::after {
+            content: "";
+            margin-top: 4px;
+            height: 3px;
+            border-radius: 99px;
+            background: linear-gradient(90deg, hsla(347, 87%, 53%, 1) 0%, hsla(347, 46%, 41%, 1) 56%);
+            display: block;
+          }
+        }
+    }
+}
