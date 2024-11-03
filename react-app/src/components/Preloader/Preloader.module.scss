@@ -12,7 +12,7 @@
   overflow: hidden;
   align-items: center;
   opacity: 0;
-  transition: transform 5s ease;
+  transition: transform 2.5s ease;
     &.active {
       opacity: 1;
       transform: translateY(-100%);

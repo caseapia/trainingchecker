@@ -11,8 +11,8 @@ export const Preloader: FC = () => {
     loader.current?.classList.add(styles.active);
     const timer = setTimeout(() => {
       loader.current?.classList.remove(styles.active);
-      setTimeout(() => setShow(false), 5000);
-    }, 5000);
+      setTimeout(() => setShow(false), 2500);
+    }, 2500);
     return () => clearTimeout(timer);
   }, []);
 

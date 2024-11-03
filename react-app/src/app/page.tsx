@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import styles from "./page.module.scss";
 import { Input } from "@/components/Input/Input";
 import Button from "@/components/Buttons/Button";
-import { FaUser } from "react-icons/fa";
+import { FaCheckCircle, FaUser } from "react-icons/fa";
+import { BiLogoGithub } from "react-icons/bi";
 
 export default function Home() {
   const [lastUpdate, setLastUpdate] = useState<string>('');
@@ -33,41 +34,21 @@ export default function Home() {
         console.error(err);
       }
     };
-    const readme = async () => {
-      try {
-        const response = await fetch(`https://api.github.com/repos/caseapia/trainingchecker/contents/README.md`, {
-            headers: {
-                'Accept': 'application/vnd.github.v3.raw'
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error(`Error fetching the README file: ${response.statusText}`);
-        }
-
-        const content: { content: string; encoding: string } = await response.json();
-        const decodedContent = content.encoding === "base64"
-        ? new TextDecoder("utf-8").decode(Uint8Array.from(atob(content.content), c => c.charCodeAt(0)))
-        : content.content;
-        setReadme(decodedContent);
-      } catch (error) {
-          console.error(error);
-      }
-    }
-
     commits();
-    readme();
   }, []);
 
   return (
     <div className={styles.container}>
       <div className={styles.readmeWrapper}>
-        <p dangerouslySetInnerHTML={{ __html: readme }} />
-        <p>Последнее обновление произошло: {lastUpdate}</p>
+      <p style={{textAlign: 'center'}}>SAMP сервер <a href="https://training-server.com/" target="_blank" rel="noopener noreferrer">TRAINING</a> не имеет отношения к созданию данного сайта. Этот сайт является частным и использует<br /><a href="https://forum.training-server.com/d/3921-training-api" target="_blank" rel="noopener noreferrer">TRAINING API</a> в соответствии с разрешением его создателя.</p><br />
+      <p>Разработано для упрощения работы с <a href="https://forum.training-server.com/d/3921-training-api" target="_blank" rel="noopener noreferrer">TRAINING API</a>.</p>
+      <p>Мы не собираем никаких данных и метрик. Если вы нашли недоработку, пожалуйста, сообщите об этом в теме на форуме.</p>
+      <p>Этот проект имеет открытый исходный код, вы всегда можете дополнить его или исправить, используя<br /><a href="https://github.com/1dontkillme/trainingchecker" target="_blank" rel="noopener noreferrer"><BiLogoGithub /> исходный код на GitHub</a>.</p><br />
+      <p>Последнее обновление произошло: {lastUpdate}</p>
       </div>
-      <form action="" className={styles.FormContainer}>
-        <Input label="Введите никнейм игрока" type="text" />
-        <Button btnType="Danger" text="XUI" type="button" icon={ <FaUser/> } />
+      <form action="./result" method="get" className={styles.FormContainer}>
+        <Input icon={<FaUser />} label="Введите никнейм игрока" type="text" name="nickname" />
+        <Button btnType="Primary" text="Проверить" type="submit" icon={ <FaCheckCircle /> } />
       </form>
     </div>
   );

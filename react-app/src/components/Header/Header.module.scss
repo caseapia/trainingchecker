@@ -41,13 +41,16 @@
               }
             }
           }
-          &.active::after {
-            content: "";
-            margin-top: 4px;
-            height: 3px;
-            border-radius: 99px;
-            background: linear-gradient(90deg, hsla(347, 87%, 53%, 1) 0%, hsla(347, 46%, 41%, 1) 56%);
-            display: block;
+          &.active {
+            color: #ccc;
+              &::after {
+                content: "";
+                margin-top: 4px;
+                height: 3px;
+                border-radius: 99px;
+                background: linear-gradient(90deg, hsla(347, 87%, 53%, 1) 0%, hsla(347, 46%, 41%, 1) 56%);
+                display: block;
+              }
           }
         }
     }

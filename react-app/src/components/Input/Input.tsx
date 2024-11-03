@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from './Input.module.scss'
+import { ReactNode } from 'react';
 
 interface Props {
   label: string;
@@ -10,9 +11,11 @@ interface Props {
   classname?: string;
   disabled?: boolean;
   placeholder?: string;
+  icon?: ReactNode;
+  name?: string;
 }
 
-export const Input = ({ label, type, onInput, onClick, onChange, classname, disabled = false, placeholder }: Props) => {
+export const Input = ({ label, type, onInput, onClick, onChange, classname, disabled = false, placeholder, icon, name }: Props) => {
   const [string, setString] = useState<string>('');
   useEffect(() => {
     const generateID = (length: number): string => {
@@ -39,10 +42,12 @@ export const Input = ({ label, type, onInput, onClick, onChange, classname, disa
         onInput={onInput}
         onChange={onChange}
         onClick={onClick}
-        className={`${styles.input} ${classname || ''}`} 
+        className={`${styles.input} ${classname || ''} ${icon || styles.nullIcon}`} 
         disabled={disabled}
         placeholder={placeholder}
+        name={name}
       />
+      {icon && (<> <span className={styles.icon}>{icon}</span> </>)}
     </>
   )
 }
