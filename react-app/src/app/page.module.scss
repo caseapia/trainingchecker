@@ -3,3 +3,14 @@
   margin-top: 50px;
   place-items: center;
 }
+.readmeWrapper {
+  width: 50%;
+}
+.FormContainer {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+    input {
+      margin-bottom: 10px;
+    }
+}

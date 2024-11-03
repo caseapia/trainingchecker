@@ -18,7 +18,7 @@ export const Preloader: FC = () => {
 
   return show ? (
     <div className={`${styles.preloader}`} ref={loader}>
-      <Image src={traininglogo} alt="Training Logotype" />
+      <Image src={traininglogo} alt="Training Logotype" width={150} draggable={false} />
     </div>
   ) : null;
 };

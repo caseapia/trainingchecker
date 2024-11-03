@@ -1,0 +1,48 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: 4px;
+  transition: .3s ease;
+  color: #fff;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+    svg {
+      margin-right: 6px;
+      margin-bottom: 2px;
+    }
+}
+.Primary {
+  background: #1339FF;
+  border: 1px solid transparent;
+    &:hover {
+      background: lighten(#1339ff, 10%);
+    }
+}
+.Transparent {
+  background: transparent;
+  border: 1px solid #1339FF;
+    &:hover {
+      border-color: lighten(#1339ff, 10%);
+    }
+}
+.Secondary {
+  border: 1px solid #191B1D;
+  background: transparent;
+
+  &:hover {
+    background: #202325;
+    border: 1px solid #191B1D;
+  }
+}
+.Danger {
+  border: 1px solid #FF6955;
+  background: transparent;
+
+  &:hover {
+    border: 1px solid #FF6955;
+    background: #FF6955;
+  }
+}
