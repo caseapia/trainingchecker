@@ -1,0 +1,23 @@
+.input {
+  background: #232527;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  outline: none;
+  color: #77787A;
+  font-size: 16px;
+  padding: 10px 24px;
+  transition: .3s ease;
+    &:focus {
+      color: white;
+    }
+    &:hover {
+      background: #2e3133;
+    }
+}
+.label {
+  color: #77787A;
+  transition: .3s ease;
+    &:hover {
+      color: white;
+    }
+}

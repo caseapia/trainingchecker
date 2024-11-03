@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
 import styles from "./page.module.scss";
+import { Input } from "@/components/Input/Input";
 
 export default function Home() {
   const [lastUpdate, setLastUpdate] = useState<string>('');
@@ -34,6 +35,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={styles.container}>asd</div>
+    <div className={styles.container}>
+      <Input label="xui" type="text" />
+    </div>
   );
 }
