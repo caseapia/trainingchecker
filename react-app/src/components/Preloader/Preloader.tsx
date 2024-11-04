@@ -9,11 +9,10 @@ export const Preloader: FC = () => {
 
   useEffect(() => {
     loader.current?.classList.add(styles.active);
-    const timer = setTimeout(() => {
+    setTimeout(() => {
       loader.current?.classList.remove(styles.active);
-      setTimeout(() => setShow(false), 2500);
-    }, 2500);
-    return () => clearTimeout(timer);
+      setTimeout(() => setShow(false), 5000);
+    }, 5000);
   }, []);
 
   return show ? (
