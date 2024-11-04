@@ -9,7 +9,7 @@ interface Player {
   lastlogin: string;
 }
 
-export const Admins = () => {
+export default function Admins() {
   const [result, setResult] = useState<Player[] | null>(null);
 
   useEffect(() => {
@@ -63,4 +63,3 @@ export const Admins = () => {
     </>
   )
 }
-export default Admins
