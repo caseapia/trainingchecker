@@ -1,0 +1,18 @@
+.container {
+  display: grid;
+  margin-top: 50px;
+  place-items: center;
+  gap: 20px;
+}
+.readmeWrapper {
+  width: 50%;
+  line-height: 25px;
+}
+.FormContainer {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+    input {
+      margin-bottom: 10px;
+    }
+}

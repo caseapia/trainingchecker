@@ -1,0 +1,30 @@
+.badge {
+  --size: 27px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: calc(var(--size) / 2);
+  background: gray;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  cursor: pointer;
+  transition: .2s;
+  font-size: calc(.6* var(--size));
+  margin-right: 4px;
+  border: 1px solid white;
+    &:hover {
+      transform: scale(1.2,1.2);
+    }
+    &:last-of-type {
+      margin-right: 0px;
+    }
+    .BadgeIcon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      vertical-align: middle;
+    }
+}
