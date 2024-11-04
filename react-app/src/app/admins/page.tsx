@@ -1,8 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import styles from './page.module.scss'
-import Link from 'next/link';
-import BadgeRenderer from '@/components/BadgeRenderer/BadgeRenderer';
 
 interface Player {
   id: number;
