@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import styles from "./page.module.scss";
 import { Input } from "@/components/Input/Input";
 import Button from "@/components/Buttons/Button";
@@ -41,26 +41,28 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={styles.container} id="main">
-      {isLoaded ?
-       (
-        <>
-          <div className={styles.readmeWrapper}>
-          <p style={{textAlign: 'center'}}>SAMP сервер <a href="https://training-server.com/" target="_blank" rel="noopener noreferrer">TRAINING</a> не имеет отношения к созданию данного сайта. Этот сайт является частным и использует<br /><a href="https://forum.training-server.com/d/3921-training-api" target="_blank" rel="noopener noreferrer">TRAINING API</a> в соответствии с разрешением его создателя.</p><br />
-          <p>Разработано для упрощения работы с <a href="https://forum.training-server.com/d/3921-training-api" target="_blank" rel="noopener noreferrer">TRAINING API</a>.</p>
-          <p>Мы не собираем никаких данных и метрик. Если вы нашли недоработку, пожалуйста, сообщите об этом в теме на форуме.</p>
-          <p>Этот проект имеет открытый исходный код, вы всегда можете дополнить его или исправить, используя<br /><a href="https://github.com/1dontkillme/trainingchecker" target="_blank" rel="noopener noreferrer"><BiLogoGithub /> исходный код на GitHub</a>.</p><br />
-          <p>Последнее обновление произошло: {lastUpdate}</p>
-          </div>
-          <form action="./result" method="get" className={styles.FormContainer}>
-            <Input icon={<FaUser />} label="Введите никнейм игрока" type="text" name="nickname" />
-            <Button btnType="Primary" text="Проверить" type="submit" icon={ <FaCheckCircle /> } />
-          </form>
-        </>
-      ) : (
-        <Lottie animationData={Preloader} />
-      )
-      }
-    </div>
+    <Suspense fallback={<Lottie animationData={Preloader} />}>
+      <div className={styles.container} id="main">
+        {isLoaded ?
+         (
+          <>
+            <div className={styles.readmeWrapper}>
+            <p style={{textAlign: 'center'}}>SAMP сервер <a href="https://training-server.com/" target="_blank" rel="noopener noreferrer">TRAINING</a> не имеет отношения к созданию данного сайта. Этот сайт является частным и использует<br /><a href="https://forum.training-server.com/d/3921-training-api" target="_blank" rel="noopener noreferrer">TRAINING API</a> в соответствии с разрешением его создателя.</p><br />
+            <p>Разработано для упрощения работы с <a href="https://forum.training-server.com/d/3921-training-api" target="_blank" rel="noopener noreferrer">TRAINING API</a>.</p>
+            <p>Мы не собираем никаких данных и метрик. Если вы нашли недоработку, пожалуйста, сообщите об этом в теме на форуме.</p>
+            <p>Этот проект имеет открытый исходный код, вы всегда можете дополнить его или исправить, используя<br /><a href="https://github.com/1dontkillme/trainingchecker" target="_blank" rel="noopener noreferrer"><BiLogoGithub /> исходный код на GitHub</a>.</p><br />
+            <p>Последнее обновление произошло: {lastUpdate}</p>
+            </div>
+            <form action="./result" method="get" className={styles.FormContainer}>
+              <Input icon={<FaUser />} label="Введите никнейм игрока" type="text" name="nickname" />
+              <Button btnType="Primary" text="Проверить" type="submit" icon={ <FaCheckCircle /> } />
+            </form>
+          </>
+        ) : (
+          <Lottie animationData={Preloader} />
+        )
+        }
+      </div>
+    </Suspense>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import styles from './page.module.scss'
 import Link from 'next/link';
 import BadgeRenderer from '@/components/BadgeRenderer/BadgeRenderer';
@@ -38,34 +38,36 @@ function Players() {
   }, []);
 
   return (
-    <div className={styles.PageWrapper} id='players'>
-      <h1>Список игроков в сети</h1>
-      {result ? (
-        <table className={styles.Table}>
-          <thead className={styles.head}>
-            <tr>
-              <th>ID</th>
-              <th>Никнейм</th>
-              <th>Вошел</th>
-            </tr>
-          </thead>
-          <tbody>
-            {result.map((player) => (
-              <tr key={player.id}>
-                <td>{player.playerid}</td>
-                <td>
-                  <Link style={{ marginRight: '6px' }} target='_blank' href={`../result?nickname=${player.login}`}>{player.login}</Link>
-                  <BadgeRenderer player={player} />
-                </td>
-                <td>{player.lastlogin}</td>
+    <Suspense fallback={<Lottie animationData={Preloader} />}>
+      <div className={styles.PageWrapper} id='players'>
+        <h1>Список игроков в сети</h1>
+        {result ? (
+          <table className={styles.Table}>
+            <thead className={styles.head}>
+              <tr>
+                <th>ID</th>
+                <th>Никнейм</th>
+                <th>Вошел</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <Lottie animationData={Preloader} />
-      )}
-    </div>
+            </thead>
+            <tbody>
+              {result.map((player) => (
+                <tr key={player.id}>
+                  <td>{player.playerid}</td>
+                  <td>
+                    <Link style={{ marginRight: '6px' }} target='_blank' href={`../result?nickname=${player.login}`}>{player.login}</Link>
+                    <BadgeRenderer player={player} />
+                  </td>
+                  <td>{player.lastlogin}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <Lottie animationData={Preloader} />
+        )}
+      </div>
+    </Suspense>
   );
 }
 
