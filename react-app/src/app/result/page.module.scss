@@ -2,6 +2,9 @@
   display: grid;
   place-items: center;
   margin-top: 10px;
+    .nickname {
+      color: var(--color-danger)
+    }
 }
 .ResultWrapper {
   border-radius: 5px;

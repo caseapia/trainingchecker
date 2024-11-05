@@ -22,16 +22,24 @@ const PlayerInfo = () => {
     lastlogin: '',
     playerid: NaN
   });
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [diffInDays, setDiffInDays] = useState(NaN);
+  const [isNotFound, setIsNotFound] = useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchPlayerData = async () => {
       if (!nickname) return;
       const url = `https://training-server.com/api/user/${nickname}`;
-
+  
       try {
         const response = await fetch(url);
         if (!response.ok) {
+          if (response.status === 404) {
+            setIsDataLoaded(false);
+            setIsNotFound(true);
+            return;
+          }
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const result = await response.json();
@@ -48,14 +56,41 @@ const PlayerInfo = () => {
           lastlogin: result.data.lastlogin,
           playerid: Number(result.data.playerid),
         });
-        setIsLoaded(true);
+        setIsDataLoaded(true);
       } catch (error) {
         console.error(error);
       }
     };
-
+  
     fetchPlayerData();
   }, [nickname]);
+
+  useEffect(() => {
+    if (!playerData.lastlogin) return;
+  
+    const dates = () => {
+      const today = new Date();
+      const lastLoginDate = new Date(playerData.lastlogin);
+  
+      const diffInTime = today.getTime() - lastLoginDate.getTime();
+      const diffInDays = Math.floor(diffInTime / (1000 * 3600 * 24));
+  
+      setDiffInDays(diffInDays);
+    };
+  
+    dates();
+  }, [playerData.lastlogin]);
+
+  useEffect(() => {
+    const getPageValid = () => {
+      if (isDataLoaded === true && isNotFound === false) {
+        setIsLoaded(true);
+      } else {
+        setIsLoaded(false);
+      }
+    }
+    getPageValid();
+  })
 
   const transformVerificationText = (text: string) => {
     const regex = /{(.*?)}/g;
@@ -78,6 +113,16 @@ const PlayerInfo = () => {
       }
     }
     return elements;
+  };
+
+  const getDaySuffix = (days: number) => {
+    const lastDigit = days % 10;
+    const lastTwoDigits = days % 100;
+  
+    if (lastTwoDigits >= 11 && lastTwoDigits <= 19) return "дней";
+    if (lastDigit === 1) return "день";
+    if (lastDigit >= 2 && lastDigit <= 4) return "дня";
+    return "дней";
   };
 
   return isLoaded ? (
@@ -123,17 +168,37 @@ const PlayerInfo = () => {
         <p><strong>Текст верификации:</strong> {transformVerificationText(playerData.verifyText)}</p>
       )}
       <p><strong>Время мута:</strong> {playerData.mute ? `${playerData.mute}` : <span style={{ color: '#91ec66e7' }}>Нет</span>}</p>
-      <p><strong>Онлайн:</strong> {playerData.online ? <span style={{ color: '#91ec66e7' }}>Да <span style={{ color: 'white' }}>(ID: {playerData.playerid})</span></span> : <span style={{ color: '#f01f4be7' }}>Нет</span>}</p>
-      <p><strong>Дата регистрации:</strong> {playerData.regdate}</p>
-      <p><strong>Дата последнего входа:</strong> {playerData.lastlogin}</p>
+      <p><strong>Дата регистрации:</strong> 
+        {playerData.regdate === '1970-01-01 03:00:00'
+          ? ' Зарегистрирован до 2018 года'
+          : ` ${playerData.regdate}`
+        }
+      </p>
+      <p>
+        <strong>Дата последнего входа: </strong>
+        {new Date(playerData.lastlogin).toDateString() === new Date().toDateString() && playerData.online === 0 ? (
+          playerData.lastlogin
+        ) : new Date(playerData.lastlogin).toDateString() !== new Date().toDateString() && playerData.online === 0 ? (
+          `${playerData.lastlogin} (${diffInDays} ${getDaySuffix(diffInDays)} назад)`
+        ) : null}
+        {playerData.online ? (
+          <span style={{ color: '#91ec66e7' }}>Сейчас в сети <span style={{ color: 'white' }}>(ID: {playerData.playerid})</span></span>
+        ) : null}
+      </p>
       <hr className={styles.ProfileLine} />
       <h5 className={styles.h5}>Значки</h5>
       <BadgeRenderer player={playerData} />
     </div>
+  ) : isNotFound ? (
+    <div className={styles.PageWrapper}>
+      <h3>Игрок с никнеймом <span className={styles.nickname}>{nickname}</span> не найден</h3>
+    </div>
   ) : (
-    <Lottie animationData={Preloader} />
+    <div className={styles.PageWrapper}>
+      <Lottie animationData={Preloader} />
+    </div>
   );
-};
+}
 
 const Result = () => (
   <div className={styles.PageWrapper} id='result'>
