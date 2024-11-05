@@ -10,6 +10,9 @@
   line-height: 2.225rem;
   border: 1px solid #242830;
   margin-top: 10px;
+    @media screen and (max-width: 767px) {
+      width: 90%;
+    }
 }
 .ProfileLine {
   margin: 1rem 0;

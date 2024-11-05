@@ -3,6 +3,8 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styles from './page.module.scss'
 import BadgeRenderer from '@/components/BadgeRenderer/BadgeRenderer';
+import Lottie from 'lottie-react';
+import Preloader from '../../../public/assets/lotties/Preloader.json';
 
 const Result = () => {
   const searchParams = useSearchParams();
@@ -20,6 +22,7 @@ const Result = () => {
     lastlogin: '',
     playerid: NaN
   });
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   useEffect(() => {
     const fetchPlayerData = async () => {
       if (!nickname) {
@@ -47,10 +50,12 @@ const Result = () => {
           playerid: Number(result.data.playerid),
         });
         console.log(result.data);
+        setIsLoaded(true);
       } catch (error) {
         console.error(error);
       }
     }
+
     fetchPlayerData();
   }, [])
   const transformVerificationText = (text: string) => {
@@ -77,63 +82,67 @@ const Result = () => {
 };
 
   return (
-    <div className={styles.PageWrapper}>
+    <div className={styles.PageWrapper} id='result'>
       <h1>Информация об игроке</h1>
-      <div className={styles.ResultWrapper}>
-        <p><strong>ID:</strong> {playerData.id}</p>
-        <p><strong>Ник:</strong> {playerData.login}</p>
-        <p><strong>Должность:</strong> {" "}
-          {
-            playerData.moder < 0 
-            ? "Младший уборщик унитаза Волека"
-            : playerData.moder === 0 
-            ? "Игрок"
-            : playerData.moder === 1
-            ? "Младший модератор"
-            : playerData.moder === 2
-            ? "Модератор"
-            : playerData.moder === 3
-            ? "Старший модератор"
-            : playerData.moder > 998 
-            ? "Администратор"
-            : "Игрок"
-          }
-        </p>
-        <p><strong>Верификация:</strong> 
-          {
-            playerData.verify === 0
-            ? ` Нет`
-            : playerData.verify === 1
-            ? ` Ютубер`
-            : playerData.verify === 2
-            ? ` Автор сообщества (маппер)`
-            : playerData.verify === 3
-            ? ` Разработчик`
-            : playerData.verify === 4
-            ? ` Автор сообщества (Модели и прочее)`
-            : playerData.verify === 5
-            ? ` Донатер`
-            : playerData.verify === 6
-            ? ` Администратор в отставке`
-            : playerData.verify > 6
-            ? ` Неизвестно`
-            : `Нет`
-          }
-          {` (ID: ${playerData.verify})`}
-        </p>
-        {playerData.verify > 0 && (
-          <p><strong>Текст верификации:</strong> {transformVerificationText(playerData.verifyText)}</p>
-        )}
-        <p><strong>Время мута:</strong> {playerData.mute ? `${playerData.mute}` : <span style={{ color: '#91ec66e7' }}>Нет</span>}</p>
-        <p><strong>Онлайн:</strong> {playerData.online ? <span style={{ color: '#91ec66e7' }}>Да <span style={{ color: 'white' }}>(ID: {playerData.playerid})</span></span> : <span style={{ color: '#f01f4be7' }}>Нет</span>}</p>
-        <p><strong>Дата регистрации:</strong> {playerData.regdate}</p>
-        <p><strong>Дата последнего входа:</strong> {playerData.lastlogin}</p>
-        <hr className={styles.ProfileLine} />
-        <h5 className={styles.h5}>Значки</h5>
-        <BadgeRenderer player={playerData} />
-        {/* <hr className={styles.ProfileLine} />
-        <h5 className={styles.h5}>Список наказаний</h5> */}
-      </div>
+      {isLoaded ? (
+        <div className={styles.ResultWrapper}>
+          <p><strong>ID:</strong> {playerData.id}</p>
+          <p><strong>Ник:</strong> {playerData.login}</p>
+          <p><strong>Должность:</strong> {" "}
+            {
+              playerData.moder < 0 
+              ? "Младший уборщик унитаза Волека"
+              : playerData.moder === 0 
+              ? "Игрок"
+              : playerData.moder === 1
+              ? "Младший модератор"
+              : playerData.moder === 2
+              ? "Модератор"
+              : playerData.moder === 3
+              ? "Старший модератор"
+              : playerData.moder > 998 
+              ? "Администратор"
+              : "Игрок"
+            }
+          </p>
+          <p><strong>Верификация:</strong> 
+            {
+              playerData.verify === 0
+              ? ` Нет`
+              : playerData.verify === 1
+              ? ` Ютубер`
+              : playerData.verify === 2
+              ? ` Автор сообщества (маппер)`
+              : playerData.verify === 3
+              ? ` Разработчик`
+              : playerData.verify === 4
+              ? ` Автор сообщества (Модели и прочее)`
+              : playerData.verify === 5
+              ? ` Донатер`
+              : playerData.verify === 6
+              ? ` Администратор в отставке`
+              : playerData.verify > 6
+              ? ` Неизвестно`
+              : `Нет`
+            }
+            {` (ID: ${playerData.verify})`}
+          </p>
+          {playerData.verify > 0 && (
+            <p><strong>Текст верификации:</strong> {transformVerificationText(playerData.verifyText)}</p>
+          )}
+          <p><strong>Время мута:</strong> {playerData.mute ? `${playerData.mute}` : <span style={{ color: '#91ec66e7' }}>Нет</span>}</p>
+          <p><strong>Онлайн:</strong> {playerData.online ? <span style={{ color: '#91ec66e7' }}>Да <span style={{ color: 'white' }}>(ID: {playerData.playerid})</span></span> : <span style={{ color: '#f01f4be7' }}>Нет</span>}</p>
+          <p><strong>Дата регистрации:</strong> {playerData.regdate}</p>
+          <p><strong>Дата последнего входа:</strong> {playerData.lastlogin}</p>
+          <hr className={styles.ProfileLine} />
+          <h5 className={styles.h5}>Значки</h5>
+          <BadgeRenderer player={playerData} />
+          {/* <hr className={styles.ProfileLine} />
+          <h5 className={styles.h5}>Список наказаний</h5> */}
+        </div>
+      ) : (
+        <Lottie animationData={Preloader} />
+      )}
     </div>
   );
 }

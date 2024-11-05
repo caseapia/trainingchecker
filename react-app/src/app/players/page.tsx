@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import styles from './page.module.scss'
 import Link from 'next/link';
 import BadgeRenderer from '@/components/BadgeRenderer/BadgeRenderer';
+import Lottie from 'lottie-react';
+import Preloader from '../../../public/assets/lotties/Preloader.json';
 
 interface Player {
   id: number;
@@ -36,7 +38,7 @@ function Players() {
   }, []);
 
   return (
-    <div className={styles.PageWrapper}>
+    <div className={styles.PageWrapper} id='players'>
       <h1>Список игроков в сети</h1>
       {result ? (
         <table className={styles.Table}>
@@ -61,7 +63,7 @@ function Players() {
           </tbody>
         </table>
       ) : (
-        <p>Загрузка контента...</p>
+        <Lottie animationData={Preloader} />
       )}
     </div>
   );
