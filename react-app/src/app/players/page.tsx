@@ -37,10 +37,6 @@ function Players() {
     getPlayers();
   }, []);
 
-  useEffect(() => {
-    document.title = `TRAINING PLAYERS`;
-  }, [])
-
   return (
     <Suspense fallback={<Lottie animationData={Preloader} />}>
       <div className={styles.PageWrapper} id='players'>
