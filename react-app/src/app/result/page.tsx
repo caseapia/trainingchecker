@@ -125,74 +125,68 @@ const PlayerInfo = () => {
     return "дней";
   };
 
-  useEffect(() => {
-    document.title = `${nickname}`;
-  }, [])
-
   return isLoaded ? (
-    <>
-      <div className={styles.ResultWrapper}>
-        <p><strong>ID:</strong> {playerData.id}</p>
-        <p><strong>Ник:</strong> {playerData.login}</p>
-        <p><strong>Должность:</strong> {playerData.moder < 0 
-            ? "Младший уборщик унитаза Волека" 
-            : playerData.moder === 0 
-            ? "Игрок" 
-            : playerData.moder === 1
-            ? "Младший модератор"
-            : playerData.moder === 2
-            ? "Модератор"
-            : playerData.moder === 3
-            ? "Старший модератор"
-            : playerData.moder > 998 
-            ? "Администратор"
-            : "Игрок"
-        }</p>
-        <p><strong>Верификация:</strong> 
-          {playerData.verify === 0
-            ? ` Нет`
-            : playerData.verify === 1
-            ? ` Ютубер`
-            : playerData.verify === 2
-            ? ` Автор сообщества (маппер)`
-            : playerData.verify === 3
-            ? ` Разработчик`
-            : playerData.verify === 4
-            ? ` Автор сообщества (Модели и прочее)`
-            : playerData.verify === 5
-            ? ` Донатер`
-            : playerData.verify > 5
-            ? ` Неизвестно`
-            : `Нет`
-          }
-          {` (ID: ${playerData.verify})`}
-        </p>
-        {playerData.verify > 0 && (
-          <p><strong>Текст верификации:</strong> {transformVerificationText(playerData.verifyText)}</p>
-        )}
-        <p><strong>Время мута:</strong> {playerData.mute ? `${playerData.mute}` : <span style={{ color: '#91ec66e7' }}>Нет</span>}</p>
-        <p><strong>Дата регистрации:</strong> 
-          {playerData.regdate === '1970-01-01 03:00:00'
-            ? ' Зарегистрирован до 2018 года'
-            : ` ${playerData.regdate}`
-          }
-        </p>
-        <p>
-          <strong>Дата последнего входа: </strong>
-          {new Date(playerData.lastlogin).toDateString() === new Date().toDateString() && playerData.online === 0 ? (
-            playerData.lastlogin
-          ) : new Date(playerData.lastlogin).toDateString() !== new Date().toDateString() && playerData.online === 0 ? (
-            `${playerData.lastlogin} (${diffInDays} ${getDaySuffix(diffInDays)} назад)`
-          ) : null}
-          {playerData.online ? (
-            <span style={{ color: '#91ec66e7' }}>Сейчас в сети <span style={{ color: 'white' }}>(ID: {playerData.playerid})</span></span>
-          ) : null}
-        </p>
-        <hr className={styles.ProfileLine} />
-        <h5 className={styles.h5}>Значки</h5>
-        <BadgeRenderer player={playerData} />
-      </div>
-    </>
+    <div className={styles.ResultWrapper}>
+      <p><strong>ID:</strong> {playerData.id}</p>
+      <p><strong>Ник:</strong> {playerData.login}</p>
+      <p><strong>Должность:</strong> {playerData.moder < 0 
+          ? "Младший уборщик унитаза Волека" 
+          : playerData.moder === 0 
+          ? "Игрок" 
+          : playerData.moder === 1
+          ? "Младший модератор"
+          : playerData.moder === 2
+          ? "Модератор"
+          : playerData.moder === 3
+          ? "Старший модератор"
+          : playerData.moder > 998 
+          ? "Администратор"
+          : "Игрок"
+      }</p>
+      <p><strong>Верификация:</strong> 
+        {playerData.verify === 0
+          ? ` Нет`
+          : playerData.verify === 1
+          ? ` Ютубер`
+          : playerData.verify === 2
+          ? ` Автор сообщества (маппер)`
+          : playerData.verify === 3
+          ? ` Разработчик`
+          : playerData.verify === 4
+          ? ` Автор сообщества (Модели и прочее)`
+          : playerData.verify === 5
+          ? ` Донатер`
+          : playerData.verify > 5
+          ? ` Неизвестно`
+          : `Нет`
+        }
+        {` (ID: ${playerData.verify})`}
+      </p>
+      {playerData.verify > 0 && (
+        <p><strong>Текст верификации:</strong> {transformVerificationText(playerData.verifyText)}</p>
+      )}
+      <p><strong>Время мута:</strong> {playerData.mute ? `${playerData.mute}` : <span style={{ color: '#91ec66e7' }}>Нет</span>}</p>
+      <p><strong>Дата регистрации:</strong> 
+        {playerData.regdate === '1970-01-01 03:00:00'
+          ? ' Зарегистрирован до 2018 года'
+          : ` ${playerData.regdate}`
+        }
+      </p>
+      <p>
+        <strong>Дата последнего входа: </strong>
+        {new Date(playerData.lastlogin).toDateString() === new Date().toDateString() && playerData.online === 0 ? (
+          playerData.lastlogin
+        ) : new Date(playerData.lastlogin).toDateString() !== new Date().toDateString() && playerData.online === 0 ? (
+          `${playerData.lastlogin} (${diffInDays} ${getDaySuffix(diffInDays)} назад)`
+        ) : null}
+        {playerData.online ? (
+          <span style={{ color: '#91ec66e7' }}>Сейчас в сети <span style={{ color: 'white' }}>(ID: {playerData.playerid})</span></span>
+        ) : null}
+      </p>
+      <hr className={styles.ProfileLine} />
+      <h5 className={styles.h5}>Значки</h5>
+      <BadgeRenderer player={playerData} />
+    </div>
   ) : isNotFound ? (
     <div className={styles.PageWrapper}>
       <h3>Игрок с никнеймом <span className={styles.nickname}>{nickname}</span> не найден</h3>
