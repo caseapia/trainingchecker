@@ -156,9 +156,7 @@ const PlayerInfo = () => {
           ? ` Автор сообщества (Модели и прочее)`
           : playerData.verify === 5
           ? ` Донатер`
-          : playerData.verify === 6
-          ? ` Администратор в отставке`
-          : playerData.verify > 6
+          : playerData.verify > 5
           ? ` Неизвестно`
           : `Нет`
         }
