@@ -41,11 +41,6 @@ export default function Home() {
   }, []);
   return (
     <>
-      <html lang="ru">
-        <head>
-          <title>TRAINING CHECKER</title>
-        </head>
-      </html>
       <Suspense fallback={<Lottie animationData={Preloader} />}>
         <div className={styles.container} id="main">
           {isLoaded ?
