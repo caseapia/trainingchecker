@@ -24,16 +24,16 @@ export const staffBadges: BadgeProps[] = [
   {
     id: 1,
     title: "Разработчик TRAINING SANDBOX",
-    description: "Этот человек учавствует в разработке TRAINING SERVER",
+    description: "Этот игрок учавствует в разработке TRAINING SERVER",
     icon: React.createElement(FaUserCog),
-    moder: 999,
+    accid: 1 | 2 | 99 | 104599,
     color: "#B72A2A",
     textColor: "#B72A2A"
   },
   {
     id: 2,
     title: "Команда TRAINING SANDBOX",
-    description: "Этот человек является подтвержденным членом команды TRAINING SERVER",
+    description: "Этот игрок является подтвержденным членом команды TRAINING SERVER",
     icon: React.createElement(FaUserShield),
     minModer: 1,
     maxModer: 9999,
@@ -43,12 +43,22 @@ export const staffBadges: BadgeProps[] = [
   {
     id: 3,
     title: "Команда сайта",
-    description: "Этот человек является или являлся разработчиком сайта TRAINING CHECKER",
+    description: "Этот игрок является или являлся разработчиком сайта TRAINING CHECKER",
     icon: React.createElement(FaCode),
     accid: 113145,
     color: "rgb(42 170 104 / 42%)",
     textColor: "rgb(42 170 104)"
   },
+  {
+    id: 4,
+    title: "Администратор TRAINING SANDBOX",
+    description: "Этот игрок является администратором TRAINING SANDBOX",
+    icon: React.createElement(FaUserShield),
+    minModer: 999,
+    maxModer: 9999,
+    color: "#B72A2A",
+    textColor: "#B72A2A",
+  }
 ]
 export const playerBadges: BadgeProps[] = [
   {
