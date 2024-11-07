@@ -20,8 +20,8 @@ type BadgeRendererProps = {
 
 const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player }) => {
   const badgesToShow = allBadges.filter((badge) =>
-    (badge.moder && badge.moder === player.moder) || 
-    (badge.accid && badge.accid === player.id) || 
+    (badge.moder && badge.moder === player.moder) ||
+    (badge.accid && (Array.isArray(badge.accid) ? badge.accid.includes(player.id) : badge.accid === player.id)) ||
     (badge.verify && badge.verify === player.verify) ||
     (badge.minModer !== undefined && (player.moder ?? 0) >= badge.minModer) &&
     (badge.maxModer !== undefined && (player.moder ?? 0) <= badge.maxModer) ||
