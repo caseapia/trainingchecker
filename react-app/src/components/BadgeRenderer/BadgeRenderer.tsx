@@ -19,17 +19,31 @@ type BadgeRendererProps = {
 };
 
 const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player }) => {
-  const badgesToShow = allBadges.filter((badge) =>
-    (badge.moder && badge.moder === player.moder) ||
-    (badge.accid && (Array.isArray(badge.accid) ? badge.accid.includes(player.id) : badge.accid === player.id)) ||
-    (badge.verify && badge.verify === player.verify) ||
-    (badge.minModer !== undefined && (player.moder ?? 0) >= badge.minModer) &&
-    (badge.maxModer !== undefined && (player.moder ?? 0) <= badge.maxModer) ||
-    (badge.minAccId !== undefined && (player.id ?? 0) >= badge.minAccId) &&
-    (badge.maxAccId !== undefined && (player.id ?? 0) <= badge.maxAccId) ||
-    (badge.minRegDate !== undefined && (player.regdate ?? '').includes(badge.minRegDate)) &&
-    (badge.maxRegDate !== undefined && !(player.regdate ?? '').includes(badge.maxRegDate))
-  );
+  const badgesToShow = allBadges.filter((badge) => {
+    if (badge.moder && badge.moder !== player.moder) return false;
+    if (badge.accid) {
+      if (Array.isArray(badge.accid)) {
+        if (player.id === undefined || !badge.accid.includes(player.id)) return false;
+      } else if (player.id === undefined || badge.accid !== player.id) {
+        return false;
+      }
+    }
+    if (badge.verify && badge.verify !== player.verify) return false;
+    if (
+      (badge.minModer !== undefined && (player.moder ?? 0) < badge.minModer) ||
+      (badge.maxModer !== undefined && (player.moder ?? 0) > badge.maxModer)
+    ) return false;
+    if (
+      (badge.minAccId !== undefined && (player.id ?? 0) < badge.minAccId) ||
+      (badge.maxAccId !== undefined && (player.id ?? 0) > badge.maxAccId)
+    ) return false;
+    if (
+      (badge.minRegDate !== undefined && !(player.regdate ?? '').includes(badge.minRegDate)) ||
+      (badge.maxRegDate !== undefined && (player.regdate ?? '').includes(badge.maxRegDate))
+    ) return false;
+  
+    return true;
+  });
 
   return (
     <>
