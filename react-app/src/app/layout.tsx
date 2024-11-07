@@ -27,10 +27,6 @@ export default function RootLayout({
       <body>
         <Header />
         {children}
-        {/* <Notify type="success" handleClose={handleClose} handleOpen={handleOpen}>
-            asd
-        </Notify>
-        <button onClick={handleOpen}>Open</button> */}
       </body>
     </html>
   );

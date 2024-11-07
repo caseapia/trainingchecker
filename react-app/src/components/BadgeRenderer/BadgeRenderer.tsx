@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { allBadges } from "../../shared/consts/badges";
 import styles from "./BadgeRenderer.module.scss";
+import BootstrapTooltip from "../Styles/TooltipStyles";
 
 type BadgeRendererProps = {
   player: {
@@ -33,12 +34,30 @@ const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player }) => {
   return (
     <>
       {badgesToShow.map((badge) => (
-        <span
-          className={`${styles.badge} ${badge.title.toLowerCase().replace(" ", "")}`}
-          style={{ backgroundColor: badge.color }}
-        >
-          <span className={`${styles.BadgeIcon}`}>{badge.icon}</span>
-        </span>
+        <BootstrapTooltip 
+        title={
+          <>
+            <span style={{ color: `${badge.textColor}` }}>
+              {badge.title}
+            </span> 
+            {
+              badge.description && 
+                <>
+                  <br />{badge.description}
+                </>
+            }
+          </>
+        } 
+        placement="top" 
+        arrow 
+        enterDelay={0}>
+          <span
+            className={`${styles.badge} ${badge.title.toLowerCase().replace(" ", "")}`}
+            style={{ backgroundColor: badge.color }}
+          >
+            <span className={`${styles.BadgeIcon}`}>{badge.icon}</span>
+          </span>
+        </BootstrapTooltip>
       ))}
     </>
   );

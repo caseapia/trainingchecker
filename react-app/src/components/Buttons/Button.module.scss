@@ -13,6 +13,10 @@
       margin-right: 6px;
       margin-bottom: 2px;
     }
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
 }
 .Primary {
   background: #1339FF;

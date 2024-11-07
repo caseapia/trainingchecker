@@ -17,6 +17,7 @@ type BadgeProps = {
   maxRegDate?: string;
   color: string;
   icon: ReactNode;
+  textColor: string;
 };
 
 export const staffBadges: BadgeProps[] = [
@@ -27,6 +28,7 @@ export const staffBadges: BadgeProps[] = [
     icon: React.createElement(FaUserCog),
     moder: 999,
     color: "#B72A2A",
+    textColor: "#B72A2A"
   },
   {
     id: 2,
@@ -36,6 +38,7 @@ export const staffBadges: BadgeProps[] = [
     minModer: 1,
     maxModer: 9999,
     color: "#0f4c816c",
+    textColor: "rgb(96 158 213)"
   },
   {
     id: 3,
@@ -44,16 +47,19 @@ export const staffBadges: BadgeProps[] = [
     icon: React.createElement(FaCode),
     accid: 113145,
     color: "rgb(42 170 104 / 42%)",
+    textColor: "rgb(42 170 104)"
   },
 ]
 export const playerBadges: BadgeProps[] = [
   {
     id: 1,
     title: "Ветеран",
+    description: "Этот значок вручается игрокам, зарегистрировавшим свой аккаунт в числе первых 150000",
     icon: React.createElement(FaMedal),
     color: "#00a5a26c",
     minAccId: 0,
     maxAccId: 150000,
+    textColor: "#00a5a2"
   }
 ]
 export const allBadges = [
