@@ -2,7 +2,7 @@
 import "./globals.css";
 import { Header } from "../components/Header/Header";
 import Notify from "../components/Notify/Notify";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function RootLayout({
   children,
@@ -19,10 +19,9 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="ru">
+    <html lang="en">
       <head>
         <link rel="shortcut icon" href="/assets/icons/favicon.png" type="image/x-icon" />
-        <title>TRAINING CHECKER</title>
       </head>
       <body>
         <Header />
