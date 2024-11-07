@@ -39,11 +39,6 @@ export default function Home() {
     };
     commits();
   }, []);
-
-  useEffect(() => {
-    document.title = `TRAINING CHECKER`;
-  }, [])
-
   return (
     <>
       <html lang="ru">

@@ -124,11 +124,6 @@ const PlayerInfo = () => {
     if (lastDigit >= 2 && lastDigit <= 4) return "дня";
     return "дней";
   };
-
-  useEffect(() => {
-    document.title = `${nickname}`;
-  }, [])
-
   return isLoaded ? (
     <>
       <div className={styles.ResultWrapper}>
