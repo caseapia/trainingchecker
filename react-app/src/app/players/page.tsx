@@ -36,7 +36,6 @@ function Players() {
 
     getPlayers();
   }, []);
-
   return (
     <Suspense fallback={<Lottie animationData={Preloader} />}>
       <div className={styles.PageWrapper} id='players'>
