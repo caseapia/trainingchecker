@@ -16,7 +16,6 @@ export const Header = () => {
     const players = playersOnlineRef.current;
     const main = mainRef.current;
     const admins = adminsRef.current;
-    const result = resultRef.current;
     const link = window.location.href;
     
     if (link.includes('/players')) {
@@ -33,8 +32,6 @@ export const Header = () => {
       <ul className={styles.list}>
         <li><Link href='../' className={styles.element} ref={mainRef}><SiMainwp /> Главная</Link></li>
         <li><Link href='../players' className={styles.element} ref={playersOnlineRef}><FaUser /> Игроки в сети</Link></li>
-        {/* <li><Link href='../admins' className={styles.element} ref={adminsRef}><FaUserGear /> Администраторы</Link></li> */}
-        {isResult && <li><Link href='../result' className={styles.element} ref={resultRef}><FaUserGear /> Информация</Link></li>}
       </ul>
     </header>
   )
