@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { FaUserCog } from "react-icons/fa";
+import { FaUserCog, FaUserSlash } from "react-icons/fa";
 import { FaCode, FaMedal, FaUserShield, FaYoutube } from "react-icons/fa6";
 
 type BadgeProps = {
@@ -83,11 +83,11 @@ export const playerBadges: BadgeProps[] = [
   {
     id: 3,
     title: "Бывший член команды TRAINING SANDBOX",
-    description: "Значок был вручен игроку за поддержку сообщества в части рекламы посредством создания контента",
-    icon: React.createElement(FaYoutube),
-    color: "#fe0032",
-    verify: 1,
-    textColor: "#fe0032"
+    description: "Значок был вручен игроку за поддержку сервера в качестве члена команды проекта",
+    icon: React.createElement(FaUserSlash),
+    color: "#ababab",
+    verify: 4,
+    textColor: "#ababab"
   },
 ]
 export const allBadges = [
