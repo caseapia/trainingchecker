@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { allBadges } from "../../shared/consts/badges";
 import styles from "./BadgeRenderer.module.scss";
 import BootstrapTooltip from "../Styles/TooltipStyles";
@@ -16,9 +16,10 @@ type BadgeRendererProps = {
     online?: number;
     regdate?: string;
   };
+  onBadgeStatusChange?: (hasBadges: boolean) => void;
 };
 
-const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player }) => {
+const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player, onBadgeStatusChange }) => {
   const badgesToShow = allBadges.filter((badge) => {
     if (badge.moder && badge.moder !== player.moder) return false;
     if (badge.accid) {
@@ -44,8 +45,15 @@ const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player }) => {
   
     return true;
   });
+  
+  useEffect(() => {
+    const hasBadges = badgesToShow.length > 0;
+    if (onBadgeStatusChange) {
+      onBadgeStatusChange(badgesToShow.length > 0);
+    }
+  }, [badgesToShow, onBadgeStatusChange])
 
-  return (
+  return badgesToShow.length > 0 ? (
     <>
       {badgesToShow.map((badge) => (
         <BootstrapTooltip 
@@ -74,7 +82,7 @@ const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player }) => {
         </BootstrapTooltip>
       ))}
     </>
-  );
+  ) : null;
 };
 
 export default BadgeRenderer;
