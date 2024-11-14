@@ -27,10 +27,10 @@ const Toast = ({ icon, children, className, type = "default", title, notifyState
 
   return (
     <div 
-      className={`${styles.NotifyWrapper}`} 
+      className={`${styles.NotifyWrapper} ${notifyState ? styles.active : ''}`} 
       onClick={onClose}
     >
-      <div className={`${styles.Notify} ${getType(type)} ${className || ''} ${notifyState ? styles.active : ''}`}>
+      <div className={`${styles.Notify} ${getType(type)} ${className || ''}`}>
         <section className={styles.IconContainer}>
           {icon && icon}
         </section>
