@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
-import styles from './Input.module.scss'
-import { ReactNode } from 'react';
+import { useEffect, useState, forwardRef, ReactNode } from "react";
+import styles from './Input.module.scss';
 
 interface Props {
   label: string;
@@ -15,39 +14,46 @@ interface Props {
   name?: string;
 }
 
-export const Input = ({ label, type, onInput, onClick, onChange, classname, disabled = false, placeholder, icon, name }: Props) => {
-  const [string, setString] = useState<string>('');
-  useEffect(() => {
-    const generateID = (length: number): string => {
-      const characters: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!?';
-      let result: string = '';
-      
-      for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * characters.length);
-        result += characters[randomIndex];
+export const Input = forwardRef<HTMLInputElement, Props>(
+  ({ label, type, onInput, onClick, onChange, classname, disabled, placeholder, icon, name }, ref) => {
+    const [string, setString] = useState<string>('');
+
+    useEffect(() => {
+      const generateID = (length: number): string => {
+        const characters: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!?';
+        let result: string = '';
+        
+        for (let i = 0; i < length; i++) {
+          const randomIndex = Math.floor(Math.random() * characters.length);
+          result += characters[randomIndex];
+        }
+
+        return result;
       }
 
-      return result;
-    }
-    
-    const newID = generateID(6);
-    setString(newID)
-  }, [])
-  return (
-    <>
-      <label htmlFor={string} className={styles.label}>{label}</label>
-      <input 
-        type={type} 
-        id={string}
-        onInput={onInput}
-        onChange={onChange}
-        onClick={onClick}
-        className={`${styles.input} ${classname || ''} ${icon || styles.nullIcon}`} 
-        disabled={disabled}
-        placeholder={placeholder}
-        name={name}
-      />
-      {icon && (<> <span className={styles.icon}>{icon}</span> </>)}
-    </>
-  )
-}
+      const newID = generateID(6);
+      setString(newID);
+    }, []);
+
+    return (
+      <>
+        <label htmlFor={string} className={styles.label}>{label}</label>
+        <input
+          type={type}
+          id={string}
+          onInput={onInput}
+          onChange={onChange}
+          onClick={onClick}
+          className={`${styles.input} ${classname || ''} ${icon ? styles.iconWith : ''}`} 
+          disabled={disabled}
+          placeholder={placeholder}
+          name={name}
+          ref={ref}
+        />
+        {icon && <span className={styles.icon}>{icon}</span>}
+      </>
+    );
+  }
+);
+
+export default Input;

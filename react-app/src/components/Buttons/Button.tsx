@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState, forwardRef } from 'react';
 import styles from './Button.module.scss';
 import { motion } from "framer-motion";
 
@@ -14,49 +14,43 @@ interface Props {
   style?: React.CSSProperties;
 }
 
-const Button = ({   
-  icon, 
-  text, 
-  onClick, 
-  onFocus, 
-  btnType,
-  type, 
-  disabled = false, 
-  classname = '',
-  style  }: Props) => {
-  const [string, setString] = useState<string>('');
-  useEffect(() => {
-    const generateID = (length: number): string => {
-      const characters: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!?';
-      let result: string = '';
-      
-      for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * characters.length);
-        result += characters[randomIndex];
+const Button = forwardRef<HTMLButtonElement, Props>(
+  ({ icon, btnType, text, onClick, onFocus, type, disabled = false, classname, style }, ref) => {
+    const [string, setString] = useState<string>('');
+    
+    useEffect(() => {
+      const generateID = (length: number): string => {
+        const characters: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!?';
+        let result: string = '';
+        
+        for (let i = 0; i < length; i++) {
+          const randomIndex = Math.floor(Math.random() * characters.length);
+          result += characters[randomIndex];
+        }
+
+        return result;
       }
 
-      return result;
+      const newID = generateID(6);
+      setString(newID);
+    }, []);
+
+    const getStatus = (btnType: string): string => {
+      switch (btnType) {
+        case 'Primary':
+          return styles.Primary;
+        case 'Transparent':
+          return styles.Transparent;
+        case 'Secondary':
+          return styles.Secondary;
+        case 'Danger':
+          return styles.Danger;
+        default:
+          return styles.Primary;
+      }
     }
-    
-    const newID = generateID(6);
-    setString(newID)
-  }, [])
-  const getStatus = (btnType: string): string => {
-    switch (btnType) {
-      case 'Primary':
-        return styles.Primary;
-      case 'Transparent':
-        return styles.Transparent;
-      case 'Secondary':
-        return styles.Secondary;
-      case 'Danger':
-        return styles.Danger;
-      default:
-        return styles.Primary;
-    }
-  }
-  return (
-    <>
+
+    return (
       <motion.button
         onClick={onClick}
         onFocus={onFocus}
@@ -66,11 +60,12 @@ const Button = ({
         style={style}
         id={string}
         whileTap={{ scale: 0.9 }}
+        ref={ref}
       >
         {icon && (<> {icon} </>)} {text}
       </motion.button>
-    </>
-  )
-}
+    );
+  }
+);
 
-export default Button
+export default Button;

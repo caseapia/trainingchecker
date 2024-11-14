@@ -6,6 +6,13 @@
       color: var(--color-danger)
     }
 }
+.PageWrapper_NotFound {
+  display: grid;
+  place-items: center;
+  margin-top: 10px;
+  max-width: 50%;
+  text-align: center;
+}
 .ResultWrapper {
   border-radius: 5px;
   padding: 10px;

@@ -1,22 +1,29 @@
 .NotifyWrapper {
   position: fixed;
-  bottom: 0;
-  opacity: 0;
-  right: 0;
-  margin-right: 15px;
-  margin-bottom: 25px;
-  cursor: pointer;
-  color: #ffffff8c;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
   font-size: 16px;
-  transition: all .2s;
-    &.active {
-      opacity: 1;
-    }
+  width: 100%;
+  bottom: 0;
+  z-index: 9999;
 }
 .Notify {
   transition: transform .2s ease-in;
   padding: 12px 20px;
+  position: relative;
+  opacity: 0;
   border-radius: 4px;
+  top: 80px;
+  transition: all .3s;
+  max-width: 40%;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+    &.active {
+      top: -10px;
+      opacity: 1;
+    }
     &.default {
       background: #1339FF;
     }
@@ -33,5 +40,23 @@
     }
     &:hover {
       transform: scale(1.1);
+    }
+    .IconContainer {
+      font-size: 45px;
+      margin-right: 25px;
+      display: flex;
+      align-items: center;
+      opacity: .8;
+    }
+    .Title {
+      font-weight: bolder;
+      font-size: 18px;
+      margin-bottom: 3px;
+    }
+    .Footer {
+      font-weight: bold;
+      opacity: .7;
+      font-size: 13px;
+      float: right;
     }
 }

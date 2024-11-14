@@ -1,16 +1,25 @@
 "use client"
-import { useEffect, useState, Suspense } from "react";
+import React, { useEffect, useState, Suspense, useRef } from "react";
 import styles from "./page.module.scss";
 import { Input } from "@/components/Input/Input";
 import Button from "@/components/Buttons/Button";
 import { FaCheckCircle, FaUser } from "react-icons/fa";
+import { TbFaceIdError } from "react-icons/tb";
 import { BiLogoGithub } from "react-icons/bi";
 import Lottie from 'lottie-react';
 import Preloader from '../../public/assets/lotties/Preloader.json';
+import Notify from '@/components/Notify/Notify';
 
 export default function Home() {
   const [lastUpdate, setLastUpdate] = useState<string>('');
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [notifyState, setNotifyState] = useState<boolean>(false);
+  const [notifyText, setNotifyText] = useState<string>('');
+  const [notifyTitle, setNotifyTitle] = useState<string>('');
+  const InputElement = useRef<HTMLInputElement>(null);
+  const ButtonElement = useRef<HTMLButtonElement>(null);
+  const FormElement = useRef<HTMLFormElement>(null);
+
   useEffect(() => {
     const commits = async () => {
       try {
@@ -39,6 +48,30 @@ export default function Home() {
     };
     commits();
   }, []);
+
+  const handleOpen = () => {
+    setNotifyState(true);
+  }
+  const handleClose = () => {
+    setNotifyState(false);
+    setTimeout(() => {
+      setNotifyText('');
+      setNotifyTitle('');
+    }, 5000);
+  }
+
+  function validation(event: React.FormEvent) {
+    if (InputElement.current && InputElement.current.value.length === 0) {
+      event.preventDefault();
+      setNotifyText('Для выполнения поиска вы должны заполнить поле никнейма игрока.');
+      setNotifyTitle('Вы не заполнили поле никнейма')
+      handleOpen();
+    } else {
+      FormElement.current?.submit;
+      handleClose();
+    }
+  }
+
   return (
     <>
       <Suspense fallback={<Lottie animationData={Preloader} />}>
@@ -53,9 +86,9 @@ export default function Home() {
               <p>Этот проект имеет открытый исходный код, вы всегда можете дополнить его или исправить, используя<br /><a href="https://github.com/1dontkillme/trainingchecker" target="_blank" rel="noopener noreferrer"><BiLogoGithub /> исходный код на GitHub</a>.</p><br />
               <p>Последнее обновление произошло: {lastUpdate}</p>
               </div>
-              <form action="./result" method="get" className={styles.FormContainer}>
-                <Input icon={<FaUser />} label="Введите никнейм игрока" type="text" name="nickname" />
-                <Button btnType="Primary" text="Проверить" type="submit" icon={ <FaCheckCircle /> } />
+              <form action="./result" method="get" className={styles.FormContainer} ref={FormElement}>
+                <Input icon={<FaUser />} label="Введите никнейм игрока" type="text" name="nickname" ref={InputElement} />
+                <Button btnType="Primary" text="Проверить" type="submit" icon={ <FaCheckCircle /> } onClick={validation} ref={ButtonElement} />
               </form>
             </>
           ) : (
@@ -64,6 +97,9 @@ export default function Home() {
           }
         </div>
       </Suspense>
+      <Notify title={notifyTitle} notifyState={notifyState} onClose={handleClose} type="error" icon={<TbFaceIdError />}>
+          {notifyText}
+      </Notify>
     </>
   );
 }
