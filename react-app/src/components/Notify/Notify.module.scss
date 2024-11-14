@@ -5,24 +5,32 @@
   color: #ffffff;
   font-size: 16px;
   width: 100%;
-  bottom: 0;
+  bottom: -80px;
+  height: fit-content;
+  transition: all .3s;
+    @media screen and (max-width: 767px) {
+      top: -100px;
+    }
+    &.active {
+      bottom: 10px;
+      opacity: 1;
+        @media screen and (max-width: 767px) {
+          top: 10px;
+        }
+    }
 }
 .Notify {
   transition: transform .2s ease-in;
   padding: 12px 20px;
   position: relative;
-  opacity: 0;
   border-radius: 4px;
-  top: 80px;
-  transition: all .3s;
   max-width: 40%;
   cursor: pointer;
   display: flex;
   flex-direction: row;
   z-index: 9999;
-    &.active {
-      top: -10px;
-      opacity: 1;
+    @media screen and (max-width: 767px) {
+      max-width: 97%;
     }
     &.default {
       background: #1339FF;
