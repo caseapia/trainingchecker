@@ -9,13 +9,13 @@
   height: fit-content;
   transition: all .3s;
     @media screen and (max-width: 767px) {
-      top: -300px;
+      top: -1000px;
     }
     &.active {
       bottom: 10px;
       opacity: 1;
         @media screen and (max-width: 767px) {
-          top: 10px;
+          top: -280px;
         }
     }
 }
