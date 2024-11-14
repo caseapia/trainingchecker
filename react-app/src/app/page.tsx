@@ -54,10 +54,8 @@ export default function Home() {
   }
   const handleClose = () => {
     setNotifyState(false);
-    setTimeout(() => {
-      setNotifyText('');
-      setNotifyTitle('');
-    }, 5000);
+    setNotifyText('');
+    setNotifyTitle('');
   }
 
   function validation(event: React.FormEvent) {
