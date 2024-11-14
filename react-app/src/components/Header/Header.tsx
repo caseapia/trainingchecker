@@ -1,8 +1,7 @@
 "use client"
 import React, { useEffect, useRef } from 'react'
 import styles from './Header.module.scss';
-import { SiMainwp } from "react-icons/si";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaHome } from "react-icons/fa";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -45,7 +44,7 @@ export const Header = () => {
     <header className={styles.header}>
       <h1>TRAINING <span className={styles.redspan}>CHECKER</span></h1>
       <ul className={styles.list}>
-        <li><Link onClick={() => swapPage('')} href='../' className={styles.element} ref={mainRef}><SiMainwp /> Главная</Link></li>
+        <li><Link onClick={() => swapPage('')} href='../' className={styles.element} ref={mainRef}><FaHome /> Главная</Link></li>
         <li><Link onClick={() => swapPage('players')} href='../players' className={styles.element} ref={playersOnlineRef}><FaUser /> Игроки в сети</Link></li>
       </ul>
     </header>
