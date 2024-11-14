@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode } from 'react';
 import styles from './Notify.module.scss';
 
 interface Props {
@@ -7,18 +7,11 @@ interface Props {
   className?: string;
   type?: "error" | "warning" | "success" | "default";
   title?: string;
-  handleOpen: () => void;
-  handleClose: () => void; 
+  notifyState: boolean;
+  onClose: () => void;
 }
 
-const Toast = ({ icon, children, className, type = "default", title, handleOpen, handleClose }: Props) => {
-  const [isOpened, setIsOpened] = useState<boolean>(true);
-
-  const onClose = () => {
-    setIsOpened(false);
-    handleClose();
-  }
-
+const Toast = ({ icon, children, className, type = "default", title, notifyState, onClose }: Props) => {
   const getType = (type: string) => {
     switch (type) {
       case "error":
@@ -30,40 +23,32 @@ const Toast = ({ icon, children, className, type = "default", title, handleOpen,
       default:
         return styles.default;
     }
-  }
-  const getActive = (isOpened: boolean) => {
-    switch (isOpened) {
-      case true:
-        return styles.active
-      default:
-        return;
-    }
-  }
+  };
 
   return (
     <div 
-      className={`${styles.NotifyWrapper} ${getActive(isOpened)}`}
+      className={`${styles.NotifyWrapper}`} 
       onClick={onClose}
     >
-      <div className={`${styles.Notify} ${getType(type)} ${className || ''}`}>
-        {title && (
-          <div className={styles.Title}>
-            {title}
+      <div className={`${styles.Notify} ${getType(type)} ${className || ''} ${notifyState ? styles.active : ''}`}>
+        <section className={styles.IconContainer}>
+          {icon && icon}
+        </section>
+        <section>
+          {title && notifyState && (
+            <div className={styles.Title}>
+              {title}
+            </div>
+          )}
+          {children && (
+            <div className={styles.Content}>
+              {children}
+            </div>
+          )}
+          <div className={styles.Footer}>
+              Нажмите, чтобы закрыть это уведомление
           </div>
-        )}
-        {icon && (
-          <div className={styles.IconContainer}>
-            {icon}
-          </div>
-        )}
-        {children && (
-          <div className={styles.Content}>
-            {children}
-          </div>
-        )}
-        <div className={styles.Footer}>
-          Нажмите чтобы закрыть это уведомление
-        </div>
+        </section>
       </div>
     </div>
   );

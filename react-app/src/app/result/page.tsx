@@ -26,6 +26,7 @@ const PlayerInfo = () => {
   const [diffInDays, setDiffInDays] = useState(NaN);
   const [isNotFound, setIsNotFound] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isNoAccess, setIsNoAccess] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchPlayerData = async () => {
@@ -35,9 +36,13 @@ const PlayerInfo = () => {
       try {
         const response = await fetch(url);
         if (!response.ok) {
+          setIsDataLoaded(false);
+          setIsNotFound(false);
+          setIsNoAccess(true);
           if (response.status === 404) {
             setIsDataLoaded(false);
             setIsNotFound(true);
+            setIsNoAccess(false);
             return;
           }
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -195,6 +200,12 @@ const PlayerInfo = () => {
   ) : isNotFound ? (
     <div className={styles.PageWrapper}>
       <h3>Игрок с никнеймом <span className={styles.nickname}>{nickname}</span> не найден</h3>
+    </div>
+  ) : isNoAccess ? (
+    <div className={styles.PageWrapper_NotFound}>
+      <h3>Эта страница недоступна <a href='https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#500' target='_blank'>(ошибка: 500)</a></h3>
+      <p>Возможно, это проблема на стороне сервера, однако высока вероятность того, что Роскомнадзор окончательно заблокировал домены <a href='https://training-server.com/' target='_blank'>TRAINING SERVER</a>. Пожалуйста, проверьте работоспособность сервисов TRAINING SERVER.</p>
+      <p>Если ресурсы TRAINING SERVER доступны, значит проблема на стороне <a href='https://forum.training-server.com/d/3921-training-api' target='_blank'>TRAINING API</a>. Мы не можем воздействовать на работоспособность, сообщите об ошибке в топике TRAINING API.</p>
     </div>
   ) : (
     <div className={styles.PageWrapper}>
