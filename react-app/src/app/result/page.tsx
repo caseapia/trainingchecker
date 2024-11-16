@@ -63,7 +63,11 @@ const PlayerInfo = () => {
 
   const fetchPlayerData = async () => {
     if (!nickname) return;
-    const url = `https://training-server.com/api/user/${nickname}`;
+    const url = `${process.env.NEXT_PUBLIC_API_USER_URL}/${nickname}`;
+
+    if (!url) {
+      throw new Error('Url is not defined')
+    }
   
     try {
       const response = await fetch(url);

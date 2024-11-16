@@ -26,11 +26,14 @@ export default function Home() {
     const commits = async () => {
       try {
         const response = await fetch(`https://api.github.com/repos/caseapia/trainingchecker/commits`, {
-          headers: {
-            'Authorization': `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`,
-            'Accept': 'application/vnd.github.v3+json',
-          },
+          
         });
+        const headers: HeadersInit = {
+          'Accept': 'application/vnd.github.v3+json',
+        }
+        if (process.env.NEXT_PUBLIC_API_KEY) {
+          headers['Authorization'] = process.env.NEXT_PUBLIC_API_KEY
+        }
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
