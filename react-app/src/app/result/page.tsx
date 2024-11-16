@@ -205,8 +205,9 @@ const PlayerInfo = () => {
     if (playerData.warn.length > 0) {
       const punishments = playerData.warn
         .map(warn => `${warn.admin} // ${warn.reason} // ${warn.bantime}`)
-        .join(',\n');
-      navigator.clipboard.writeText(punishments);
+        .join(';\n');
+      const punishmentsCount = playerData.warn.length;
+      navigator.clipboard.writeText(`${punishments}\n\nВсего наказаний: ${punishmentsCount}`);
       setNotifyTitle('Данные о наказаниях скопированы');
       setNotifyIcon(<FaCheckCircle />);
       setNotifyText(`Наказания игрока ${playerData.login} были помещены в ваш буфер обмена`);
@@ -288,7 +289,7 @@ const PlayerInfo = () => {
         <BadgeRenderer player={playerData} />
         <div className={styles.ButtonGroup}>
           <Button btnType="Secondary" text="Обновить" type="button" icon={ <HiRefresh /> } onClick={refreshData} />
-          {playerData.warn.length > 0 ? <Button btnType="Secondary" text="Наказания" type="button" icon={ <FaHammer /> } onClick={openModal} /> : <BootstrapTooltip title='У этого игрока нет наказаний'><Button btnType="Secondary" text="Наказания" type="button" icon={ <FaHammer /> } onClick={openModal} disabled={true} /></BootstrapTooltip>}
+          {playerData.warn.length > 0 ? <Button btnType="Secondary" text="Наказания" type="button" disabled={false} icon={ <FaHammer /> } onClick={openModal} /> : <Button btnType="Secondary" text="Наказания" type="button" disabled={true} icon={ <FaHammer /> } onClick={openModal} />}
         </div>
       </div>
       <Notify notifyState={notifyState} onClose={handleClose} title={notifyTitle} icon={notifyIcon} type={notifyType}>
@@ -306,26 +307,33 @@ const PlayerInfo = () => {
         secondButtonAction={copyPunishments}
       >
         {playerData.warn.length > 0 ? (
-          <table className={styles.Table}>
-            <thead>
-              <tr>
-                <th>Администратор</th>
-                <th>Причина</th>
-                <th>Дата</th>
-              </tr>
-            </thead>
-            <tbody>
-            {playerData.warn && playerData.warn.length > 0 ? (
-              playerData.warn.map((warn, index) => (
-                <tr key={index}>
-                  <td><Link href={`?nickname=${warn.admin}`}>{warn.admin}</Link></td>
-                  <td>{warn.reason}</td>
-                  <td>{new Date(warn.bantime).toLocaleString()}</td>
+          <>
+            <table className={styles.Table}>
+              <thead>
+                <tr>
+                  <th>Администратор</th>
+                  <th>Причина</th>
+                  <th>Дата</th>
                 </tr>
-              ))
-            ) : null}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+              {playerData.warn && playerData.warn.length > 0 ? (
+                playerData.warn.map((warn, index) => (
+                  <>
+                    <tr key={index}>
+                      <td><Link href={`?nickname=${warn.admin}`}>{warn.admin}</Link></td>
+                      <td>{warn.reason}</td>
+                      <td>{new Date(warn.bantime).toLocaleString()}</td>
+                    </tr>
+                  </>
+                ))
+              ) : null}
+              <tr>
+                <td colSpan={3}>Всего наказаний: {playerData.warn.length}</td>
+              </tr>
+              </tbody>
+            </table>
+          </>
         ) : null}
       </Modal>
     </>
