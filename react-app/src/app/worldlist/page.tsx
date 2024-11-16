@@ -4,7 +4,7 @@ import styles from './page.module.scss'
 import Preloader from '../../../public/assets/lotties/Preloader.json';
 import Lottie from 'lottie-react';
 
-export const WorldList = () => {
+const WorldList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   return isLoaded ? (
