@@ -8,14 +8,13 @@
   backdrop-filter: blur(3px);
   background: #00000094;
   z-index: 99999999;
+  display: grid;
+  place-items: center;
 }
 .Modal {
   overflow: auto;
+  overflow-x: hidden;
   background: #0c0c0c;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   padding: 15px;
   border-radius: 10px;
   max-width: 50%;
@@ -23,6 +22,11 @@
   max-height: 70%;
   scrollbar-color: #4664ff transparent;
   scrollbar-width: thin;
+    @media screen and (max-width: 767px) {
+      max-width: 100%;
+      min-width: 100%;
+      max-height: 100%;
+    }
     .Title {
       white-space: nowrap;
     }

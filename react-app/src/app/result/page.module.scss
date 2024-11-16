@@ -57,6 +57,9 @@
   width: 100%;
   text-align: center;
   margin-top: 10px;
+    @media screen and (max-width: 767px) {
+      width: 90%;
+    }
     > thead {
       vertical-align: bottom;
     }
