@@ -1,0 +1,62 @@
+.FadeOut {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+  background: #00000094;
+  z-index: 99999999;
+}
+.Modal {
+  overflow: auto;
+  background: #0c0c0c;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 50%;
+  min-width: 30%;
+  max-height: 70%;
+  scrollbar-color: #4664ff transparent;
+  scrollbar-width: thin;
+    .Title {
+      white-space: nowrap;
+    }
+    .Header {
+      font-weight: bolder;
+      font-size: 20px;
+      text-align: left;
+      display: flex;
+      vertical-align: middle;
+      margin-bottom: 15px;
+        .Close {
+          display: grid;
+          width: 100%;
+          justify-items: end;
+          svg {
+            font-size: 24px;
+            cursor: pointer;
+          }
+        }
+    }
+    .Body {
+      width: 100%;
+    }
+    .Footer {
+      margin-top: 15px;
+        .ButtonGroup {
+          display: flex;
+          flex-direction: row;
+            button {
+              margin-right: 15px;
+                &:last-of-type {
+                  margin-right: 0;
+                }
+            }
+        }
+    }
+}

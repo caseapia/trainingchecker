@@ -12,10 +12,11 @@ interface Props {
   placeholder?: string;
   icon?: ReactNode;
   name?: string;
+  onError?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, Props>(
-  ({ label, type, onInput, onClick, onChange, classname, disabled, placeholder, icon, name }, ref) => {
+  ({ label, type, onInput, onClick, onChange, classname, disabled, placeholder, icon, name, onError }, ref) => {
     const [string, setString] = useState<string>('');
 
     useEffect(() => {
@@ -44,7 +45,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
           onInput={onInput}
           onChange={onChange}
           onClick={onClick}
-          className={`${styles.input} ${classname || ''} ${icon ? styles.iconWith : ''}`} 
+          className={`${styles.input} ${classname || ''} ${icon ? styles.iconWith : ''} ${onError ? styles.Error : ''}`} 
           disabled={disabled}
           placeholder={placeholder}
           name={name}

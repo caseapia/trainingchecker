@@ -1,6 +1,7 @@
 "use client"
-import React, { useEffect, useState, Suspense, useRef } from "react";
+import React, { useEffect, useState, Suspense, useRef, ReactNode } from "react";
 import styles from "./page.module.scss";
+import buttonstyles from '@/components/Buttons/Button.module.scss';
 import { Input } from "@/components/Input/Input";
 import Button from "@/components/Buttons/Button";
 import { FaCheckCircle, FaUser } from "react-icons/fa";
@@ -16,6 +17,7 @@ export default function Home() {
   const [notifyState, setNotifyState] = useState<boolean>(false);
   const [notifyText, setNotifyText] = useState<string>('');
   const [notifyTitle, setNotifyTitle] = useState<string>('');
+  const [notifyIcon, setNotifyIcon] = useState<ReactNode>();
   const InputElement = useRef<HTMLInputElement>(null);
   const ButtonElement = useRef<HTMLButtonElement>(null);
   const FormElement = useRef<HTMLFormElement>(null);
@@ -62,10 +64,15 @@ export default function Home() {
     if (InputElement.current && InputElement.current.value.length === 0) {
       event.preventDefault();
       setNotifyText('Для выполнения поиска вы должны заполнить поле никнейма игрока.');
-      setNotifyTitle('Вы не заполнили поле никнейма')
+      setNotifyTitle('Вы не заполнили поле никнейма');
+      setNotifyIcon(<TbFaceIdError />)
+      ButtonElement.current?.classList.remove(buttonstyles.Primary)
+      ButtonElement.current?.classList.add(buttonstyles.Danger);
       handleOpen();
     } else {
       FormElement.current?.submit;
+      ButtonElement.current?.classList.remove(buttonstyles.Danger)
+      ButtonElement.current?.classList.add(buttonstyles.Primary);
       handleClose();
     }
   }
@@ -95,7 +102,7 @@ export default function Home() {
           }
         </div>
       </Suspense>
-      <Notify title={notifyTitle} notifyState={notifyState} onClose={handleClose} type="error" icon={<TbFaceIdError />}>
+      <Notify title={notifyTitle} notifyState={notifyState} onClose={handleClose} type="error" icon={notifyIcon}>
           {notifyText}
       </Notify>
     </>

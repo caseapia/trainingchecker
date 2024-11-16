@@ -9,9 +9,11 @@
   font-size: 16px;
   width: 100%;
   cursor: pointer;
+  user-select: none;
     svg {
       margin-right: 6px;
       margin-bottom: 2px;
+      font-size: 20px;
     }
     &:disabled {
       cursor: not-allowed;
@@ -42,8 +44,8 @@
   }
 }
 .Danger {
-  border: 1px solid #FF6955;
-  background: transparent;
+  border: 1px solid transparent;
+  background: #FF6955;
 
   &:hover {
     border: 1px solid #FF6955;

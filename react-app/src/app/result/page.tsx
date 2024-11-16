@@ -1,15 +1,34 @@
 "use client";
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState, Suspense, ReactNode } from 'react';
 import styles from './page.module.scss';
 import BadgeRenderer from '@/components/BadgeRenderer/BadgeRenderer';
 import Lottie from 'lottie-react';
 import Preloader from '../../../public/assets/lotties/Preloader.json';
+import Button from '@/components/Buttons/Button';
+import { HiRefresh } from "react-icons/hi";
+import Notify from "@/components/Notify/Notify";
+import { FaCheckCircle, FaHammer } from 'react-icons/fa';
+import { Modal } from '@/components/Modal/Modal';
+import Link from 'next/link';
 
 const PlayerInfo = () => {
   const searchParams = useSearchParams();
   const nickname = searchParams.get('nickname');
-  const [playerData, setPlayerData] = useState({
+  const [playerData, setPlayerData] = useState<{
+    id: number;
+    login: string;
+    access: number;
+    moder: number;
+    verify: number;
+    verifyText: string;
+    mute: number;
+    online: number;
+    regdate: string;
+    lastlogin: string;
+    playerid: number;
+    warn: Array<{ reason: string; bantime: string; admin: string; }>;
+  }>({
     id: NaN,
     login: '',
     access: NaN,
@@ -20,55 +39,90 @@ const PlayerInfo = () => {
     online: NaN,
     regdate: '',
     lastlogin: '',
-    playerid: NaN
+    playerid: NaN,
+    warn: []
   });
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [diffInDays, setDiffInDays] = useState(NaN);
   const [isNotFound, setIsNotFound] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isNoAccess, setIsNoAccess] = useState<boolean>(false);
+  const [notifyState, setNotifyState] = useState<boolean>(false);
+  const [notifyText, setNotifyText] = useState<string>('');
+  const [notifyTitle, setNotifyTitle] = useState<string>('');
+  const [notifyIcon, setNotifyIcon] = useState<ReactNode>();
+  const [notifyType, setNotifyType] = useState<string>();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    const fetchPlayerData = async () => {
-      if (!nickname) return;
-      const url = `https://training-server.com/api/user/${nickname}`;
+    if (!window.location.href.includes('nickname')) {
+      window.location.href = '../'
+    }
+  }, [nickname])
+
+  const fetchPlayerData = async () => {
+    if (!nickname) return;
+    const url = `https://training-server.com/api/user/${nickname}`;
   
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        setIsDataLoaded(false);
+        setIsNotFound(false);
+        setIsNoAccess(true);
+        if (response.status === 404) {
           setIsDataLoaded(false);
-          setIsNotFound(false);
-          setIsNoAccess(true);
-          if (response.status === 404) {
-            setIsDataLoaded(false);
-            setIsNotFound(true);
-            setIsNoAccess(false);
-            return;
-          }
-          throw new Error(`HTTP error! status: ${response.status}`);
+          setIsNotFound(true);
+          setIsNoAccess(false);
+          return;
         }
-        const result = await response.json();
-        setPlayerData({
-          id: Number(result.data.id),
-          login: result.data.login,
-          access: Number(result.data.access),
-          moder: Number(result.data.moder),
-          verify: Number(result.data.verify),
-          verifyText: result.data.verifyText,
-          mute: Number(result.data.mute),
-          online: Number(result.data.online),
-          regdate: result.data.regdate,
-          lastlogin: result.data.lastlogin,
-          playerid: Number(result.data.playerid),
-        });
-        setIsDataLoaded(true);
-      } catch (error) {
-        console.error(error);
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-    };
+      const result = await response.json();
+      setPlayerData({
+        id: Number(result.data.id),
+        login: result.data.login,
+        access: Number(result.data.access),
+        moder: Number(result.data.moder),
+        verify: Number(result.data.verify),
+        verifyText: result.data.verifyText,
+        mute: Number(result.data.mute),
+        online: Number(result.data.online),
+        regdate: result.data.regdate,
+        lastlogin: result.data.lastlogin,
+        playerid: Number(result.data.playerid),
+        warn: result.data.warn,
+      });
+      setIsDataLoaded(true);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   
+  useEffect(() => {
     fetchPlayerData();
   }, [nickname]);
+  
+  const refreshData = async () => {
+    try {
+      const response = await fetch(`https://training-server.com/api/user/${nickname}`);
+  
+      if (response.status === 200) {
+        setNotifyTitle('Успешно!');
+        setNotifyIcon(<FaCheckCircle />);
+        setNotifyText(`Информация об игроке ${playerData.login} была обновлена`);
+        setNotifyType("success");
+      } else {
+        setNotifyTitle('Ошибка!');
+        setNotifyIcon(<HiRefresh />);
+        setNotifyText(`Ошибка при получении информации об игроке ${playerData.login}`);
+        setNotifyType("error");
+      }
+    } catch (error) {
+      console.error('Ошибка при обновлении данных игрока:', error);
+    }
+    handleOpen();
+  };
 
   useEffect(() => {
     if (!playerData.lastlogin) return;
@@ -129,6 +183,18 @@ const PlayerInfo = () => {
     if (lastDigit >= 2 && lastDigit <= 4) return "дня";
     return "дней";
   };
+  const handleOpen = () => {
+    setNotifyState(true);
+  }
+  const handleClose = () => {
+    setNotifyState(false);
+    setNotifyText('');
+    setNotifyTitle('');
+  }
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return isLoaded ? (
     <>
       <div className={styles.ResultWrapper}>
@@ -195,7 +261,36 @@ const PlayerInfo = () => {
         <hr className={styles.ProfileLine} />
         <h5 className={styles.h5}>Значки</h5>
         <BadgeRenderer player={playerData} />
+        <div className={styles.ButtonGroup}>
+          <Button btnType="Secondary" text="Обновить" type="button" icon={ <HiRefresh /> } onClick={refreshData} />
+          {playerData.warn.length > 0 ? <Button btnType="Secondary" text="Наказания" type="button" icon={ <FaHammer /> } onClick={openModal} /> : <Button btnType="Secondary" text="Наказания" type="button" icon={ <FaHammer /> } onClick={openModal} disabled={true} />}
+        </div>
       </div>
+      <Notify notifyState={notifyState} onClose={handleClose} title={notifyTitle} icon={notifyIcon} type={notifyType}>
+        {notifyText}
+      </Notify>
+      <Modal isOpen={isModalOpen} onClose={closeModal} title={`Список наказаний ${playerData.login} (${playerData.id})`} firstButtonContent='Закрыть' firstButtonIcon={<FaCheckCircle />}>
+        {playerData.warn.length > 0 ? (
+          <table className={styles.Table}>
+            <thead>
+              <tr>
+                <th>Администратор</th>
+                <th>Причина</th>
+                <th>Дата</th>
+              </tr>
+            </thead>
+            <tbody>
+            {playerData.warn.map((warn, index) => (
+              <tr key={index}>
+                <td><Link href={`?nickname=${warn.admin}`} onClick={handleClose}>{warn.admin}</Link></td>
+                <td>{warn.reason}</td>
+                <td>{new Date(warn.bantime).toLocaleString()}</td>
+              </tr>
+            ))}
+            </tbody>
+          </table>
+        ) : null}
+      </Modal>
     </>
   ) : isNotFound ? (
     <div className={styles.PageWrapper}>
