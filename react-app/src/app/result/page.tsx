@@ -11,6 +11,7 @@ import Notify from "@/components/Notify/Notify";
 import { FaCheckCircle, FaHammer } from 'react-icons/fa';
 import { Modal } from '@/components/Modal/Modal';
 import Link from 'next/link';
+import BootstrapTooltip from '@/components/Styles/TooltipStyles';
 
 const PlayerInfo = () => {
   const searchParams = useSearchParams();
@@ -263,7 +264,7 @@ const PlayerInfo = () => {
         <BadgeRenderer player={playerData} />
         <div className={styles.ButtonGroup}>
           <Button btnType="Secondary" text="Обновить" type="button" icon={ <HiRefresh /> } onClick={refreshData} />
-          {playerData.warn.length > 0 ? <Button btnType="Secondary" text="Наказания" type="button" icon={ <FaHammer /> } onClick={openModal} /> : <Button btnType="Secondary" text="Наказания" type="button" icon={ <FaHammer /> } onClick={openModal} disabled={true} />}
+          {playerData.warn.length > 0 ? <Button btnType="Secondary" text="Наказания" type="button" icon={ <FaHammer /> } onClick={openModal} /> : <BootstrapTooltip title='У этого игрока нет наказаний'><Button btnType="Secondary" text="Наказания" type="button" icon={ <FaHammer /> } onClick={openModal} disabled={true} /></BootstrapTooltip>}
         </div>
       </div>
       <Notify notifyState={notifyState} onClose={handleClose} title={notifyTitle} icon={notifyIcon} type={notifyType}>
