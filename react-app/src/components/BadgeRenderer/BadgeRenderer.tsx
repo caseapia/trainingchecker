@@ -71,7 +71,7 @@ const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player, onBadgeStatusChan
           </>
         } 
         placement="top" 
-        arrow 
+        arrow
         enterDelay={0}>
           <span
             className={`${styles.badge} ${badge.title.toLowerCase().replace(" ", "")}`}

@@ -19,7 +19,12 @@ function Players() {
 
   useEffect(() => {
     const getPlayers = async () => {
-      const url = `https://training-server.com/api/online`;
+      const url = process.env.NEXT_PUBLIC_API_ONLINE_URL;
+
+      if (!url) {
+        console.debug('API URL is not defined');
+        return;
+      }
 
       try {
         const response = await fetch(url);
