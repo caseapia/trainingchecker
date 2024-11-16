@@ -5,7 +5,7 @@ interface Props {
   icon?: ReactNode;
   children: ReactNode;
   className?: string;
-  type?: "error" | "warning" | "success" | "default";
+  type?: string;
   title?: string;
   notifyState: boolean;
   onClose: () => void;
