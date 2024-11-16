@@ -59,6 +59,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         className={`${styles.button} ${getStatus(btnType)} ${classname || ''}`}
         style={style}
         id={string}
+        layout
         whileTap={{ scale: 0.9 }}
         ref={ref}
       >

@@ -57,27 +57,22 @@ const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player, onBadgeStatusChan
     <>
       {badgesToShow.map((badge) => (
         <BootstrapTooltip 
-        title={
-          <>
-            <span style={{ color: `${badge.textColor}` }}>
-              {badge.title}
-            </span> 
-            {
-              badge.description && 
-                <>
-                  <br />{badge.description}
-                </>
-            }
-          </>
-        } 
-        placement="top" 
-        arrow
-        enterDelay={0}>
+          title={<><span style={{ color: `${badge.textColor}` }}>{badge.title}</span>{badge.description && <><br />{badge.description}</>}</>} 
+          placement="top" 
+          key={badge.id || badge.title}
+          arrow
+          enterDelay={0}>
           <span
-            className={`${styles.badge} ${badge.title.toLowerCase().replace(" ", "")}`}
+            className={styles.badge}
             style={{ backgroundColor: badge.color }}
+            key={badge.id || badge.title}
           >
-            <span className={`${styles.BadgeIcon}`}>{badge.icon}</span>
+            <span 
+              className={`${styles.BadgeIcon}`} 
+              key={badge.id || badge.title}
+            >
+              {badge.icon}
+            </span>
           </span>
         </BootstrapTooltip>
       ))}
