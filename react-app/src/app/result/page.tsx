@@ -207,7 +207,7 @@ const PlayerInfo = () => {
         .map(warn => `${warn.admin} // ${warn.reason} // ${warn.bantime}`)
         .join(';\n');
       const punishmentsCount = playerData.warn.length;
-      navigator.clipboard.writeText(`${punishments}\n\nВсего наказаний: ${punishmentsCount}`);
+      navigator.clipboard.writeText(`Список наказаний ${playerData.login} (${playerData.id})\n\n${punishments}\n\nВсего наказаний: ${punishmentsCount}`);
       setNotifyTitle('Данные о наказаниях скопированы');
       setNotifyIcon(<FaCheckCircle />);
       setNotifyText(`Наказания игрока ${playerData.login} были помещены в ваш буфер обмена`);
