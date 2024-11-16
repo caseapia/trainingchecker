@@ -48,4 +48,5 @@ a {
 }
 ::-webkit-scrollbar-thumb {
   background: #1339FF;
+  border-radius: 10px;
 }

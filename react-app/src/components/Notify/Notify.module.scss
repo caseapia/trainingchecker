@@ -8,6 +8,7 @@
   bottom: -80px;
   height: fit-content;
   transition: all .3s;
+  z-index: 9999999999;
     @media screen and (max-width: 767px) {
       top: -1000px;
     }
@@ -28,7 +29,7 @@
   cursor: pointer;
   display: flex;
   flex-direction: row;
-  z-index: 9999;
+  z-index: 9999999999;
     @media screen and (max-width: 767px) {
       max-width: 97%;
     }
