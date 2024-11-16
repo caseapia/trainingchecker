@@ -31,8 +31,8 @@ export default function Home() {
         const headers: HeadersInit = {
           'Accept': 'application/vnd.github.v3+json',
         }
-        if (process.env.NEXT_PUBLIC_API_KEY) {
-          headers['Authorization'] = process.env.NEXT_PUBLIC_API_KEY
+        if (process.env.NEXT_PRIVATE_API_KEY) {
+          headers['Authorization'] = process.env.NEXT_PRIVATE_API_KEY
         }
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
