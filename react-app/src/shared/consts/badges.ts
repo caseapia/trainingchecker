@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { FaUserCog, FaUserSlash } from "react-icons/fa";
-import { FaCode, FaMedal, FaUserShield, FaYoutube } from "react-icons/fa6";
+import { FaCode, FaCrown, FaMedal, FaUserShield, FaYoutube } from "react-icons/fa6";
 
 type BadgeProps = {
   id: number;
@@ -23,6 +23,15 @@ type BadgeProps = {
 export const staffBadges: BadgeProps[] = [
   {
     id: 1,
+    title: "Создатель TRAINING SANDBOX",
+    description: "Когда-то этот игрок создал LSGOV TRAINING — ныне TRAINING SANDBOX",
+    icon: React.createElement(FaCrown),
+    accid: [1, 2],
+    color: "#000000",
+    textColor: "red",
+  },
+  {
+    id: 2,
     title: "Разработчик TRAINING SANDBOX",
     description: "Этот игрок учавствует в разработке TRAINING SANDBOX",
     icon: React.createElement(FaUserCog),
@@ -31,7 +40,17 @@ export const staffBadges: BadgeProps[] = [
     textColor: "#B72A2A"
   },
   {
-    id: 2,
+    id: 3,
+    title: "Администратор TRAINING SANDBOX",
+    description: "Этот игрок является администратором TRAINING SANDBOX",
+    icon: React.createElement(FaUserShield),
+    minModer: 999,
+    maxModer: 9999,
+    color: "#B72A2A",
+    textColor: "#B72A2A",
+  },
+  {
+    id: 4,
     title: "Команда TRAINING SANDBOX",
     description: "Этот игрок является подтвержденным членом команды TRAINING SANDBOX",
     icon: React.createElement(FaUserShield),
@@ -41,7 +60,7 @@ export const staffBadges: BadgeProps[] = [
     textColor: "rgb(96 158 213)"
   },
   {
-    id: 3,
+    id: 5,
     title: "Команда сайта",
     description: "Этот игрок является или являлся разработчиком сайта TRAINING CHECKER",
     icon: React.createElement(FaCode),
@@ -49,20 +68,10 @@ export const staffBadges: BadgeProps[] = [
     color: "rgb(42 170 104 / 42%)",
     textColor: "rgb(42 170 104)"
   },
-  {
-    id: 4,
-    title: "Администратор TRAINING SANDBOX",
-    description: "Этот игрок является администратором TRAINING SANDBOX",
-    icon: React.createElement(FaUserShield),
-    minModer: 999,
-    maxModer: 9999,
-    color: "#B72A2A",
-    textColor: "#B72A2A",
-  },
 ]
 export const playerBadges: BadgeProps[] = [
   {
-    id: 1,
+    id: 6,
     title: "Ветеран",
     description: "Этот значок вручается игрокам, зарегистрировавшим свой аккаунт в числе первых 150000",
     icon: React.createElement(FaMedal),
@@ -72,7 +81,7 @@ export const playerBadges: BadgeProps[] = [
     textColor: "#00a5a2"
   },
   {
-    id: 2,
+    id: 7,
     title: "Ютубер",
     description: "Значок был вручен игроку за поддержку сообщества в части рекламы посредством создания контента",
     icon: React.createElement(FaYoutube),
@@ -81,7 +90,7 @@ export const playerBadges: BadgeProps[] = [
     textColor: "#fe0032"
   },
   {
-    id: 3,
+    id: 8,
     title: "Бывший член команды TRAINING SANDBOX",
     description: "Значок был вручен игроку за поддержку сервера в качестве члена команды проекта",
     icon: React.createElement(FaUserSlash),

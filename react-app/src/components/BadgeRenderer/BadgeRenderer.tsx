@@ -45,6 +45,12 @@ const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player, onBadgeStatusChan
   
     return true;
   });
+
+  badgesToShow.sort((a, b) => {
+    const idA = Number(a.id) || 0;
+    const idB = Number(b.id) || 0;
+    return idA - idB;
+  })
   
   useEffect(() => {
     const hasBadges = badgesToShow.length > 0;
