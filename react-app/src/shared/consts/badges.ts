@@ -26,7 +26,7 @@ export const staffBadges: BadgeProps[] = [
     title: "Разработчик TRAINING SANDBOX",
     description: "Этот игрок учавствует в разработке TRAINING SANDBOX",
     icon: React.createElement(FaUserCog),
-    accid: [1, 2, 99, 104599],
+    verify: 3,
     color: "#B72A2A",
     textColor: "#B72A2A"
   },

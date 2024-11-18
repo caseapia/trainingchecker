@@ -13,10 +13,11 @@ interface Props {
   icon?: ReactNode;
   name?: string;
   onError?: string;
+  onEmptied?: (event: React.FormEvent<HTMLInputElement>) => void;
 }
 
 export const Input = forwardRef<HTMLInputElement, Props>(
-  ({ label, type, onInput, onClick, onChange, classname, disabled, placeholder, icon, name, onError }, ref) => {
+  ({ label, type, onInput, onClick, onChange, classname, disabled, placeholder, icon, name, onError, onEmptied }, ref) => {
     const [string, setString] = useState<string>('');
 
     useEffect(() => {
@@ -50,6 +51,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
           placeholder={placeholder}
           name={name}
           ref={ref}
+          onEmptied={onEmptied}
         />
         {icon && <span className={styles.icon}>{icon}</span>}
       </>
