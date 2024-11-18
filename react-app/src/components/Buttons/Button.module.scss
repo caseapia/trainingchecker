@@ -23,32 +23,37 @@
 .Primary {
   background: #1339FF;
   border: 1px solid transparent;
-    &:hover {
-      background: lighten(#1339ff, 10%);
+    &:enabled {
+      &:hover {
+        background: lighten(#1339ff, 7%);
+      }
     }
 }
 .Transparent {
   background: transparent;
   border: 1px solid #1339FF;
-    &:hover {
-      border-color: lighten(#1339ff, 10%);
+    &:enabled {
+      &:hover {
+        border-color: lighten(#1339ff, 7%);
+      }
     }
 }
 .Secondary {
   border: 1px solid #191B1D;
   background: transparent;
-
-  &:hover {
-    background: #202325;
-    border: 1px solid #191B1D;
-  }
+    &:enabled {
+      &:hover {
+        background: #202325;
+        border: 1px solid #191B1D;
+      }
+    }
 }
 .Danger {
   border: 1px solid transparent;
   background: #FF6955;
-
-  &:hover {
-    border: 1px solid #FF6955;
-    background: #FF6955;
-  }
+    &:enabled {
+      &:hover {
+        background: lighten(#FF6955, 7%);
+      }
+    }
 }

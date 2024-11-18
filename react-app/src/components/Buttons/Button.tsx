@@ -60,7 +60,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         style={style}
         id={string}
         layout
-        whileTap={{ scale: 0.9 }}
+        whileTap={{ scale: 0.950 }}
         ref={ref}
       >
         {icon && (<> {icon} </>)} {text}

@@ -38,7 +38,6 @@ export default function Home() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const cmts = await response.json();
-        console.debug(cmts);
 
         if (Array.isArray(cmts) && cmts.length > 0) {
           const lastcmtday = cmts[0].commit.committer.date;
@@ -59,24 +58,49 @@ export default function Home() {
   }
   const handleClose = () => {
     setNotifyState(false);
-    setNotifyText('');
-    setNotifyTitle('');
+    setTimeout(() => {
+      setNotifyText('');
+      setNotifyTitle('');
+      setNotifyIcon('');
+    }, 5000);
   }
 
   function validation(event: React.FormEvent) {
     if (InputElement.current && InputElement.current.value.length === 0) {
       event.preventDefault();
-      setNotifyText('Для выполнения поиска вы должны заполнить поле никнейма игрока.');
+      setNotifyText('Для выполнения поиска вы должны заполнить поле никнейма игрока');
       setNotifyTitle('Вы не заполнили поле никнейма');
       setNotifyIcon(<TbFaceIdError />)
-      ButtonElement.current?.classList.remove(buttonstyles.Primary)
-      ButtonElement.current?.classList.add(buttonstyles.Danger);
+      if (ButtonElement.current) {
+        ButtonElement.current.disabled = true;
+      }
       handleOpen();
     } else {
       FormElement.current?.submit;
-      ButtonElement.current?.classList.remove(buttonstyles.Danger)
-      ButtonElement.current?.classList.add(buttonstyles.Primary);
+      if (ButtonElement.current) {
+        ButtonElement.current.disabled = false;
+      }
       handleClose();
+    }
+  }
+  const testInput = () => {
+    const cyrillicPattern = /[а-яА-ЯёЁ]/;
+    if (InputElement && InputElement.current) {
+      const textContent = InputElement.current.value || '';
+      if (cyrillicPattern.test(textContent)) {
+        setNotifyTitle('Поле никнейма содержит кириллические символы');
+        setNotifyText('На TRAINING SANDBOX никнеймы поддерживают только символы латиницы и цифры, пожалуйста, следуйте требованиям');
+        setNotifyIcon(<TbFaceIdError />)
+        if (ButtonElement.current) {
+          ButtonElement.current.disabled = true;
+        }
+        handleOpen();
+      } else {
+        handleClose();
+        if (ButtonElement.current) {
+          ButtonElement.current.disabled = false;
+        }
+      }
     }
   }
 
@@ -95,8 +119,8 @@ export default function Home() {
               <p>Последнее обновление произошло: {lastUpdate}</p>
               </div>
               <form action="./result" method="get" className={styles.FormContainer} ref={FormElement}>
-                <Input icon={<FaUser />} label="Введите никнейм игрока" type="text" name="nickname" ref={InputElement} />
-                <Button btnType="Primary" text="Проверить" type="submit" icon={ <FaCheckCircle /> } onClick={validation} ref={ButtonElement} />
+                <Input icon={<FaUser />} label="Введите никнейм игрока" type="text" name="nickname" ref={InputElement} onChange={testInput} onEmptied={validation} />
+                <Button btnType="Primary" text="Проверить" type="submit" icon={ <FaCheckCircle /> } onClick={validation} ref={ButtonElement} disabled />
               </form>
             </>
           ) : (

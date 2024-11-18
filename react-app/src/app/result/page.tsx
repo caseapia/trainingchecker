@@ -194,8 +194,12 @@ const PlayerInfo = () => {
   }
   const handleClose = () => {
     setNotifyState(false);
-    setNotifyText('');
-    setNotifyTitle('');
+    setTimeout(() => {
+      setNotifyText('');
+      setNotifyTitle('');
+      setNotifyIcon('');
+      setNotifyType('');
+    }, 2000);
   }
 
   const openModal = () => setIsModalOpen(true);
@@ -321,7 +325,7 @@ const PlayerInfo = () => {
                 playerData.warn.map((warn, index) => (
                   <>
                     <tr key={index}>
-                      <td><Link href={`?nickname=${warn.admin}`}>{warn.admin}</Link></td>
+                      <td><Link href={`?nickname=${warn.admin}`} onClick={closeModal}>{warn.admin}</Link></td>
                       <td>{warn.reason}</td>
                       <td>{new Date(warn.bantime).toLocaleString()}</td>
                     </tr>
