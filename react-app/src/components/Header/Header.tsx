@@ -21,7 +21,13 @@ export const Header = () => {
   }, []);
 
   const handleOpenMobileMenu = () => {
-    setIsMobileMenuOpened((prev) => !prev);
+    setIsMobileMenuOpened((prev) => {
+      const isOpen = !prev;
+      if (isOpen) {
+        document.body.style.overflow = isOpen? "hidden" : "auto";
+      }
+      return isOpen;
+    })
   };
 
   const swapPage = (page: string) => {
