@@ -7,7 +7,7 @@ const page = () => {
   return (
     <div className={styles.PageWrapper}>
       <h1>Список всех значков</h1>
-      <table className={styles.BadgesWrapper}>
+      <table className={styles.table}>
         <thead>
           <tr>
             <td>Иконка</td>
