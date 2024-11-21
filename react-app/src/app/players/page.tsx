@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { BadgeRenderer } from '@/components/BadgeRenderer/BadgeRenderer';
 import Lottie from 'lottie-react';
 import Preloader from '../../../public/assets/lotties/Preloader.json';
+import { Table, Thead, Tr, Td, TBody, Th } from '@/components/Table/Table';
 
 interface Player {
   id: number;
@@ -46,27 +47,27 @@ function Players() {
       <div className={styles.PageWrapper} id='players'>
         <h1>Список игроков в сети</h1>
         {result ? (
-          <table className={styles.Table}>
-            <thead className={styles.head}>
-              <tr>
-                <th>ID</th>
-                <th>Никнейм</th>
-                <th>Вошел</th>
-              </tr>
-            </thead>
-            <tbody>
+          <Table width={50}>
+            <Thead>
+              <Tr>
+                <Th>ID</Th>
+                <Th>Никнейм</Th>
+                <Th>Вошел</Th>
+              </Tr>
+            </Thead>
+            <TBody>
               {result.map((player) => (
-                <tr key={player.id}>
-                  <td>{player.playerid}</td>
-                  <td>
+                <Tr key={player.id}>
+                  <Td>{player.playerid}</Td>
+                  <Td>
                     <Link style={{ marginRight: '6px' }} href={`../result?nickname=${player.login}`}>{player.login}</Link>
                     <BadgeRenderer player={player} />
-                  </td>
-                  <td>{player.lastlogin}</td>
-                </tr>
+                  </Td>
+                  <Td>{player.lastlogin}</Td>
+                </Tr>
               ))}
-            </tbody>
-          </table>
+            </TBody>
+          </Table>
         ) : (
           <Lottie animationData={Preloader} />
         )}

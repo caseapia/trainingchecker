@@ -12,6 +12,7 @@ import { FaCheckCircle, FaCopy, FaHammer } from 'react-icons/fa';
 import { MdError } from "react-icons/md";
 import { Modal } from '@/components/Modal/Modal';
 import Link from 'next/link';
+import { Table, Thead, Tr, Td, TBody, Th } from '@/components/Table/Table';
 
 const PlayerInfo = () => {
   const searchParams = useSearchParams();
@@ -310,34 +311,25 @@ const PlayerInfo = () => {
         secondButtonAction={copyPunishments}
       >
         {playerData.warn.length > 0 ? (
-          <>
-            <table className={styles.Table}>
-              <thead>
-                <tr>
-                  <th>Администратор</th>
-                  <th>Причина</th>
-                  <th>Дата</th>
-                </tr>
-              </thead>
-              <tbody>
-              {playerData.warn && playerData.warn.length > 0 ? (
-                playerData.warn.map((warn, index) => (
-                  <>
-                    <tr key={index}>
-                      <td><Link href={`?nickname=${warn.admin}`} onClick={closeModal}>{warn.admin}</Link></td>
-                      <td>{warn.reason}</td>
-                      <td>{new Date(warn.bantime).toLocaleString()}</td>
-                    </tr>
-                  </>
-                ))
-              ) : null}
-              <tr>
-                <td colSpan={3}>Всего наказаний: {playerData.warn.length}</td>
-              </tr>
-              </tbody>
-            </table>
-          </>
-        ) : null}
+          <Table width={100}>
+            <Thead>
+              <Tr>
+                <Td>Администратор</Td>
+                <Td>Причина</Td>
+                <Td>Дата</Td>
+              </Tr>
+            </Thead>
+            <TBody>
+              {playerData.warn.map((warn, index) => (
+                <Tr key={index}>
+                  <Td><Link href={`?nickname=${warn.admin}`} onClick={closeModal}>{warn.admin}</Link></Td>
+                  <Td>{warn.reason}</Td>
+                  <Td>{new Date(warn.bantime).toLocaleString()}</Td>
+                </Tr>
+              ))}
+            </TBody>
+          </Table>
+        ) : <p style={{ color: 'var(--color-danger)', textAlign: 'center' }}>У этого игрока нет наказаний</p>}
       </Modal>
     </>
   ) : isNotFound ? (

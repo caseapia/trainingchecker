@@ -1,0 +1,29 @@
+.Table {
+  background: transparent;
+  border: 1px solid rgba(73,80,87,.42);
+  padding: 10px;
+  text-align: center;
+  border-spacing: 0;
+  border-radius: 10px;
+    @media screen and (max-width: 767px) {
+      width: 90%;
+    }
+    thead {
+      font-weight: bolder;
+        th, td {
+          padding: 10px;
+        }
+    }
+    tbody {
+      tr {
+        transition: .2s;
+          &:hover {
+            background: lighten(rgba(73,80,87,.12), 3%);
+          }
+      }
+      td {
+        padding: 10px;
+        border-top: 1px solid rgba(73,80,87,.42);
+      }
+    }
+}

@@ -14,7 +14,7 @@ type HeaderProps = {
 export const Elements: HeaderProps[] = [
   {
     text: "Главная",
-    id: "",
+    id: "main",
     icon: React.createElement(FaHome),
     link: "../",
   },

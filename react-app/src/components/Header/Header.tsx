@@ -17,7 +17,7 @@ export const Header = () => {
 
   useEffect(() => {
     const crntPage = window.location.pathname.split('/')[1];
-    setActivePage(crntPage);
+    setActivePage("main");
   }, []);
 
   const handleOpenMobileMenu = () => {
@@ -31,6 +31,10 @@ export const Header = () => {
   };
 
   const swapPage = (page: string) => {
+    router.push(`/${page}`);
+    if (page === "") {
+      setActivePage("../")
+    }
     setActivePage(page);
     if (isMobileMenuOpened) {
       setIsMobileMenuOpened(false);
