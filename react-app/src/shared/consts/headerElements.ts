@@ -1,5 +1,5 @@
 import React from "react";
-import { FaHome, FaList, FaUser } from "react-icons/fa";
+import { FaHome, FaList, FaMedal, FaUser } from "react-icons/fa";
 
 type HeaderProps = {
   icon: React.ReactNode;
@@ -23,6 +23,12 @@ export const Elements: HeaderProps[] = [
     id: "players",
     icon: React.createElement(FaUser),
     link: "/players",
+  },
+  {
+    text: "Список бейджей",
+    id: "badges",
+    icon: React.createElement(FaMedal),
+    link: "/badges",
   },
   {
     text: "Список миров",

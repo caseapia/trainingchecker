@@ -2,7 +2,7 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import styles from './page.module.scss'
 import Link from 'next/link';
-import BadgeRenderer from '@/components/BadgeRenderer/BadgeRenderer';
+import { BadgeRenderer } from '@/components/BadgeRenderer/BadgeRenderer';
 import Lottie from 'lottie-react';
 import Preloader from '../../../public/assets/lotties/Preloader.json';
 

@@ -67,7 +67,7 @@
     font-size: 40px;
     float: right;
     display: flex;
-    position: fixed;
+    position: absolute;
     right: 0;
     margin-right: 7px;
     margin-bottom: 2px;
@@ -96,12 +96,12 @@
           &__list {
             list-style-type: none;
             padding: 0;
-            width: 100%;
+            width: 0%;
               li {
                 background-color: #1a18187a;
                 padding: 15px;
                 margin-bottom: 10px;
-                width: 100%;
+                width: 0%;
                 text-align: center;
                   &:last-of-type {
                     margin-bottom: 0;
