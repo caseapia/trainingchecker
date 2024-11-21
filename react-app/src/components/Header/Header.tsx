@@ -78,13 +78,14 @@ export const Header = () => {
                 <button className={styles.mobile__button} onClick={handleOpenMobileMenu}>X</button>
               </div>
               <div className={styles.mobile__menu__body}>
-              <ul className={styles.mobile__menu__body__list}>
+              <motion.ul className={styles.mobile__menu__body__list} animate={{ width: "100%" }}>
                 {Elements.length > 0 &&
                   Elements.map((element, index) => (
-                    <li 
+                    <motion.li 
                       key={index}
                       style={element.style}
                       className={activePage === element.id ? styles.active : ""}
+                      animate={{ width: "100%" }}
                     >
                       <Link 
                         href={element.link}
@@ -93,9 +94,9 @@ export const Header = () => {
                       >
                         {element.icon} {element.text}
                       </Link>
-                    </li>
+                    </motion.li>
                   ))}
-              </ul>
+              </motion.ul>
               </div>
             </motion.div>
           )}

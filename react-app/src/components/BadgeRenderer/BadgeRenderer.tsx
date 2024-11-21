@@ -1,10 +1,11 @@
+"use client"
 import React, { useEffect, useState } from "react";
 import { allBadges } from "../../shared/consts/badges";
 import styles from "./BadgeRenderer.module.scss";
 import BootstrapTooltip from "../Styles/TooltipStyles";
 
 type BadgeRendererProps = {
-  player: {
+  player?: {
     id?: number;
     login?: string;
     lastlogin?: string;
@@ -21,6 +22,8 @@ type BadgeRendererProps = {
 
 const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player, onBadgeStatusChange }) => {
   const badgesToShow = allBadges.filter((badge) => {
+    if (!player) return false; 
+
     if (badge.moder && badge.moder !== player.moder) return false;
     if (badge.accid) {
       if (Array.isArray(badge.accid)) {
@@ -86,4 +89,4 @@ const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player, onBadgeStatusChan
   ) : null;
 };
 
-export default BadgeRenderer;
+export { BadgeRenderer };

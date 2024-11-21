@@ -2,7 +2,7 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState, Suspense, ReactNode } from 'react';
 import styles from './page.module.scss';
-import BadgeRenderer from '@/components/BadgeRenderer/BadgeRenderer';
+import { BadgeRenderer } from '@/components/BadgeRenderer/BadgeRenderer';
 import Lottie from 'lottie-react';
 import Preloader from '../../../public/assets/lotties/Preloader.json';
 import Button from '@/components/Buttons/Button';
@@ -12,7 +12,6 @@ import { FaCheckCircle, FaCopy, FaHammer } from 'react-icons/fa';
 import { MdError } from "react-icons/md";
 import { Modal } from '@/components/Modal/Modal';
 import Link from 'next/link';
-import BootstrapTooltip from '@/components/Styles/TooltipStyles';
 
 const PlayerInfo = () => {
   const searchParams = useSearchParams();
