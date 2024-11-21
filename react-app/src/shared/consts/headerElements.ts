@@ -25,7 +25,7 @@ export const Elements: HeaderProps[] = [
     link: "/players",
   },
   {
-    text: "Список бейджей",
+    text: "Список значков",
     id: "badges",
     icon: React.createElement(FaMedal),
     link: "/badges",
