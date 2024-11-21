@@ -4,7 +4,14 @@ import styles from './page.module.scss';
 import { allBadges } from '@/shared/consts/badges';
 import { Table, Thead, Tr, Td, TBody } from '@/components/Table/Table';
 
+
 const page = () => {
+  const sortedBadges = allBadges.sort((a, b) => {
+    if (a.category < b.category) return 1;
+    if (a.category > b.category) return -1;
+
+    return a.id - b.id;
+  });
   return (
     <div className={styles.PageWrapper}>
       <h1>Список всех значков</h1>
@@ -17,7 +24,7 @@ const page = () => {
           </Tr>
         </Thead>
         <TBody>
-          {allBadges.map((badge, index) => (
+          {sortedBadges.map((badge, index) => (
             <Tr key={index}>
               <Td>
                 <span
