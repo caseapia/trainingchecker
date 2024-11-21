@@ -1,59 +1,100 @@
-"use client"
-import React, { useEffect, useRef } from 'react'
-import styles from './Header.module.scss';
+"use client";
+import React, { useEffect, useRef, useState } from "react";
+import styles from "./Header.module.scss";
 import { FaUser, FaHome } from "react-icons/fa";
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { GiPortal } from "react-icons/gi";
-import BootstrapTooltip from '../Styles/TooltipStyles';
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { TiTabsOutline } from "react-icons/ti";
+import { motion } from "framer-motion";
+import { isMobileDevice } from "@/hooks/isMobileDevice";
+import { Elements } from "@/shared/consts/headerElements";
 
 export const Header = () => {
-  const mainRef = useRef<HTMLAnchorElement>(null);
-  const playersOnlineRef = useRef<HTMLAnchorElement>(null);
-  const adminsRef = useRef<HTMLAnchorElement>(null);
-  const worldsRef = useRef<HTMLAnchorElement>(null);
+  const isMobile = isMobileDevice();
+  const [isMobileMenuOpened, setIsMobileMenuOpened] = useState<boolean>(false);
+  const [activePage, setActivePage] = useState<string>("");
   const router = useRouter();
 
   useEffect(() => {
-    const players = playersOnlineRef.current;
-    const main = mainRef.current;
-    const admins = adminsRef.current;
-    const link = window.location.href;
-
-    if (link.includes('/players')) {
-      players?.classList.add(styles.active);
-    } else if (link.includes('/admins')) {
-      admins?.classList.add(styles.active);
-    } else {
-      main?.classList.add(styles.active);
-    }
+    const crntPage = window.location.pathname.split('/')[1];
+    setActivePage(crntPage);
   }, []);
 
+  const handleOpenMobileMenu = () => {
+    setIsMobileMenuOpened((prev) => !prev);
+  };
+
   const swapPage = (page: string) => {
-    mainRef.current?.classList.remove(styles.active);
-    playersOnlineRef.current?.classList.remove(styles.active);
-    adminsRef.current?.classList.remove(styles.active);
-    worldsRef.current?.classList.remove(styles.active);
-    router.push(page);
-    if (page === 'players') {
-      playersOnlineRef.current?.classList.add(styles.active);
-    } else if (page === 'admins') {
-      adminsRef.current?.classList.add(styles.active);
-    } else if (page === 'worlds') {
-      worldsRef.current?.classList.add(styles.active);
+    setActivePage(page);
+    if (isMobileMenuOpened) {
+      setIsMobileMenuOpened(false);
     } else {
-      mainRef.current?.classList.add(styles.active);
+      return;
     }
   };
 
   return (
     <header className={styles.header}>
-      <h1>TRAINING <span className={styles.redspan}>CHECKER</span></h1>
-      <ul className={styles.list}>
-        <li><Link onClick={() => swapPage('')} href='../' className={styles.element} ref={mainRef}><FaHome /> Главная</Link></li>
-        <li><Link onClick={() => swapPage('players')} href='../players' className={styles.element} ref={playersOnlineRef}><FaUser /> Игроки в сети</Link></li>
-        <BootstrapTooltip title='СКОРО!'><li className={styles.disabled}><Link style={{ cursor: 'default', pointerEvents: 'none', userSelect: 'none' }} href='' className={styles.element} ref={worldsRef}><GiPortal /> Список миров</Link></li></BootstrapTooltip>
-      </ul>
+      <h1>
+        TRAINING <span className={styles.redspan}>CHECKER</span>
+      </h1>
+      {!isMobile ? (
+        <ul className={styles.list}>
+          {Elements.length > 0 &&
+            Elements.map((element, index) => (
+              <li key={index}>
+                <Link 
+                  href={element.link} 
+                  onClick={() => swapPage(element.id)}
+                  className={activePage === element.id ? styles.active : ""}
+                  style={element.style}
+                >
+                  {element.icon} {element.text}
+                </Link>
+              </li>
+            ))}
+        </ul>
+      ) : (
+        <>
+          <button
+            className={styles.mobile__button}
+            onClick={handleOpenMobileMenu}
+          >
+            <TiTabsOutline />
+          </button>
+          {isMobileMenuOpened && (
+            <motion.div 
+              className={styles.mobile__menu}
+              layout
+              animate={{ width: "100%", opacity: 1 }}
+            >
+              <div className={styles.mobile__menu__header}>
+                <button className={styles.mobile__button} onClick={handleOpenMobileMenu}>X</button>
+              </div>
+              <div className={styles.mobile__menu__body}>
+              <ul className={styles.mobile__menu__body__list}>
+                {Elements.length > 0 &&
+                  Elements.map((element, index) => (
+                    <li 
+                      key={index}
+                      style={element.style}
+                      className={activePage === element.id ? styles.active : ""}
+                    >
+                      <Link 
+                        href={element.link}
+                        onClick={() => swapPage(element.id)}
+                        style={element.style}
+                      >
+                        {element.icon} {element.text}
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+              </div>
+            </motion.div>
+          )}
+        </>
+      )}
     </header>
-  )
-}
+  );
+};
