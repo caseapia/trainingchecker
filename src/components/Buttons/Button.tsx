@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useState, forwardRef } from 'react';
 import styles from './Button.module.scss';
 import { motion } from "framer-motion";
+import { useGenerateId } from '@/shared/hooks/useGenerateId';
 
 interface Props {
   icon?: ReactNode;
@@ -16,24 +17,7 @@ interface Props {
 
 const Button = forwardRef<HTMLButtonElement, Props>(
   ({ icon, btnType, text, onClick, onFocus, type, disabled = false, classname, style }, ref) => {
-    const [string, setString] = useState<string>('');
-    
-    useEffect(() => {
-      const generateID = (length: number): string => {
-        const characters: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!?';
-        let result: string = '';
-        
-        for (let i = 0; i < length; i++) {
-          const randomIndex = Math.floor(Math.random() * characters.length);
-          result += characters[randomIndex];
-        }
-
-        return result;
-      }
-
-      const newID = generateID(6);
-      setString(newID);
-    }, []);
+    const string = useGenerateId();
 
     const getStatus = (btnType: string): string => {
       switch (btnType) {
