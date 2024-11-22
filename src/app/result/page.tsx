@@ -58,6 +58,11 @@ const PlayerInfo = () => {
   const [notifyType, setNotifyType] = useState<string>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (nickname === null || nickname === '') {
+      router.push('../');
+    }
+  }, [searchParams, router]);
 
   const fetchPlayerData = async () => {
     if (!nickname) return;
@@ -105,12 +110,6 @@ const PlayerInfo = () => {
   useEffect(() => {
     fetchPlayerData();
   }, [nickname]);
-
-  useEffect(() => {
-    if (nickname === null || nickname === '') {
-      router.push('../');
-    }
-  }, [searchParams, router]);
   
   const refreshData = async () => {
     try {
