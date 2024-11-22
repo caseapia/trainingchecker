@@ -16,6 +16,7 @@
     "@nextui-org/system": "^2.2.6",
     "@nextui-org/theme": "^2.2.11",
     "@nextui-org/tooltip": "^2.0.41",
+    "@vercel/analytics": "^1.4.1",
     "bootstrap": "^5.3.3",
     "framer-motion": "^11.11.11",
     "lottie-react": "^2.4.0",
