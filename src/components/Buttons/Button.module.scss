@@ -10,10 +10,12 @@
   width: 100%;
   cursor: pointer;
   user-select: none;
+    span {
+      display: flex;
+    }
     svg {
       margin-right: 6px;
       margin-bottom: 2px;
-      font-size: 20px;
     }
     &:disabled {
       cursor: not-allowed;

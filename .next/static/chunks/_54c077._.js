@@ -397,21 +397,27 @@ const Button = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5
         id: string,
         layout: true,
         whileTap: {
-            scale: 0.950
+            scale: .95
         },
         ref: ref,
-        children: [
-            icon && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
-                children: [
-                    " ",
-                    icon,
-                    " "
-                ]
-            }, void 0, true),
-            " ",
-            text
-        ]
-    }, void 0, true, {
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+            children: [
+                icon && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                    children: [
+                        " ",
+                        icon,
+                        " "
+                    ]
+                }, void 0, true),
+                " ",
+                text
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/Buttons/Button.tsx",
+            lineNumber: 50,
+            columnNumber: 9
+        }, this)
+    }, void 0, false, {
         fileName: "[project]/src/components/Buttons/Button.tsx",
         lineNumber: 38,
         columnNumber: 7
@@ -873,8 +879,10 @@ var _s = __turbopack_refresh__.signature();
 ;
 ;
 ;
+;
 const PlayerInfo = ()=>{
     _s();
+    const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
     const searchParams = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSearchParams"])();
     const nickname = searchParams.get('nickname');
     const [playerData, setPlayerData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
@@ -902,13 +910,6 @@ const PlayerInfo = ()=>{
     const [notifyIcon, setNotifyIcon] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])();
     const [notifyType, setNotifyType] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])();
     const [isModalOpen, setIsModalOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        if (!window.location.href.includes('nickname')) {
-            window.location.href = '../';
-        }
-    }, [
-        nickname
-    ]);
     const fetchPlayerData = async ()=>{
         if (!nickname) return;
         const url = `${("TURBOPACK compile-time value", "https://training-server.com/api/user")}/${nickname}`;
@@ -954,6 +955,14 @@ const PlayerInfo = ()=>{
     }, [
         nickname
     ]);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        if (nickname === null || nickname === '') {
+            router.push('../');
+        }
+    }, [
+        searchParams,
+        router
+    ]);
     const refreshData = async ()=>{
         try {
             const response = await fetch(`https://training-server.com/api/user/${nickname}`);
@@ -961,7 +970,7 @@ const PlayerInfo = ()=>{
                 setNotifyTitle('Успешно!');
                 setNotifyIcon(/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fa$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FaCheckCircle"], {}, void 0, false, {
                     fileName: "[project]/src/app/result/page.tsx",
-                    lineNumber: 118,
+                    lineNumber: 121,
                     columnNumber: 23
                 }, this));
                 setNotifyText(`Информация об игроке ${playerData.login} была обновлена`);
@@ -970,7 +979,7 @@ const PlayerInfo = ()=>{
                 setNotifyTitle('Ошибка!');
                 setNotifyIcon(/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$md$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["MdError"], {}, void 0, false, {
                     fileName: "[project]/src/app/result/page.tsx",
-                    lineNumber: 123,
+                    lineNumber: 126,
                     columnNumber: 23
                 }, this));
                 setNotifyText(`Ошибка при получении информации об игроке ${playerData.login}`);
@@ -1021,7 +1030,7 @@ const PlayerInfo = ()=>{
                         children: nextText
                     }, i, false, {
                         fileName: "[project]/src/app/result/page.tsx",
-                        lineNumber: 172,
+                        lineNumber: 175,
                         columnNumber: 13
                     }, this));
                     i++;
@@ -1062,7 +1071,7 @@ const PlayerInfo = ()=>{
             setNotifyTitle('Данные о наказаниях скопированы');
             setNotifyIcon(/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fa$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FaCheckCircle"], {}, void 0, false, {
                 fileName: "[project]/src/app/result/page.tsx",
-                lineNumber: 216,
+                lineNumber: 219,
                 columnNumber: 21
             }, this));
             setNotifyText(`Наказания игрока ${playerData.login} были помещены в ваш буфер обмена`);
@@ -1071,7 +1080,7 @@ const PlayerInfo = ()=>{
             setNotifyTitle('Ошибка!');
             setNotifyIcon(/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$md$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["MdError"], {}, void 0, false, {
                 fileName: "[project]/src/app/result/page.tsx",
-                lineNumber: 221,
+                lineNumber: 224,
                 columnNumber: 21
             }, this));
             setNotifyText(`Игрок ${playerData.login} не имеет наказаний`);
@@ -1090,7 +1099,7 @@ const PlayerInfo = ()=>{
                                 children: "ID:"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/result/page.tsx",
-                                lineNumber: 231,
+                                lineNumber: 234,
                                 columnNumber: 12
                             }, this),
                             " ",
@@ -1098,7 +1107,7 @@ const PlayerInfo = ()=>{
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/result/page.tsx",
-                        lineNumber: 231,
+                        lineNumber: 234,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1107,7 +1116,7 @@ const PlayerInfo = ()=>{
                                 children: "Ник:"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/result/page.tsx",
-                                lineNumber: 232,
+                                lineNumber: 235,
                                 columnNumber: 12
                             }, this),
                             " ",
@@ -1115,7 +1124,7 @@ const PlayerInfo = ()=>{
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/result/page.tsx",
-                        lineNumber: 232,
+                        lineNumber: 235,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1124,7 +1133,7 @@ const PlayerInfo = ()=>{
                                 children: "Должность:"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/result/page.tsx",
-                                lineNumber: 233,
+                                lineNumber: 236,
                                 columnNumber: 12
                             }, this),
                             " ",
@@ -1132,7 +1141,7 @@ const PlayerInfo = ()=>{
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/result/page.tsx",
-                        lineNumber: 233,
+                        lineNumber: 236,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1141,7 +1150,7 @@ const PlayerInfo = ()=>{
                                 children: "Верификация:"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/result/page.tsx",
-                                lineNumber: 247,
+                                lineNumber: 250,
                                 columnNumber: 12
                             }, this),
                             playerData.verify === 0 ? ` Нет` : playerData.verify === 1 ? ` Ютубер` : playerData.verify === 2 ? ` Автор сообщества (создатель модов)` : playerData.verify === 3 ? ` Разработчик` : playerData.verify === 4 ? ` Администратор в отставке` : playerData.verify === 5 ? ` Спонсор` : playerData.verify === 6 ? ` Создатель миров` : playerData.verify === 7 ? ` 🤨` : playerData.verify > 7 ? ` Неизвестно` : `Нет`,
@@ -1149,7 +1158,7 @@ const PlayerInfo = ()=>{
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/result/page.tsx",
-                        lineNumber: 247,
+                        lineNumber: 250,
                         columnNumber: 9
                     }, this),
                     playerData.verify > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1158,7 +1167,7 @@ const PlayerInfo = ()=>{
                                 children: "Текст верификации:"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/result/page.tsx",
-                                lineNumber: 271,
+                                lineNumber: 274,
                                 columnNumber: 14
                             }, this),
                             " ",
@@ -1166,7 +1175,7 @@ const PlayerInfo = ()=>{
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/result/page.tsx",
-                        lineNumber: 271,
+                        lineNumber: 274,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1175,7 +1184,7 @@ const PlayerInfo = ()=>{
                                 children: "Время мута:"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/result/page.tsx",
-                                lineNumber: 273,
+                                lineNumber: 276,
                                 columnNumber: 12
                             }, this),
                             " ",
@@ -1186,13 +1195,13 @@ const PlayerInfo = ()=>{
                                 children: "Нет"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/result/page.tsx",
-                                lineNumber: 273,
+                                lineNumber: 276,
                                 columnNumber: 83
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/result/page.tsx",
-                        lineNumber: 273,
+                        lineNumber: 276,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1201,14 +1210,14 @@ const PlayerInfo = ()=>{
                                 children: "Дата регистрации:"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/result/page.tsx",
-                                lineNumber: 274,
+                                lineNumber: 277,
                                 columnNumber: 12
                             }, this),
                             playerData.regdate === '1970-01-01 03:00:00' ? ' Зарегистрирован до 2018 года' : ` ${playerData.regdate}`
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/result/page.tsx",
-                        lineNumber: 274,
+                        lineNumber: 277,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1217,7 +1226,7 @@ const PlayerInfo = ()=>{
                                 children: "Дата последнего входа: "
                             }, void 0, false, {
                                 fileName: "[project]/src/app/result/page.tsx",
-                                lineNumber: 281,
+                                lineNumber: 284,
                                 columnNumber: 11
                             }, this),
                             new Date(playerData.lastlogin).toDateString() === new Date().toDateString() && playerData.online === 0 ? playerData.lastlogin : new Date(playerData.lastlogin).toDateString() !== new Date().toDateString() && playerData.online === 0 ? `${playerData.lastlogin} (${diffInDays} ${getDaySuffix(diffInDays)} назад)` : null,
@@ -1238,26 +1247,26 @@ const PlayerInfo = ()=>{
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/result/page.tsx",
-                                        lineNumber: 288,
+                                        lineNumber: 291,
                                         columnNumber: 64
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/result/page.tsx",
-                                lineNumber: 288,
+                                lineNumber: 291,
                                 columnNumber: 13
                             }, this) : null
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/result/page.tsx",
-                        lineNumber: 280,
+                        lineNumber: 283,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                         className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$result$2f$page$2e$module$2e$scss$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].ProfileLine
                     }, void 0, false, {
                         fileName: "[project]/src/app/result/page.tsx",
-                        lineNumber: 291,
+                        lineNumber: 294,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h5", {
@@ -1265,14 +1274,14 @@ const PlayerInfo = ()=>{
                         children: "Значки"
                     }, void 0, false, {
                         fileName: "[project]/src/app/result/page.tsx",
-                        lineNumber: 292,
+                        lineNumber: 295,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$BadgeRenderer$2f$BadgeRenderer$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BadgeRenderer"], {
                         player: playerData
                     }, void 0, false, {
                         fileName: "[project]/src/app/result/page.tsx",
-                        lineNumber: 293,
+                        lineNumber: 296,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1284,13 +1293,13 @@ const PlayerInfo = ()=>{
                                 type: "button",
                                 icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$hi$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["HiRefresh"], {}, void 0, false, {
                                     fileName: "[project]/src/app/result/page.tsx",
-                                    lineNumber: 295,
+                                    lineNumber: 298,
                                     columnNumber: 76
                                 }, void 0),
                                 onClick: refreshData
                             }, void 0, false, {
                                 fileName: "[project]/src/app/result/page.tsx",
-                                lineNumber: 295,
+                                lineNumber: 298,
                                 columnNumber: 11
                             }, this),
                             playerData.warn.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Buttons$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -1300,13 +1309,13 @@ const PlayerInfo = ()=>{
                                 disabled: false,
                                 icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fa$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FaHammer"], {}, void 0, false, {
                                     fileName: "[project]/src/app/result/page.tsx",
-                                    lineNumber: 296,
+                                    lineNumber: 299,
                                     columnNumber: 124
                                 }, void 0),
                                 onClick: openModal
                             }, void 0, false, {
                                 fileName: "[project]/src/app/result/page.tsx",
-                                lineNumber: 296,
+                                lineNumber: 299,
                                 columnNumber: 41
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Buttons$2f$Button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                 btnType: "Secondary",
@@ -1315,37 +1324,25 @@ const PlayerInfo = ()=>{
                                 disabled: true,
                                 icon: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fa$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["FaHammer"], {}, void 0, false, {
                                     fileName: "[project]/src/app/result/page.tsx",
-                                    lineNumber: 296,
+                                    lineNumber: 299,
                                     columnNumber: 246
                                 }, void 0),
                                 onClick: openModal
                             }, void 0, false, {
                                 fileName: "[project]/src/app/result/page.tsx",
-                                lineNumber: 296,
+                                lineNumber: 299,
                                 columnNumber: 164
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/result/page.tsx",
-                        lineNumber: 294,
+                        lineNumber: 297,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/result/page.tsx",
-                lineNumber: 230,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Notify$2f$Notify$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                notifyState: notifyState,
-                onClose: handleClose,
-                title: notifyTitle,
-                icon: notifyIcon,
-                type: notifyType,
-                children: notifyText
-            }, void 0, false, {
-                fileName: "[project]/src/app/result/page.tsx",
-                lineNumber: 299,
+                lineNumber: 233,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Modal$2f$Modal$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Modal"], {
@@ -1467,6 +1464,18 @@ const PlayerInfo = ()=>{
                 fileName: "[project]/src/app/result/page.tsx",
                 lineNumber: 302,
                 columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Notify$2f$Notify$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                notifyState: notifyState,
+                onClose: handleClose,
+                title: notifyTitle,
+                icon: notifyIcon,
+                type: notifyType,
+                children: notifyText
+            }, void 0, false, {
+                fileName: "[project]/src/app/result/page.tsx",
+                lineNumber: 334,
+                columnNumber: 7
             }, this)
         ]
     }, void 0, true) : isNotFound ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1479,19 +1488,19 @@ const PlayerInfo = ()=>{
                     children: nickname
                 }, void 0, false, {
                     fileName: "[project]/src/app/result/page.tsx",
-                    lineNumber: 337,
+                    lineNumber: 346,
                     columnNumber: 29
                 }, this),
                 " не найден"
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/result/page.tsx",
-            lineNumber: 337,
+            lineNumber: 346,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/result/page.tsx",
-        lineNumber: 336,
+        lineNumber: 345,
         columnNumber: 5
     }, this) : isNoAccess ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$result$2f$page$2e$module$2e$scss$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].PageWrapper_NotFound,
@@ -1505,13 +1514,13 @@ const PlayerInfo = ()=>{
                         children: "(ошибка: 500)"
                     }, void 0, false, {
                         fileName: "[project]/src/app/result/page.tsx",
-                        lineNumber: 341,
+                        lineNumber: 350,
                         columnNumber: 35
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/result/page.tsx",
-                lineNumber: 341,
+                lineNumber: 350,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1523,14 +1532,14 @@ const PlayerInfo = ()=>{
                         children: "TRAINING SERVER"
                     }, void 0, false, {
                         fileName: "[project]/src/app/result/page.tsx",
-                        lineNumber: 342,
+                        lineNumber: 351,
                         columnNumber: 135
                     }, this),
                     ". Пожалуйста, проверьте работоспособность сервисов TRAINING SERVER."
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/result/page.tsx",
-                lineNumber: 342,
+                lineNumber: 351,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1542,38 +1551,41 @@ const PlayerInfo = ()=>{
                         children: "TRAINING API"
                     }, void 0, false, {
                         fileName: "[project]/src/app/result/page.tsx",
-                        lineNumber: 343,
+                        lineNumber: 352,
                         columnNumber: 76
                     }, this),
                     ". Мы не можем воздействовать на работоспособность, сообщите об ошибке в топике TRAINING API."
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/result/page.tsx",
-                lineNumber: 343,
+                lineNumber: 352,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/result/page.tsx",
-        lineNumber: 340,
+        lineNumber: 349,
         columnNumber: 5
-    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$result$2f$page$2e$module$2e$scss$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].PageWrapper,
-        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lottie$2d$react$2f$build$2f$index$2e$umd$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-            animationData: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$assets$2f$lotties$2f$Preloader$2e$json__$28$json$29$__["default"]
+    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$result$2f$page$2e$module$2e$scss$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].PageWrapper,
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lottie$2d$react$2f$build$2f$index$2e$umd$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                animationData: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$assets$2f$lotties$2f$Preloader$2e$json__$28$json$29$__["default"]
+            }, void 0, false, {
+                fileName: "[project]/src/app/result/page.tsx",
+                lineNumber: 357,
+                columnNumber: 9
+            }, this)
         }, void 0, false, {
             fileName: "[project]/src/app/result/page.tsx",
-            lineNumber: 347,
+            lineNumber: 356,
             columnNumber: 7
         }, this)
-    }, void 0, false, {
-        fileName: "[project]/src/app/result/page.tsx",
-        lineNumber: 346,
-        columnNumber: 5
-    }, this);
+    }, void 0, false);
 };
-_s(PlayerInfo, "R+LnUioHP0ZSPnY9evOoWAPKMIc=", false, function() {
+_s(PlayerInfo, "WK1hWQEsQzKBXUrz+HHmWyTUTO8=", false, function() {
     return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useSearchParams"]
     ];
 });
@@ -1586,7 +1598,7 @@ const Result = ()=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$
                 children: "Информация об игроке"
             }, void 0, false, {
                 fileName: "[project]/src/app/result/page.tsx",
-                lineNumber: 354,
+                lineNumber: 365,
                 columnNumber: 5
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Suspense"], {
@@ -1594,23 +1606,23 @@ const Result = ()=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$
                     animationData: __TURBOPACK__imported__module__$5b$project$5d2f$public$2f$assets$2f$lotties$2f$Preloader$2e$json__$28$json$29$__["default"]
                 }, void 0, false, {
                     fileName: "[project]/src/app/result/page.tsx",
-                    lineNumber: 355,
+                    lineNumber: 366,
                     columnNumber: 25
                 }, void 0),
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(PlayerInfo, {}, void 0, false, {
                     fileName: "[project]/src/app/result/page.tsx",
-                    lineNumber: 356,
+                    lineNumber: 367,
                     columnNumber: 7
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/result/page.tsx",
-                lineNumber: 355,
+                lineNumber: 366,
                 columnNumber: 5
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/result/page.tsx",
-        lineNumber: 353,
+        lineNumber: 364,
         columnNumber: 3
     }, this);
 _c1 = Result;

@@ -44,10 +44,13 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         style={style}
         id={string}
         layout
-        whileTap={{ scale: 0.950 }}
+        whileTap={{ scale: .95 }}
         ref={ref}
       >
-        {icon && (<> {icon} </>)} {text}
+        <span>
+          {icon && (<> {icon} </>)} {text}
+        </span>
+       
       </motion.button>
     );
   }

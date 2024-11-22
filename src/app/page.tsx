@@ -88,8 +88,17 @@ export default function Home() {
     if (InputElement && InputElement.current) {
       const textContent = InputElement.current.value || '';
       if (cyrillicPattern.test(textContent)) {
-        setNotifyTitle('Поле никнейма содержит кириллические символы');
-        setNotifyText('На TRAINING SANDBOX никнеймы поддерживают только символы латиницы и цифры, пожалуйста, следуйте требованиям');
+        InputElement.current.value = '';
+        setNotifyTitle('Ошибка');
+        setNotifyText('Никнейм не может состоять из символов кириллицы');
+        setNotifyIcon(<TbFaceIdError />)
+        if (ButtonElement.current) {
+          ButtonElement.current.disabled = true;
+        }
+        handleOpen();
+      } else if (InputElement.current && InputElement.current.value.length === 0) {
+        setNotifyTitle('Ошибка');
+        setNotifyText('Поле никнейма не может быть пустым');
         setNotifyIcon(<TbFaceIdError />)
         if (ButtonElement.current) {
           ButtonElement.current.disabled = true;
@@ -118,9 +127,29 @@ export default function Home() {
               <p>Этот проект имеет открытый исходный код, вы всегда можете дополнить его или исправить, используя<br /><a href="https://github.com/1dontkillme/trainingchecker" target="_blank" rel="noopener noreferrer"><BiLogoGithub /> исходный код на GitHub</a>.</p><br />
               <p>Последнее обновление произошло: {lastUpdate}</p>
               </div>
-              <form action="./result" method="get" className={styles.FormContainer} ref={FormElement}>
-                <Input icon={<FaUser />} label="Введите никнейм игрока" type="text" name="nickname" ref={InputElement} onChange={testInput} onEmptied={validation} />
-                <Button btnType="Primary" text="Проверить" type="submit" icon={ <FaCheckCircle /> } onClick={validation} ref={ButtonElement} disabled />
+              <form 
+                action="./result" 
+                method="get" 
+                className={styles.FormContainer} 
+                ref={FormElement}
+              >
+                <Input 
+                  icon={ <FaUser /> }
+                  label="Введите никнейм игрока" 
+                  type="text" 
+                  name="nickname" 
+                  ref={InputElement} 
+                  onChange={testInput} 
+                />
+                <Button 
+                  btnType="Primary" 
+                  text="Проверить" 
+                  type="submit" 
+                  icon={ <FaCheckCircle /> } 
+                  onClick={validation} 
+                  ref={ButtonElement} 
+                  disabled 
+                />
               </form>
             </>
           ) : (

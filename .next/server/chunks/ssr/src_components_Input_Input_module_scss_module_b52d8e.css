@@ -6,7 +6,6 @@
   outline: none;
   color: #77787a;
   font-size: 16px;
-  padding: 13px 40px;
   transition: all .3s;
   width: 100%;
 }
@@ -19,7 +18,11 @@
   background: #2e3133;
 }
 
-.Input-module-scss-module__R6-G4W__input.Input-module-scss-module__R6-G4W__nullIcon {
+.Input-module-scss-module__R6-G4W__input.Input-module-scss-module__R6-G4W__WithIcon {
+  padding: 13px 40px;
+}
+
+.Input-module-scss-module__R6-G4W__input.Input-module-scss-module__R6-G4W__WithoutIcon {
   padding: 13px 24px !important;
 }
 
@@ -42,6 +45,7 @@
   position: absolute;
   margin-top: 39px;
   margin-left: 11px;
+  display: inline-flex;
 }
 
 /*# sourceMappingURL=src_components_Input_Input_module_scss_module_b52d8e.css.map*/

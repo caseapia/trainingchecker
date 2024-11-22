@@ -42,7 +42,6 @@
   outline: none;
   color: #77787a;
   font-size: 16px;
-  padding: 13px 40px;
   transition: all .3s;
   width: 100%;
 }
@@ -55,7 +54,11 @@
   background: #2e3133;
 }
 
-.Input-module-scss-module__R6-G4W__input.Input-module-scss-module__R6-G4W__nullIcon {
+.Input-module-scss-module__R6-G4W__input.Input-module-scss-module__R6-G4W__WithIcon {
+  padding: 13px 40px;
+}
+
+.Input-module-scss-module__R6-G4W__input.Input-module-scss-module__R6-G4W__WithoutIcon {
   padding: 13px 24px !important;
 }
 
@@ -78,6 +81,7 @@
   position: absolute;
   margin-top: 39px;
   margin-left: 11px;
+  display: inline-flex;
 }
 
 
@@ -96,10 +100,13 @@
   user-select: none;
 }
 
+.Button-module-scss-module__hDVbYq__button span {
+  display: flex;
+}
+
 .Button-module-scss-module__hDVbYq__button svg {
   margin-right: 6px;
   margin-bottom: 2px;
-  font-size: 20px;
 }
 
 .Button-module-scss-module__hDVbYq__button:disabled {

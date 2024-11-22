@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState, Suspense, ReactNode } from 'react';
+import { useEffect, useState, Suspense, ReactNode, useMemo } from 'react';
 import styles from './page.module.scss';
 import { BadgeRenderer } from '@/components/BadgeRenderer/BadgeRenderer';
 import Lottie from 'lottie-react';
@@ -13,8 +13,10 @@ import { MdError } from "react-icons/md";
 import { Modal } from '@/components/Modal/Modal';
 import Link from 'next/link';
 import { Table, Thead, Tr, Td, TBody, Th } from '@/components/Table/Table';
+import { useRouter } from 'next/navigation';
 
 const PlayerInfo = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const nickname = searchParams.get('nickname');
   const [playerData, setPlayerData] = useState<{
@@ -56,11 +58,6 @@ const PlayerInfo = () => {
   const [notifyType, setNotifyType] = useState<string>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (!window.location.href.includes('nickname')) {
-      window.location.href = '../'
-    }
-  }, [nickname])
 
   const fetchPlayerData = async () => {
     if (!nickname) return;
@@ -108,6 +105,12 @@ const PlayerInfo = () => {
   useEffect(() => {
     fetchPlayerData();
   }, [nickname]);
+
+  useEffect(() => {
+    if (nickname === null || nickname === '') {
+      router.push('../');
+    }
+  }, [searchParams, router]);
   
   const refreshData = async () => {
     try {
@@ -296,9 +299,6 @@ const PlayerInfo = () => {
           {playerData.warn.length > 0 ? <Button btnType="Secondary" text="Наказания" type="button" disabled={false} icon={ <FaHammer /> } onClick={openModal} /> : <Button btnType="Secondary" text="Наказания" type="button" disabled={true} icon={ <FaHammer /> } onClick={openModal} />}
         </div>
       </div>
-      <Notify notifyState={notifyState} onClose={handleClose} title={notifyTitle} icon={notifyIcon} type={notifyType}>
-        {notifyText}
-      </Notify>
       <Modal 
         isOpen={isModalOpen} 
         onClose={closeModal} 
@@ -331,6 +331,15 @@ const PlayerInfo = () => {
           </Table>
         ) : <p style={{ color: 'var(--color-danger)', textAlign: 'center' }}>У этого игрока нет наказаний</p>}
       </Modal>
+      <Notify 
+        notifyState={notifyState} 
+        onClose={handleClose} 
+        title={notifyTitle} 
+        icon={notifyIcon} 
+        type={notifyType}
+      >
+        {notifyText}
+      </Notify>
     </>
   ) : isNotFound ? (
     <div className={styles.PageWrapper}>
@@ -343,9 +352,11 @@ const PlayerInfo = () => {
       <p>Если ресурсы TRAINING SERVER доступны, значит проблема на стороне <a href='https://forum.training-server.com/d/3921-training-api' target='_blank'>TRAINING API</a>. Мы не можем воздействовать на работоспособность, сообщите об ошибке в топике TRAINING API.</p>
     </div>
   ) : (
-    <div className={styles.PageWrapper}>
-      <Lottie animationData={Preloader} />
-    </div>
+    <>
+      <div className={styles.PageWrapper}>
+        <Lottie animationData={Preloader} />
+      </div>
+    </>
   );
 }
 

@@ -5,7 +5,6 @@
   outline: none;
   color: #77787A;
   font-size: 16px;
-  padding: 13px 40px;
   transition: .3s ease;
   width: 100%;
     &:focus {
@@ -14,7 +13,10 @@
     &:hover {
       background: #2e3133;
     }
-    &.nullIcon {
+    &.WithIcon {
+      padding: 13px 40px;
+    }
+    &.WithoutIcon {
       padding: 13px 24px !important;
     }
 }
@@ -34,4 +36,5 @@
   position: absolute;
   margin-top: 39px;
   margin-left: 11px;
+  display: inline-flex;
 }

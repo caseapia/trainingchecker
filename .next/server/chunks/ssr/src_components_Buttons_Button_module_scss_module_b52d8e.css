@@ -13,10 +13,13 @@
   user-select: none;
 }
 
+.Button-module-scss-module__hDVbYq__button span {
+  display: flex;
+}
+
 .Button-module-scss-module__hDVbYq__button svg {
   margin-right: 6px;
   margin-bottom: 2px;
-  font-size: 20px;
 }
 
 .Button-module-scss-module__hDVbYq__button:disabled {
