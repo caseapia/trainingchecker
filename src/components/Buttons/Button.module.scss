@@ -1,0 +1,59 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: 4px;
+  transition: .3s ease;
+  color: #fff;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+    svg {
+      margin-right: 6px;
+      margin-bottom: 2px;
+      font-size: 20px;
+    }
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+}
+.Primary {
+  background: #1339FF;
+  border: 1px solid transparent;
+    &:enabled {
+      &:hover {
+        background: lighten(#1339ff, 7%);
+      }
+    }
+}
+.Transparent {
+  background: transparent;
+  border: 1px solid #1339FF;
+    &:enabled {
+      &:hover {
+        border-color: lighten(#1339ff, 7%);
+      }
+    }
+}
+.Secondary {
+  border: 1px solid #191B1D;
+  background: transparent;
+    &:enabled {
+      &:hover {
+        background: #202325;
+        border: 1px solid #191B1D;
+      }
+    }
+}
+.Danger {
+  border: 1px solid transparent;
+  background: #FF6955;
+    &:enabled {
+      &:hover {
+        background: lighten(#FF6955, 7%);
+      }
+    }
+}

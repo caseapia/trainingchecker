@@ -1,0 +1,119 @@
+@keyframes hoveranimation {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.redspan {
+  color: #f01f4b;
+}
+.header {
+  display: grid;
+  place-items: center;
+  margin-top: 40px;
+}
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  background: #1a17175c;
+  border-radius: 15px;
+  padding: 10px;
+    li {
+      margin-right: 25px;
+        &:last-of-type {
+          margin-right: 0;
+        }
+        a {
+          &:not(.active) {
+            &:hover {
+              &::after {
+                content: "";
+                margin-top: 4px;
+                height: 3px;
+                border-radius: 99px;
+                background: linear-gradient(90deg, hsla(347, 87%, 53%, 1) 0%, hsla(347, 46%, 41%, 1) 56%);
+                display: block;
+                animation: hoveranimation .5s;
+              }
+            }
+          }
+          &.active {
+            color: #ccc;
+              &::after {
+                content: "";
+                margin-top: 4px;
+                height: 3px;
+                border-radius: 99px;
+                background: linear-gradient(90deg, hsla(347, 87%, 53%, 1) 0%, hsla(347, 46%, 41%, 1) 56%);
+                display: block;
+              }
+          }
+        }
+        &.disabled {
+          opacity: 0.5;
+        }
+    }
+}
+.mobile {
+  &__button {
+    appearance: none;
+    border: 0;
+    background: 0;
+    color: white;
+    font-size: 40px;
+    float: right;
+    display: flex;
+    position: absolute;
+    right: 0;
+    margin-right: 7px;
+    margin-bottom: 2px;
+  }
+  &__menu {
+    height: 100%;
+    background-color: black;
+    width: 0%;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    opacity: 0;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999999;
+      &__header {
+        margin-top: 30px;
+        opacity: 1;
+        margin-right: 20px;
+      }
+      &__body {
+        width: 100%;
+        display: grid;
+        place-items: center;
+        height: 50%;
+          &__list {
+            list-style-type: none;
+            padding: 0;
+            width: 0%;
+              li {
+                background-color: #1a18187a;
+                padding: 15px;
+                margin-bottom: 10px;
+                width: 0%;
+                text-align: center;
+                  &:last-of-type {
+                    margin-bottom: 0;
+                  }
+                  &.active {
+                    background-color: lighten(#1a18187a, 10%);
+                     a {
+                      color: #ccc;
+                     }
+                  }
+          }
+        }
+      }
+  }
+}

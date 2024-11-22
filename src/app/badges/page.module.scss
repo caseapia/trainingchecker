@@ -1,0 +1,34 @@
+.PageWrapper {
+  display: grid;
+  place-items: center;
+  margin-top: 10px;
+}
+.badge {
+  --size: 30px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: calc(var(--size) / 2);
+  background: gray;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  transition: .2s ease-in;
+  font-size: calc(.6* var(--size));
+  border: 1px solid white;
+  cursor: pointer;
+    .BadgeIcon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      vertical-align: middle;
+    }
+    &:hover {
+      transform: scale(1.5,1.5);
+    }
+}
+.badgeTitle {
+  margin-left: 10px;
+}

@@ -1,0 +1,37 @@
+.input {
+  background: #232527;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  outline: none;
+  color: #77787A;
+  font-size: 16px;
+  padding: 13px 40px;
+  transition: .3s ease;
+  width: 100%;
+    &:focus {
+      color: white;
+    }
+    &:hover {
+      background: #2e3133;
+    }
+    &.nullIcon {
+      padding: 13px 24px !important;
+    }
+}
+.Error {
+  border: 1px solid #FF6955;
+}
+.label {
+  color: #77787A;
+  transition: .3s ease;
+  width: 100%;
+  margin-bottom: 5px;
+    &:hover {
+      color: white;
+    }
+}
+.icon {
+  position: absolute;
+  margin-top: 39px;
+  margin-left: 11px;
+}
