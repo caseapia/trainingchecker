@@ -4,10 +4,8 @@
   padding: 10px;
   text-align: center;
   border-spacing: 0;
+  width: 50%;
   border-radius: 10px;
-    @media screen and (max-width: 767px) {
-      width: 90%;
-    }
     thead {
       font-weight: bolder;
         th, td {

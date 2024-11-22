@@ -15,7 +15,7 @@ const page = () => {
   return (
     <div className={styles.PageWrapper}>
       <h1>Список всех значков</h1>
-      <Table width={50}>
+      <Table>
         <Thead>
           <Tr>
             <Td>Иконка</Td>
