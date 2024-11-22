@@ -1,0 +1,45 @@
+/* [project]/src/app/badges/page.module.scss.module.css [app-client] (css) */
+.page-module-scss-module__jfsepq__PageWrapper {
+  display: grid;
+  place-items: center;
+  margin-top: 10px;
+}
+
+
+/* [project]/src/components/BadgeRenderer/BadgeRenderer.module.scss.module.css [app-client] (css) */
+.BadgeRenderer-module-scss-module__WnziHq__badge {
+  --size: 25px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: calc(var(--size) / 2);
+  background: gray;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  cursor: pointer;
+  transition: all .2s;
+  font-size: calc(.6 * var(--size));
+  margin-right: 7px;
+  border: 1px solid #fff;
+}
+
+.BadgeRenderer-module-scss-module__WnziHq__badge:hover {
+  transform: scale(1.2);
+}
+
+.BadgeRenderer-module-scss-module__WnziHq__badge:last-of-type {
+  margin-right: 0;
+}
+
+.BadgeRenderer-module-scss-module__WnziHq__badge .BadgeRenderer-module-scss-module__WnziHq__BadgeIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+}
+
+
+/*# sourceMappingURL=src_f80d6c._.css.map*/

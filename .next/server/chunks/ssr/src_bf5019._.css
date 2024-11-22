@@ -1,0 +1,78 @@
+/* [project]/src/app/players/page.module.scss.module.css [app-client] (css) */
+.page-module-scss-module__QkDE7W__PageWrapper {
+  display: grid;
+  place-items: center;
+  margin-top: 10px;
+}
+
+.page-module-scss-module__QkDE7W__Table {
+  background: none;
+  border: 1px solid #4950576b;
+  padding: 10px;
+  text-align: center;
+  border-spacing: 0;
+  border-radius: 10px;
+  width: 50%;
+}
+
+@media screen and (width <= 767px) {
+  .page-module-scss-module__QkDE7W__Table {
+    width: 90%;
+  }
+}
+
+.page-module-scss-module__QkDE7W__Table .page-module-scss-module__QkDE7W__head {
+  font-weight: bolder;
+}
+
+.page-module-scss-module__QkDE7W__Table .page-module-scss-module__QkDE7W__head th {
+  padding: 10px;
+}
+
+.page-module-scss-module__QkDE7W__Table tbody tr:hover {
+  background: #50585f1f;
+}
+
+.page-module-scss-module__QkDE7W__Table tbody td {
+  padding: 10px;
+  border-top: 1px solid #4950576b;
+}
+
+
+/* [project]/src/components/BadgeRenderer/BadgeRenderer.module.scss.module.css [app-client] (css) */
+.BadgeRenderer-module-scss-module__WnziHq__badge {
+  --size: 25px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: calc(var(--size) / 2);
+  background: gray;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  cursor: pointer;
+  transition: all .2s;
+  font-size: calc(.6 * var(--size));
+  margin-right: 7px;
+  border: 1px solid #fff;
+}
+
+.BadgeRenderer-module-scss-module__WnziHq__badge:hover {
+  transform: scale(1.2);
+}
+
+.BadgeRenderer-module-scss-module__WnziHq__badge:last-of-type {
+  margin-right: 0;
+}
+
+.BadgeRenderer-module-scss-module__WnziHq__badge .BadgeRenderer-module-scss-module__WnziHq__BadgeIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+}
+
+
+/*# sourceMappingURL=src_bf5019._.css.map*/

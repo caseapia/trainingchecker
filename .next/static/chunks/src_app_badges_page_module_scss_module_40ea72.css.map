@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Users/dontkillme/Documents/projects/trainingchecker/react-app/src/app/badges/page.module.scss.module.css"],"sourcesContent":[".PageWrapper{display:grid;place-items:center;margin-top:10px}.table{background:rgba(0,0,0,0);border:1px solid rgba(73,80,87,.42);padding:10px;text-align:center;border-spacing:0;border-radius:10px;width:50%}.table thead{font-weight:bolder}.table thead td{padding:10px}.table tbody tr{transition:.2s}.table tbody tr:hover{background:hsla(210,8.75%,34.3725490196%,.12)}.table tbody td{padding:10px;border-top:1px solid rgba(73,80,87,.42)}.table .badge{--size: 30px;width:var(--size);height:var(--size);border-radius:calc(var(--size)/2);background:gray;color:#fff;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;box-shadow:0 2px 4px var(--shadow-color);transition:.2s ease-in;font-size:calc(.6*var(--size));border:1px solid #fff;cursor:pointer}.table .badge .BadgeIcon{display:flex;justify-content:center;align-items:center;vertical-align:middle}.table .badge:hover{transform:scale(1.5, 1.5)}.table .badgeTitle{margin-left:10px}"],"names":[],"mappings":"AAAA;;;;;;AAA6D;;;;;;;;;;AAAiJ;;;;AAAgC;;;;AAA6B;;;;AAA+B;;;;AAAoE;;;;;AAAqE;;;;;;;;;;;;;;;;;;AAAqV;;;;;;;AAAsG;;;;AAA8C"}},
+    {"offset": {"line": 70, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

@@ -1,0 +1,419 @@
+/* [project]/src/app/result/page.module.scss.module.css [app-client] (css) */
+.page-module-scss-module__JW_EwG__PageWrapper {
+  display: grid;
+  place-items: center;
+  margin-top: 10px;
+}
+
+.page-module-scss-module__JW_EwG__PageWrapper .page-module-scss-module__JW_EwG__nickname {
+  color: var(--color-danger);
+}
+
+.page-module-scss-module__JW_EwG__PageWrapper_NotFound {
+  display: grid;
+  place-items: center;
+  margin-top: 10px;
+  max-width: 50%;
+  text-align: center;
+}
+
+.page-module-scss-module__JW_EwG__ResultWrapper {
+  border-radius: 5px;
+  padding: 10px;
+  width: 25%;
+  line-height: 2.225rem;
+  border: 1px solid #242830;
+  margin-top: 10px;
+}
+
+@media screen and (width <= 767px) {
+  .page-module-scss-module__JW_EwG__ResultWrapper {
+    width: 90%;
+  }
+}
+
+.page-module-scss-module__JW_EwG__ProfileLine {
+  margin: 1rem 0;
+  color: inherit;
+  border: 0;
+  border-top: 1px solid;
+  opacity: .25;
+  border-style: double;
+  border-color: #fff;
+}
+
+.page-module-scss-module__JW_EwG__h5 {
+  margin-bottom: .5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  font-size: 1.25rem;
+}
+
+.page-module-scss-module__JW_EwG__ButtonGroup {
+  display: flex;
+  margin-top: 15px;
+  flex-direction: row;
+}
+
+.page-module-scss-module__JW_EwG__ButtonGroup button {
+  margin-right: 10px;
+}
+
+.page-module-scss-module__JW_EwG__ButtonGroup button:last-of-type {
+  margin-right: 0;
+}
+
+.page-module-scss-module__JW_EwG__Table {
+  border: 1px solid #4950576b;
+  padding: 1.5rem;
+  border-radius: .375rem;
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+}
+
+@media screen and (width <= 767px) {
+  .page-module-scss-module__JW_EwG__Table {
+    width: 90%;
+  }
+}
+
+.page-module-scss-module__JW_EwG__Table > thead {
+  vertical-align: bottom;
+}
+
+.page-module-scss-module__JW_EwG__Table tbody, .page-module-scss-module__JW_EwG__Table td, .page-module-scss-module__JW_EwG__Table tfoot, .page-module-scss-module__JW_EwG__Table th, .page-module-scss-module__JW_EwG__Table thead, .page-module-scss-module__JW_EwG__Table tr {
+  border-color: inherit;
+  border-style: solid;
+  border-width: 0;
+}
+
+.page-module-scss-module__JW_EwG__Table tbody a, .page-module-scss-module__JW_EwG__Table td a, .page-module-scss-module__JW_EwG__Table tfoot a, .page-module-scss-module__JW_EwG__Table th a, .page-module-scss-module__JW_EwG__Table thead a, .page-module-scss-module__JW_EwG__Table tr a {
+  background: none;
+  appearance: none;
+}
+
+.page-module-scss-module__JW_EwG__Table > :not(caption) > * > * {
+  padding: .5rem;
+  color: initial, initial, #fff;
+  border-bottom-width: 1px;
+  box-shadow: inset 0 0 0 9999px initial, initial, #0000;
+}
+
+.page-module-scss-module__JW_EwG__Table > tbody {
+  vertical-align: inherit;
+}
+
+.page-module-scss-module__JW_EwG__Table > tbody tr {
+  border-color: inherit;
+  border-style: solid;
+  border-width: 0;
+}
+
+
+/* [project]/src/components/BadgeRenderer/BadgeRenderer.module.scss.module.css [app-client] (css) */
+.BadgeRenderer-module-scss-module__WnziHq__badge {
+  --size: 25px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: calc(var(--size) / 2);
+  background: gray;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  cursor: pointer;
+  transition: all .2s;
+  font-size: calc(.6 * var(--size));
+  margin-right: 7px;
+  border: 1px solid #fff;
+}
+
+.BadgeRenderer-module-scss-module__WnziHq__badge:hover {
+  transform: scale(1.2);
+}
+
+.BadgeRenderer-module-scss-module__WnziHq__badge:last-of-type {
+  margin-right: 0;
+}
+
+.BadgeRenderer-module-scss-module__WnziHq__badge .BadgeRenderer-module-scss-module__WnziHq__BadgeIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+}
+
+
+/* [project]/src/components/Buttons/Button.module.scss.module.css [app-client] (css) */
+.Button-module-scss-module__hDVbYq__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: 4px;
+  transition: all .3s;
+  color: #fff;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+}
+
+.Button-module-scss-module__hDVbYq__button svg {
+  margin-right: 6px;
+  margin-bottom: 2px;
+  font-size: 20px;
+}
+
+.Button-module-scss-module__hDVbYq__button:disabled {
+  cursor: not-allowed;
+  opacity: .5;
+}
+
+.Button-module-scss-module__hDVbYq__Primary {
+  background: #1339ff;
+  border: 1px solid #0000;
+}
+
+.Button-module-scss-module__hDVbYq__Primary:enabled:hover {
+  background: #3757ff;
+}
+
+.Button-module-scss-module__hDVbYq__Transparent {
+  background: none;
+  border: 1px solid #1339ff;
+}
+
+.Button-module-scss-module__hDVbYq__Transparent:enabled:hover {
+  border-color: #3757ff;
+}
+
+.Button-module-scss-module__hDVbYq__Secondary {
+  border: 1px solid #191b1d;
+  background: none;
+}
+
+.Button-module-scss-module__hDVbYq__Secondary:enabled:hover {
+  background: #202325;
+  border: 1px solid #191b1d;
+}
+
+.Button-module-scss-module__hDVbYq__Danger {
+  border: 1px solid #0000;
+  background: #ff6955;
+}
+
+.Button-module-scss-module__hDVbYq__Danger:enabled:hover {
+  background: #ff8979;
+}
+
+
+/* [project]/src/components/Notify/Notify.module.scss.module.css [app-client] (css) */
+.Notify-module-scss-module__x4gz3G__NotifyWrapper {
+  position: fixed;
+  display: grid;
+  place-items: center;
+  color: #ffffffbd;
+  font-size: 16px;
+  width: 100%;
+  bottom: -80px;
+  height: fit-content;
+  transition: all .3s;
+  z-index: 2147483647;
+}
+
+@media screen and (width <= 767px) {
+  .Notify-module-scss-module__x4gz3G__NotifyWrapper {
+    top: -1000px;
+  }
+}
+
+.Notify-module-scss-module__x4gz3G__NotifyWrapper.Notify-module-scss-module__x4gz3G__active {
+  bottom: 10px;
+  opacity: 1;
+}
+
+@media screen and (width <= 767px) {
+  .Notify-module-scss-module__x4gz3G__NotifyWrapper.Notify-module-scss-module__x4gz3G__active {
+    top: -200px;
+  }
+}
+
+.Notify-module-scss-module__x4gz3G__Notify {
+  transition: transform .2s ease-in;
+  padding: 12px 20px;
+  position: relative;
+  border-radius: 4px;
+  max-width: 40%;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  z-index: 2147483647;
+}
+
+@media screen and (width <= 767px) {
+  .Notify-module-scss-module__x4gz3G__Notify {
+    max-width: 97%;
+  }
+}
+
+.Notify-module-scss-module__x4gz3G__Notify.Notify-module-scss-module__x4gz3G__default {
+  background: #1339ff;
+}
+
+.Notify-module-scss-module__x4gz3G__Notify.Notify-module-scss-module__x4gz3G__error {
+  background: #f55;
+}
+
+.Notify-module-scss-module__x4gz3G__Notify.Notify-module-scss-module__x4gz3G__warning {
+  background: #f57b00b4;
+}
+
+.Notify-module-scss-module__x4gz3G__Notify.Notify-module-scss-module__x4gz3G__success {
+  background: #388e3c;
+}
+
+.Notify-module-scss-module__x4gz3G__Notify:hover {
+  transform: scale(1.1);
+}
+
+.Notify-module-scss-module__x4gz3G__Notify .Notify-module-scss-module__x4gz3G__IconContainer {
+  font-size: 45px;
+  margin-right: 25px;
+  display: flex;
+  align-items: center;
+  opacity: .8;
+}
+
+.Notify-module-scss-module__x4gz3G__Notify .Notify-module-scss-module__x4gz3G__Title {
+  font-weight: bolder;
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 3px;
+}
+
+.Notify-module-scss-module__x4gz3G__Notify .Notify-module-scss-module__x4gz3G__Footer {
+  font-weight: bold;
+  opacity: .7;
+  font-size: 13px;
+  float: right;
+}
+
+
+/* [project]/src/components/Modal/Modal.module.scss.module.css [app-client] (css) */
+.Modal-module-scss-module__k1ZY8q__FadeOut {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+  background: #00000094;
+  z-index: 99999999;
+  display: grid;
+  place-items: center;
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal {
+  overflow: auto;
+  overflow-x: hidden;
+  background: #0c0c0c;
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 50%;
+  min-width: 30%;
+  max-height: 70%;
+}
+
+@media screen and (width <= 767px) {
+  .Modal-module-scss-module__k1ZY8q__Modal {
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 100%;
+  }
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal .Modal-module-scss-module__k1ZY8q__Title {
+  white-space: nowrap;
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal .Modal-module-scss-module__k1ZY8q__Header {
+  font-weight: bolder;
+  font-size: 20px;
+  text-align: left;
+  display: flex;
+  vertical-align: middle;
+  margin-bottom: 15px;
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal .Modal-module-scss-module__k1ZY8q__Header .Modal-module-scss-module__k1ZY8q__Close {
+  display: grid;
+  width: 100%;
+  justify-items: end;
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal .Modal-module-scss-module__k1ZY8q__Header .Modal-module-scss-module__k1ZY8q__Close svg {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal .Modal-module-scss-module__k1ZY8q__Body {
+  width: 100%;
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal .Modal-module-scss-module__k1ZY8q__Footer {
+  margin-top: 15px;
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal .Modal-module-scss-module__k1ZY8q__Footer .Modal-module-scss-module__k1ZY8q__ButtonGroup {
+  display: flex;
+  flex-direction: row;
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal .Modal-module-scss-module__k1ZY8q__Footer .Modal-module-scss-module__k1ZY8q__ButtonGroup button {
+  margin-right: 15px;
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal .Modal-module-scss-module__k1ZY8q__Footer .Modal-module-scss-module__k1ZY8q__ButtonGroup button:last-of-type {
+  margin-right: 0;
+}
+
+
+/* [project]/src/components/Table/Table.module.scss.module.css [app-client] (css) */
+.Table-module-scss-module__orpvca__Table {
+  background: none;
+  border: 1px solid #4950576b;
+  padding: 10px;
+  text-align: center;
+  border-spacing: 0;
+  width: 50%;
+  border-radius: 10px;
+}
+
+.Table-module-scss-module__orpvca__Table thead {
+  font-weight: bolder;
+}
+
+.Table-module-scss-module__orpvca__Table thead th, .Table-module-scss-module__orpvca__Table thead td {
+  padding: 10px;
+}
+
+.Table-module-scss-module__orpvca__Table tbody tr {
+  transition: all .2s;
+}
+
+.Table-module-scss-module__orpvca__Table tbody tr:hover {
+  background: #50585f1f;
+}
+
+.Table-module-scss-module__orpvca__Table tbody td {
+  padding: 10px;
+  border-top: 1px solid #4950576b;
+}
+
+
+/*# sourceMappingURL=src_ae93be._.css.map*/

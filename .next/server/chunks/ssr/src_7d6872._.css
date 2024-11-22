@@ -1,0 +1,78 @@
+/* [project]/src/app/players/page.module.scss.module.css [app-client] (css) */
+.page-module-scss-module__QkDE7W__PageWrapper {
+  display: grid;
+  place-items: center;
+  margin-top: 10px;
+}
+
+
+/* [project]/src/components/BadgeRenderer/BadgeRenderer.module.scss.module.css [app-client] (css) */
+.BadgeRenderer-module-scss-module__WnziHq__badge {
+  --size: 25px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: calc(var(--size) / 2);
+  background: gray;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  cursor: pointer;
+  transition: all .2s;
+  font-size: calc(.6 * var(--size));
+  margin-right: 7px;
+  border: 1px solid #fff;
+}
+
+.BadgeRenderer-module-scss-module__WnziHq__badge:hover {
+  transform: scale(1.2);
+}
+
+.BadgeRenderer-module-scss-module__WnziHq__badge:last-of-type {
+  margin-right: 0;
+}
+
+.BadgeRenderer-module-scss-module__WnziHq__badge .BadgeRenderer-module-scss-module__WnziHq__BadgeIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+}
+
+
+/* [project]/src/components/Table/Table.module.scss.module.css [app-client] (css) */
+.Table-module-scss-module__orpvca__Table {
+  background: none;
+  border: 1px solid #4950576b;
+  padding: 10px;
+  text-align: center;
+  border-spacing: 0;
+  width: 50%;
+  border-radius: 10px;
+}
+
+.Table-module-scss-module__orpvca__Table thead {
+  font-weight: bolder;
+}
+
+.Table-module-scss-module__orpvca__Table thead th, .Table-module-scss-module__orpvca__Table thead td {
+  padding: 10px;
+}
+
+.Table-module-scss-module__orpvca__Table tbody tr {
+  transition: all .2s;
+}
+
+.Table-module-scss-module__orpvca__Table tbody tr:hover {
+  background: #50585f1f;
+}
+
+.Table-module-scss-module__orpvca__Table tbody td {
+  padding: 10px;
+  border-top: 1px solid #4950576b;
+}
+
+
+/*# sourceMappingURL=src_7d6872._.css.map*/

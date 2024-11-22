@@ -1,0 +1,9 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack://[project]/src/app/badges/page.module.scss.module.css"],"sourcesContent":[".PageWrapper{display:grid;place-items:center;margin-top:10px}.badge{--size: 30px;width:var(--size);height:var(--size);border-radius:calc(var(--size)/2);background:gray;color:#fff;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;box-shadow:0 2px 4px var(--shadow-color);transition:.2s ease-in;font-size:calc(.6*var(--size));border:1px solid #fff;cursor:pointer}.badge .BadgeIcon{display:flex;justify-content:center;align-items:center;vertical-align:middle}.badge:hover{transform:scale(1.5, 1.5)}.badgeTitle{margin-left:10px}"],"names":[],"mappings":"AAAA;;;;;;AAA6D;;;;;;;;;;;;;;;;;;AAA8U;;;;;;;AAA+F;;;;AAAuC"}},
+    {"offset": {"line": 39, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
+    {"offset": {"line": 42, "column": 0}, "map": {"version":3,"sources":["turbopack://[project]/src/components/Table/Table.module.scss.module.css"],"sourcesContent":[".Table{background:rgba(0,0,0,0);border:1px solid rgba(73,80,87,.42);padding:10px;text-align:center;border-spacing:0;width:50%;border-radius:10px}.Table thead{font-weight:bolder}.Table thead th,.Table thead td{padding:10px}.Table tbody tr{transition:.2s}.Table tbody tr:hover{background:hsla(210,8.75%,34.3725490196%,.12)}.Table tbody td{padding:10px;border-top:1px solid rgba(73,80,87,.42)}"],"names":[],"mappings":"AAAA;;;;;;;;;;AAAiJ;;;;AAAgC;;;;AAA6C;;;;AAA+B;;;;AAAoE"}},
+    {"offset": {"line": 72, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

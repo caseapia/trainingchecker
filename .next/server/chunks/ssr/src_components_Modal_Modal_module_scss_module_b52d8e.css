@@ -1,0 +1,80 @@
+/* [project]/src/components/Modal/Modal.module.scss.module.css [app-client] (css) */
+.Modal-module-scss-module__k1ZY8q__FadeOut {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+  background: #00000094;
+  z-index: 99999999;
+  display: grid;
+  place-items: center;
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal {
+  overflow: auto;
+  overflow-x: hidden;
+  background: #0c0c0c;
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 50%;
+  min-width: 30%;
+  max-height: 70%;
+}
+
+@media screen and (width <= 767px) {
+  .Modal-module-scss-module__k1ZY8q__Modal {
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 100%;
+  }
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal .Modal-module-scss-module__k1ZY8q__Title {
+  white-space: nowrap;
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal .Modal-module-scss-module__k1ZY8q__Header {
+  font-weight: bolder;
+  font-size: 20px;
+  text-align: left;
+  display: flex;
+  vertical-align: middle;
+  margin-bottom: 15px;
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal .Modal-module-scss-module__k1ZY8q__Header .Modal-module-scss-module__k1ZY8q__Close {
+  display: grid;
+  width: 100%;
+  justify-items: end;
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal .Modal-module-scss-module__k1ZY8q__Header .Modal-module-scss-module__k1ZY8q__Close svg {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal .Modal-module-scss-module__k1ZY8q__Body {
+  width: 100%;
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal .Modal-module-scss-module__k1ZY8q__Footer {
+  margin-top: 15px;
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal .Modal-module-scss-module__k1ZY8q__Footer .Modal-module-scss-module__k1ZY8q__ButtonGroup {
+  display: flex;
+  flex-direction: row;
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal .Modal-module-scss-module__k1ZY8q__Footer .Modal-module-scss-module__k1ZY8q__ButtonGroup button {
+  margin-right: 15px;
+}
+
+.Modal-module-scss-module__k1ZY8q__Modal .Modal-module-scss-module__k1ZY8q__Footer .Modal-module-scss-module__k1ZY8q__ButtonGroup button:last-of-type {
+  margin-right: 0;
+}
+
+/*# sourceMappingURL=src_components_Modal_Modal_module_scss_module_b52d8e.css.map*/
