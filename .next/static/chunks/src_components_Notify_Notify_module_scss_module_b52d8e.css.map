@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack://[project]/src/components/Notify/Notify.module.scss.module.css"],"sourcesContent":[".NotifyWrapper{position:fixed;display:grid;place-items:center;color:hsla(0,0%,100%,.7411764706);font-size:16px;width:100%;bottom:-80px;height:fit-content;transition:all .3s;z-index:9999999999}@media screen and (max-width: 767px){.NotifyWrapper{top:-1000px}}.NotifyWrapper.active{bottom:10px;opacity:1}@media screen and (max-width: 767px){.NotifyWrapper.active{top:-200px}}.Notify{transition:transform .2s ease-in;padding:12px 20px;position:relative;border-radius:4px;max-width:40%;cursor:pointer;display:flex;flex-direction:row;z-index:9999999999}@media screen and (max-width: 767px){.Notify{max-width:97%}}.Notify.default{background:#1339ff}.Notify.error{background:#f55}.Notify.warning{background:rgba(245,123,0,.705)}.Notify.success{background:#388e3c}.Notify:hover{transform:scale(1.1)}.Notify .IconContainer{font-size:45px;margin-right:25px;display:flex;align-items:center;opacity:.8}.Notify .Title{font-weight:bolder;font-size:18px;color:#fff;margin-bottom:3px}.Notify .Footer{font-weight:bold;opacity:.7;font-size:13px;float:right}"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;AAAgM;EAAqC;;;;;AAA4B;;;;;AAA4C;EAAqC;;;;;AAAkC;;;;;;;;;;;;AAA+K;EAAqC;;;;;AAAuB;;;;AAAmC;;;;AAA8B;;;;AAAgD;;;;AAAmC;;;;AAAmC;;;;;;;;AAAmG;;;;;;;AAA8E"}},
-    {"offset": {"line": 90, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

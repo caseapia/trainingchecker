@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Users/dontkillme/Documents/projects/trainingchecker/react-app/src/app/worldlist/page.module.scss.module.css"],"sourcesContent":[".PageWrapper{display:grid;place-items:center;margin-top:10px}"],"names":[],"mappings":"AAAA"}},
-    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}

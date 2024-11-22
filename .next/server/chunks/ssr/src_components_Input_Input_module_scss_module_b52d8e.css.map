@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack://[project]/src/components/Input/Input.module.scss.module.css"],"sourcesContent":[".input{background:#232527;border:1px solid rgba(0,0,0,0);border-radius:8px;outline:none;color:#77787a;font-size:16px;transition:.3s ease;width:100%}.input:focus{color:#fff}.input:hover{background:#2e3133}.input.WithIcon{padding:13px 40px}.input.WithoutIcon{padding:13px 24px !important}.Error{border:1px solid #ff6955}.label{color:#77787a;transition:.3s ease;width:100%;margin-bottom:5px}.label:hover{color:#fff}.icon{position:absolute;margin-top:39px;margin-left:11px;display:inline-flex}"],"names":[],"mappings":"AAAA;;;;;;;;;;;AAAoJ;;;;AAAwB;;;;AAAgC;;;;AAAkC;;;;AAAgD;;;;AAAgC;;;;;;;AAAsE;;;;AAAwB"}},
-    {"offset": {"line": 49, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}
