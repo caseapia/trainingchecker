@@ -1,9 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":["turbopack://[project]/src/app/worldlist/page.module.scss.module.css [app-client] (css module)"],"sourcesContent":["__turbopack_export_value__({\n  \"PageWrapper\": \"page-module-scss-module__z2Mpqq__PageWrapper\",\n});\n"],"names":[],"mappings":"AAAA;AACA;AACA"}},
-    {"offset": {"line": 9, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
-    {"offset": {"line": 15, "column": 0}, "map": {"version":3,"sources":["turbopack://[project]/src/app/worldlist/page.tsx"],"sourcesContent":["\"use client\"\r\nimport { Suspense, useState } from 'react';\r\nimport styles from './page.module.scss'\r\nimport Preloader from '../../../public/assets/lotties/Preloader.json';\r\nimport Lottie from 'lottie-react';\r\n\r\nexport const WorldList = () => {\r\n  const [isLoaded, setIsLoaded] = useState<boolean>(false);\r\n\r\n  return isLoaded ? (\r\n    <Suspense>\r\n      <div className={styles.PageWrapper}>\r\n        <h1>Список открытых миров</h1>\r\n      </div>\r\n    </Suspense>\r\n  ) : (\r\n    <div className={styles.PageWrapper}>\r\n      <Lottie animationData={Preloader} />\r\n    </div>\r\n  )\r\n}\r\n\r\nexport default WorldList;"],"names":[],"mappings":";;;;;AACA;AACA;AACA;AACA;AAAA;AAJA;;;;;;AAMO,MAAM,YAAY;IACvB,MAAM,CAAC,UAAU,YAAY,GAAG,CAAA,GAAA,qMAAA,CAAA,WAAQ,AAAD,EAAW;IAElD,OAAO,yBACL,8OAAC,qMAAA,CAAA,WAAQ;kBACP,cAAA,8OAAC;YAAI,WAAW,gKAAA,CAAA,UAAM,CAAC,WAAW;sBAChC,cAAA,8OAAC;0BAAG;;;;;;;;;;;;;;;6BAIR,8OAAC;QAAI,WAAW,gKAAA,CAAA,UAAM,CAAC,WAAW;kBAChC,cAAA,8OAAC,uKAAA,CAAA,UAAM;YAAC,eAAe,gHAAA,CAAA,UAAS;;;;;;;;;;;AAGtC;uCAEe"}},
-    {"offset": {"line": 68, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}
