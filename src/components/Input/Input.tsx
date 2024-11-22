@@ -1,5 +1,6 @@
 import { useEffect, useState, forwardRef, ReactNode } from "react";
 import styles from './Input.module.scss';
+import { useGenerateId } from '@/shared/hooks/useGenerateId';
 
 interface Props {
   label: string;
@@ -18,24 +19,7 @@ interface Props {
 
 export const Input = forwardRef<HTMLInputElement, Props>(
   ({ label, type, onInput, onClick, onChange, classname, disabled, placeholder, icon, name, onError, onEmptied }, ref) => {
-    const [string, setString] = useState<string>('');
-
-    useEffect(() => {
-      const generateID = (length: number): string => {
-        const characters: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!?';
-        let result: string = '';
-        
-        for (let i = 0; i < length; i++) {
-          const randomIndex = Math.floor(Math.random() * characters.length);
-          result += characters[randomIndex];
-        }
-
-        return result;
-      }
-
-      const newID = generateID(6);
-      setString(newID);
-    }, []);
+    const string = useGenerateId();
 
     return (
       <>
@@ -46,7 +30,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
           onInput={onInput}
           onChange={onChange}
           onClick={onClick}
-          className={`${styles.input} ${classname || ''} ${icon ? styles.iconWith : ''} ${onError ? styles.Error : ''}`} 
+          className={`${styles.input} ${classname || ''} ${onError ? styles.Error : ''}`} 
           disabled={disabled}
           placeholder={placeholder}
           name={name}
