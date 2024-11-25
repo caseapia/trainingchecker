@@ -30,14 +30,12 @@ export const Elements: HeaderProps[] = [
     id: "badges",
     icon: React.createElement(FaMedal),
     link: "/badges",
-    isNew: true,
   },
   {
     text: "Список миров",
     id: "worlds",
     icon: React.createElement(FaList),
     link: "/worldlist",
-    style: { opacity: '.7', pointerEvents: 'none' },
     isNew: true,
   },
 ];
