@@ -68,9 +68,9 @@ export const staffBadges: BadgeProps[] = [
     id: 5,
     title: "Команда сайта",
     category: "staff",
-    description: "Этот игрок является или являлся разработчиком сайта TRAINING CHECKER",
+    description: "Этот игрок является разработчиком или помогал в разработке сайта TRAINING CHECKER",
     icon: React.createElement(FaCode),
-    accid: [113145, 125043],
+    accid: [113145, 125043, 271552],
     color: "rgb(42 170 104 / 42%)",
     textColor: "rgb(42 170 104)"
   },
