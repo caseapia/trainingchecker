@@ -1,11 +1,35 @@
 "use client"
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import styles from './page.module.scss'
 import Preloader from '../../../public/assets/lotties/Preloader.json';
 import Lottie from 'lottie-react';
 
 const WorldList = () => {
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(true);
+
+  useEffect(() => {
+    const getWorlds = async () => {
+      const url = process.env.NEXT_PUBLIC_API_WORLDLIST_URL;
+
+      if (!url) {
+        console.debug('API URL is not defined');
+        setIsLoaded(false);
+        return;
+      }
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        console.debug(response);
+      } catch {
+
+      }
+    }
+
+    getWorlds();
+  }, [])
 
   return isLoaded ? (
     <Suspense>

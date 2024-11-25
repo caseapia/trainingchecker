@@ -34,7 +34,6 @@ export const Elements: HeaderProps[] = [
     text: "Список миров",
     id: "worlds",
     icon: React.createElement(FaList),
-    link: "",
-    style: { pointerEvents: 'none', opacity: '.7' },
+    link: "/worldlist",
   },
 ];
