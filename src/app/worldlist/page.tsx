@@ -151,7 +151,7 @@ const WorldList = () => {
           <Button btnType='Primary' text='Скопировать' type='button' onClick={copyWorlds} />
           <Button btnType='Secondary' text={sensMode === true ? 'Выключить чувствительный режим' : 'Включить чувствительный режим'} type='button' onClick={sensitiveMode} />
         </div>
-        <Table width={50}>
+        <Table11>
           <Thead>
             <Tr>
               <Th>Название</Th>
@@ -178,7 +178,7 @@ const WorldList = () => {
               ))
             )}
           </TBody>
-        </Table>
+        </Table11>
       </div>
       <Notify 
         notifyState={notifyState} 
