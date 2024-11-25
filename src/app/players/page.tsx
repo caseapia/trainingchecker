@@ -23,7 +23,6 @@ function Players() {
       const url = process.env.NEXT_PUBLIC_API_ONLINE_URL;
 
       if (!url) {
-        console.debug('API URL is not defined');
         return;
       }
 
@@ -34,7 +33,6 @@ function Players() {
         }
         const jsonResponse = await response.json();
         setResult(jsonResponse.data);
-        console.log(jsonResponse.data);
       } catch (err) {
         console.error('Error:', err);
       }

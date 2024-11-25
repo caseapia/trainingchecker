@@ -25,7 +25,6 @@ const WorldList = () => {
       const url = process.env.NEXT_PUBLIC_API_WORLDLIST_URL;
 
       if (!url) {
-        console.debug('API URL is not defined');
         setIsLoaded(false);
         return;
       }
@@ -36,7 +35,6 @@ const WorldList = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.debug(data);
         setResult(data.worlds);
         setIsLoaded(true);
       } catch (err) {

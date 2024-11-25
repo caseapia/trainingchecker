@@ -41,7 +41,6 @@ export default function Home() {
 
         if (Array.isArray(cmts) && cmts.length > 0) {
           const lastcmtday = cmts[0].commit.committer.date;
-          console.debug('Last commit date:', lastcmtday);
           const lastUpdate = new Date(lastcmtday).toLocaleString();
           setLastUpdate(lastUpdate);
         }

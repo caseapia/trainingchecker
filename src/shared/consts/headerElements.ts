@@ -33,7 +33,7 @@ export const Elements: HeaderProps[] = [
   },
   {
     text: "Список миров",
-    id: "worlds",
+    id: "worldlist",
     icon: React.createElement(FaList),
     link: "/worldlist",
     isNew: true,
