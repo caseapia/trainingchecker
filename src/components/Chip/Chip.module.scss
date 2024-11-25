@@ -1,16 +1,20 @@
 .Chip {
   background-color: hsl(240 5.26% 26.08%);
   max-width: fit-content;
-  margin-left: 220px;
   border-radius: 9999px;
   white-space: nowrap;
   align-items: center;
   display: inline-flex;
   min-width: min-content;
   height: 1.75rem;
+  font-size: 13px;
+  margin-right: 5px;
+    &:last-of-type {
+      margin-right: 0;
+    }
 }
 .small {
-  padding: 4px 8px;
+  padding: 2px 6px;
 }
 .medium {
   padding: 6px 10px;

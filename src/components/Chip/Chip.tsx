@@ -20,7 +20,7 @@ const Chip = ({ label, className, size = "medium", icon, iconPosition = "left", 
           <span className={`${styles.ChipIcon} ${styles[iconPosition]}`} style={{ fontSize: `${iconSize}px` }}>{icon}</span>
         )}
         {image && (
-          <Image src={image} width={iconSize} height={iconSize} alt={label} className={`${styles.ChipImage} ${styles[iconPosition]}`} />
+          <img src={image} width={iconSize} height={iconSize} alt={label} className={`${styles.ChipImage} ${styles[iconPosition]}`} />
         )}
         {label}
       </span>

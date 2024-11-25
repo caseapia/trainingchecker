@@ -2,4 +2,13 @@
   display: grid;
   place-items: center;
   margin-top: 10px;
+  border: 1px solid black;
+    h1 {
+      margin-bottom: 10px;
+    }
+}
+.ChipContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -5,6 +5,7 @@ interface Props {
   children?: React.ReactNode;
   style?: React.CSSProperties;
   colSpan?: number;
+  className?: string;
 }
 interface TableProps {
   width?: number;
@@ -12,37 +13,37 @@ interface TableProps {
   children?: React.ReactNode;
 }
 
-const Thead = ({ children }: Props) => {
+const Thead = ({ children, className }: Props) => {
   return (
-    <thead>
+    <thead className={className || ''}>
       {children}
     </thead>
   );
 };
-const TBody = ({ children }: Props) => {
+const TBody = ({ children, className }: Props) => {
   return (
-    <tbody>
+    <tbody className={className || ''}>
       {children}
     </tbody>
   );
 };
-const Tr = ({ children, style }: Props) => {
+const Tr = ({ children, style, className }: Props) => {
   return (
-    <tr style={style}>
+    <tr style={style} className={className || ''}>
       {children}
     </tr>
   )
 };
-const Td = ({ children, style, colSpan }: Props) => {
+const Td = ({ children, style, colSpan, className }: Props) => {
   return (
-    <td style={style} colSpan={colSpan}>
+    <td style={style} colSpan={colSpan} className={className || ''}>
       {children}
     </td>
   )
 }
-const Th = ({ children, style, colSpan }: Props) => {
+const Th = ({ children, style, colSpan, className }: Props) => {
   return (
-    <th style={style} colSpan={colSpan}>
+    <th style={style} colSpan={colSpan} className={className || ''}>
       {children}
     </th>
   )
@@ -50,7 +51,7 @@ const Th = ({ children, style, colSpan }: Props) => {
 
 const Table = ({ width, className, children }: TableProps) => {
   return (
-    <table style={{ width: `${width}%` }} className={`${styles.Table} ${className || ''}`}>
+    <table style={{ width: `${width}%` }} className={`${styles.Table} ${styles[className || '']}`}>
       {children}
     </table>
   );
