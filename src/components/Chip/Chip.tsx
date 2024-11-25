@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from './Chip.module.scss'
 import Image from 'next/image';
+import { useGenerateId } from '@/shared/hooks/useGenerateId';
 
 interface Props {
   label: string;
@@ -13,8 +14,9 @@ interface Props {
 }
 
 const Chip = ({ label, className, size = "medium", icon, iconPosition = "left", iconSize, image }: Props) => {
+  const id = useGenerateId();
   return (
-    <div className={`${styles.Chip} ${className || ''} ${styles[size]}`}>
+    <div id={id} className={`${styles.Chip} ${className || ''} ${styles[size]}`}>
       <span>
         {icon && (
           <span className={`${styles.ChipIcon} ${styles[iconPosition]}`} style={{ fontSize: `${iconSize}px` }}>{icon}</span>
