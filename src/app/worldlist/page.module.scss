@@ -11,3 +11,15 @@
   justify-content: center;
   align-items: center;
 }
+.buttonGroup {
+  display: flex;
+  flex-direction: row;
+  width: 35%;
+  margin-bottom: 10px;
+    button {
+      margin-right: 15px;
+        &:last-of-type {
+          margin-right: 0;
+        }
+    }
+}

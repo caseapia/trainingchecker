@@ -191,18 +191,9 @@ const PlayerInfo = () => {
     if (lastDigit >= 2 && lastDigit <= 4) return "дня";
     return "дней";
   };
-  const handleOpen = () => {
-    setNotifyState(true);
-  }
-  const handleClose = () => {
-    setNotifyState(false);
-    setTimeout(() => {
-      setNotifyText('');
-      setNotifyTitle('');
-      setNotifyIcon('');
-      setNotifyType('');
-    }, 2000);
-  }
+
+  const handleOpen = () => setNotifyState(true);
+  const handleClose = () => setNotifyState(false);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);

@@ -18,6 +18,9 @@ export const Header = () => {
   useEffect(() => {
     const crntPage = window.location.pathname.split('/')[1];
     setActivePage(crntPage === ""? "../" : crntPage);
+    if (crntPage === "") {
+      setActivePage("main")
+    }
   }, []);
 
   const handleOpenMobileMenu = () => {

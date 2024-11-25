@@ -7,6 +7,9 @@ import { Table, Thead, Tr, Td, Th, TBody } from '@/components/Table/Table';
 import Chip from '@/components/Chip/Chip';
 import { FaBookmark } from "react-icons/fa6";
 import { GoCpu, GoAlertFill } from "react-icons/go";
+import Button from '@/components/Buttons/Button';
+import Notify from '@/components/Notify/Notify';
+import { FaCheckCircle } from 'react-icons/fa';
 
 interface Worlds {
   name: string;
@@ -19,6 +22,13 @@ interface Worlds {
 const WorldList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [result, setResult] = useState<Worlds[] | null>(null)
+  const [notifyState, setNotifyState] = useState<boolean>(false);
+  const [notifyText, setNotifyText] = useState<string>('');
+  const [notifyTitle, setNotifyTitle] = useState<string>('');
+  const [notifyIcon, setNotifyIcon] = useState<React.ReactNode>();
+  const [notifyType, setNotifyType] = useState<string>('');
+  const [sensMode, setSensMode] = useState<boolean>(false);
+  const [originalWorlds, setOriginalWorlds] = useState<Worlds[] | null>(null);
 
   useEffect(() => {
     const getWorlds = async () => {
@@ -36,6 +46,7 @@ const WorldList = () => {
         }
         const data = await response.json();
         setResult(data.worlds);
+        setOriginalWorlds(data.worlds)
         setIsLoaded(true);
       } catch (err) {
         console.error('Error:', err);
@@ -45,6 +56,7 @@ const WorldList = () => {
 
     getWorlds();
   }, [])
+
   const transformWorldName = (text: string) => {
     const regex = /{(.*?)}/g;
     const parts = text.split(regex);
@@ -68,10 +80,77 @@ const WorldList = () => {
     return elements;
   };
 
+  const handleOpen = () => setNotifyState(true);
+  const handleClose = () => setNotifyState(false);
+
+  const copyWorlds = () => {
+    if (result && result.length > 0) {
+      navigator.clipboard.writeText(
+        result
+          .map(world => {
+            const ssmpCondition = world.ssmp;
+            const staticCondition = world.static;
+    
+            const ssmp = () => {
+              if (ssmpCondition) {
+                return 'Использует SSMP';
+              } else {
+                return 'Не использует SSMP';
+              }
+            };
+            const staticW = () => {
+              if (staticCondition) {
+                return 'Статичный';
+              } else {
+                return 'Не статичный';
+              }
+            };
+    
+            return `Название: ${world.name} // Игроков: ${world.players} // ${ssmp()} // ${staticW()}`;
+          })
+          .join(';\n')
+      );
+      setNotifyTitle('Успешно');
+      setNotifyType('success')
+      setNotifyText('Список открытых миров скопирован в ваш буфер обмена');
+      setNotifyIcon(<FaCheckCircle />)
+      handleOpen();
+    }
+  };
+
+  const sensitiveMode = () => {
+    if (result) {
+      if (sensMode === false) {
+        const filteredWorlds = result.filter(world => 
+          !['SEX', 'sex', 'Секс', 'секс', 'Sex', 'СЕКС'].some(substring => world.name.includes(substring))
+        );
+        setResult(filteredWorlds);
+        setSensMode(true);
+        setNotifyTitle('Успешно');
+        setNotifyType('success')
+        setNotifyText('Чувствительный режим включен');
+        setNotifyIcon(<FaCheckCircle />);
+        handleOpen();
+      } else {
+        setResult(originalWorlds);
+        setSensMode(false);
+        setNotifyTitle('Успешно');
+        setNotifyType('success')
+        setNotifyText('Чувствительный режим выключен');
+        setNotifyIcon(<FaCheckCircle />);
+        handleOpen();
+      }
+    }
+  }
+
   return isLoaded ? (
     <Suspense>
       <div className={styles.PageWrapper}>
         <h1>Список открытых миров</h1>
+        <div className={styles.buttonGroup}>
+          <Button btnType='Primary' text='Скопировать' type='button' onClick={copyWorlds} />
+          <Button btnType='Secondary' text={sensMode === true ? 'Выключить чувствительный режим' : 'Включить чувствительный режим'} type='button' onClick={sensitiveMode} />
+        </div>
         <Table width={50}>
           <Thead>
             <Tr>
@@ -101,6 +180,15 @@ const WorldList = () => {
           </TBody>
         </Table>
       </div>
+      <Notify 
+        notifyState={notifyState} 
+        onClose={handleClose} 
+        title={notifyTitle} 
+        icon={notifyIcon} 
+        type={notifyType}
+      >
+        {notifyText}
+      </Notify>
     </Suspense>
   ) : (
     <div className={styles.PageWrapper}>
