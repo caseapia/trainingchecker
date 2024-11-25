@@ -5,7 +5,7 @@ import Preloader from '../../../public/assets/lotties/Preloader.json';
 import Lottie from 'lottie-react';
 
 const WorldList = () => {
-  const [isLoaded, setIsLoaded] = useState<boolean>(true);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     const getWorlds = async () => {
@@ -23,8 +23,9 @@ const WorldList = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         console.debug(response);
-      } catch {
-
+        setIsLoaded(true);
+      } catch (err) {
+        console.error('Error:', err);
       }
     }
 
