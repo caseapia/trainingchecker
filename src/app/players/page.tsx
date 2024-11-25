@@ -45,7 +45,7 @@ function Players() {
       <div className={styles.PageWrapper} id='players'>
         <h1>Список игроков в сети</h1>
         {result ? (
-          <Table width={50}>
+          <Table>
             <Thead>
               <Tr>
                 <Th>ID</Th>
