@@ -16,15 +16,15 @@
   margin-top: 40px;
 }
 .badge__new {
-  font-family: 'Monaco','Consolas', 'Courier', monospace;
   margin-left: 10px;
-  border: 1px solid rgba(245, 123, 0, 0.705);
+  background-color: rgba(245, 123, 0, 0.705);
   padding: 1px 5px;
   border-radius: 4px;
   pointer-events: none;
   user-select: none;
-  color: rgba(245, 123, 0, 0.705);
+  color: darken(rgba(245, 123, 0, 0.705), 90%);
   text-align: center;
+  text-transform: uppercase;
 }
 .list {
   list-style: none;
