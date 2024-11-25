@@ -22,6 +22,10 @@
       td {
         padding: 10px;
         border-top: 1px solid rgba(73,80,87,.42);
+        border-right: 1px solid rgba(73,80,87,.42);
+        &:last-child {
+            border-right: 0;
+        }
       }
     }
 }
