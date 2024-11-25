@@ -1,0 +1,29 @@
+.Chip {
+  background-color: hsl(240 5.26% 26.08%);
+  max-width: fit-content;
+  margin-left: 220px;
+  border-radius: 9999px;
+  white-space: nowrap;
+  align-items: center;
+  display: inline-flex;
+  min-width: min-content;
+  height: 1.75rem;
+}
+.small {
+  padding: 4px 8px;
+}
+.medium {
+  padding: 6px 10px;
+}
+.large {
+  padding: 8px 12px;
+}
+.ChipIcon {
+
+}
+.left {
+
+}
+.right {
+
+}

@@ -2,7 +2,8 @@
 import "./globals.css";
 import { Header } from "../components/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
+import Chip from "@/components/Chip/Chip";
 
 export default function RootLayout({
   children,
@@ -21,6 +22,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <Analytics/>
+        {/* <Chip label="Test" image="../../public/assets/images/training-logo.jpg" iconSize={40} /> */}
       </body>
     </html>
   );

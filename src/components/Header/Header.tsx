@@ -60,6 +60,9 @@ export const Header = () => {
                   style={element.style}
                 >
                   {element.icon} {element.text}
+                  {element.isNew && (
+                    <span className={styles.badge__new} style={element.style}>NEW</span>
+                  )}
                 </Link>
               </li>
             ))}
@@ -97,6 +100,9 @@ export const Header = () => {
                         style={element.style}
                       >
                         {element.icon} {element.text}
+                        {element.isNew && (
+                          <span className={styles.badge__new}>NEW</span>
+                        )}
                       </Link>
                     </motion.li>
                   ))}
