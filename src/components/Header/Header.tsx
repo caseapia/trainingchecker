@@ -64,7 +64,7 @@ export const Header = () => {
                 >
                   {element.icon} {element.text}
                   {element.isNew && (
-                    <span className={styles.badge__new} style={element.style}>NEW</span>
+                    <span className={styles.badge__new} style={element.style}>new</span>
                   )}
                 </Link>
               </li>
