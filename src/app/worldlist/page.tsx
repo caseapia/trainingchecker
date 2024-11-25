@@ -5,6 +5,8 @@ import Preloader from '../../../public/assets/lotties/Preloader.json';
 import Lottie from 'lottie-react';
 import { Table, Thead, Tr, Td, Th, TBody } from '@/components/Table/Table';
 import Chip from '@/components/Chip/Chip';
+import { FaBookmark } from "react-icons/fa6";
+import { GoCpu, GoAlertFill } from "react-icons/go";
 
 interface Worlds {
   name: string;
@@ -87,12 +89,13 @@ const WorldList = () => {
                   <Td>{transformWorldName(world.name)}</Td>
                   <Td>{world.players}</Td>
                   <Td className={styles.ChipContainer}>
-                    {world.static === true && (
-                      <Chip label='Статичный' size='small' />
-                    )}
-                    {world.ssmp === true && (
-                      <Chip label='SSMP' size='small' />
-                    )}
+                    {world.static === true ? (
+                      <Chip label="Статичный" size="small" icon={<FaBookmark />} />
+                    ) : world.ssmp === true ? (
+                      <Chip label="SSMP" size="small" icon={<GoCpu />} />
+                    ) : world.static || world.ssmp === false ? (
+                      <Chip label="Нет меток" size="small" icon={<GoAlertFill />} />
+                    ) : null}
                   </Td>
                 </Tr>
               ))
