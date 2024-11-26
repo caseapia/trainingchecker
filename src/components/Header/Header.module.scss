@@ -16,14 +16,17 @@
   margin-top: 40px;
 }
 .badge__new {
+  padding: .2em .5em .2em;
   margin-left: 10px;
-  background-color: rgba(245, 123, 0, 0.705);
-  padding: 1px 5px;
-  border-radius: 4px;
-  pointer-events: none;
-  user-select: none;
-  color: darken(rgba(245, 123, 0, 0.705), 90%);
+  background: #d2322d;
+  color: #fff;
+  vertical-align: middle;
+  display: inline-block;
+  font-size: 75%;
+  line-height: 1;
   text-align: center;
+  white-space: nowrap;
+  border-radius: .25rem;
   text-transform: uppercase;
 }
 .list {
@@ -45,7 +48,7 @@
                 content: "";
                 margin-top: 4px;
                 height: 3px;
-                border-radius: 99px;
+                border-radius: 9999px;
                 background: linear-gradient(90deg, rgba(239, 31, 76, 0.541) 0%, rgba(153, 56, 77, 0.39) 56%);
                 display: block;
                 animation: hoveranimation .5s;
@@ -58,7 +61,7 @@
                 content: "";
                 margin-top: 4px;
                 height: 3px;
-                border-radius: 99px;
+                border-radius: 9999px;
                 background: linear-gradient(90deg, hsla(347, 87%, 53%, 1) 0%, hsla(347, 46%, 41%, 1) 56%);
                 display: block;
               }
