@@ -1,13 +1,13 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Header.module.scss";
-import { FaUser, FaHome } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { TiTabsOutline } from "react-icons/ti";
 import { motion } from "framer-motion";
 import { isMobileDevice } from "@/hooks/isMobileDevice";
 import { Elements } from "@/shared/consts/headerElements";
+import BootstrapTooltip from "../Styles/TooltipStyles";
 
 export const Header = () => {
   const isMobile = isMobileDevice();
@@ -18,9 +18,6 @@ export const Header = () => {
   useEffect(() => {
     const crntPage = window.location.pathname.split('/')[1];
     setActivePage(crntPage === ""? "../" : crntPage);
-    // if (crntPage === "") {
-    //   setActivePage("main")
-    // }
     const elementExists = Elements.some((el) => el.id === crntPage);
     if (!elementExists) {
       setActivePage("main");
@@ -60,17 +57,19 @@ export const Header = () => {
           {Elements.length > 0 &&
             Elements.map((element, index) => (
               <li key={index}>
-                <Link 
-                  href={element.link} 
-                  onClick={() => swapPage(element.id)}
-                  className={activePage === element.id ? styles.active : ""}
-                  style={element.style}
-                >
-                  {element.icon} {element.text}
-                  {element.isNew && (
-                    <span className={styles.badge__new} style={element.style}>new</span>
-                  )}
-                </Link>
+                <BootstrapTooltip title={element.tooltipText}>
+                  <Link 
+                    href={element.link} 
+                    onClick={() => swapPage(element.id)}
+                    className={activePage === element.id ? styles.active : ""}
+                    style={element.style}
+                  >
+                    {element.icon} {element.text}
+                    {element.isNew && (
+                      <span className={styles.badge__new} style={element.style}>new</span>
+                    )}
+                  </Link>
+                </BootstrapTooltip>
               </li>
             ))}
         </ul>

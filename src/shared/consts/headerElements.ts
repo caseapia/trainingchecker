@@ -1,5 +1,6 @@
 import React from "react";
 import { FaHome, FaList, FaMedal, FaUser } from "react-icons/fa";
+import { IoAnalyticsSharp } from "react-icons/io5";
 
 type HeaderProps = {
   icon: React.ReactNode;
@@ -9,6 +10,7 @@ type HeaderProps = {
   id: string;
   style?: React.CSSProperties;
   isNew?: boolean;
+  tooltipText?: string;
 };
 
 
@@ -37,5 +39,16 @@ export const Elements: HeaderProps[] = [
     icon: React.createElement(FaList),
     link: "/worldlist",
     isNew: true,
+  },
+  {
+    text: "Политика сбора метрик",
+    id: "data-collection",
+    icon: React.createElement(IoAnalyticsSharp),
+    link: "",
+    isNew: true,
+    style: {
+      opacity: ".5",
+    },
+    tooltipText: "В процессе доработки",
   },
 ];
