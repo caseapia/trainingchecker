@@ -13,7 +13,7 @@ const dataCollection: React.FC = () => {
     const fetchAboutData = async () => {
       try {
         const response = await fetch(
-          'https://raw.githubusercontent.com/caseapia/main/src/shared/documents/aboutData.md'
+          'https://raw.githubusercontent.com/caseapia/trainingchecker/main/src/shared/documents/aboutData.md'
         )
         const text = await response.text();
         const htmlContent = marked(text);
