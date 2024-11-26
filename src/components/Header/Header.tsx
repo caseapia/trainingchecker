@@ -18,8 +18,12 @@ export const Header = () => {
   useEffect(() => {
     const crntPage = window.location.pathname.split('/')[1];
     setActivePage(crntPage === ""? "../" : crntPage);
-    if (crntPage === "") {
-      setActivePage("main")
+    // if (crntPage === "") {
+    //   setActivePage("main")
+    // }
+    const elementExists = Elements.some((el) => el.id === crntPage);
+    if (!elementExists) {
+      setActivePage("main");
     }
   }, []);
 
