@@ -93,20 +93,11 @@ const WorldList = () => {
             const staticCondition = world.static;
     
             const ssmp = () => {
-              if (ssmpCondition) {
-                return 'Использует SSMP';
-              } else {
-                return 'Не использует SSMP';
-              }
+              return ssmpCondition === true ? 'Использует SSMP' : 'Не использует SSMP';
             };
             const staticW = () => {
-              if (staticCondition) {
-                return 'Статичный';
-              } else {
-                return 'Не статичный';
-              }
+              return staticCondition === true ? 'Статичный' : 'Не статичный'
             };
-    
             return `Название: ${world.name} // Игроков: ${world.players} // ${ssmp()} // ${staticW()}`;
           })
           .join(';\n')
