@@ -2,6 +2,8 @@
 
 :root {
   --color-danger: #dc3545;
+  --color-muted: #edededc7;
+  --color-defaultText: #ededed;
 }
 
 html,
@@ -11,7 +13,7 @@ body {
 }
 
 body {
-  color: #ededed;
+  color: var(--color-defaultText);
   background: #0a0a0a;
   font-family: "Roboto", sans-serif;
   font-size: 17px;
