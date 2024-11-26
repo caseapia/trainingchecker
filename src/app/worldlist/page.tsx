@@ -122,7 +122,7 @@ const WorldList = () => {
     if (result) {
       if (sensMode === false) {
         const filteredWorlds = result.filter(world => 
-          !['SEX', 'sex', 'Секс', 'секс', 'Sex', 'СЕКС'].some(substring => world.name.includes(substring))
+          !['SEX', 'sex', 'Секс', 'секс', 'Sex', 'СЕКС', 'rp', 'RP', 'рп', 'РП'].some(substring => world.name.includes(substring))
         );
         setResult(filteredWorlds);
         setSensMode(true);
