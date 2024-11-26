@@ -10,6 +10,7 @@ import { GoCpu, GoAlertFill } from "react-icons/go";
 import Button from '@/components/Buttons/Button';
 import Notify from '@/components/Notify/Notify';
 import { FaCheckCircle } from 'react-icons/fa';
+import worldBlockWorlds from '@/consts/worldBlockWords';
 
 interface Worlds {
   name: string;
@@ -121,8 +122,10 @@ const WorldList = () => {
   const sensitiveMode = () => {
     if (result) {
       if (sensMode === false) {
-        const filteredWorlds = result.filter(world => 
-          !['SEX', 'sex', 'Секс', 'секс', 'Sex', 'СЕКС', 'rp', 'RP', 'рп', 'РП'].some(substring => world.name.includes(substring))
+        const filteredWorlds = result.filter(world =>
+          !worldBlockWorlds.some(forbiddenWord =>
+            world.name.toLowerCase().includes(forbiddenWord)
+          )
         );
         setResult(filteredWorlds);
         setSensMode(true);
