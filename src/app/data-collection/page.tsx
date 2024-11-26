@@ -16,8 +16,7 @@ const dataCollection: React.FC = () => {
           'https://raw.githubusercontent.com/caseapia/trainingchecker/main/src/shared/documents/aboutData.md'
         )
         const text = await response.text();
-        const htmlContent = marked(text);
-        setAboutData(`${htmlContent}`);
+        setAboutData(text);
       } catch (e) {
         console.error('Error fetching about data:', e);
       }
