@@ -1,7 +1,7 @@
 "use client"
 import { Suspense, useEffect, useState } from 'react';
 import styles from './page.module.scss'
-import Preloader from '../../../public/assets/lotties/Preloader.json';
+import Preloader from '@/public/assets/lotties/Preloader.json';
 import Lottie from 'lottie-react';
 import { Table, Thead, Tr, Td, Th, TBody } from '@/components/Table/Table';
 import Chip from '@/components/Chip/Chip';

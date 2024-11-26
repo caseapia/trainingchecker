@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react";
-import { allBadges } from "../../shared/consts/badges";
+import { allBadges } from "@/consts/badges";
 import styles from "./BadgeRenderer.module.scss";
 import BootstrapTooltip from "../Styles/TooltipStyles";
 

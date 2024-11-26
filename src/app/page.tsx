@@ -8,7 +8,7 @@ import { FaCheckCircle, FaUser } from "react-icons/fa";
 import { TbFaceIdError } from "react-icons/tb";
 import { BiLogoGithub } from "react-icons/bi";
 import Lottie from 'lottie-react';
-import Preloader from '../../public/assets/lotties/Preloader.json';
+import Preloader from '@/public/assets/lotties/Preloader.json';
 import Notify from '@/components/Notify/Notify';
 
 export default function Home() {

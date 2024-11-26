@@ -23,6 +23,7 @@
       "@/hooks/*": ["./src/shared/hooks/*"],
       "@/components/*": ["./src/components/*"],
       "@/consts/*": ["./src/shared/consts/*"],
+      "@/public/*": ["./public/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

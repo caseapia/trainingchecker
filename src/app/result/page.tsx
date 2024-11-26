@@ -1,10 +1,10 @@
 "use client";
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState, Suspense, ReactNode, useMemo } from 'react';
+import { useEffect, useState, Suspense, ReactNode } from 'react';
 import styles from './page.module.scss';
 import { BadgeRenderer } from '@/components/BadgeRenderer/BadgeRenderer';
 import Lottie from 'lottie-react';
-import Preloader from '../../../public/assets/lotties/Preloader.json';
+import Preloader from '@/public/assets/lotties/Preloader.json';
 import Button from '@/components/Buttons/Button';
 import { HiRefresh } from "react-icons/hi";
 import Notify from "@/components/Notify/Notify";
