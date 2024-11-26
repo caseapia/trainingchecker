@@ -86,22 +86,24 @@ const WorldList = () => {
 
   const copyWorlds = () => {
     if (result && result.length > 0) {
-      navigator.clipboard.writeText(
-        result
-          .map(world => {
-            const ssmpCondition = world.ssmp;
-            const staticCondition = world.static;
-    
-            const ssmp = () => {
-              return ssmpCondition === true ? 'Использует SSMP' : 'Не использует SSMP';
-            };
-            const staticW = () => {
-              return staticCondition === true ? 'Статичный' : 'Не статичный'
-            };
-            return `Название: ${world.name} // Игроков: ${world.players} // ${ssmp()} // ${staticW()}`;
-          })
-          .join(';\n')
-      );
+      const toCopyContent = result
+        .map(world => {
+          const ssmpCondition = world.ssmp;
+          const staticCondition = world.static;
+
+          const ssmp = () => {
+            return ssmpCondition === true ? ' // Использует SSMP' : '';
+          };
+          const staticW = () => {
+            return staticCondition === true ? ' // Статичный' : ''
+          };
+          return `Название: ${world.name} // Игроков: ${world.players}${ssmp()}${staticW()}`;
+        })
+        .join(';\n')
+      const worldsCounter = result.length;
+      const isSensModeActive = sensMode === true ? 'Чувствительный режим включен' : '';
+
+      navigator.clipboard.writeText(`${isSensModeActive}\n\n${toCopyContent}\n\nВсего миров: ${worldsCounter}`);
       setNotifyTitle('Успешно');
       setNotifyType('success')
       setNotifyText('Список открытых миров скопирован в ваш буфер обмена');
