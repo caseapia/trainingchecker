@@ -80,11 +80,11 @@ export const playerBadges: BadgeProps[] = [
     id: 1,
     title: "Ветеран",
     category: "player",
-    description: "Этот значок вручается игрокам, зарегистрировавшим свой аккаунт в числе первых 150000",
+    description: `Этот значок вручается игрокам, зарегистрировавшим свой аккаунт в числе первых 130000`,
     icon: React.createElement(FaMedal),
     color: "#00a5a26c",
     minAccId: 0,
-    maxAccId: 150000,
+    maxAccId: 130000,
     textColor: "#00a5a2"
   },
   {
