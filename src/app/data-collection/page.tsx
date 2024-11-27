@@ -14,9 +14,7 @@ const dataCollection: React.FC = () => {
   useEffect(() => {
     const fetchAboutData = async () => {
       try {
-        const response = await fetch(
-          'https://api.github.com/repos/caseapia/trainingchecker/contents/src/shared/documents'
-        )
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_DOCUMENTS_URL}`)
         const files = await response.json();
         const markdownFiles = files.filter((file: any) => file.name.endsWith('.md'))
 
