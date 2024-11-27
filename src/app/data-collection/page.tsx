@@ -15,14 +15,24 @@ const dataCollection: React.FC = () => {
   useEffect(() => {
     const fetchAboutData = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_DOCUMENTS_URL}`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_DOCUMENTS_URL}`);
+  
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+  
         const files: Array<{ name: string; download_url: string }> = await response.json();
         const markdownFiles = files.filter((file) => file.name.endsWith('.md'));
-
+  
         for (const file of markdownFiles) {
           const fileResponse = await fetch(file.download_url);
+  
+          if (!fileResponse.ok) {
+            throw new Error(`Failed to fetch file: ${file.name}, status: ${fileResponse.status}`);
+          }
+  
           const text = await fileResponse.text();
-
+  
           if (file.name === 'aboutData.md') {
             setAboutData(text);
           } else if (file.name === 'why.md') {
@@ -30,15 +40,15 @@ const dataCollection: React.FC = () => {
           } else if (file.name === 'dataPaths.md') {
             setDataPaths(text);
           }
-          setIsLoaded(true);
         }
+        setIsLoaded(true);
       } catch (e) {
         console.error('Error fetching about data:', e);
       }
-    }
-
+    };
+  
     fetchAboutData();
-  }, [])
+  }, []);
 
   return isLoaded ? (
     <div className={styles.PageWrapper}>
