@@ -16,8 +16,8 @@ const dataCollection: React.FC = () => {
     const fetchAboutData = async () => {
       try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_DOCUMENTS_URL}`)
-        const files = await response.json();
-        const markdownFiles = files.filter((file: any) => file.name.endsWith('.md'))
+        const files: Array<{ name: string; download_url: string }> = await response.json();
+        const markdownFiles = files.filter((file) => file.name.endsWith('.md'));
 
         for (const file of markdownFiles) {
           const fileResponse = await fetch(file.download_url);
