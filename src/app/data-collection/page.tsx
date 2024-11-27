@@ -4,6 +4,7 @@ import styles from './page.module.scss'
 import Link from 'next/link';
 import Preloader from '@/public/assets/lotties/Preloader.json';
 import Lottie from 'lottie-react';
+import ReactMarkdown from 'react-markdown';
 
 const dataCollection: React.FC = () => {
   const [aboutData, setAboutData] = useState<string>("");
@@ -14,16 +15,24 @@ const dataCollection: React.FC = () => {
   useEffect(() => {
     const fetchAboutData = async () => {
       try {
-        const response = await fetch(
-          'https://api.github.com/repos/caseapia/trainingchecker/contents/src/shared/documents'
-        )
-        const files = await response.json();
-        const markdownFiles = files.filter((file: any) => file.name.endsWith('.md'))
-
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_DOCUMENTS_URL}`);
+  
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+  
+        const files: Array<{ name: string; download_url: string }> = await response.json();
+        const markdownFiles = files.filter((file) => file.name.endsWith('.md'));
+  
         for (const file of markdownFiles) {
           const fileResponse = await fetch(file.download_url);
+  
+          if (!fileResponse.ok) {
+            throw new Error(`Failed to fetch file: ${file.name}, status: ${fileResponse.status}`);
+          }
+  
           const text = await fileResponse.text();
-
+  
           if (file.name === 'aboutData.md') {
             setAboutData(text);
           } else if (file.name === 'why.md') {
@@ -31,15 +40,15 @@ const dataCollection: React.FC = () => {
           } else if (file.name === 'dataPaths.md') {
             setDataPaths(text);
           }
-          setIsLoaded(true);
         }
+        setIsLoaded(true);
       } catch (e) {
         console.error('Error fetching about data:', e);
       }
-    }
-
+    };
+  
     fetchAboutData();
-  }, [])
+  }, []);
 
   return isLoaded ? (
     <div className={styles.PageWrapper}>
@@ -54,16 +63,13 @@ const dataCollection: React.FC = () => {
         </ul>
       </div>
       <div className={styles.tab} id='about-data'>
-        <h3>Какие данные мы собираем о вас?</h3>
-        <p>{aboutData}</p>
+        <ReactMarkdown>{aboutData}</ReactMarkdown>
       </div>
       <div className={styles.tab} id='data-paths'>
-        <h3>Куда уходят собираемые данные?</h3>
-        <p>{dataPaths}</p>
+        <ReactMarkdown>{dataPaths}</ReactMarkdown>
       </div>
       <div className={styles.tab} id='why'>
-        <h3>Зачем мы собираем эти данные и как используем их?</h3>
-        <p>{why}</p>
+        <ReactMarkdown>{why}</ReactMarkdown>
       </div>
     </div>
   ) : (
