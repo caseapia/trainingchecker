@@ -41,7 +41,12 @@
         &:last-of-type {
           margin-right: 0;
         }
-        a {
+        .disabled_element {
+          opacity: .5;
+          cursor: default;
+          color: #08c;
+        }
+        a, .disabled_element {
           &:not(.active) {
             &:hover {
               &::after {

@@ -56,21 +56,30 @@ export const Header = () => {
         <ul className={styles.list}>
           {Elements.length > 0 &&
             Elements.map((element, index) => (
-              <li key={index}>
-                <BootstrapTooltip title={element.tooltipText}>
-                  <Link 
-                    href={element.link} 
-                    onClick={() => swapPage(element.id)}
-                    className={activePage === element.id ? styles.active : ""}
-                    style={element.style}
-                  >
-                    {element.icon} {element.text}
-                    {element.isNew && (
-                      <span className={styles.badge__new} style={element.style}>new</span>
-                    )}
-                  </Link>
-                </BootstrapTooltip>
-              </li>
+              <BootstrapTooltip title={element.tooltipText}>
+                <li key={index}>
+                  { element.isDisabled === false ? (
+                    <Link 
+                      href={element.link} 
+                      onClick={() => swapPage(element.id)}
+                      className={activePage === element.id ? styles.active : ""}
+                      style={element.style}
+                    >
+                      {element.icon} {element.text}
+                      {element.isNew && (
+                        <span className={styles.badge__new} style={element.style}>new</span>
+                      )}
+                    </Link>
+                  ) : (
+                    <span className={styles.disabled_element} style={element.style}>
+                      {element.icon} {element.text}
+                      {element.isNew && (
+                        <span className={styles.badge__new} style={element.style}>new</span>
+                      )}
+                    </span>
+                  )}
+                </li>
+              </BootstrapTooltip>
             ))}
         </ul>
       ) : (

@@ -11,6 +11,7 @@ type HeaderProps = {
   style?: React.CSSProperties;
   isNew?: boolean;
   tooltipText?: string;
+  isDisabled: boolean;
 };
 
 
@@ -20,18 +21,21 @@ export const Elements: HeaderProps[] = [
     id: "main",
     icon: React.createElement(FaHome),
     link: "../",
+    isDisabled: false,
   },
   {
     text: "Игроки в сети",
     id: "players",
     icon: React.createElement(FaUser),
     link: "/players",
+    isDisabled: false,
   },
   {
     text: "Список значков",
     id: "badges",
     icon: React.createElement(FaMedal),
     link: "/badges",
+    isDisabled: false,
   },
   {
     text: "Список миров",
@@ -39,16 +43,15 @@ export const Elements: HeaderProps[] = [
     icon: React.createElement(FaList),
     link: "/worldlist",
     isNew: true,
+    isDisabled: false,
   },
   {
     text: "Политика сбора метрик",
     id: "data-collection",
     icon: React.createElement(IoAnalyticsSharp),
-    link: "",
+    link: "/data-collection",
     isNew: true,
-    style: {
-      opacity: ".5",
-    },
     tooltipText: "В процессе доработки",
+    isDisabled: true,
   },
 ];
