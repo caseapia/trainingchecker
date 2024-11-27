@@ -51,7 +51,6 @@ export const Elements: HeaderProps[] = [
     icon: React.createElement(IoAnalyticsSharp),
     link: "/data-collection",
     isNew: true,
-    tooltipText: "В процессе доработки",
     isDisabled: false,
   },
 ];
