@@ -64,17 +64,34 @@ export const Header = () => {
                       onClick={() => swapPage(element.id)}
                       className={activePage === element.id ? styles.active : ""}
                       style={element.style}
+                      key={index}
                     >
                       {element.icon} {element.text}
                       {element.isNew && (
-                        <span className={styles.badge__new} style={element.style}>new</span>
+                        <span 
+                          className={styles.badge__new} 
+                          style={element.style}
+                          key={index}
+                        >
+                          new
+                        </span>
                       )}
                     </Link>
                   ) : (
-                    <span className={styles.disabled_element} style={element.style}>
+                    <span 
+                      className={styles.disabled_element} 
+                      style={element.style}
+                      key={index}
+                    >
                       {element.icon} {element.text}
                       {element.isNew && (
-                        <span className={styles.badge__new} style={element.style}>new</span>
+                        <span 
+                          className={styles.badge__new} 
+                          style={element.style}
+                          key={index}
+                        >
+                          new
+                        </span>
                       )}
                     </span>
                   )}
