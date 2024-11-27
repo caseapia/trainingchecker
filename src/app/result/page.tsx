@@ -113,7 +113,7 @@ const PlayerInfo = () => {
   
   const refreshData = async () => {
     try {
-      const response = await fetch(`https://training-server.com/api/user/${nickname}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_USER_URL}/${nickname}`);
   
       if (response.status === 200) {
         setNotifyTitle('Успешно!');

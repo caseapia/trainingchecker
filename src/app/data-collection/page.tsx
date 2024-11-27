@@ -4,6 +4,7 @@ import styles from './page.module.scss'
 import Link from 'next/link';
 import Preloader from '@/public/assets/lotties/Preloader.json';
 import Lottie from 'lottie-react';
+import ReactMarkdown from 'react-markdown';
 
 const dataCollection: React.FC = () => {
   const [aboutData, setAboutData] = useState<string>("");
@@ -14,9 +15,7 @@ const dataCollection: React.FC = () => {
   useEffect(() => {
     const fetchAboutData = async () => {
       try {
-        const response = await fetch(
-          'https://api.github.com/repos/caseapia/trainingchecker/contents/src/shared/documents'
-        )
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_DOCUMENTS_URL}`)
         const files = await response.json();
         const markdownFiles = files.filter((file: any) => file.name.endsWith('.md'))
 
@@ -54,16 +53,13 @@ const dataCollection: React.FC = () => {
         </ul>
       </div>
       <div className={styles.tab} id='about-data'>
-        <h3>Какие данные мы собираем о вас?</h3>
-        <p>{aboutData}</p>
+        <ReactMarkdown>{aboutData}</ReactMarkdown>
       </div>
       <div className={styles.tab} id='data-paths'>
-        <h3>Куда уходят собираемые данные?</h3>
-        <p>{dataPaths}</p>
+        <ReactMarkdown>{dataPaths}</ReactMarkdown>
       </div>
       <div className={styles.tab} id='why'>
-        <h3>Зачем мы собираем эти данные и как используем их?</h3>
-        <p>{why}</p>
+        <ReactMarkdown>{why}</ReactMarkdown>
       </div>
     </div>
   ) : (
