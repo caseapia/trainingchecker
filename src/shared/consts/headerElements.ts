@@ -52,6 +52,6 @@ export const Elements: HeaderProps[] = [
     link: "/data-collection",
     isNew: true,
     tooltipText: "В процессе доработки",
-    isDisabled: false,
+    isDisabled: true,
   },
 ];
