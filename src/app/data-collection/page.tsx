@@ -53,13 +53,13 @@ const dataCollection: React.FC = () => {
         </ul>
       </div>
       <div className={styles.tab} id='about-data'>
-        {aboutData}
+        <ReactMarkdown>{aboutData}</ReactMarkdown>
       </div>
       <div className={styles.tab} id='data-paths'>
-        {dataPaths}
+        <ReactMarkdown>{dataPaths}</ReactMarkdown>
       </div>
       <div className={styles.tab} id='why'>
-        {why}
+        <ReactMarkdown>{why}</ReactMarkdown>
       </div>
     </div>
   ) : (
