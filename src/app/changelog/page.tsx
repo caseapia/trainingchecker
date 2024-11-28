@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import styles from './page.module.scss';
 import Lottie from 'lottie-react';
 import Preloader from '@/public/assets/lotties/Preloader.json';
+import { isMobileDevice } from '@/shared/hooks/isMobileDevice';
+import { useRouter } from 'next/navigation';
 
 type Commit = {
   sha: string;
@@ -17,6 +19,15 @@ type Commit = {
 const changelog = () => {
   const [commitData, setCommitData] = useState<Commit[]>();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const isMobile = isMobileDevice();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isMobile === true) {
+      setIsLoaded(false);
+      router.push('/');
+    }
+  })
 
   const cutOffDate = new Date("2024-11-28T16:59:35Z");
 
