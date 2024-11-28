@@ -9,7 +9,7 @@ type HeaderProps = {
   link: string;
   id: string;
   style?: React.CSSProperties;
-  isNew?: boolean;
+  isNew: boolean;
   tooltipText?: string;
   isDisabled: boolean;
 };
@@ -21,6 +21,7 @@ export const Elements: HeaderProps[] = [
     id: "main",
     icon: React.createElement(FaHome),
     link: "../",
+    isNew: false,
     isDisabled: false,
   },
   {
@@ -28,6 +29,7 @@ export const Elements: HeaderProps[] = [
     id: "players",
     icon: React.createElement(FaUser),
     link: "/players",
+    isNew: false,
     isDisabled: false,
   },
   {
@@ -35,6 +37,7 @@ export const Elements: HeaderProps[] = [
     id: "badges",
     icon: React.createElement(FaMedal),
     link: "/badges",
+    isNew: false,
     isDisabled: false,
   },
   {
@@ -42,7 +45,7 @@ export const Elements: HeaderProps[] = [
     id: "worldlist",
     icon: React.createElement(FaList),
     link: "/worldlist",
-    isNew: true,
+    isNew: false,
     isDisabled: false,
   },
   {
@@ -50,7 +53,7 @@ export const Elements: HeaderProps[] = [
     id: "data-collection",
     icon: React.createElement(IoAnalyticsSharp),
     link: "/data-collection",
-    isNew: true,
+    isNew: false,
     isDisabled: false,
   },
 ];

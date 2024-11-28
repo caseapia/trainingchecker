@@ -66,7 +66,7 @@ export const Header = () => {
                       style={element.style}
                       key={index}
                     >
-                      {element.icon} {element.text}
+                      <span>{element.icon} {element.text}</span>
                       {element.isNew && (
                         <span 
                           className={styles.badge__new} 

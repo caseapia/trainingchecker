@@ -9,7 +9,8 @@ import { FaBookmark } from "react-icons/fa6";
 import { GoCpu, GoAlertFill } from "react-icons/go";
 import Button from '@/components/Buttons/Button';
 import Notify from '@/components/Notify/Notify';
-import { FaCheckCircle } from 'react-icons/fa';
+import { FaCheckCircle, FaCopy } from 'react-icons/fa';
+import { MdDeblur, MdLensBlur } from "react-icons/md";
 import worldBlockWorlds from '@/consts/worldBlockWords';
 
 interface Worlds {
@@ -144,8 +145,20 @@ const WorldList = () => {
       <div className={styles.PageWrapper}>
         <h1>Список открытых миров</h1>
         <div className={styles.buttonGroup}>
-          <Button btnType='Primary' text='Скопировать' type='button' onClick={copyWorlds} />
-          <Button btnType='Secondary' text={sensMode === true ? 'Выключить чувствительный режим' : 'Включить чувствительный режим'} type='button' onClick={sensitiveMode} />
+          <Button 
+            btnType='Primary' 
+            text='Скопировать' 
+            type='button' 
+            onClick={copyWorlds} 
+            icon={<FaCopy />}
+          />
+          <Button 
+            btnType='Secondary' 
+            text={sensMode === true ? 'Выключить чувствительный режим' : 'Включить чувствительный режим'}
+            type='button' 
+            onClick={sensitiveMode}
+            icon={sensMode === true ? <MdDeblur /> : <MdLensBlur />}
+          />
         </div>
         <Table>
           <Thead>
