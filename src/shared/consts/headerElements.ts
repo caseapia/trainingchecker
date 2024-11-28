@@ -12,6 +12,7 @@ type HeaderProps = {
   isNew: boolean;
   tooltipText?: string;
   isDisabled: boolean;
+  isMobileAvailable: boolean;
 };
 
 
@@ -23,6 +24,7 @@ export const Elements: HeaderProps[] = [
     link: "../",
     isNew: false,
     isDisabled: false,
+    isMobileAvailable: true,
   },
   {
     text: "Игроки в сети",
@@ -31,6 +33,7 @@ export const Elements: HeaderProps[] = [
     link: "/players",
     isNew: false,
     isDisabled: false,
+    isMobileAvailable: true,
   },
   {
     text: "Список значков",
@@ -39,6 +42,7 @@ export const Elements: HeaderProps[] = [
     link: "/badges",
     isNew: false,
     isDisabled: false,
+    isMobileAvailable: true,
   },
   {
     text: "Список миров",
@@ -47,6 +51,7 @@ export const Elements: HeaderProps[] = [
     link: "/worldlist",
     isNew: true,
     isDisabled: false,
+    isMobileAvailable: true,
   },
   {
     text: "Политика сбора метрик",
@@ -55,6 +60,7 @@ export const Elements: HeaderProps[] = [
     link: "/data-collection",
     isNew: true,
     isDisabled: false,
+    isMobileAvailable: true,
   },
   {
     text: "Список изменений",
@@ -63,5 +69,6 @@ export const Elements: HeaderProps[] = [
     link: "/changelog",
     isNew: true,
     isDisabled: false,
+    isMobileAvailable: false,
   },
 ];

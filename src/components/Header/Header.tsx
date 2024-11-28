@@ -120,8 +120,8 @@ export const Header = () => {
               </div>
               <div className={styles.mobile__menu__body}>
               <motion.ul className={styles.mobile__menu__body__list} animate={{ width: "100%" }}>
-                {Elements.length > 0 &&
-                  Elements.map((element, index) => (
+                {Elements.length > 0 && Elements.map((element, index) => (
+                  element.isMobileAvailable && (
                     <motion.li 
                       key={index}
                       style={element.style}
@@ -139,6 +139,7 @@ export const Header = () => {
                         )}
                       </Link>
                     </motion.li>
+                  )
                   ))}
               </motion.ul>
               </div>
