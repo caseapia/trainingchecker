@@ -11,6 +11,12 @@ import Lottie from 'lottie-react';
 import Preloader from '@/public/assets/lotties/Preloader.json';
 import Notify from '@/components/Notify/Notify';
 
+type Commit = {
+  sha: string;
+  message: string;
+  date: string;
+}
+
 export default function Home() {
   const [lastUpdate, setLastUpdate] = useState<string>('');
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -18,6 +24,7 @@ export default function Home() {
   const [notifyText, setNotifyText] = useState<string>('');
   const [notifyTitle, setNotifyTitle] = useState<string>('');
   const [notifyIcon, setNotifyIcon] = useState<ReactNode>();
+  const [commit, setCommit] = useState<Commit>();
   const InputElement = useRef<HTMLInputElement>(null);
   const ButtonElement = useRef<HTMLButtonElement>(null);
   const FormElement = useRef<HTMLFormElement>(null);
@@ -51,6 +58,37 @@ export default function Home() {
     };
     commits();
   }, []);
+
+  useEffect(() => {
+    const getCommit = async () => {
+      try {
+        const response = await fetch(`https://api.github.com/repos/caseapia/trainingchecker/commits?per_page=1`);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        if (data && data.length > 0) {
+          const lastCommit = data[0];
+          setCommit({
+            sha: lastCommit.sha,
+            message: lastCommit.commit.message,
+            date: new Date(lastCommit.committer.date).toLocaleString(),
+          });
+        } else {
+          setCommit({
+            sha: '',
+            message: '',
+            date: '',
+          })
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getCommit();
+  }, [])
 
   const handleOpen = () => {
     setNotifyState(true);
@@ -120,10 +158,10 @@ export default function Home() {
            (
             <>
               <div className={styles.readmeWrapper}>
-              <p style={{textAlign: 'center'}}>SAMP сервер <a href="https://training-server.com/" target="_blank" rel="noopener noreferrer">TRAINING</a> не имеет отношения к созданию данного сайта. Этот сайт является частным и использует<br /><a href="https://forum.training-server.com/d/3921-training-api" target="_blank" rel="noopener noreferrer">TRAINING API</a> в соответствии с разрешением его создателя.</p><br />
-              <p>Разработано для упрощения работы с <a href="https://forum.training-server.com/d/3921-training-api" target="_blank" rel="noopener noreferrer">TRAINING API</a>.</p>
-              <p>Этот проект имеет открытый исходный код, вы всегда можете дополнить его или исправить, используя<br /><a href="https://github.com/1dontkillme/trainingchecker" target="_blank" rel="noopener noreferrer"><BiLogoGithub /> исходный код на GitHub</a>.</p><br />
-              <p>Последнее обновление произошло: {lastUpdate}</p>
+                <p style={{textAlign: 'center'}}>SAMP сервер <a href="https://training-server.com/" target="_blank" rel="noopener noreferrer">TRAINING</a> не имеет отношения к созданию данного сайта. Этот сайт является частным и использует<br /><a href="https://forum.training-server.com/d/3921-training-api" target="_blank" rel="noopener noreferrer">TRAINING API</a> в соответствии с разрешением его создателя.</p><br />
+                <p>Разработано для упрощения работы с <a href="https://forum.training-server.com/d/3921-training-api" target="_blank" rel="noopener noreferrer">TRAINING API</a>.</p>
+                <p>Этот проект имеет открытый исходный код, вы всегда можете дополнить его или исправить, используя<br /><a href="https://github.com/1dontkillme/trainingchecker" target="_blank" rel="noopener noreferrer"><BiLogoGithub /> исходный код на GitHub</a>.</p><br />
+                <p>Последнее обновление произошло: {lastUpdate}</p>
               </div>
               <form 
                 action="./result" 

@@ -15,24 +15,26 @@ import Link from 'next/link';
 import { Table, Thead, Tr, Td, TBody, Th } from '@/components/Table/Table';
 import { useRouter } from 'next/navigation';
 
+type PlayerData = {
+  id: number;
+  login: string;
+  access: number;
+  moder: number;
+  verify: number;
+  verifyText: string;
+  mute: number;
+  online: number;
+  regdate: string;
+  lastlogin: string;
+  playerid: number;
+  warn: Array<{ reason: string; bantime: string; admin: string; }>;
+}
+
 const PlayerInfo = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const nickname = searchParams.get('nickname');
-  const [playerData, setPlayerData] = useState<{
-    id: number;
-    login: string;
-    access: number;
-    moder: number;
-    verify: number;
-    verifyText: string;
-    mute: number;
-    online: number;
-    regdate: string;
-    lastlogin: string;
-    playerid: number;
-    warn: Array<{ reason: string; bantime: string; admin: string; }>;
-  }>({
+  const [playerData, setPlayerData] = useState<PlayerData>({
     id: NaN,
     login: '',
     access: NaN,

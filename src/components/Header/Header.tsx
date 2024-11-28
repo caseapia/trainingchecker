@@ -66,8 +66,9 @@ export const Header = () => {
                       style={element.style}
                       key={index}
                     >
-                      <span>{element.icon} {element.text}</span>
-                      {element.isNew && (
+                      <span>
+                        {element.icon} {element.text}
+                        {element.isNew && (
                         <span 
                           className={styles.badge__new} 
                           style={element.style}
@@ -76,6 +77,7 @@ export const Header = () => {
                           new
                         </span>
                       )}
+                      </span>
                     </Link>
                   ) : (
                     <span 

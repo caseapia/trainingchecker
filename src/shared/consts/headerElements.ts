@@ -1,5 +1,5 @@
 import React from "react";
-import { FaHome, FaList, FaMedal, FaUser } from "react-icons/fa";
+import { FaHome, FaList, FaMedal, FaUser, FaClipboardList } from "react-icons/fa";
 import { IoAnalyticsSharp } from "react-icons/io5";
 
 type HeaderProps = {
@@ -45,7 +45,7 @@ export const Elements: HeaderProps[] = [
     id: "worldlist",
     icon: React.createElement(FaList),
     link: "/worldlist",
-    isNew: false,
+    isNew: true,
     isDisabled: false,
   },
   {
@@ -53,7 +53,15 @@ export const Elements: HeaderProps[] = [
     id: "data-collection",
     icon: React.createElement(IoAnalyticsSharp),
     link: "/data-collection",
-    isNew: false,
+    isNew: true,
+    isDisabled: false,
+  },
+  {
+    text: "Список изменений",
+    id: "changelog",
+    icon: React.createElement(FaClipboardList),
+    link: "/changelog",
+    isNew: true,
     isDisabled: false,
   },
 ];
