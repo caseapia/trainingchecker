@@ -56,7 +56,7 @@ export const Header = () => {
         <ul className={styles.list}>
           {Elements.length > 0 &&
             Elements.map((element, index) => (
-              <BootstrapTooltip title={element.tooltipText}>
+              <BootstrapTooltip title={element.tooltipText} key={index}>
                 <li key={index}>
                   { element.isDisabled === false ? (
                     <Link 

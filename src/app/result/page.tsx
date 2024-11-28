@@ -223,7 +223,9 @@ const PlayerInfo = () => {
       <div className={styles.ResultWrapper}>
         <p><strong>ID:</strong> {playerData.id}</p>
         <p><strong>Ник:</strong> {playerData.login}</p>
-        <p><strong>Должность:</strong> {playerData.moder < 0 
+        <p><strong>Должность:</strong> 
+        {
+            playerData.moder < 0 
             ? "Младший уборщик унитаза Волека" 
             : playerData.moder === 0 
             ? "Игрок" 
@@ -236,11 +238,11 @@ const PlayerInfo = () => {
             : playerData.moder > 998 
             ? "Администратор"
             : "Игрок"
-        }</p>
+          }
+        </p>
         <p><strong>Верификация:</strong> 
-          {playerData.verify === 0
-            ? ` Нет`
-            : playerData.verify === 1
+          {
+            playerData.verify === 1
             ? ` Ютубер`
             : playerData.verify === 2
             ? ` Автор сообщества (создатель модов)`
@@ -256,7 +258,7 @@ const PlayerInfo = () => {
             ? ` 🤨`
             : playerData.verify > 7
             ? ` Неизвестно`
-            : `Нет`
+            : ` Нет`
           }
           {` (ID: ${playerData.verify})`}
         </p>
@@ -265,7 +267,8 @@ const PlayerInfo = () => {
         )}
         <p><strong>Время мута:</strong> {playerData.mute ? `${playerData.mute}` : <span style={{ color: '#91ec66e7' }}>Нет</span>}</p>
         <p><strong>Дата регистрации:</strong> 
-          {playerData.regdate === '1970-01-01 03:00:00'
+          {
+            playerData.regdate === '1970-01-01 03:00:00'
             ? ' Зарегистрирован до 2018 года'
             : ` ${playerData.regdate}`
           }
