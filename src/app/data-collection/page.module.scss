@@ -23,9 +23,6 @@
     }
     h3 {
       text-align: center;
-        &::after {
-          content: "\f0c1";
-        }
     }
     &:last-of-type {
       margin-bottom: 0;
