@@ -3,6 +3,8 @@ export const worldBlockWorlds: string[] = [
   'секс',
   'rp',
   'рп',
+  'roleplay',
+  'role play',
 ];
 
 export default worldBlockWorlds;
