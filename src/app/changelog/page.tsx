@@ -11,6 +11,7 @@ type Commit = {
   message: string;
   date: string;
   url: string;
+  author_url: string;
 }
 
 const changelog = () => {
@@ -44,6 +45,7 @@ const changelog = () => {
               ? new Date(commit.commit.author.date).toLocaleString()
               : "N/A",
             url: commit?.html_url ?? "#",
+            author_url: commit?.author?.html_url,
           }));
           setCommitData(formattedData);
           setIsLoaded(true);
@@ -73,7 +75,7 @@ const changelog = () => {
               {commitData.map((commit, index) => (
                 <Tr key={index}>
                   <Td><a href={commit.url} target='_blank'>{commit.sha}</a></Td>
-                  <Td>{commit.author === '1dontkillme' ? 'caseapia' : `${commit.author}`}</Td>
+                  <Td><a href={commit.author_url} target='_blank'>{commit.author === '1dontkillme' ? 'caseapia' : `${commit.author}`}</a></Td>
                   <Td>{commit.message}</Td>
                   <Td>{commit.date}</Td>
                 </Tr>
