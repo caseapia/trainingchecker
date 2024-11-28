@@ -73,7 +73,7 @@ const changelog = () => {
               {commitData.map((commit, index) => (
                 <Tr key={index}>
                   <Td><a href={commit.url} target='_blank'>{commit.sha}</a></Td>
-                  <Td>{commit.author}</Td>
+                  <Td>{commit.author === '1dontkillme' ? 'caseapia' : `${commit.author}`}</Td>
                   <Td>{commit.message}</Td>
                   <Td>{commit.date}</Td>
                 </Tr>
