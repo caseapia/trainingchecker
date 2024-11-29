@@ -31,6 +31,7 @@
 }
 .list {
   list-style: none;
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
   background: #1a17175c;
@@ -89,12 +90,22 @@
     }
 }
 .mobile {
+  &__header {
+    display: flex;
+    justify-content: center;
+      h1 {
+        font-size: 25px;
+      }
+      svg {
+        margin-right: 10px;
+      }
+  }
   &__button {
     appearance: none;
     border: 0;
     background: 0;
     color: white;
-    font-size: 40px;
+    font-size: 20px;
     float: right;
     display: flex;
     position: absolute;

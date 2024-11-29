@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import styles from "./Header.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { TiTabsOutline } from "react-icons/ti";
 import { motion } from "framer-motion";
 import { isMobileDevice } from "@/hooks/isMobileDevice";
 import { Elements } from "@/shared/consts/headerElements";
 import BootstrapTooltip from "../Styles/TooltipStyles";
+import { FaBars } from "react-icons/fa";
 
 export const Header = () => {
   const isMobile = isMobileDevice();
@@ -48,7 +48,7 @@ export const Header = () => {
   };
 
   return (
-    <header className={styles.header}>
+    <header className={isMobile === true ? `${styles.header} ${styles.mobile__header}` : styles.header}>
       <h1>
         TRAINING <span className={styles.redspan}>CHECKER</span>
       </h1>
@@ -107,7 +107,7 @@ export const Header = () => {
             className={styles.mobile__button}
             onClick={handleOpenMobileMenu}
           >
-            <TiTabsOutline />
+            <FaBars />
           </button>
           {isMobileMenuOpened && (
             <motion.div 
