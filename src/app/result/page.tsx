@@ -114,24 +114,12 @@ const PlayerInfo = () => {
     fetchPlayerData();
   }, [nickname]);
   
-  const refreshData = async () => {
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_USER_URL}/${nickname}`);
-  
-      if (response.status === 200) {
-        setNotifyTitle('Успешно!');
-        setNotifyIcon(<FaCheckCircle />);
-        setNotifyText(`Информация об игроке ${playerData.login} была обновлена`);
-        setNotifyType("success");
-      } else {
-        setNotifyTitle('Ошибка!');
-        setNotifyIcon(<MdError />);
-        setNotifyText(`Ошибка при получении информации об игроке ${playerData.login}`);
-        setNotifyType("error");
-      }
-    } catch (error) {
-      console.error('Ошибка при обновлении данных игрока:', error);
-    }
+  const refreshData = () => {
+    fetchPlayerData();
+    setNotifyTitle('Успешно!');
+    setNotifyIcon(<FaCheckCircle />);
+    setNotifyText(`Информация об игроке ${playerData.login} была обновлена`);
+    setNotifyType("success");
     handleOpen();
   };
 
