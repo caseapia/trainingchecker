@@ -9,8 +9,8 @@ interface Props {
 
 const PageWrapper = ({ title, children, classname }: Props) => {
   return (
-    <div className={`${classname || ''} ${styles.PageWrapper}`}>
-      <h1>{title}</h1>
+    <div className={`${classname || ""} ${styles.PageWrapper}`}>
+      {title && <h1>{title}</h1>}
       {children}
     </div>
   )
