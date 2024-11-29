@@ -142,7 +142,7 @@ const WorldList = () => {
   }
 
   return isLoaded ? (
-    <Suspense>
+    <Suspense fallback={<Lottie animationData={Preloader} />}>
       <PageWrapper title={`Список открытых миров (${result?.length})`}>
         <div className={styles.buttonGroup}>
           <Button 
@@ -200,9 +200,9 @@ const WorldList = () => {
       </Notify>
     </Suspense>
   ) : (
-    <div className={styles.PageWrapper}>
+    <PageWrapper>
       <Lottie animationData={Preloader} />
-    </div>
+    </PageWrapper>
   )
 }
 

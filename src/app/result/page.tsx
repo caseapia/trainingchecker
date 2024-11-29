@@ -14,6 +14,7 @@ import { Modal } from '@/components/Modal/Modal';
 import Link from 'next/link';
 import { Table, Thead, Tr, Td, TBody, Th } from '@/components/Table/Table';
 import { useRouter } from 'next/navigation';
+import PageWrapper from '@/components/PageWrapper/PageWrapper';
 
 type PlayerData = {
   id: number;
@@ -307,9 +308,9 @@ const PlayerInfo = () => {
           <Table width={100}>
             <Thead>
               <Tr>
-                <Td>Администратор</Td>
-                <Td>Причина</Td>
-                <Td>Дата</Td>
+                <Th>Администратор</Th>
+                <Th>Причина</Th>
+                <Th>Дата</Th>
               </Tr>
             </Thead>
             <TBody>
@@ -354,12 +355,12 @@ const PlayerInfo = () => {
 }
 
 const Result = () => (
-  <div className={styles.PageWrapper} id='result'>
+  <PageWrapper>
     <h1>Информация об игроке</h1>
     <Suspense fallback={<Lottie animationData={Preloader} />}>
       <PlayerInfo />
     </Suspense>
-  </div>
+  </PageWrapper>
 );
 
 export default Result;
