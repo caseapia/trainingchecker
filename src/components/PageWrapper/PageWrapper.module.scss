@@ -1,0 +1,10 @@
+.PageWrapper {
+  display: grid;
+  place-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+    .HeaderText {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+}

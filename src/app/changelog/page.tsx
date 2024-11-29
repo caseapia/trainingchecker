@@ -6,6 +6,7 @@ import Lottie from 'lottie-react';
 import Preloader from '@/public/assets/lotties/Preloader.json';
 import { isMobileDevice } from '@/shared/hooks/isMobileDevice';
 import { useRouter } from 'next/navigation';
+import PageWrapper from '@/components/PageWrapper/PageWrapper';
 
 type Commit = {
   sha: string;
@@ -69,10 +70,9 @@ const changelog = () => {
     getCommits();
   }, [])
   return isLoaded ? (
-    <div className={styles.PageWrapper}>
+    <PageWrapper title="Список изменений">
       {commitData ? (
         <>
-          <h1>Список изменений</h1>
           <Table>
             <Thead>
               <Tr>
@@ -95,7 +95,7 @@ const changelog = () => {
           </Table>
         </>
       ) : null}
-    </div>
+    </PageWrapper>
   ) : (
     <div className={styles.PageWrapper}>
       <Lottie animationData={Preloader} />

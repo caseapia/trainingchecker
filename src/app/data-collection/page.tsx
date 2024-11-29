@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Preloader from '@/public/assets/lotties/Preloader.json';
 import Lottie from 'lottie-react';
 import ReactMarkdown from 'react-markdown';
+import PageWrapper from '@/components/PageWrapper/PageWrapper';
 
 const dataCollection: React.FC = () => {
   const [aboutData, setAboutData] = useState<string>("");
@@ -51,8 +52,7 @@ const dataCollection: React.FC = () => {
   }, []);
 
   return isLoaded ? (
-    <div className={styles.PageWrapper}>
-      <h1>Политика сбора метрик</h1>
+    <PageWrapper title="Политика сбора метрик">
       <div className={styles.tab}>
         <h3>Эта страница покрывает следующие пункты:</h3><br />
         <strong>Политика конфиденциальности:</strong>
@@ -71,7 +71,7 @@ const dataCollection: React.FC = () => {
       <div className={styles.tab} id='why'>
         <ReactMarkdown>{why}</ReactMarkdown>
       </div>
-    </div>
+    </PageWrapper>
   ) : (
     <div className={styles.PageWrapper}>
       <Lottie animationData={Preloader} />

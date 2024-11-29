@@ -1,14 +1,11 @@
 "use client";
 import "./globals.css";
 import { Header } from "../components/Header/Header";
-import { Footer } from "@/components/Footer/Footer";
 import { Analytics } from "@vercel/analytics/react";
+import { useEffect, useState } from "react";
+import { Elements } from '@/consts/headerElements';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children, }: { children: React.ReactNode; }) {
 
   return (
     <html lang="en">
@@ -19,7 +16,6 @@ export default function RootLayout({
       <body>
         <Header />
         {children}
-        <Footer />
         <Analytics/>
       </body>
     </html>

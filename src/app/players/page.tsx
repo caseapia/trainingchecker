@@ -6,6 +6,7 @@ import { BadgeRenderer } from '@/components/BadgeRenderer/BadgeRenderer';
 import Lottie from 'lottie-react';
 import Preloader from '@/public/assets/lotties/Preloader.json';
 import { Table, Thead, Tr, Td, TBody, Th } from '@/components/Table/Table';
+import PageWrapper from '@/components/PageWrapper/PageWrapper';
 
 interface Player {
   id: number;
@@ -42,8 +43,7 @@ function Players() {
   }, []);
   return (
     <Suspense fallback={<Lottie animationData={Preloader} />}>
-      <div className={styles.PageWrapper} id='players'>
-        <h1>Список игроков в сети</h1>
+      <PageWrapper title={`Список игроков в сети (${result?.length || "Загрузка..."})`}>
         {result ? (
           <Table>
             <Thead>
@@ -69,7 +69,7 @@ function Players() {
         ) : (
           <Lottie animationData={Preloader} />
         )}
-      </div>
+      </PageWrapper>
     </Suspense>
   );
 }

@@ -12,6 +12,7 @@ import Notify from '@/components/Notify/Notify';
 import { FaCheckCircle, FaCopy } from 'react-icons/fa';
 import { MdDeblur, MdLensBlur } from "react-icons/md";
 import worldBlockWorlds from '@/consts/worldBlockWords';
+import PageWrapper from '@/components/PageWrapper/PageWrapper';
 
 interface Worlds {
   name: string;
@@ -142,8 +143,7 @@ const WorldList = () => {
 
   return isLoaded ? (
     <Suspense>
-      <div className={styles.PageWrapper}>
-        <h1>Список открытых миров</h1>
+      <PageWrapper title={`Список открытых миров (${result?.length})`}>
         <div className={styles.buttonGroup}>
           <Button 
             btnType='Primary' 
@@ -188,7 +188,7 @@ const WorldList = () => {
             )}
           </TBody>
         </Table>
-      </div>
+      </PageWrapper>
       <Notify 
         notifyState={notifyState} 
         onClose={handleClose} 

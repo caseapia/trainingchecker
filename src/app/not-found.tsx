@@ -2,13 +2,14 @@
 import { TbMoodSadFilled } from "react-icons/tb";
 import styles from './not-found.module.scss';
 import Button from "@/components/Buttons/Button";
+import PageWrapper from "@/components/PageWrapper/PageWrapper";
 
 const NotFound = () => {
 
   const report = () => window.open("https://forum.training-server.com/d/19854-training-checker-training-api-tolko-s-interfeysom", "_blank")
 
   return (
-    <div className={styles.PageWrapper}>
+    <PageWrapper>
       <div className={styles.container}>
         <div className={styles.IconContainer}>
           <TbMoodSadFilled />
@@ -20,7 +21,7 @@ const NotFound = () => {
           <Button btnType="Transparent" text="Сообщить" type="button" onClick={report} />
         </div>
       </div>
-    </div>
+    </PageWrapper>
   );
 };
 
