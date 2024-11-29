@@ -144,6 +144,13 @@
                 margin-bottom: 10px;
                 width: 0%;
                 text-align: center;
+                  a {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                  }
                   &:last-of-type {
                     margin-bottom: 0;
                   }
