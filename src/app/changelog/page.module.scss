@@ -1,5 +1,6 @@
-.NewWrapper {
+.blockWrapper {
   display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 .log {
   &__item {
@@ -7,6 +8,7 @@
     padding-top: 20px;
     display: grid;
     width: 400px;
+    margin-right: 30px;
       &__icon_container {
         display: flex;
         height: 100%;
@@ -14,6 +16,9 @@
         font-size: 100px;
         width: 100%;
         justify-content: space-around;
+      }
+      &:last-of-type {
+        margin-right: 0;
       }
   }
   &__info_container {
@@ -28,7 +33,16 @@
     background-color: #1a171721;
     justify-content: space-between;
       &__text {
-        &__date {
+        height: 69px;
+        display: inline-block;
+        h3 {
+          overflow: hidden;
+          width: 259px;
+          height: 48px;
+        }
+        &__data {
+          width: fit-content;
+          display: inline-block;
           opacity: .6;
           display: flex;
           align-items: center;
