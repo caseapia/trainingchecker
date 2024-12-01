@@ -52,7 +52,12 @@ const page = () => {
 
   return isLoaded ? (
     <PageWrapper classname={styles.NewWrapper}>
-      <ReactMarkdown>{content}</ReactMarkdown>
+      <h1 className={styles.title}>{changeLog.map((log): string => {
+        return log.title;
+      })}</h1>
+      <div className={styles.newsWrapper}>
+        <ReactMarkdown>{content}</ReactMarkdown>
+      </div>
     </PageWrapper>
   ) : (
     <PageWrapper>

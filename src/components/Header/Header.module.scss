@@ -46,6 +46,9 @@
           opacity: .5;
           cursor: default;
           color: #08c;
+            .badge__new {
+              display: inline-block;
+            }
         }
         a, .disabled_element {
           &:not(.active) {
