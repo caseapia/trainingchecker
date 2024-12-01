@@ -68,7 +68,7 @@ export const Elements: HeaderProps[] = [
     icon: React.createElement(FaClipboardList),
     link: "/changelog",
     isNew: true,
-    isDisabled: false,
+    isDisabled: true,
     isMobileAvailable: false,
   },
 ];

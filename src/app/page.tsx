@@ -138,7 +138,8 @@ export default function Home() {
                   type="text" 
                   name="nickname" 
                   ref={InputElement} 
-                  onChange={testInput} 
+                  onChange={testInput}
+                  required={true}
                 />
                 <Button 
                   btnType="Primary" 

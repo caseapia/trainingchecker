@@ -26,7 +26,7 @@ const Toast = ({ icon, children, className, type = "default", title, notifyState
   };
 
   return (
-    <div 
+    <output 
       className={`${styles.NotifyWrapper} ${notifyState ? styles.active : ''}`} 
       onClick={onClose}
     >
@@ -50,7 +50,7 @@ const Toast = ({ icon, children, className, type = "default", title, notifyState
           </div>
         </section>
       </div>
-    </div>
+    </output>
   );
 }
 

@@ -13,6 +13,7 @@ import { FaCheckCircle, FaCopy } from 'react-icons/fa';
 import { MdDeblur, MdLensBlur } from "react-icons/md";
 import worldBlockWorlds from '@/consts/worldBlockWords';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
+import BootstrapTooltip from '@/components/Styles/TooltipStyles';
 
 interface Worlds {
   name: string;
