@@ -13,16 +13,17 @@ import Link from "next/link";
 import BootstrapTooltip from "@/components/Styles/TooltipStyles";
 
 const Changelog = () => {
-  const [isLoaded, setIsLoaded] = useState<boolean>(true);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const isMobile = isMobileDevice();
   const router = useRouter();
 
   useEffect(() => {
-    if (isMobile) {
+    if (changeLog) {
+      setIsLoaded(true);
+    } else {
       setIsLoaded(false);
-      router.push("/");
     }
-  }, [isMobile, router]);
+  })
 
   return isLoaded ? (
     <PageWrapper title="Список изменений" classname={styles.NewWrapper}>
@@ -84,9 +85,9 @@ const Changelog = () => {
       </div>
     </PageWrapper>
   ) : (
-    <div className={styles.PageWrapper}>
+    <PageWrapper>
       <Lottie animationData={Preloader} />
-    </div>
+    </PageWrapper>
   );
 };
 

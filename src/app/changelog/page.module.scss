@@ -1,6 +1,8 @@
 .blockWrapper {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+    }  
 }
 .log {
   &__item {
@@ -16,6 +18,13 @@
         font-size: 100px;
         width: 100%;
         justify-content: space-around;
+      }
+      @media screen and (max-width: 767px) {
+        margin-bottom: 30px;
+        margin-right: 0;
+          :last-of-type {
+            margin-bottom: 0;
+          }
       }
       &:last-of-type {
         margin-right: 0;
