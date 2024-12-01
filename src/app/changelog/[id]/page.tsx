@@ -28,7 +28,7 @@ const page = () => {
       }
 
       const files: Array<{ name: string; download_url: string }> = await response.json();
-      const markdownFiles = files.filter((file) => filteredNews.some((log) => file.name === log.route));
+      const markdownFiles = files.filter((file) => filteredNews.some((log) => file.name === `${log.route}.md`));
 
       for (const file of markdownFiles) {
         const fileResponse = await fetch(file.download_url);
@@ -62,7 +62,7 @@ const page = () => {
           icon={<FaArrowAltCircleLeft />} 
           onClick={() => history.back()}
         />
-        {changeLog.map((log): string => {
+        {filteredNews.map((log): string => {
           return `${log.title}`;
         })}
       </h1>
