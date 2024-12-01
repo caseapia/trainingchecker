@@ -2,7 +2,7 @@ import React from "react";
 import { FaGear } from "react-icons/fa6";
 
 type Props = {
-  id: string;
+  route: string;
   title: string;
   author: string;
   date: string;
@@ -15,7 +15,7 @@ type Props = {
 
 export const changeLog: Props[] = [
   {
-    id: "version-1",
+    route: "version-1",
     title: "Версия 1",
     author: "dontkillme",
     date: "10.02.2023",

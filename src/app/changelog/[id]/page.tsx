@@ -7,6 +7,7 @@ import changeLog from '@/shared/consts/changelog';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import Lottie from 'lottie-react';
 import Preloader from '@/public/assets/lotties/Preloader.json';
+import ReactMarkdown from 'react-markdown';
 
 const page = () => {
   const { id } = useParams();
@@ -14,7 +15,7 @@ const page = () => {
   const [content, setContent] = useState<string>("");
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const filteredNews = changeLog.filter((log) => log.id === id);
+  const filteredNews = changeLog.filter((log) => log.route === id);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +26,7 @@ const page = () => {
       }
 
       const files: Array<{ name: string; download_url: string }> = await response.json();
-      const markdownFiles = files.filter((file) => filteredNews.some((log) => file.name.includes(log.id)));
+      const markdownFiles = files.filter((file) => filteredNews.some((log) => file.name.includes(log.route)));
 
       for (const file of markdownFiles) {
         const fileResponse = await fetch(file.download_url);
@@ -40,6 +41,7 @@ const page = () => {
       }
       setIsLoaded(true);
     }
+    fetchData();
   })
 
   useEffect(() => {
@@ -50,21 +52,7 @@ const page = () => {
 
   return isLoaded ? (
     <PageWrapper classname={styles.NewWrapper}>
-      {filteredNews.map((news, idx) => {
-        return (
-          <div className={styles.newsWrapper} key={idx}>
-            <section className={styles.headWrapper}>
-              <h1>{news.title}</h1>
-              Автор: {news.author}
-            </section>
-            <section className={styles.newsBody}>
-            {news.content.map((item, idx) => (
-              <div key={idx} dangerouslySetInnerHTML={{ __html: item }} />
-            ))}
-            </section>
-          </div>
-        )
-      })}
+      <ReactMarkdown>{content}</ReactMarkdown>
     </PageWrapper>
   ) : (
     <PageWrapper>
