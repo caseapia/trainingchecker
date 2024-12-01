@@ -33,7 +33,7 @@
 }
 .Transparent {
   background: transparent;
-  border: 1px solid #1339FF;
+  border: 2px solid #1339FF;
     &:enabled {
       &:hover {
         border-color: lighten(#1339ff, 7%);

@@ -1,3 +1,6 @@
+.NewWrapper {
+  display: grid;
+}
 .log {
   &__item {
     border-radius: 15px;
@@ -26,15 +29,20 @@
     justify-content: space-between;
       &__text {
         &__date {
-          color: gray;
+          opacity: .6;
           display: flex;
           align-items: center;
           vertical-align: middle;
+          margin-top: 6px;
           font-size: 14px;
             svg {
               margin-right: 5px;
             }
         }
+      }
+      &__buttonContainer {
+        display: flex;
+        align-items: center;
       }
   }
 }

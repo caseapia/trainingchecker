@@ -1,6 +1,13 @@
 .NewWrapper {
   .title {
     text-align: center !important;
+    display: flex;
+    white-space: nowrap;
+      button {
+        width: 15%;
+        margin-right: 24px;
+        font-size: 14px;
+      }
   }
   h1 {
     text-align: left !important;

@@ -8,6 +8,8 @@ import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import Lottie from 'lottie-react';
 import Preloader from '@/public/assets/lotties/Preloader.json';
 import ReactMarkdown from 'react-markdown';
+import Button from '@/components/Buttons/Button';
+import { FaArrowAltCircleLeft } from 'react-icons/fa';
 
 const page = () => {
   const { id } = useParams();
@@ -46,15 +48,24 @@ const page = () => {
 
   useEffect(() => {
     if (!filteredNews.length) {
-      router.push('../');
+      window.location.href = "../not-found";
     }
   }, [filteredNews])
 
   return isLoaded ? (
     <PageWrapper classname={styles.NewWrapper}>
-      <h1 className={styles.title}>{changeLog.map((log): string => {
-        return log.title;
-      })}</h1>
+      <h1 className={styles.title}>
+        <Button 
+          type="button" 
+          btnType="Secondary" 
+          text="Вернуться" 
+          icon={<FaArrowAltCircleLeft />} 
+          onClick={() => history.back()}
+        />
+        {changeLog.map((log): string => {
+          return `${log.title}`;
+        })}
+      </h1>
       <div className={styles.newsWrapper}>
         <ReactMarkdown>{content}</ReactMarkdown>
       </div>

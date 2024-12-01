@@ -6,22 +6,17 @@ type Props = {
   title: string;
   author: string;
   date: string;
-  content: string[];
   color: string;
   icon: React.ReactNode;
 };
 
 export const changeLog: Props[] = [
   {
-    route: "changelog_new",
+    route: "10-02-2023",
     title: "Новое оформление страницы изменений",
     author: "dontkillme",
-    date: "10.02.2023",
-    content: [
-      "<li>Первое изменение</li>",
-      "<li>Второе изменение</li>",
-    ],
-    color: "green",
+    date: "10-02-2023",
+    color: "#f01f4b",
     icon: React.createElement(FaGear),
   },
 ];

@@ -24,7 +24,7 @@ const Changelog = () => {
   }, [isMobile, router]);
 
   return isLoaded ? (
-    <PageWrapper title="Список изменений">
+    <PageWrapper title="Список изменений" classname={styles.NewWrapper}>
       {changeLog.length > 0 ? (
         changeLog.map((log, index) => (
           <div
@@ -44,7 +44,7 @@ const Changelog = () => {
               </div>
               <div className={styles.log__info_container__buttonContainer}>
                 <Link href={`/changelog/${log.route}`}>
-                  <Button btnType="Transparent" text="Читать" type="button" />
+                  <Button btnType="Transparent" text="Читать" type="button" style={{ borderColor: `${log.color}` }} />
                 </Link>
               </div>
             </div>
