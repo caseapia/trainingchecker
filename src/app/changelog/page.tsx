@@ -46,9 +46,27 @@ const Changelog = () => {
                   >
                     <h3 className={styles.log__info_container__text__title}>{log.title}</h3>
                   </BootstrapTooltip>
-                  <span className={styles.log__info_container__text__data}>
-                    <FaClock /> {log.date}&nbsp;<FaUser /> {log.author}
-                  </span>
+                  <section className={styles.log__info_container__text__data}>
+                    <BootstrapTooltip 
+                      title="Дата" 
+                      placement="top" 
+                      enterDelay={0}
+                    >
+                      <span className={styles.log__info_container__text__data__date}>
+                        <FaClock /> {log.date}
+                      </span>
+                    </BootstrapTooltip>
+                    &nbsp;
+                    <BootstrapTooltip 
+                      title="Автор"
+                      placement="top" 
+                      enterDelay={0}
+                    >
+                      <span className={styles.log__info_container__text__data__author}>
+                        <FaUser /> {log.author}
+                      </span>
+                    </BootstrapTooltip>
+                  </section>
                 </div>
                 <div className={styles.log__info_container__buttonContainer}>
                   <Link href={`/changelog/${log.route}`}>
