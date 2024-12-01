@@ -13,7 +13,7 @@ type Props = {
 
 export const changeLog: Props[] = [
   {
-    route: "12-01-2024",
+    route: "changelog-new",
     title: "Новое оформление страницы изменений",
     author: "dontkillme",
     date: "12-01-2024",
@@ -21,7 +21,7 @@ export const changeLog: Props[] = [
     icon: React.createElement(FaGear),
   },
   {
-    route: "12-01-2024-1",
+    route: "old-updates",
     title: "Обновления, опубликованные до новой системы патчноутов",
     author: "dontkillme",
     date: "12-01-2024",

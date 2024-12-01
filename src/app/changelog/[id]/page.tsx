@@ -28,7 +28,7 @@ const page = () => {
       }
 
       const files: Array<{ name: string; download_url: string }> = await response.json();
-      const markdownFiles = files.filter((file) => filteredNews.some((log) => file.name.includes(log.route)));
+      const markdownFiles = files.filter((file) => filteredNews.some((log) => file.name === log.route));
 
       for (const file of markdownFiles) {
         const fileResponse = await fetch(file.download_url);
