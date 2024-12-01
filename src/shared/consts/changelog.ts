@@ -11,12 +11,10 @@ type Props = {
   icon: React.ReactNode;
 };
 
-
-
 export const changeLog: Props[] = [
   {
-    route: "version-1",
-    title: "Версия 1",
+    route: "changelog_new",
+    title: "Новое оформление страницы изменений",
     author: "dontkillme",
     date: "10.02.2023",
     content: [

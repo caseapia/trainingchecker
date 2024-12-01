@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import { changeLog } from "@/consts/changelog";
 import Button from "@/components/Buttons/Button";
-import { FaClock } from "react-icons/fa6";
+import { FaClock, FaUser } from "react-icons/fa6";
 import Link from "next/link";
 
 const Changelog = () => {
@@ -39,7 +39,7 @@ const Changelog = () => {
               <div className={styles.log__info_container__text}>
                 <h3 className={styles.log__info_container__text__title}>{log.title}</h3>
                 <p className={styles.log__info_container__text__date}>
-                  <FaClock /> {log.date}
+                  <FaClock /> {log.date}&nbsp;<FaUser /> {log.author}
                 </p>
               </div>
               <div className={styles.log__info_container__buttonContainer}>
@@ -50,7 +50,11 @@ const Changelog = () => {
             </div>
           </div>
         ))
-      ) : null}
+      ) : (
+        <div className={styles.log__empty}>
+          <p>Список изменений пуст</p>
+        </div>
+      )}
     </PageWrapper>
   ) : (
     <div className={styles.PageWrapper}>
