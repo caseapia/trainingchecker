@@ -13,6 +13,14 @@ type Props = {
 
 export const changeLog: Props[] = [
   {
+    route: "6-12_changelog",
+    title: "Бейджи и уведомления",
+    author: "dontkillme",
+    date: "06-12-2024",
+    color: "rgb(31 240 145)",
+    icon: React.createElement(FaHammer),
+  },
+  {
     route: "changelog-new",
     title: "Новое оформление страницы изменений",
     author: "dontkillme",
