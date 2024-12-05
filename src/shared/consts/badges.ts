@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { FaRobot, FaUserCog, FaUserSlash } from "react-icons/fa";
+import { FaRobot, FaUserCog, FaUserSlash, FaSatellite } from "react-icons/fa";
 import { FaCode, FaCrown, FaMedal, FaUserShield, FaYoutube } from "react-icons/fa6";
 
 type BadgeProps = {
@@ -122,8 +122,8 @@ export const playerBadges: BadgeProps[] = [
     id: 7,
     title: "Легион Хроноса",
     category: "player",
-    description: "Легион Хроноса — это объединение, воплощающее власть, контроль и абсолютный порядок. Управляемый системой Хронос, легион стремится к доминированию над временем и пространством, обеспечивая строгую дисциплину и непреклонную власть.",
-    icon: React.createElement(FaRobot),
+    description: "Объединение, воплощающее власть, контроль и абсолютный порядок. Управляемый системой Хронос, легион стремится к доминированию над временем и пространством, обеспечивая строгую дисциплину и непреклонную власть.",
+    icon: React.createElement(FaSatellite),
     color: "#b22424",
     nicknameIncludes: "czo.ooo",
     textColor: "#b22424"
