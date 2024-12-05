@@ -7,7 +7,6 @@ import Lottie from 'lottie-react';
 import Preloader from '@/public/assets/lotties/Preloader.json';
 import Button from '@/components/Buttons/Button';
 import { HiRefresh } from "react-icons/hi";
-import Notify from "@/components/Notify/Notify";
 import { FaCheckCircle, FaCopy, FaHammer } from 'react-icons/fa';
 import { MdError } from "react-icons/md";
 import { Modal } from '@/components/Modal/Modal';
@@ -15,6 +14,7 @@ import Link from 'next/link';
 import { Table, Thead, Tr, Td, TBody, Th } from '@/components/Table/Table';
 import { useRouter } from 'next/navigation';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
+import { toast } from '@/utils/toast';
 
 type PlayerData = {
   id: number;
@@ -54,11 +54,6 @@ const PlayerInfo = () => {
   const [isNotFound, setIsNotFound] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isNoAccess, setIsNoAccess] = useState<boolean>(false);
-  const [notifyState, setNotifyState] = useState<boolean>(false);
-  const [notifyText, setNotifyText] = useState<string>('');
-  const [notifyTitle, setNotifyTitle] = useState<string>('');
-  const [notifyIcon, setNotifyIcon] = useState<ReactNode>();
-  const [notifyType, setNotifyType] = useState<string>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -116,11 +111,7 @@ const PlayerInfo = () => {
   
   const refreshData = () => {
     fetchPlayerData();
-    setNotifyTitle('Успешно!');
-    setNotifyIcon(<FaCheckCircle />);
-    setNotifyText(`Информация об игроке ${playerData.login} была обновлена`);
-    setNotifyType("success");
-    handleOpen();
+    toast.success(`Информация об игроке ${playerData.login} была обновлена`, { icon: <FaCheckCircle />, title: "Успешно!" })
   };
 
   useEffect(() => {
@@ -183,9 +174,6 @@ const PlayerInfo = () => {
     return "дней";
   };
 
-  const handleOpen = () => setNotifyState(true);
-  const handleClose = () => setNotifyState(false);
-
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   
@@ -196,17 +184,10 @@ const PlayerInfo = () => {
         .join(';\n');
       const punishmentsCount = playerData.warn.length;
       navigator.clipboard.writeText(`Список наказаний ${playerData.login} (${playerData.id})\n\n${punishments}\n\nВсего наказаний: ${punishmentsCount}`);
-      setNotifyTitle('Данные о наказаниях скопированы');
-      setNotifyIcon(<FaCheckCircle />);
-      setNotifyText(`Наказания игрока ${playerData.login} были помещены в ваш буфер обмена`);
-      setNotifyType("success");
+      toast.success(`Наказания игрока ${playerData.login} были помещены в ваш буфер обмена`, { icon: <FaCheckCircle />, title: "Данные о наказаниях скопированы" })
     } else {
-      setNotifyTitle('Ошибка!');
-      setNotifyIcon(<MdError />);
-      setNotifyText(`Игрок ${playerData.login} не имеет наказаний`);
-      setNotifyType("error");
+      toast.error(`Игрок ${playerData.login} не имеет наказаний`, { icon: <MdError />, title: "Ошибка!" })
     }
-    handleOpen();
   }
 
   return isLoaded ? (
@@ -313,15 +294,6 @@ const PlayerInfo = () => {
           </Table>
         ) : <p style={{ color: 'var(--color-danger)', textAlign: 'center' }}>У этого игрока нет наказаний</p>}
       </Modal>
-      <Notify 
-        notifyState={notifyState} 
-        onClose={handleClose} 
-        title={notifyTitle} 
-        icon={notifyIcon} 
-        type={notifyType}
-      >
-        {notifyText}
-      </Notify>
     </>
   ) : isNotFound ? (
     <div className={styles.PageWrapper}>

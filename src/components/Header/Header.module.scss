@@ -117,56 +117,36 @@
     right: 0;
     margin-right: 7px;
     margin-bottom: 2px;
+    transition: transform .3s ease;
   }
   &__menu {
-    height: 100%;
-    background-color: black;
-    width: 0%;
-    overflow: hidden;
-    position: absolute;
-    left: 50%;
-    opacity: 0;
-    top: 50%;
-    transform: translate(-50%, -50%);
     z-index: 999999;
-      &__header {
-        margin-top: 30px;
-        opacity: 1;
-        margin-right: 20px;
-      }
-      &__body {
-        width: 100%;
+    background-color: rgb(15, 15, 15);
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+      &__list {
+        list-style: none;
+        margin: 0;
         display: grid;
-        place-items: center;
-        height: 50%;
-          &__list {
-            list-style-type: none;
-            padding: 0;
-            width: 0%;
-              li {
-                background-color: #1a18187a;
-                padding: 15px;
-                margin-bottom: 10px;
-                width: 0%;
-                text-align: center;
-                  a {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    vertical-align: middle;
-                    white-space: nowrap;
-                  }
-                  &:last-of-type {
-                    margin-bottom: 0;
-                  }
-                  &.active {
-                    background-color: lighten(#1a18187a, 10%);
-                     a {
-                      color: #ccc;
-                     }
-                  }
+        width: 100%;
+        justify-items: center;
+        align-content: center;
+          li {
+            margin-bottom: 7px;
+            width: 100%;
+            display: flex;
+            padding: 7px;
+            justify-content: center;
+            background-color: lighten(#1a17175c, 5%);
+            border-radius: 15px;
+            white-space: nowrap;
+            flex-wrap: nowrap;
           }
-        }
       }
   }
 }

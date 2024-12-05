@@ -8,12 +8,11 @@ import Chip from '@/components/Chip/Chip';
 import { FaBookmark } from "react-icons/fa6";
 import { GoCpu, GoAlertFill } from "react-icons/go";
 import Button from '@/components/Buttons/Button';
-import Notify from '@/components/Notify/Notify';
 import { FaCheckCircle, FaCopy } from 'react-icons/fa';
-import { MdDeblur, MdLensBlur } from "react-icons/md";
+import { MdDeblur, MdError, MdLensBlur } from "react-icons/md";
 import worldBlockWorlds from '@/consts/worldBlockWords';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
-import BootstrapTooltip from '@/components/Styles/TooltipStyles';
+import { toast } from '@/utils/toast';
 
 interface Worlds {
   name: string;
@@ -35,14 +34,16 @@ const WorldList = () => {
   const [originalWorlds, setOriginalWorlds] = useState<Worlds[] | null>(null);
 
   useEffect(() => {
+    let timeoutId: any;
+  
     const getWorlds = async () => {
       const url = process.env.NEXT_PUBLIC_API_WORLDLIST_URL;
-
+  
       if (!url) {
         setIsLoaded(false);
         return;
       }
-
+  
       try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -50,16 +51,29 @@ const WorldList = () => {
         }
         const data = await response.json();
         setResult(data.worlds);
-        setOriginalWorlds(data.worlds)
+        setOriginalWorlds(data.worlds);
         setIsLoaded(true);
       } catch (err) {
         console.error('Error:', err);
         setIsLoaded(false);
+      } finally {
+        clearTimeout(timeoutId);
       }
-    }
-
+    };
+  
+    timeoutId = setTimeout(() => {
+      if (!isLoaded) {
+        toast.error(`Произошла непредвиденная ошибка`, { icon: <MdError />, title: 'Ошибка' });
+        getWorlds();
+      }
+    }, 5000);
+  
     getWorlds();
-  }, [])
+  
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
 
   const transformWorldName = (text: string) => {
     const regex = /{(.*?)}/g;
@@ -190,15 +204,6 @@ const WorldList = () => {
           </TBody>
         </Table>
       </PageWrapper>
-      <Notify 
-        notifyState={notifyState} 
-        onClose={handleClose} 
-        title={notifyTitle} 
-        icon={notifyIcon} 
-        type={notifyType}
-      >
-        {notifyText}
-      </Notify>
     </Suspense>
   ) : (
     <PageWrapper>

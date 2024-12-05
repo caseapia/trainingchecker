@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Header.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -14,6 +14,7 @@ export const Header = () => {
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState<boolean>(false);
   const [activePage, setActivePage] = useState<string>("");
   const router = useRouter();
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const crntPage = window.location.pathname.split('/')[1];
@@ -25,13 +26,7 @@ export const Header = () => {
   }, []);
 
   const handleOpenMobileMenu = () => {
-    setIsMobileMenuOpened((prev) => {
-      const isOpen = !prev;
-      if (isOpen) {
-        document.body.style.overflow = isOpen? "hidden" : "auto";
-      }
-      return isOpen;
-    })
+    setIsMobileMenuOpened(!isMobileMenuOpened);
   };
 
   const swapPage = (page: string) => {
@@ -105,44 +100,54 @@ export const Header = () => {
         <>
           <button
             className={styles.mobile__button}
+            ref={buttonRef}
             onClick={handleOpenMobileMenu}
           >
             <FaBars />
           </button>
           {isMobileMenuOpened && (
-            <motion.div 
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0 }}
               className={styles.mobile__menu}
-              layout
-              animate={{ width: "100%", opacity: 1 }}
             >
-              <div className={styles.mobile__menu__header}>
-                <button className={styles.mobile__button} onClick={handleOpenMobileMenu}>X</button>
-              </div>
-              <div className={styles.mobile__menu__body}>
-              <motion.ul className={styles.mobile__menu__body__list} animate={{ width: "100%" }}>
-                {Elements.length > 0 && Elements.map((element, index) => (
-                  element.isMobileAvailable && (
-                    <motion.li 
-                      key={index}
-                      style={element.style}
-                      className={activePage === element.id ? styles.active : ""}
-                      animate={{ width: "100%" }}
-                    >
-                      <Link 
+              <ul className={styles.mobile__menu__list}>
+                {Elements.length > 0 && (
+                  Elements.map((element, idx) => (
+                    <li key={idx} className={activePage === element.id ? styles.active : ""}>
+                      {!element.isDisabled ? (
+                        <Link 
                         href={element.link}
                         onClick={() => swapPage(element.id)}
                         style={element.style}
                       >
-                        {element.icon} {element.text}
-                        {element.isNew && (
-                          <span className={styles.badge__new}>NEW</span>
-                        )}
+                        <span>
+                          {element.icon} {element.text}
+                          {element.isNew && (
+                            <span 
+                              className={styles.badge__new} 
+                              style={element.style}
+                              key={idx}
+                            >
+                              new
+                            </span>
+                          )}
+                        </span>
                       </Link>
-                    </motion.li>
-                  )
-                  ))}
-              </motion.ul>
-              </div>
+                      ) : (
+                        <span 
+                          className={styles.disabled_element}
+                          style={element.style}
+                          key={idx}
+                        >
+                          {element.icon} {element.text} {element.isNew && <span className={styles.badge__new} style={element.style} key={idx}>new</span>}
+                        </span>
+                      )}
+                    </li>
+                  ))
+                )}
+              </ul>
             </motion.div>
           )}
         </>

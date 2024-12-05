@@ -9,16 +9,12 @@ import { TbFaceIdError } from "react-icons/tb";
 import { BiLogoGithub } from "react-icons/bi";
 import Lottie from 'lottie-react';
 import Preloader from '@/public/assets/lotties/Preloader.json';
-import Notify from '@/components/Notify/Notify';
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
+import { toast } from "@/utils/toast";
 
 export default function Home() {
   const [lastUpdate, setLastUpdate] = useState<string>('');
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [notifyState, setNotifyState] = useState<boolean>(false);
-  const [notifyText, setNotifyText] = useState<string>('');
-  const [notifyTitle, setNotifyTitle] = useState<string>('');
-  const [notifyIcon, setNotifyIcon] = useState<ReactNode>();
   const InputElement = useRef<HTMLInputElement>(null);
   const ButtonElement = useRef<HTMLButtonElement>(null);
   const FormElement = useRef<HTMLFormElement>(null);
@@ -53,34 +49,19 @@ export default function Home() {
     commits();
   }, []);
 
-  const handleOpen = () => {
-    setNotifyState(true);
-  }
-  const handleClose = () => {
-    setNotifyState(false);
-    setTimeout(() => {
-      setNotifyText('');
-      setNotifyTitle('');
-      setNotifyIcon('');
-    }, 5000);
-  }
-
   function validation(event: React.FormEvent) {
     if (InputElement.current && InputElement.current.value.length === 0) {
       event.preventDefault();
-      setNotifyText('Для выполнения поиска вы должны заполнить поле никнейма игрока');
-      setNotifyTitle('Вы не заполнили поле никнейма');
-      setNotifyIcon(<TbFaceIdError />)
       if (ButtonElement.current) {
         ButtonElement.current.disabled = true;
       }
-      handleOpen();
+      toast.error('Вы не заполнили поле никнейма', { icon: <TbFaceIdError />, title: "Поле никнейма не заполнено" })
     } else {
       FormElement.current?.submit;
       if (ButtonElement.current) {
         ButtonElement.current.disabled = false;
       }
-      handleClose();
+      toast.clear();
     }
   }
   const testInput = () => {
@@ -89,23 +70,18 @@ export default function Home() {
       const textContent = InputElement.current.value || '';
       if (cyrillicPattern.test(textContent)) {
         InputElement.current.value = '';
-        setNotifyTitle('Ошибка');
-        setNotifyText('Никнейм не может состоять из символов кириллицы');
-        setNotifyIcon(<TbFaceIdError />)
+        toast.error('Никнейм не может состоять из символов кириллицы', { icon: <TbFaceIdError />, title: "Ошибка" })
         if (ButtonElement.current) {
           ButtonElement.current.disabled = true;
         }
-        handleOpen();
+        toast.clear();
       } else if (InputElement.current && InputElement.current.value.length === 0) {
-        setNotifyTitle('Ошибка');
-        setNotifyText('Поле никнейма не может быть пустым');
-        setNotifyIcon(<TbFaceIdError />)
+        toast.error('Поле никнейма не может быть пустым', { icon: <TbFaceIdError />, title: "Ошибка" })
         if (ButtonElement.current) {
           ButtonElement.current.disabled = true;
         }
-        handleOpen();
       } else {
-        handleClose();
+        toast.clear();
         if (ButtonElement.current) {
           ButtonElement.current.disabled = false;
         }
@@ -127,7 +103,7 @@ export default function Home() {
                 <p>Последнее обновление произошло: {lastUpdate}</p>
               </div>
               <form 
-                action="./result" 
+                action="./player" 
                 method="get" 
                 className={styles.FormContainer} 
                 ref={FormElement}
@@ -158,9 +134,6 @@ export default function Home() {
           }
         </PageWrapper>
       </Suspense>
-      <Notify title={notifyTitle} notifyState={notifyState} onClose={handleClose} type="error" icon={notifyIcon}>
-          {notifyText}
-      </Notify>
     </>
   );
 }
