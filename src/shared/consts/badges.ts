@@ -125,7 +125,7 @@ export const playerBadges: BadgeProps[] = [
     description: "Легион Хроноса — это объединение, воплощающее власть, контроль и абсолютный порядок. Управляемый системой Хронос, легион стремится к доминированию над временем и пространством, обеспечивая строгую дисциплину и непреклонную власть.",
     icon: React.createElement(FaRobot),
     color: "#b22424",
-    nicknameIncludes: ".czo.ooo",
+    nicknameIncludes: "czo.ooo",
     textColor: "#b22424"
   },
 ]
