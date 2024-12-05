@@ -15,6 +15,7 @@ type BadgeProps = {
   maxAccId?: number;
   minRegDate?: string;
   maxRegDate?: string;
+  nicknameIncludes?: string | string[];
   color: string;
   icon: ReactNode;
   textColor: string;
@@ -114,8 +115,28 @@ export const playerBadges: BadgeProps[] = [
     description: "Этот аккаунт управляется не человеком, а ботом и является официальным пользовательским ботом TRAINING SANDBOX",
     icon: React.createElement(FaRobot),
     color: "rgb(144, 203, 255)",
+    accid: [605187, 659622, 659678],
+    textColor: "rgb(144, 203, 255)"
+  },
+  {
+    id: 6,
+    title: "Бот",
+    category: "player",
+    description: "Этот аккаунт управляется не человеком, а ботом и является официальным пользовательским ботом TRAINING SANDBOX",
+    icon: React.createElement(FaRobot),
+    color: "rgb(144, 203, 255)",
     accid: 605187,
     textColor: "rgb(144, 203, 255)"
+  },
+  {
+    id: 7,
+    title: "Легион Хроноса",
+    category: "player",
+    description: "Легион Хроноса — это объединение, воплощающее власть, контроль и абсолютный порядок. Управляемый системой Хронос, легион стремится к доминированию над временем и пространством, обеспечивая строгую дисциплину и непреклонную власть.",
+    icon: React.createElement(FaRobot),
+    color: "#b22424",
+    nicknameIncludes: ".czo.ooo",
+    textColor: "#b22424"
   },
 ]
 export const allBadges = [

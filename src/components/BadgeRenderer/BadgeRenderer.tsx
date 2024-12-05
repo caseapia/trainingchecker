@@ -45,6 +45,14 @@ const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player, onBadgeStatusChan
       (badge.minRegDate !== undefined && !(player.regdate ?? '').includes(badge.minRegDate)) ||
       (badge.maxRegDate !== undefined && (player.regdate ?? '').includes(badge.maxRegDate))
     ) return false;
+    if (
+      badge.nicknameIncludes !== undefined &&
+      (
+        Array.isArray(badge.nicknameIncludes)
+          ? badge.nicknameIncludes.some(nick => (player.login ?? '').includes(nick))
+          : !(player.login ?? '').includes(badge.nicknameIncludes)
+      )
+    ) return false;
   
     return true;
 
