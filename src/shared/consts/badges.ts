@@ -119,16 +119,6 @@ export const playerBadges: BadgeProps[] = [
     textColor: "rgb(144, 203, 255)"
   },
   {
-    id: 6,
-    title: "Бот",
-    category: "player",
-    description: "Этот аккаунт управляется не человеком, а ботом и является официальным пользовательским ботом TRAINING SANDBOX",
-    icon: React.createElement(FaRobot),
-    color: "rgb(144, 203, 255)",
-    accid: 605187,
-    textColor: "rgb(144, 203, 255)"
-  },
-  {
     id: 7,
     title: "Легион Хроноса",
     category: "player",
