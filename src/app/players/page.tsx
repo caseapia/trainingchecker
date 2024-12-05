@@ -58,7 +58,7 @@ function Players() {
                 <Tr key={player.id}>
                   <Td>{player.playerid}</Td>
                   <Td>
-                    <Link style={{ marginRight: '6px' }} href={`../result?nickname=${player.login}`}>{player.login}</Link>
+                    <Link style={{ marginRight: '6px' }} href={`../player?nickname=${player.login}`}>{player.login}</Link>
                     <BadgeRenderer player={player} />
                   </Td>
                   <Td>{player.lastlogin}</Td>
