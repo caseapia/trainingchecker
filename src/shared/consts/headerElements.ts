@@ -69,6 +69,6 @@ export const Elements: HeaderProps[] = [
     link: "/changelog",
     isNew: true,
     isDisabled: false,
-    isMobileAvailable: false,
+    isMobileAvailable: true,
   },
 ];
