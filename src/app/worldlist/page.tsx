@@ -25,11 +25,6 @@ interface Worlds {
 const WorldList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [result, setResult] = useState<Worlds[] | null>(null)
-  const [notifyState, setNotifyState] = useState<boolean>(false);
-  const [notifyText, setNotifyText] = useState<string>('');
-  const [notifyTitle, setNotifyTitle] = useState<string>('');
-  const [notifyIcon, setNotifyIcon] = useState<React.ReactNode>();
-  const [notifyType, setNotifyType] = useState<string>('');
   const [sensMode, setSensMode] = useState<boolean>(false);
   const [originalWorlds, setOriginalWorlds] = useState<Worlds[] | null>(null);
 
@@ -98,9 +93,6 @@ const WorldList = () => {
     return elements;
   };
 
-  const handleOpen = () => setNotifyState(true);
-  const handleClose = () => setNotifyState(false);
-
   const copyWorlds = () => {
     if (result && result.length > 0) {
       const toCopyContent = result
@@ -121,11 +113,7 @@ const WorldList = () => {
       const isSensModeActive = sensMode === true ? 'Чувствительный режим включен' : '';
 
       navigator.clipboard.writeText(`${isSensModeActive}\n\n${toCopyContent}\n\nВсего миров: ${worldsCounter}`);
-      setNotifyTitle('Успешно');
-      setNotifyType('success')
-      setNotifyText('Список открытых миров скопирован в ваш буфер обмена');
-      setNotifyIcon(<FaCheckCircle />)
-      handleOpen();
+      toast.success('Список открытых миров скопирован в ваш буфер обмена', { icon: <FaCheckCircle />, title: 'Успешно' });
     }
   };
 
@@ -139,19 +127,11 @@ const WorldList = () => {
         );
         setResult(filteredWorlds);
         setSensMode(true);
-        setNotifyTitle('Успешно');
-        setNotifyType('success')
-        setNotifyText('Чувствительный режим включен');
-        setNotifyIcon(<FaCheckCircle />);
-        handleOpen();
+        toast.success('Чувствительный режим включен', { icon: <FaCheckCircle />, title: 'Успешно' });
       } else {
         setResult(originalWorlds);
         setSensMode(false);
-        setNotifyTitle('Успешно');
-        setNotifyType('success')
-        setNotifyText('Чувствительный режим выключен');
-        setNotifyIcon(<FaCheckCircle />);
-        handleOpen();
+        toast.success('Чувствительный режим выключен', { icon: <FaCheckCircle />, title: 'Успешно' });
       }
     }
   }
