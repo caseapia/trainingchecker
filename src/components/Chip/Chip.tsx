@@ -1,16 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from './Chip.module.scss'
 import { useGenerateId } from '@/shared/hooks/useGenerateId';
-
-interface Props {
-  label: string;
-  className?: string;
-  size?: 'small' | 'medium' | 'large';
-  icon?: React.ReactNode;
-  iconPosition?: 'left' | 'right';
-  iconSize?: number;
-  image?: string;
-}
 
 const Chip = ({ label, className, size = "medium", icon, iconPosition = "left", iconSize, image }: Props) => {
   const id = useGenerateId();

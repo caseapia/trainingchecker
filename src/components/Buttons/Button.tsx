@@ -1,24 +1,29 @@
-import { ReactNode, useEffect, useState, forwardRef } from 'react';
+import { forwardRef } from 'react';
 import styles from './Button.module.scss';
 import { motion } from "framer-motion";
+import Props from './types';
 import { useGenerateId } from '@/shared/hooks/useGenerateId';
 
-interface Props {
-  icon?: ReactNode;
-  btnType: "Primary" | "Transparent" | "Secondary" | "Danger";
-  text: string;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  onFocus?: (event: React.FocusEvent<HTMLButtonElement>) => void;
-  type: "submit" | "reset" | "button";
-  disabled?: boolean;
-  classname?: string;
-  style?: React.CSSProperties;
-}
+const buttonVariants = {
+  whileTap: {
+    scale: 0.95,
+  },
+};
 
 const Button = forwardRef<HTMLButtonElement, Props>(
-  ({ icon, btnType, text, onClick, onFocus, type, disabled = false, classname, style }, ref) => {
-    const string = useGenerateId();
-
+  ({ 
+      icon, 
+      btnType, 
+      text, 
+      onClick, 
+      onFocus, 
+      type, 
+      disabled = false, 
+      classname, 
+      style 
+    }, ref
+  ) => {
+    const id = useGenerateId();
     const getStatus = (btnType: string): string => {
       switch (btnType) {
         case 'Primary':
@@ -32,7 +37,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         default:
           return styles.Primary;
       }
-    }
+    };
 
     return (
       <motion.button
@@ -42,15 +47,13 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         disabled={disabled}
         className={`${styles.button} ${getStatus(btnType)} ${classname || ''}`}
         style={style}
-        id={string}
-        layout
-        whileTap={{ scale: .95 }}
+        whileTap={buttonVariants.whileTap}
         ref={ref}
+        id={id}
       >
         <span>
-          {icon && (<> {icon} </>)} {text}
+          {icon && <>{icon}</>} {text}
         </span>
-       
       </motion.button>
     );
   }

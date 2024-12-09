@@ -58,10 +58,10 @@ const WorldList = () => {
   
     timeoutId = setTimeout(() => {
       if (!isLoaded) {
-        toast.error(`Произошла непредвиденная ошибка`, { icon: <MdError />, title: 'Ошибка' });
+        toast.error(`Превышено время ожидания запроса`, { icon: <MdError />, title: 'Непредвиденная ошибка' });
         getWorlds();
       }
-    }, 5000);
+    }, 8000);
   
     getWorlds();
   

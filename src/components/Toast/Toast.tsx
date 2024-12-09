@@ -3,6 +3,17 @@ import { useToast } from './context/ToastContext';
 import styles from './Toast.module.scss';
 import { AnimatePresence, motion } from "framer-motion";
 
+const ToastAnimation = {
+  initial: {
+    bottom: '-80px',
+    scale: .9,
+  },
+  animate: {
+    bottom: '20px',
+    scale: 1,
+  },
+}
+
 const Toast = () => {
   const { toasts, removeToast } = useToast();
 
@@ -14,9 +25,9 @@ const Toast = () => {
             key={toast.id} 
             className={`${styles.Toast} ${toast.type === "success" ? styles.success : toast.type === "error" ? styles.error : styles.default} ${toast.className || ''}`}
             onClick={() => removeToast(toast.id)}
-            initial={{ bottom: '-80px', scale: 0.9 }}
-            animate={{ bottom: '20px', scale: 1 }}
-            exit={{ bottom: '-80px', scale: 0.9 }}
+            initial={ ToastAnimation.initial }
+            animate={ ToastAnimation.animate }
+            exit={ ToastAnimation.initial }
           >
             <section className={styles.IconContainer}>
               {toast.icon && toast.icon}

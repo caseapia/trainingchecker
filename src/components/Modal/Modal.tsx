@@ -3,20 +3,40 @@ import styles from './Modal.module.scss';
 import Button from '../Buttons/Button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
+import Props from './types';
 
-interface Props {
-  title?: string;
-  children: React.ReactNode;
-  className?: string;
-  isOpen: boolean; 
-  firstButtonIcon?: React.ReactNode;
-  firstButtonContent?: string;
-  firstButtonAction?: () => void;
-  secondButtonIcon?: React.ReactNode;
-  secondButtonContent?: string;
-  secondButtonAction?: () => void;
-  onClose: () => void;
-}
+const backdropVariants = {
+  hidden: { 
+    opacity: 0 
+  },
+  visible: { 
+    opacity: 1 
+  },
+  exit: { 
+    opacity: 0 
+  },
+};
+
+const modalVariants = {
+  hidden: { 
+    scale: 0.9, 
+    opacity: 0 
+  },
+  visible: { 
+    scale: 1, 
+    opacity: 1, 
+    transition: { 
+      duration: 0.2 
+    } 
+  },
+  exit: { 
+    scale: 0.9, 
+    opacity: 0, 
+    transition: { 
+      duration: 0.2 
+    } 
+  },
+};
 
 export const Modal = ({
   title,
@@ -41,66 +61,63 @@ export const Modal = ({
     };
 
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('mouseup', handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-  }, [isOpen, onClose])
-
-  if (!isOpen) return null;
+      document.removeEventListener('mouseup', handleClickOutside);
+    };
+  }, [isOpen, onClose]);
 
   return (
     <AnimatePresence>
-      {isOpen ? 
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className={styles.FadeOut}
-      >
-        <motion.div 
-          className={`${styles.Modal} ${className || ''}`} 
-          key="box" 
-          initial={{ scale: 0 }} 
-          animate={{ scale: 1 }}
-          exit={{ scale: 0 }}
-          ref={modalRef}
+      {isOpen && (
+        <motion.div
+          className={styles.FadeOut}
+          variants={backdropVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
         >
-          <div className={styles.Header}>
-            {title && <div className={styles.Title}>{title}</div>}
-            <motion.div className={styles.Close}>
-              <FaXmark onClick={onClose} />
-            </motion.div>
-          </div>
-          <div className={styles.Body}>{children}</div>
-          <div className={styles.Footer}>
-            {(firstButtonContent || secondButtonContent) && (
-              <div className={styles.ButtonGroup}>
-                {firstButtonContent && (
-                  <Button
-                    btnType="Primary"
-                    text={firstButtonContent}
-                    type="button"
-                    icon={firstButtonIcon || null}
-                    onClick={firstButtonAction}
-                  />
-                )}
-                {secondButtonContent && (
-                  <Button
-                    btnType="Secondary"
-                    text={secondButtonContent}
-                    type="button"
-                    icon={secondButtonIcon || null}
-                    onClick={secondButtonAction}
-                  />
-                )}
+          <motion.div
+            className={`${styles.Modal} ${className || ''}`}
+            variants={modalVariants}
+            ref={modalRef}
+          >
+            <div className={styles.Header}>
+              {title && <div className={styles.Title}>{title}</div>}
+              <div className={styles.Close} onClick={onClose}>
+                <FaXmark />
               </div>
-            )}
-          </div>
+            </div>
+            <div className={styles.Body}>{children}</div>
+            <div className={styles.Footer}>
+              {(firstButtonContent || secondButtonContent) && (
+                <div className={styles.ButtonGroup}>
+                  {firstButtonContent && (
+                    <Button
+                      btnType="Primary"
+                      text={firstButtonContent}
+                      type="button"
+                      icon={firstButtonIcon || null}
+                      onClick={firstButtonAction}
+                    />
+                  )}
+                  {secondButtonContent && (
+                    <Button
+                      btnType="Secondary"
+                      text={secondButtonContent}
+                      type="button"
+                      icon={secondButtonIcon || null}
+                      onClick={secondButtonAction}
+                    />
+                  )}
+                </div>
+              )}
+            </div>
+          </motion.div>
         </motion.div>
-      </motion.div> : null}
+      )}
     </AnimatePresence>
   );
 };

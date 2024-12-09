@@ -1,4 +1,4 @@
-import { useEffect, useState, forwardRef, ReactNode } from "react";
+import { forwardRef } from "react";
 import styles from './Input.module.scss';
 import { useGenerateId } from '@/shared/hooks/useGenerateId';
 
@@ -11,7 +11,7 @@ interface Props {
   classname?: string;
   disabled?: boolean;
   placeholder?: string;
-  icon?: ReactNode;
+  icon?: React.ReactNode;
   name?: string;
   onError?: string;
   onEmptied?: (event: React.FormEvent<HTMLInputElement>) => void;
