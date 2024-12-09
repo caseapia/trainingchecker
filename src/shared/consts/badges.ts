@@ -131,4 +131,5 @@ export const playerBadges: BadgeProps[] = [
 ]
 export const allBadges = [
   ...staffBadges, ...playerBadges,
-]
+];
+export default BadgeProps;

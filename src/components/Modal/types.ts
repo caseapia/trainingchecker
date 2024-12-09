@@ -10,6 +10,8 @@ interface Props {
   secondButtonContent?: string;
   secondButtonAction?: () => void;
   onClose: () => void;
+  titleClass?: string;
+  titleStyle?: React.CSSProperties;
 }
 
 export default Props;

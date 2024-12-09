@@ -1,8 +1,10 @@
 "use client"
 import React, { useEffect, useState } from "react";
-import { allBadges } from "@/consts/badges";
+import BadgeProps, { allBadges } from "@/consts/badges";
 import styles from "./BadgeRenderer.module.scss";
 import BootstrapTooltip from "../Styles/TooltipStyles";
+import { Modal } from "../Modal/Modal";
+import { isMobileDevice } from "@/shared/hooks/isMobileDevice";
 
 type BadgeRendererProps = {
   player?: {
@@ -17,12 +19,15 @@ type BadgeRendererProps = {
     online?: number;
     regdate?: string;
   };
-  onBadgeStatusChange?: (hasBadges: boolean) => void;
 };
 
-const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player, onBadgeStatusChange }) => {
+const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player }) => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedBadge, setSelectedBadge] = useState<BadgeProps | undefined>(undefined);
+  const isMobile = isMobileDevice();
+
   const badgesToShow = allBadges.filter((badge) => {
-    if (!player) return false; 
+    if (!player) return false;
 
     if (badge.moder && badge.moder !== player.moder) return false;
     if (badge.accid) {
@@ -53,22 +58,22 @@ const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player, onBadgeStatusChan
           : !(player.login ?? '').includes(badge.nicknameIncludes)
       )
     ) return false;
-  
-    return true;
 
-    allBadges.sort((a, b) => {
-      if (a.category < b.category) return 1;
-      if (a.category > b.category) return -1;
-  
-      return a.id - b.id;
-    })});
-  
+    return true;
+  });
+
   useEffect(() => {
     const hasBadges = badgesToShow.length > 0;
-    if (onBadgeStatusChange) {
-      onBadgeStatusChange(badgesToShow.length > 0);
+  }, [badgesToShow]);
+
+  const handleBadgeClick = (badge: BadgeProps) => {
+    if (isMobile) {
+      setSelectedBadge(badge);
+      setIsModalOpen(true);
+    } else {
+      return false;
     }
-  }, [badgesToShow, onBadgeStatusChange])
+  }
 
   return badgesToShow.length > 0 ? (
     <>
@@ -83,18 +88,27 @@ const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player, onBadgeStatusChan
             className={styles.badge}
             style={{ backgroundColor: badge.color }}
             key={badge.id || badge.title}
+            onClick={() => handleBadgeClick(badge)}
           >
-            <span 
-              className={`${styles.BadgeIcon}`} 
-              key={badge.id || badge.title}
-            >
+            <span className={`${styles.BadgeIcon}`}>
               {badge.icon}
             </span>
           </span>
         </BootstrapTooltip>
       ))}
+      {selectedBadge && (
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          title={selectedBadge.title}
+          titleStyle={{ color: `${selectedBadge.textColor}` }}
+        >
+          <p>{selectedBadge.description}</p>
+        </Modal>
+      )}
     </>
   ) : null;
 };
+
 
 export { BadgeRenderer };

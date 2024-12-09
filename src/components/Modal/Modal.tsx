@@ -50,6 +50,8 @@ export const Modal = ({
   onClose,
   firstButtonAction,
   secondButtonAction,
+  titleClass = '',
+  titleStyle,
 }: Props) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
@@ -84,7 +86,10 @@ export const Modal = ({
             variants={modalVariants}
             ref={modalRef}
           >
-            <div className={styles.Header}>
+            <div 
+              className={`${styles.Header} ${styles[titleClass]}`}
+              style={titleStyle}
+            >
               {title && <div className={styles.Title}>{title}</div>}
               <div className={styles.Close} onClick={onClose}>
                 <FaXmark />
