@@ -6,12 +6,12 @@
   font-size: 16px;
   width: 100%;
   height: fit-content;
-  transition: all .2s;
+  transition: all .4s;
   z-index: 9999999999;
   bottom: 0;
 }
 .Toast {
-  transition: transform .2s ease-in;
+  transition: transform .4s ease-in;
   padding: 12px 20px;
   position: relative;
   border-radius: 4px;
