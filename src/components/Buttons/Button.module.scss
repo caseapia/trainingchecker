@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   padding: 12px 20px;
-  border-radius: 4px;
+  border-radius: 10px;
   transition: .3s ease;
   color: #fff;
   font-size: 16px;
@@ -23,20 +23,20 @@
     }
 }
 .Primary {
-  background: #1339FF;
+  background: #99384d;
   border: 1px solid transparent;
     &:enabled {
       &:hover {
-        background: lighten(#1339ff, 7%);
+        background: lighten(#99384d, 7%);
       }
     }
 }
 .Transparent {
   background: transparent;
-  border: 2px solid #1339FF;
+  border: 2px solid #99384d;
     &:enabled {
       &:hover {
-        border-color: lighten(#1339ff, 7%);
+        border-color: lighten(#99384d, 7%);
       }
     }
 }
