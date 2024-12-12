@@ -38,13 +38,13 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
       icon: options?.icon,
       title: options?.title,
       className: options?.className,
-      onClose: () => removeToast(),
+      onClose: () => removeToast(id),
     };
-    setToasts(() => [newToast]);
+    setToasts((prevToasts) => [...prevToasts, newToast]);
   };
 
-  const removeToast = () => {
-    setToasts([]);
+  const removeToast = (id: string) => {
+    setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id));
   };
 
   return (
