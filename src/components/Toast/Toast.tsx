@@ -4,8 +4,8 @@ import styles from './Toast.module.scss';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const ToastAnimation = {
-  initial: { bottom: '-80px', opacity: 0, marginTop: 0, transition: { duration: 0.4 }},
-  animate: { bottom: '20px', opacity: 1, marginTop: '20px', transition: { duration: 0.4 } },
+  initial: { bottom: '-80px', opacity: 0, marginTop: 0, transition: { duration: 0.3 }},
+  animate: { bottom: '20px', opacity: 1, marginTop: '20px', transition: { duration: 0.3 } },
 };
 
 const Toast = () => {
