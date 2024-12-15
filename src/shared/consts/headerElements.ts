@@ -54,21 +54,12 @@ export const Elements: HeaderProps[] = [
     isMobileAvailable: true,
   },
   {
-    text: "Политика сбора метрик",
-    id: "data-collection",
-    icon: React.createElement(IoAnalyticsSharp),
-    link: "/data-collection",
-    isNew: false,
-    isDisabled: false,
-    isMobileAvailable: true,
-  },
-  {
     text: "Список изменений",
     id: "changelog",
     icon: React.createElement(FaClipboardList),
     link: "/changelog",
     isNew: true,
     isDisabled: false,
-    isMobileAvailable: true,
+    isMobileAvailable: false,
   },
 ];
