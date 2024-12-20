@@ -31,6 +31,7 @@ const Toast = () => {
               {toast.content && <div className={styles.Content}>{toast.content}</div>}
               <div className={styles.Footer}>Нажмите, чтобы закрыть это уведомление</div>
             </section>
+            <div className={styles.ProgressBar}></div>
           </motion.div>
         ))}
       </AnimatePresence>
