@@ -111,7 +111,7 @@ const PlayerInfo = () => {
   
   const refreshData = () => {
     fetchPlayerData();
-    toast.success(`Информация об игроке ${playerData.login} была обновлена`, { icon: <FaCheckCircle />, title: "Успешно!" })
+    toast.success(`Информация об игроке ${playerData.login} была обновлена`, { title: "Успешно!" })
   };
 
   useEffect(() => {
@@ -184,9 +184,45 @@ const PlayerInfo = () => {
         .join(';\n');
       const punishmentsCount = playerData.warn.length;
       navigator.clipboard.writeText(`Список наказаний ${playerData.login} (${playerData.id})\n\n${punishments}\n\nВсего наказаний: ${punishmentsCount}`);
-      toast.success(`Наказания игрока ${playerData.login} были помещены в ваш буфер обмена`, { icon: <FaCheckCircle />, title: "Данные о наказаниях скопированы" })
+      toast.success(`Наказания игрока ${playerData.login} были помещены в ваш буфер обмена`, { title: "Данные о наказаниях скопированы" })
     } else {
-      toast.error(`Игрок ${playerData.login} не имеет наказаний`, { icon: <MdError />, title: "Ошибка!" })
+      toast.error(`Игрок ${playerData.login} не имеет наказаний`, { title: "Ошибка!" })
+    }
+  }
+
+  const getVerify = () => {
+    switch (playerData.verify) {
+      case 1: 
+        return `Ютубер`
+      case 2: 
+        return `Автор сообщества (создатель модов)`
+      case 3: 
+        return `Разработчик`
+      case 4: 
+        return `Администратор в отставке`
+      case 5: 
+        return `Спонсор`
+      case 6: 
+        return `Создатель миров`
+      case 7: 
+        return `🤨`
+      default: 
+        return `Нет`
+    }
+  }
+
+  const getModer = () => {
+    switch (playerData.moder) {
+      case 1:
+        return 'Младший модератор';
+      case 2:
+        return 'Модератор';
+      case 3:
+        return 'Старший модератор';
+      case 998:
+        return 'Администратор';
+      default:
+        return 'Игрок';
     }
   }
 
@@ -195,43 +231,8 @@ const PlayerInfo = () => {
       <div className={styles.ResultWrapper}>
         <p><strong>ID:</strong> {playerData.id}</p>
         <p><strong>Ник:</strong> {playerData.login}</p>
-        <p><strong>Должность:</strong> 
-        {
-            playerData.moder < 0 
-            ? " Младший уборщик унитаза Волека"
-            : playerData.moder === 1
-            ? " Младший модератор"
-            : playerData.moder === 2
-            ? " Модератор"
-            : playerData.moder === 3
-            ? " Старший модератор"
-            : playerData.moder > 998 
-            ? " Администратор"
-            : " Игрок"
-          }
-        </p>
-        <p><strong>Верификация:</strong> 
-          {
-            playerData.verify === 1
-            ? ` Ютубер`
-            : playerData.verify === 2
-            ? ` Автор сообщества (создатель модов)`
-            : playerData.verify === 3
-            ? ` Разработчик`
-            : playerData.verify === 4
-            ? ` Администратор в отставке`
-            : playerData.verify === 5
-            ? ` Спонсор`
-            : playerData.verify === 6
-            ? ` Создатель миров`
-            : playerData.verify === 7
-            ? ` 🤨`
-            : playerData.verify > 7
-            ? ` Неизвестно`
-            : ` Нет`
-          }
-          {` (ID: ${playerData.verify})`}
-        </p>
+        <p><strong>Должность:</strong> {getModer()}</p>
+        <p><strong>Верификация:</strong> {`${getVerify()} (ID: ${playerData.verify})`}</p>
         {playerData.verify > 0 && (
           <p><strong>Текст верификации:</strong> {transformVerificationText(playerData.verifyText)}</p>
         )}

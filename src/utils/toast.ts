@@ -7,8 +7,8 @@ export const setToastInstance = (instance: ReturnType<typeof useToast>) => {
 }
 
 export const toast = {
-  success: (content: string, options?: { icon?: React.ReactNode, title?: string, className?: string, }) => toastLet.addToast('success', content, options),
-  error: (content: string, options?: { icon?: React.ReactNode, title?: string, className?: string, }) => toastLet.addToast('error', content, options),
-  basic: (content: string, options?: { icon?: React.ReactNode, title?: string, className?: string, }) => toastLet.addToast('default', content, options),
+  success: (content: string, options?: { title?: string, className?: string, }) => toastLet.addToast('success', content, options),
+  error: (content: string, options?: { title?: string, className?: string, }) => toastLet.addToast('error', content, options),
+  basic: (content: string, options?: { title?: string, className?: string, }) => toastLet.addToast('default', content, options),
   clear: () => toastLet.removeToast,
 }

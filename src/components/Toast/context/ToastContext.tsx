@@ -41,6 +41,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
       onClose: () => removeToast(id),
     };
     setToasts((prevToasts) => [...prevToasts, newToast]);
+    setTimeout(() => removeToast(id), 5000);
   };
 
   const removeToast = (id: string) => {

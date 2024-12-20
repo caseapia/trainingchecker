@@ -1,3 +1,12 @@
+@keyframes progressBar {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+}
+
 .ToastWrapper {
   position: fixed;
   display: grid;
@@ -52,11 +61,27 @@
       color: #fff;
       margin-bottom: 3px;
     }
+    .Body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
     .Footer {
       font-weight: bold;
       opacity: .7;
       font-size: 13px;
       float: right;
+    }
+    .ProgressBar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 4px;
+      background: #ffffff;
+      width: 100%;
+      animation: progressBar 5002ms;
+      animation-iteration-count: 1;
+      border-radius: 4px;
     }
     &:first-of-type {
       margin-top: 0;
