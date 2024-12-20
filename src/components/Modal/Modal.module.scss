@@ -53,10 +53,17 @@
         .ButtonGroup {
           display: flex;
           flex-direction: row;
+            @media screen and (max-width: 767px) {
+              flex-direction: column;
+            }
             button {
               margin-right: 15px;
+              @media screen and (max-width: 767px) {
+                margin-bottom: 15px;
+              }
                 &:last-of-type {
                   margin-right: 0;
+                  margin-bottom: 0;
                 }
             }
         }
