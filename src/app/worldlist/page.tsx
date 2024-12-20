@@ -58,7 +58,7 @@ const WorldList = () => {
   
     timeoutId = setTimeout(() => {
       if (!isLoaded) {
-        toast.error(`Превышено время ожидания запроса`, { icon: <MdError />, title: 'Непредвиденная ошибка' });
+        toast.error(`Превышено время ожидания запроса`, { title: 'Непредвиденная ошибка' });
         getWorlds();
       }
     }, 8000);
@@ -113,7 +113,7 @@ const WorldList = () => {
       const isSensModeActive = sensMode === true ? 'Чувствительный режим включен' : '';
 
       navigator.clipboard.writeText(`${isSensModeActive}\n\n${toCopyContent}\n\nВсего миров: ${worldsCounter}`);
-      toast.success('Список открытых миров скопирован в ваш буфер обмена', { icon: <FaCheckCircle />, title: 'Успешно' });
+      toast.success('Список открытых миров скопирован в ваш буфер обмена', { title: 'Успешно' });
     }
   };
 
@@ -127,11 +127,11 @@ const WorldList = () => {
         );
         setResult(filteredWorlds);
         setSensMode(true);
-        toast.success('Чувствительный режим включен', { icon: <FaCheckCircle />, title: 'Успешно' });
+        toast.success('Чувствительный режим включен', { title: 'Успешно' });
       } else {
         setResult(originalWorlds);
         setSensMode(false);
-        toast.success('Чувствительный режим выключен', { icon: <FaCheckCircle />, title: 'Успешно' });
+        toast.success('Чувствительный режим выключен', { title: 'Успешно' });
       }
     }
   }

@@ -111,7 +111,7 @@ const PlayerInfo = () => {
   
   const refreshData = () => {
     fetchPlayerData();
-    toast.success(`Информация об игроке ${playerData.login} была обновлена`, { icon: <FaCheckCircle />, title: "Успешно!" })
+    toast.success(`Информация об игроке ${playerData.login} была обновлена`, { title: "Успешно!" })
   };
 
   useEffect(() => {
@@ -184,9 +184,9 @@ const PlayerInfo = () => {
         .join(';\n');
       const punishmentsCount = playerData.warn.length;
       navigator.clipboard.writeText(`Список наказаний ${playerData.login} (${playerData.id})\n\n${punishments}\n\nВсего наказаний: ${punishmentsCount}`);
-      toast.success(`Наказания игрока ${playerData.login} были помещены в ваш буфер обмена`, { icon: <FaCheckCircle />, title: "Данные о наказаниях скопированы" })
+      toast.success(`Наказания игрока ${playerData.login} были помещены в ваш буфер обмена`, { title: "Данные о наказаниях скопированы" })
     } else {
-      toast.error(`Игрок ${playerData.login} не имеет наказаний`, { icon: <MdError />, title: "Ошибка!" })
+      toast.error(`Игрок ${playerData.login} не имеет наказаний`, { title: "Ошибка!" })
     }
   }
 

@@ -61,6 +61,11 @@
       color: #fff;
       margin-bottom: 3px;
     }
+    .Body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
     .Footer {
       font-weight: bold;
       opacity: .7;

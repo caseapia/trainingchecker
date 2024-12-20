@@ -55,7 +55,7 @@ export default function Home() {
       if (ButtonElement.current) {
         ButtonElement.current.disabled = true;
       }
-      toast.error('Вы не заполнили поле никнейма', { icon: <TbFaceIdError />, title: "Поле никнейма не заполнено" })
+      toast.error('Вы не заполнили поле никнейма', { title: "Поле никнейма не заполнено" })
     } else {
       FormElement.current?.submit;
       if (ButtonElement.current) {
@@ -70,13 +70,13 @@ export default function Home() {
       const textContent = InputElement.current.value || '';
       if (cyrillicPattern.test(textContent)) {
         InputElement.current.value = '';
-        toast.error('Никнейм не может состоять из символов кириллицы', { icon: <TbFaceIdError />, title: "Ошибка" })
+        toast.error('Никнейм не может состоять из символов кириллицы', { title: "Ошибка" })
         if (ButtonElement.current) {
           ButtonElement.current.disabled = true;
         }
         toast.clear();
       } else if (InputElement.current && InputElement.current.value.length === 0) {
-        toast.error('Поле никнейма не может быть пустым', { icon: <TbFaceIdError />, title: "Ошибка" })
+        toast.error('Поле никнейма не может быть пустым', { title: "Ошибка" })
         if (ButtonElement.current) {
           ButtonElement.current.disabled = true;
         }
