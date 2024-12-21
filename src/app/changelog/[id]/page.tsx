@@ -5,12 +5,11 @@ import styles from './page.module.scss';
 import React, { useEffect, useState } from 'react';
 import changeLog from '@/shared/consts/changelog';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
-import Lottie from 'lottie-react';
-import Preloader from '@/public/assets/lotties/Preloader.json';
 import ReactMarkdown from 'react-markdown';
 import Button from '@/components/Buttons/Button';
 import { FaArrowAltCircleLeft } from 'react-icons/fa';
 import { toast } from '@/utils/toast';
+import Loader from '@/components/Loader/Loader';
 
 const page = () => {
   const { id } = useParams();
@@ -76,9 +75,7 @@ const page = () => {
       </div>
     </PageWrapper>
   ) : (
-    <PageWrapper>
-      <Lottie animationData={Preloader} />
-    </PageWrapper>
+    <Loader />
   )
 }
 

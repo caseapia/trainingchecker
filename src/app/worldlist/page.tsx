@@ -1,18 +1,17 @@
 "use client"
 import { Suspense, useEffect, useState } from 'react';
 import styles from './page.module.scss'
-import Preloader from '@/public/assets/lotties/Preloader.json';
-import Lottie from 'lottie-react';
 import { Table, Thead, Tr, Td, Th, TBody } from '@/components/Table/Table';
 import Chip from '@/components/Chip/Chip';
 import { FaBookmark } from "react-icons/fa6";
 import { GoCpu, GoAlertFill } from "react-icons/go";
 import Button from '@/components/Buttons/Button';
-import { FaCheckCircle, FaCopy } from 'react-icons/fa';
-import { MdDeblur, MdError, MdLensBlur } from "react-icons/md";
+import { FaCopy } from 'react-icons/fa';
+import { MdDeblur, MdLensBlur } from "react-icons/md";
 import worldBlockWorlds from '@/consts/worldBlockWords';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import { toast } from '@/utils/toast';
+import Loader from '@/components/Loader/Loader';
 
 interface Worlds {
   name: string;
@@ -137,7 +136,7 @@ const WorldList = () => {
   }
 
   return isLoaded ? (
-    <Suspense fallback={<Lottie animationData={Preloader} />}>
+    <Suspense fallback={<Loader />}>
       <PageWrapper title={`Список открытых миров (${result?.length})`}>
         <div className={styles.buttonGroup}>
           <Button 
@@ -186,9 +185,7 @@ const WorldList = () => {
       </PageWrapper>
     </Suspense>
   ) : (
-    <PageWrapper>
-      <Lottie animationData={Preloader} />
-    </PageWrapper>
+    <Loader />
   )
 }
 

@@ -1,12 +1,10 @@
 "use client";
 import React, { useEffect, useState, Suspense } from 'react';
-import styles from './page.module.scss'
 import Link from 'next/link';
 import { BadgeRenderer } from '@/components/BadgeRenderer/BadgeRenderer';
-import Lottie from 'lottie-react';
-import Preloader from '@/public/assets/lotties/Preloader.json';
 import { Table, Thead, Tr, Td, TBody, Th } from '@/components/Table/Table';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
+import Loader from '@/components/Loader/Loader';
 
 interface Player {
   id: number;
@@ -42,7 +40,7 @@ function Players() {
     getPlayers();
   }, []);
   return (
-    <Suspense fallback={<Lottie animationData={Preloader} />}>
+    <Suspense fallback={<Loader />}>
       <PageWrapper title={`Список игроков в сети (${result?.length || "Загрузка..."})`}>
         {result ? (
           <Table>
@@ -67,7 +65,7 @@ function Players() {
             </TBody>
           </Table>
         ) : (
-          <Lottie animationData={Preloader} />
+          <Loader />
         )}
       </PageWrapper>
     </Suspense>

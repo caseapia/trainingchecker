@@ -1,14 +1,11 @@
 "use client"
-import React, { useEffect, useState, Suspense, useRef, ReactNode } from "react";
+import React, { useEffect, useState, Suspense, useRef } from "react";
 import styles from "./page.module.scss";
-import buttonstyles from '@/components/Buttons/Button.module.scss';
 import { Input } from "@/components/Input/Input";
 import Button from "@/components/Buttons/Button";
 import { FaCheckCircle, FaUser } from "react-icons/fa";
-import { TbFaceIdError } from "react-icons/tb";
 import { BiLogoGithub } from "react-icons/bi";
-import Lottie from 'lottie-react';
-import Preloader from '@/public/assets/lotties/Preloader.json';
+import Loader from "@/components/Loader/Loader";
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import { toast } from "@/utils/toast";
 
@@ -91,7 +88,7 @@ export default function Home() {
 
   return (
     <>
-      <Suspense fallback={<Lottie animationData={Preloader} />}>
+      <Suspense fallback={<Loader />}>
         <PageWrapper classname={styles.gapped}>
           {isLoaded ?
            (
@@ -129,7 +126,7 @@ export default function Home() {
               </form>
             </>
           ) : (
-            <Lottie animationData={Preloader} />
+            <Loader />
           )
           }
         </PageWrapper>
