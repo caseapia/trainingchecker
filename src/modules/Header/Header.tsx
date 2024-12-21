@@ -61,18 +61,21 @@ export const Header = () => {
       <motion.li 
         key={id} 
         className={activePage === id ? styles.active : ""}
-        whileTap={{ scale: '.93' }}
+        draggable="false"
       >
         {isDisabled ? (
-          <span className={styles.disabled_element} style={style}>
-            {icon} {text}
-            {isNew && <span className={`${styles.badge} ${styles.new}`}>new</span>}
-          </span>
+          <BootstrapTooltip title={tooltipText}>
+            <span className={styles.disabled_element} style={style}>
+              {icon} {text}
+              {isNew && <span className={`${styles.badge} ${styles.new}`}>new</span>}
+            </span>
+          </BootstrapTooltip>
         ) : (
           <Link
             href={link}
             onClick={() => handleNavigation(id)}
             style={style}
+            draggable="false"
           >
             <span>
               {icon} {text}

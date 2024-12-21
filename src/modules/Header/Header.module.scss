@@ -51,7 +51,7 @@
         border-radius: 6px;
         padding-inline: 8px;
         padding-block: 6px;
-        opacity: .8;
+        opacity: .9;
           &:not(.active) {
             &:hover {
               background-color: #656c7633;
@@ -81,7 +81,7 @@
 }
 
 .disabled_element {
-  opacity: 0.5;
+  opacity: .5 !important;
   cursor: not-allowed;
   display: flex;
   justify-content: center;
