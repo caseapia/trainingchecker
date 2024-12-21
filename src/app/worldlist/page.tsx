@@ -8,11 +8,12 @@ import Chip from '@/components/Chip/Chip';
 import { FaBookmark } from "react-icons/fa6";
 import { GoCpu, GoAlertFill } from "react-icons/go";
 import Button from '@/components/Buttons/Button';
-import { FaCheckCircle, FaCopy } from 'react-icons/fa';
-import { MdDeblur, MdError, MdLensBlur } from "react-icons/md";
+import { FaCopy } from 'react-icons/fa';
+import { MdDeblur, MdLensBlur } from "react-icons/md";
 import worldBlockWorlds from '@/consts/worldBlockWords';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import { toast } from '@/utils/toast';
+import Loader from '@/components/Loader/Loader';
 
 interface Worlds {
   name: string;
@@ -186,9 +187,7 @@ const WorldList = () => {
       </PageWrapper>
     </Suspense>
   ) : (
-    <PageWrapper>
-      <Lottie animationData={Preloader} />
-    </PageWrapper>
+    <Loader />
   )
 }
 

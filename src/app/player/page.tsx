@@ -8,13 +8,13 @@ import Preloader from '@/public/assets/lotties/Preloader.json';
 import Button from '@/components/Buttons/Button';
 import { HiRefresh } from "react-icons/hi";
 import { FaCheckCircle, FaCopy, FaHammer } from 'react-icons/fa';
-import { MdError } from "react-icons/md";
 import { Modal } from '@/components/Modal/Modal';
 import Link from 'next/link';
 import { Table, Thead, Tr, Td, TBody, Th } from '@/components/Table/Table';
 import { useRouter } from 'next/navigation';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import { toast } from '@/utils/toast';
+import Loader from '@/components/Loader/Loader';
 
 type PlayerData = {
   id: number;
@@ -309,9 +309,7 @@ const PlayerInfo = () => {
     </div>
   ) : (
     <>
-      <div className={styles.PageWrapper}>
-        <Lottie animationData={Preloader} />
-      </div>
+      <Loader />
     </>
   );
 }

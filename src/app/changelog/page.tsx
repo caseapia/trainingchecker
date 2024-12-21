@@ -1,8 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import styles from "./page.module.scss";
-import Lottie from "lottie-react";
-import Preloader from "@/public/assets/lotties/Preloader.json";
 import { isMobileDevice } from "@/shared/hooks/isMobileDevice";
 import { useRouter } from "next/navigation";
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
@@ -11,6 +9,7 @@ import Button from "@/components/Buttons/Button";
 import { FaClock, FaUser } from "react-icons/fa6";
 import Link from "next/link";
 import BootstrapTooltip from "@/components/Styles/TooltipStyles";
+import Loader from "@/components/Loader/Loader";
 
 const Changelog = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -86,7 +85,7 @@ const Changelog = () => {
     </PageWrapper>
   ) : (
     <PageWrapper>
-      <Lottie animationData={Preloader} />
+      <Loader />
     </PageWrapper>
   );
 };
