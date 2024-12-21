@@ -50,7 +50,8 @@ export const Elements: HeaderProps[] = [
     icon: React.createElement(FaList),
     link: "/worldlist",
     isNew: false,
-    isDisabled: false,
+    isDisabled: true,
+    tooltipText: "Эта вкладка временно недоступна и отключена на серверной части. Мы оповестим вас, когда все ошибки будут исправлены.",
     isMobileAvailable: true,
   },
   {
