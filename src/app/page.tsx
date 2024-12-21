@@ -8,6 +8,7 @@ import { BiLogoGithub } from "react-icons/bi";
 import Loader from "@/modules/Loader/Loader";
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import { toast } from "@/utils/toast";
+import TestIcon from "@/public/assets/icons/page-main/icon.svg";
 
 export default function Home() {
   const [lastUpdate, setLastUpdate] = useState<string>('');
@@ -98,6 +99,7 @@ export default function Home() {
                 <p>Разработано для упрощения работы с <a href="https://forum.training-server.com/d/3921-training-api" target="_blank" rel="noopener noreferrer">TRAINING API</a>.</p>
                 <p>Этот проект имеет открытый исходный код, вы всегда можете дополнить его или исправить, используя<br /><a href="https://github.com/1dontkillme/trainingchecker" target="_blank" rel="noopener noreferrer"><BiLogoGithub /> исходный код на GitHub</a>.</p><br />
                 <p>Последнее обновление произошло: {lastUpdate}</p>
+                <TestIcon width={32} height={32} />
               </div>
               <form 
                 action="./player" 
