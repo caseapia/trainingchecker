@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import { toast } from '@/utils/toast';
 import Loader from '@/components/Loader/Loader';
+import Chip from '@/components/Chip/Chip';
 
 type PlayerData = {
   id: number;
@@ -211,6 +212,10 @@ const PlayerInfo = () => {
   }
 
   const getModer = () => {
+    if (playerData.moder >= 998) {
+      return 'Администратор';
+    }
+
     switch (playerData.moder) {
       case 1:
         return 'Младший модератор';
@@ -218,10 +223,15 @@ const PlayerInfo = () => {
         return 'Модератор';
       case 3:
         return 'Старший модератор';
-      case 998:
-        return 'Администратор';
       default:
         return 'Игрок';
+    }
+  }
+  const getColor = () => {
+    if (playerData.moder >= 1 && playerData.moder <= 998) {
+      return '#0f4c816c';
+    } else if (playerData.moder >= 998) {
+      return '#B72A2A6c';
     }
   }
 
@@ -230,7 +240,7 @@ const PlayerInfo = () => {
       <div className={styles.ResultWrapper}>
         <p><strong>ID:</strong> {playerData.id}</p>
         <p><strong>Ник:</strong> {playerData.login}</p>
-        <p><strong>Должность:</strong> {getModer()}</p>
+        <strong>Должность:</strong> <Chip label={getModer()} color={getColor()} />
         <p><strong>Верификация:</strong> {`${getVerify()} (ID: ${playerData.verify})`}</p>
         {playerData.verify > 0 && (
           <p><strong>Текст верификации:</strong> {transformVerificationText(playerData.verifyText)}</p>
