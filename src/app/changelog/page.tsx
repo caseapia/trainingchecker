@@ -36,7 +36,7 @@ const Changelog = () => {
               style={{ background: `linear-gradient(160deg, ${log.color} 0%, #0000008c 100%)` }}
             >
               <div className={styles.log__item__icon_container}>
-                <p>{log.icon}</p>
+                {log.icon}
               </div>
               <div className={styles.log__info_container}>
                 <div className={styles.log__info_container__text}>
