@@ -1,5 +1,5 @@
 import React from "react";
-import { FaHammer } from "react-icons/fa";
+import { FaHammer, FaCheckCircle } from "react-icons/fa";
 import { FaGear } from "react-icons/fa6";
 
 type Props = {
@@ -12,6 +12,14 @@ type Props = {
 };
 
 export const changeLog: Props[] = [
+  {
+    route: "toast-updates",
+    title: "Обновление системы уведомлений",
+    author: "dontkillme",
+    date: "21-12-2024",
+    color: "rgb(31 240 145)",
+    icon: React.createElement(FaCheckCircle),
+  },
   {
     route: "6-12_changelog",
     title: "Бейджи и уведомления",
