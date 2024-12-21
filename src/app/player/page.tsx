@@ -51,7 +51,6 @@ const PlayerInfo = () => {
   });
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [diffInDays, setDiffInDays] = useState(NaN);
-  const [isNotFound, setIsNotFound] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isNoAccess, setIsNoAccess] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -61,7 +60,11 @@ const PlayerInfo = () => {
   useEffect(() => {
     if (nickname === null || nickname === '') {
       router.push('../');
-      toast.error('Страница не может быть открыта без указания конкретного игрока, переносим вас обратно...', { title: 'Ошибка', lifeTime: 2000 })
+      toast.error('Страница не может быть открыта без указания конкретного игрока, переносим вас обратно...', { 
+        title: 'Ошибка', 
+        lifeTime: 5000 
+      })
+      clearTimeout(timeoutId);
     }
   }, [searchParams, router]);
 
@@ -77,13 +80,14 @@ const PlayerInfo = () => {
       const response = await fetch(url);
       if (!response.ok) {
         setIsDataLoaded(false);
-        setIsNotFound(false);
         setIsNoAccess(true);
         if (response.status === 404) {
-          setIsDataLoaded(false);
-          setIsNotFound(true);
-          setIsNoAccess(false);
-          return;
+          router.push('../');
+          toast.error(`Игрок с никнеймом ${nickname} не найден. Перенаправляем вас на главную страницу`, { 
+            title: 'Игрок не найден', 
+            lifeTime: 5000 
+          })
+          clearTimeout(timeoutId);
         }
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -141,7 +145,7 @@ const PlayerInfo = () => {
 
   useEffect(() => {
     const getPageValid = () => {
-      if (isDataLoaded === true && isNotFound === false) {
+      if (isDataLoaded === true) {
         setIsLoaded(true);
       } else {
         setIsLoaded(false);
@@ -193,7 +197,10 @@ const PlayerInfo = () => {
         .join(';\n');
       const punishmentsCount = playerData.warn.length;
       navigator.clipboard.writeText(`Список наказаний ${playerData.login} (${playerData.id})\n\n${punishments}\n\nВсего наказаний: ${punishmentsCount}`);
-      toast.success(`Наказания игрока ${playerData.login} были помещены в ваш буфер обмена`, { title: "Данные о наказаниях скопированы" })
+      toast.success(`Наказания игрока ${playerData.login} были помещены в ваш буфер обмена`, { 
+        title: "Данные о наказаниях скопированы",
+        lifeTime: 5000, 
+      })
     } else {
       toast.error(`Игрок ${playerData.login} не имеет наказаний`, { title: "Ошибка!" })
     }
@@ -314,16 +321,6 @@ const PlayerInfo = () => {
         ) : <p style={{ color: 'var(--color-danger)', textAlign: 'center' }}>У этого игрока нет наказаний</p>}
       </Modal>
     </>
-  ) : isNotFound ? (
-    <div className={styles.PageWrapper}>
-      <h3>Игрок с никнеймом <span className={styles.nickname}>{nickname}</span> не найден</h3>
-    </div>
-  ) : isNoAccess ? (
-    <div className={styles.PageWrapper_NotFound}>
-      <h3>Эта страница недоступна <a href='https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#500' target='_blank'>(ошибка: 500)</a></h3>
-      <p>Возможно, это проблема на стороне сервера, однако высока вероятность того, что Роскомнадзор окончательно заблокировал домены <a href='https://training-server.com/' target='_blank'>TRAINING SERVER</a>. Пожалуйста, проверьте работоспособность сервисов TRAINING SERVER.</p>
-      <p>Если ресурсы TRAINING SERVER доступны, значит проблема на стороне <a href='https://forum.training-server.com/d/3921-training-api' target='_blank'>TRAINING API</a>. Мы не можем воздействовать на работоспособность, сообщите об ошибке в топике TRAINING API.</p>
-    </div>
   ) : (
     <>
       <Loader />
