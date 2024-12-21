@@ -6,7 +6,7 @@ import { BadgeRenderer } from '@/components/BadgeRenderer/BadgeRenderer';
 import Button from '@/components/Buttons/Button';
 import CheckIcon from '@/icons/checkCircle.svg';
 import CopyIcon from '@/icons/copy.svg';
-import HammerIcon from '@/icons/page-player/hammer.svg';
+import HammerIcon from '@/icons/hammer.svg';
 import RefreshIcon from '@/icons/page-player/refresh.svg';
 import { Modal } from '@/components/Modal/Modal';
 import Link from 'next/link';
