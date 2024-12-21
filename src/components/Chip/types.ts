@@ -6,4 +6,5 @@ interface Props {
   iconPosition?: 'left' | 'right';
   iconSize?: number;
   image?: string;
+  color?: string;
 }
