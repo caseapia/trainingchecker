@@ -44,15 +44,7 @@
         &:last-of-type {
           margin-right: 0;
         }
-        .disabled_element {
-          opacity: .5;
-          cursor: default;
-          color: #08c;
-            .badge__new {
-              display: inline-block;
-            }
-        }
-        a, .disabled_element {
+        a {
           &:not(.active) {
             &:hover {
               &::after {
@@ -66,17 +58,6 @@
               }
             }
           }
-          span {
-            display: flex;
-            vertical-align: middle;
-            align-content: center;
-            justify-content: center;
-            align-items: center;
-              svg {
-                margin-right: 5px;
-                vertical-align: middle;
-              }
-          }
           &.active {
             color: #ccc;
               &::after {
@@ -88,6 +69,17 @@
                 display: block;
               }
           }
+        }
+        span {
+          display: flex;
+          vertical-align: middle;
+          align-content: center;
+          justify-content: center;
+          align-items: center;
+            svg {
+              margin-right: 5px;
+              vertical-align: middle;
+            }
         }
         &.disabled {
           opacity: 0.5;
@@ -149,4 +141,17 @@
           }
       }
   }
+}
+.disabled_element {
+  opacity: .5;
+  cursor: default;
+  color: #08c;
+  display: flex;
+  vertical-align: middle;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+    .badge__new {
+      display: inline-block;
+    }
 }
