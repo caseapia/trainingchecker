@@ -12,6 +12,7 @@ import worldBlockWorlds from '@/consts/worldBlockWords';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import { toast } from '@/utils/toast';
 import Loader from '@/components/Loader/Loader';
+import { usePage500 } from '@/shared/hooks/page500';
 
 interface Worlds {
   name: string;
@@ -26,9 +27,10 @@ const WorldList = () => {
   const [result, setResult] = useState<Worlds[] | null>(null)
   const [sensMode, setSensMode] = useState<boolean>(false);
   const [originalWorlds, setOriginalWorlds] = useState<Worlds[] | null>(null);
+  const triggerPage500 = usePage500();
 
   useEffect(() => {
-    let timeoutId: any;
+    let timeoutId: NodeJS.Timeout;
   
     const getWorlds = async () => {
       const url = process.env.NEXT_PUBLIC_API_WORLDLIST_URL;
@@ -57,8 +59,7 @@ const WorldList = () => {
   
     timeoutId = setTimeout(() => {
       if (!isLoaded) {
-        toast.error(`Превышено время ожидания запроса, отправляем новый запрос`, { title: 'Непредвиденная ошибка' });
-        getWorlds();
+        triggerPage500();
       }
     }, 8000);
   

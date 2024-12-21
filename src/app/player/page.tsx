@@ -14,6 +14,7 @@ import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import { toast } from '@/utils/toast';
 import Loader from '@/components/Loader/Loader';
 import Chip from '@/components/Chip/Chip';
+import { usePage500 } from '@/shared/hooks/page500';
 
 type PlayerData = {
   id: number;
@@ -54,6 +55,8 @@ const PlayerInfo = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isNoAccess, setIsNoAccess] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const triggerPage500 = usePage500();
+  let timeoutId: NodeJS.Timeout;
 
   useEffect(() => {
     if (nickname === null || nickname === '') {
@@ -100,12 +103,18 @@ const PlayerInfo = () => {
         warn: result.data.warn as Array<{ reason: string; bantime: string; admin: string; }>,
       });
       setIsDataLoaded(true);
+      clearTimeout(timeoutId);
     } catch (error) {
       console.error(error);
     }
   };
   
   useEffect(() => {
+    timeoutId = setTimeout(() => {
+      if (!isLoaded) {
+        triggerPage500();
+      }
+    }, 8000);
     fetchPlayerData();
   }, [nickname]);
   
