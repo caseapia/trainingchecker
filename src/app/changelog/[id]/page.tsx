@@ -10,6 +10,7 @@ import Preloader from '@/public/assets/lotties/Preloader.json';
 import ReactMarkdown from 'react-markdown';
 import Button from '@/components/Buttons/Button';
 import { FaArrowAltCircleLeft } from 'react-icons/fa';
+import { toast } from '@/utils/toast';
 
 const page = () => {
   const { id } = useParams();
@@ -25,6 +26,10 @@ const page = () => {
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      if (response.status === 500) {
+        toast.error(`Ошибка отправки запроса к GitHub. Отправляем новый запрос`, { title: "Ошибка", lifeTime: 5000 } )
+        return;
       }
 
       const files: Array<{ name: string; download_url: string }> = await response.json();

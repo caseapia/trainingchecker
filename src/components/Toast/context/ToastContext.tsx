@@ -2,12 +2,12 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface Toast {
   id: string;
-  icon?: ReactNode;
   content: string;
   className?: string;
   type?: 'success' | 'error' | 'default';
   title?: string;
   onClose: () => void;
+  lifeTime?: number;
 }
 
 interface ToastContextType {
@@ -15,7 +15,7 @@ interface ToastContextType {
   addToast: (
     type: 'success' | 'error' | 'default', 
     content: string,
-    options?: { icon?: ReactNode, title?: string, className?: string, }
+    options?: { title?: string, className?: string, lifeTime?: number, }
   ) => void;
   removeToast: (id: string) => void;
 }
@@ -28,20 +28,22 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
   const addToast = (
       type: 'success' | 'error' | 'default', 
       content: string,
-      options?: { icon?: ReactNode, title?: string, className?: string, }
+      options?: { title?: string, className?: string, lifeTime?: number, }
     ) => {
     const id = Math.random().toString(36).substring(2, 9);
     const newToast: Toast = {
       id,
       type,
       content,
-      icon: options?.icon,
       title: options?.title,
       className: options?.className,
       onClose: () => removeToast(id),
+      lifeTime: options?.lifeTime
     };
     setToasts((prevToasts) => [...prevToasts, newToast]);
-    setTimeout(() => removeToast(id), 5000);
+    {options?.lifeTime && (
+      setTimeout(() => removeToast(id), newToast.lifeTime!)
+    )}
   };
 
   const removeToast = (id: string) => {

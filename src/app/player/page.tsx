@@ -111,7 +111,7 @@ const PlayerInfo = () => {
   
   const refreshData = () => {
     fetchPlayerData();
-    toast.success(`Информация об игроке ${playerData.login} была обновлена`, { title: "Успешно!" })
+    toast.success(`Информация об игроке ${playerData.login} была обновлена`, { title: "Успешно!", lifeTime: 5000 })
   };
 
   useEffect(() => {

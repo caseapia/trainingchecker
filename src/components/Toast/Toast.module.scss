@@ -24,7 +24,7 @@
   padding: 12px 20px;
   position: relative;
   border-radius: 4px;
-  max-width: 40%;
+  max-width: 25%;
   cursor: pointer;
   display: flex;
   flex-direction: row;
@@ -79,9 +79,7 @@
       height: 4px;
       background: #ffffff;
       width: 100%;
-      animation: progressBar 5002ms;
-      animation-iteration-count: 1;
-      border-radius: 4px;
+      animation: progressBar;
     }
     &:first-of-type {
       margin-top: 0;

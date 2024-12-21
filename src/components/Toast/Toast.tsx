@@ -38,7 +38,10 @@ const Toast = () => {
               {toast.title && <div className={styles.Title}>{toast.title}</div>}
               {toast.content && <div className={styles.Content}>{toast.content}</div>}
             </section>
-            <div className={styles.ProgressBar}></div>
+            <div 
+              className={`${toast.lifeTime ? styles.ProgressBar : ''}`}
+              style={{ animationDuration: `${toast.lifeTime}ms` }}
+            ></div>
           </motion.div>
         ))}
       </AnimatePresence>
