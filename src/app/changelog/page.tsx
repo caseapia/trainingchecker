@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation";
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import { changeLog } from "@/consts/changelog";
 import Button from "@/components/Buttons/Button";
-import { FaClock, FaUser } from "react-icons/fa6";
+import UserIcon from '@/icons/user.svg';
+import ClockIcon from '@/icons/changelog/clock.svg';
 import Link from "next/link";
 import BootstrapTooltip from "@/components/Styles/TooltipStyles";
 import Loader from "@/modules/Loader/Loader";
@@ -53,7 +54,7 @@ const Changelog = () => {
                       enterDelay={0}
                     >
                       <span className={styles.log__info_container__text__data__date}>
-                        <FaClock /> {log.date}
+                        <ClockIcon /> {log.date}
                       </span>
                     </BootstrapTooltip>
                     &nbsp;
@@ -63,14 +64,19 @@ const Changelog = () => {
                       enterDelay={0}
                     >
                       <span className={styles.log__info_container__text__data__author}>
-                        <FaUser /> {log.author}
+                        <UserIcon /> {log.author}
                       </span>
                     </BootstrapTooltip>
                   </section>
                 </div>
                 <div className={styles.log__info_container__buttonContainer}>
                   <Link href={`/changelog/${log.route}`}>
-                    <Button btnType="Transparent" text="Читать" type="button" style={{ borderColor: `${log.color}` }} />
+                    <Button 
+                      type="Transparent" 
+                      text="Читать" 
+                      action="button" 
+                      style={{ borderColor: `${log.color}` }}
+                    />
                   </Link>
                 </div>
               </div>

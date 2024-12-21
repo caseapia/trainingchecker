@@ -1,10 +1,16 @@
+import { FC } from 'react';
+
+export type ButtonIcon = FC<React.SVGProps<SVGElement>>;
+export type ButtonTypes = "Primary" | "Transparent" | "Secondary" | "Danger"
+type ButtonActions = "submit" | "reset" | "button"
+
 interface Props {
-  icon?: React.ReactNode;
-  btnType: "Primary" | "Transparent" | "Secondary" | "Danger";
+  icon?: ButtonIcon;
+  type: ButtonTypes;
   text: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   onFocus?: (event: React.FocusEvent<HTMLButtonElement>) => void;
-  type: "submit" | "reset" | "button";
+  action: ButtonActions;
   disabled?: boolean;
   classname?: string;
   style?: React.CSSProperties;

@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { isMobileDevice } from "@/hooks/isMobileDevice";
 import { Elements } from "@/shared/consts/headerElements";
-import BootstrapTooltip from "../../../components/Styles/TooltipStyles";
-import { FaBars } from "react-icons/fa";
+import BootstrapTooltip from "@/components/Styles/TooltipStyles";
+import BarsIcon from '@/icons/components/header/bars.svg';
 
 export const Header = () => {
   const isMobile = isMobileDevice();
@@ -93,7 +93,7 @@ export const Header = () => {
       {isMobile ? (
         <>
           <button className={styles.mobile__button} onClick={toggleMobileMenu}>
-            <FaBars />
+            <BarsIcon />
           </button>
           {isMobileMenuOpened && (
             <motion.div

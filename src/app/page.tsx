@@ -3,12 +3,12 @@ import React, { useEffect, useState, Suspense, useRef } from "react";
 import styles from "./page.module.scss";
 import { Input } from "@/components/Input/Input";
 import Button from "@/components/Buttons/Button";
-import { FaCheckCircle, FaUser } from "react-icons/fa";
-import { BiLogoGithub } from "react-icons/bi";
 import Loader from "@/modules/Loader/Loader";
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import { toast } from "@/utils/toast";
-import TestIcon from "@/public/assets/icons/page-main/icon.svg";
+import CheckIcon from '@/icons/checkCircle.svg';
+import UserIcon from '@/icons/user.svg';
+import GithubIcon from '@/icons/page-main/github.svg';
 
 export default function Home() {
   const [lastUpdate, setLastUpdate] = useState<string>('');
@@ -97,9 +97,8 @@ export default function Home() {
               <div className={styles.readmeWrapper}>
                 <p style={{textAlign: 'center'}}>SAMP сервер <a href="https://training-server.com/" target="_blank" rel="noopener noreferrer">TRAINING</a> не имеет отношения к созданию данного сайта. Этот сайт является частным и использует<br /><a href="https://forum.training-server.com/d/3921-training-api" target="_blank" rel="noopener noreferrer">TRAINING API</a> в соответствии с разрешением его создателя.</p><br />
                 <p>Разработано для упрощения работы с <a href="https://forum.training-server.com/d/3921-training-api" target="_blank" rel="noopener noreferrer">TRAINING API</a>.</p>
-                <p>Этот проект имеет открытый исходный код, вы всегда можете дополнить его или исправить, используя<br /><a href="https://github.com/1dontkillme/trainingchecker" target="_blank" rel="noopener noreferrer"><BiLogoGithub /> исходный код на GitHub</a>.</p><br />
+                <p>Этот проект имеет открытый исходный код, вы всегда можете дополнить его или исправить, используя<br /><a href="https://github.com/1dontkillme/trainingchecker" target="_blank" rel="noopener noreferrer"><GithubIcon width={16} height={16} /> исходный код на GitHub</a>.</p><br />
                 <p>Последнее обновление произошло: {lastUpdate}</p>
-                <TestIcon width={32} height={32} />
               </div>
               <form 
                 action="./player" 
@@ -108,7 +107,7 @@ export default function Home() {
                 ref={FormElement}
               >
                 <Input 
-                  icon={ <FaUser /> }
+                  icon={UserIcon}
                   label="Введите никнейм игрока" 
                   type="text" 
                   name="nickname" 
@@ -117,10 +116,10 @@ export default function Home() {
                   required={true}
                 />
                 <Button 
-                  btnType="Primary" 
+                  type="Primary" 
                   text="Проверить" 
-                  type="submit" 
-                  icon={ <FaCheckCircle /> } 
+                  action="submit" 
+                  icon={CheckIcon}
                   onClick={validation} 
                   ref={ButtonElement} 
                   disabled 
