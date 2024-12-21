@@ -11,7 +11,7 @@ import { MdDeblur, MdLensBlur } from "react-icons/md";
 import worldBlockWorlds from '@/consts/worldBlockWords';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import { toast } from '@/utils/toast';
-import Loader from '@/components/Loader/Loader';
+import Loader from '@/modules/Loader/Loader';
 import { usePage500 } from '@/shared/hooks/page500';
 
 interface Worlds {

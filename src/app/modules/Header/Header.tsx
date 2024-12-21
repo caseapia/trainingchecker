@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { isMobileDevice } from "@/hooks/isMobileDevice";
 import { Elements } from "@/shared/consts/headerElements";
-import BootstrapTooltip from "../Styles/TooltipStyles";
+import BootstrapTooltip from "../../../components/Styles/TooltipStyles";
 import { FaBars } from "react-icons/fa";
 
 export const Header = () => {

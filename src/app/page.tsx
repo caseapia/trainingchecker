@@ -5,7 +5,7 @@ import { Input } from "@/components/Input/Input";
 import Button from "@/components/Buttons/Button";
 import { FaCheckCircle, FaUser } from "react-icons/fa";
 import { BiLogoGithub } from "react-icons/bi";
-import Loader from "@/components/Loader/Loader";
+import Loader from "@/modules/Loader/Loader";
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import { toast } from "@/utils/toast";
 

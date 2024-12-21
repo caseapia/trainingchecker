@@ -9,7 +9,7 @@ import ReactMarkdown from 'react-markdown';
 import Button from '@/components/Buttons/Button';
 import { FaArrowAltCircleLeft } from 'react-icons/fa';
 import { toast } from '@/utils/toast';
-import Loader from '@/components/Loader/Loader';
+import Loader from '@/modules/Loader/Loader';
 
 const page = () => {
   const { id } = useParams();

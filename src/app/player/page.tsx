@@ -12,7 +12,7 @@ import { Table, Thead, Tr, Td, TBody, Th } from '@/components/Table/Table';
 import { useRouter } from 'next/navigation';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import { toast } from '@/utils/toast';
-import Loader from '@/components/Loader/Loader';
+import Loader from '@/modules/Loader/Loader';
 import Chip from '@/components/Chip/Chip';
 import { usePage500 } from '@/shared/hooks/page500';
 

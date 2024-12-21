@@ -9,7 +9,7 @@ import Button from "@/components/Buttons/Button";
 import { FaClock, FaUser } from "react-icons/fa6";
 import Link from "next/link";
 import BootstrapTooltip from "@/components/Styles/TooltipStyles";
-import Loader from "@/components/Loader/Loader";
+import Loader from "@/modules/Loader/Loader";
 
 const Changelog = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
