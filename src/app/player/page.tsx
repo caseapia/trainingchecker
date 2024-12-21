@@ -59,6 +59,7 @@ const PlayerInfo = () => {
   useEffect(() => {
     if (nickname === null || nickname === '') {
       router.push('../');
+      toast.error('Страница не может быть открыта без указания конкретного игрока, переносим вас обратно...', { title: 'Ошибка', lifeTime: 2000 })
     }
   }, [searchParams, router]);
 
