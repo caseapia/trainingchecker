@@ -1,8 +1,6 @@
 "use client"
 import { Suspense, useEffect, useState } from 'react';
 import styles from './page.module.scss'
-import Preloader from '@/public/assets/lotties/Preloader.json';
-import Lottie from 'lottie-react';
 import { Table, Thead, Tr, Td, Th, TBody } from '@/components/Table/Table';
 import Chip from '@/components/Chip/Chip';
 import { FaBookmark } from "react-icons/fa6";
@@ -138,7 +136,7 @@ const WorldList = () => {
   }
 
   return isLoaded ? (
-    <Suspense fallback={<Lottie animationData={Preloader} />}>
+    <Suspense fallback={<Loader />}>
       <PageWrapper title={`Список открытых миров (${result?.length})`}>
         <div className={styles.buttonGroup}>
           <Button 

@@ -1,10 +1,8 @@
 "use client";
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState, Suspense, ReactNode } from 'react';
+import { useEffect, useState, Suspense  } from 'react';
 import styles from './page.module.scss';
 import { BadgeRenderer } from '@/components/BadgeRenderer/BadgeRenderer';
-import Lottie from 'lottie-react';
-import Preloader from '@/public/assets/lotties/Preloader.json';
 import Button from '@/components/Buttons/Button';
 import { HiRefresh } from "react-icons/hi";
 import { FaCheckCircle, FaCopy, FaHammer } from 'react-icons/fa';
@@ -317,7 +315,7 @@ const PlayerInfo = () => {
 const Result = () => (
   <PageWrapper>
     <h1>Информация об игроке</h1>
-    <Suspense fallback={<Lottie animationData={Preloader} />}>
+    <Suspense fallback={<Loader />}>
       <PlayerInfo />
     </Suspense>
   </PageWrapper>
