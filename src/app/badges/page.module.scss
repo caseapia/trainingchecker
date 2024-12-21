@@ -16,7 +16,6 @@
   vertical-align: middle;
   box-shadow: 0 2px 4px var(--shadow-color);
   transition: .2s ease-in;
-  font-size: calc(.6* var(--size));
   border: 1px solid white;
   cursor: pointer;
     .BadgeIcon {
@@ -27,6 +26,10 @@
     }
     &:hover {
       transform: scale(1.5,1.5);
+    }
+    svg {
+      width: calc(.6* var(--size));
+      height: calc(.6* var(--size));
     }
 }
 .badgeTitle {

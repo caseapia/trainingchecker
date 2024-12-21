@@ -1,6 +1,9 @@
 import React from "react";
-import { FaHome, FaList, FaMedal, FaUser, FaClipboardList } from "react-icons/fa";
-import { IoAnalyticsSharp } from "react-icons/io5";
+import HomeIcon from '@/icons/components/header/home.svg';
+import ListIcon from '@/icons/components/header/list.svg';
+import UserIcon from '@/icons/user.svg';
+import MedalIcon from '@/icons/medal.svg';
+import CopyIcon from '@/icons/copy.svg';
 
 type HeaderProps = {
   icon: React.ReactNode;
@@ -20,7 +23,7 @@ export const Elements: HeaderProps[] = [
   {
     text: "Главная",
     id: "main",
-    icon: React.createElement(FaHome),
+    icon: React.createElement(HomeIcon),
     link: "../",
     isNew: false,
     isDisabled: false,
@@ -29,7 +32,7 @@ export const Elements: HeaderProps[] = [
   {
     text: "Игроки в сети",
     id: "players",
-    icon: React.createElement(FaUser),
+    icon: React.createElement(UserIcon),
     link: "/players",
     isNew: false,
     isDisabled: false,
@@ -38,7 +41,7 @@ export const Elements: HeaderProps[] = [
   {
     text: "Список значков",
     id: "badges",
-    icon: React.createElement(FaMedal),
+    icon: React.createElement(MedalIcon),
     link: "/badges",
     isNew: false,
     isDisabled: false,
@@ -47,7 +50,7 @@ export const Elements: HeaderProps[] = [
   {
     text: "Список миров",
     id: "worldlist",
-    icon: React.createElement(FaList),
+    icon: React.createElement(ListIcon),
     link: "/worldlist",
     isNew: false,
     isDisabled: true,
@@ -57,7 +60,7 @@ export const Elements: HeaderProps[] = [
   {
     text: "Список изменений",
     id: "changelog",
-    icon: React.createElement(FaClipboardList),
+    icon: React.createElement(CopyIcon),
     link: "/changelog",
     isNew: true,
     isDisabled: false,

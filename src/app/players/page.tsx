@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { BadgeRenderer } from '@/components/BadgeRenderer/BadgeRenderer';
 import { Table, Thead, Tr, Td, TBody, Th } from '@/components/Table/Table';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
-import Loader from '@/components/Loader/Loader';
+import Loader from '@/modules/Loader/Loader';
 
 interface Player {
   id: number;

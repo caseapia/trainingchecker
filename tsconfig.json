@@ -24,8 +24,17 @@
       "@/components/*": ["./src/components/*"],
       "@/consts/*": ["./src/shared/consts/*"],
       "@/public/*": ["./public/*"],
+      "@/modules/*": ["./src/modules/*"],
+      "@/icons/*": ["./public/assets/icons/*"],
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "svgr.d.ts",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts", 
+    "next.config.js",
+],
   "exclude": ["node_modules"]
 }

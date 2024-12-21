@@ -1,4 +1,4 @@
-import { FaXmark } from 'react-icons/fa6';
+import XmarkIcon from '@/icons/components/modal/xmark.svg';
 import styles from './Modal.module.scss';
 import Button from '../Buttons/Button';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -43,9 +43,9 @@ export const Modal = ({
   children,
   className,
   isOpen,
-  firstButtonIcon,
+  firstButtonIcon: FirstIcon,
   firstButtonContent,
-  secondButtonIcon,
+  secondButtonIcon: SecondIcon,
   secondButtonContent,
   onClose,
   firstButtonAction,
@@ -92,7 +92,7 @@ export const Modal = ({
             >
               {title && <div className={styles.Title}>{title}</div>}
               <div className={styles.Close} onClick={onClose}>
-                <FaXmark />
+                <XmarkIcon />
               </div>
             </div>
             <div className={styles.Body}>{children}</div>
@@ -101,19 +101,19 @@ export const Modal = ({
                 <div className={styles.ButtonGroup}>
                   {firstButtonContent && (
                     <Button
-                      btnType="Primary"
+                      type="Primary"
                       text={firstButtonContent}
-                      type="button"
-                      icon={firstButtonIcon || null}
+                      action="button"
+                      icon={FirstIcon}
                       onClick={firstButtonAction}
                     />
                   )}
                   {secondButtonContent && (
                     <Button
-                      btnType="Secondary"
+                    type="Secondary"
                       text={secondButtonContent}
-                      type="button"
-                      icon={secondButtonIcon || null}
+                      action="button"
+                      icon={SecondIcon}
                       onClick={secondButtonAction}
                     />
                   )}

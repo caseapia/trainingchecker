@@ -4,15 +4,17 @@ import { useEffect, useState, Suspense  } from 'react';
 import styles from './page.module.scss';
 import { BadgeRenderer } from '@/components/BadgeRenderer/BadgeRenderer';
 import Button from '@/components/Buttons/Button';
-import { HiRefresh } from "react-icons/hi";
-import { FaCheckCircle, FaCopy, FaHammer } from 'react-icons/fa';
+import CheckIcon from '@/icons/checkCircle.svg';
+import CopyIcon from '@/icons/copy.svg';
+import HammerIcon from '@/icons/page-player/hammer.svg';
+import RefreshIcon from '@/icons/page-player/refresh.svg';
 import { Modal } from '@/components/Modal/Modal';
 import Link from 'next/link';
 import { Table, Thead, Tr, Td, TBody, Th } from '@/components/Table/Table';
 import { useRouter } from 'next/navigation';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import { toast } from '@/utils/toast';
-import Loader from '@/components/Loader/Loader';
+import Loader from '@/modules/Loader/Loader';
 import Chip from '@/components/Chip/Chip';
 import { usePage500 } from '@/shared/hooks/page500';
 
@@ -284,8 +286,21 @@ const PlayerInfo = () => {
         <h5 className={styles.h5}>Значки</h5>
         <BadgeRenderer player={playerData} />
         <div className={styles.ButtonGroup}>
-          <Button btnType="Secondary" text="Обновить" type="button" icon={ <HiRefresh /> } onClick={refreshData} />
-          {playerData.warn.length > 0 ? <Button btnType="Secondary" text="Наказания" type="button" disabled={false} icon={ <FaHammer /> } onClick={openModal} /> : <Button btnType="Secondary" text="Наказания" type="button" disabled={true} icon={ <FaHammer /> } onClick={openModal} />}
+          <Button 
+            type="Secondary" 
+            text="Обновить" 
+            action="button" 
+            icon={RefreshIcon} 
+            onClick={refreshData} 
+          />
+          <Button 
+            type='Secondary'
+            text='Наказания'
+            action='button'
+            disabled={playerData.warn.length > 0 ? false : true}
+            onClick={openModal}
+            icon={HammerIcon}
+          />
         </div>
       </div>
       <Modal 
@@ -293,10 +308,10 @@ const PlayerInfo = () => {
         onClose={closeModal} 
         title={`Список наказаний ${playerData.login} (${playerData.id})`} 
         firstButtonContent='Закрыть' 
-        firstButtonIcon={<FaCheckCircle />} 
+        firstButtonIcon={CheckIcon} 
         firstButtonAction={closeModal}
         secondButtonContent='Скопировать' 
-        secondButtonIcon={<FaCopy />}
+        secondButtonIcon={CopyIcon}
         secondButtonAction={copyPunishments}
       >
         {playerData.warn.length > 0 ? (

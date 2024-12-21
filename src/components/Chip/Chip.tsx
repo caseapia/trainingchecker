@@ -1,8 +1,18 @@
 import React from 'react';
 import styles from './Chip.module.scss'
 import { useGenerateId } from '@/shared/hooks/useGenerateId';
+import Props from './types';
 
-const Chip = ({ label, className, size = "medium", icon, iconPosition = "left", iconSize, image, color, }: Props) => {
+const Chip = ({ 
+  label, 
+  className, 
+  size = "medium", 
+  icon: Icon, 
+  iconPosition = "left", 
+  iconSize, 
+  image, 
+  color, 
+}: Props) => {
   const id = useGenerateId();
   return (
     <div 
@@ -11,8 +21,8 @@ const Chip = ({ label, className, size = "medium", icon, iconPosition = "left", 
       style={{ backgroundColor: `${color && color}` }}
     >
       <span className={styles.ChipContent}>
-        {icon && (
-          <span className={`${styles.ChipIcon}`} style={{ fontSize: `${iconSize}px` }}>{icon}</span>
+        {Icon && (
+          <span className={`${styles.ChipIcon}`} style={{ fontSize: `${iconSize}px` }}><Icon /></span>
         )}
         {image && (
           <img src={image} width={iconSize} height={iconSize} alt={label} className={`${styles.ChipImage}`} />

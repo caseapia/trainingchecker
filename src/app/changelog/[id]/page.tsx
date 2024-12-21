@@ -7,9 +7,9 @@ import changeLog from '@/shared/consts/changelog';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import ReactMarkdown from 'react-markdown';
 import Button from '@/components/Buttons/Button';
-import { FaArrowAltCircleLeft } from 'react-icons/fa';
+import circleArrowLeft from '@/icons/changelog/[id]/circleArrowLeft.svg';
 import { toast } from '@/utils/toast';
-import Loader from '@/components/Loader/Loader';
+import Loader from '@/modules/Loader/Loader';
 
 const page = () => {
   const { id } = useParams();
@@ -60,10 +60,10 @@ const page = () => {
     <PageWrapper classname={styles.NewWrapper}>
       <h1 className={styles.title}>
         <Button 
-          type="button" 
-          btnType="Secondary" 
+          action="button" 
+          type="Secondary" 
           text="Вернуться" 
-          icon={<FaArrowAltCircleLeft />} 
+          icon={circleArrowLeft} 
           onClick={() => history.back()}
         />
         {filteredNews.map((log): string => {

@@ -12,8 +12,8 @@ const buttonVariants = {
 
 const Button = forwardRef<HTMLButtonElement, Props>(
   ({ 
-      icon, 
-      btnType, 
+      icon: Icon, 
+      action, 
       text, 
       onClick, 
       onFocus, 
@@ -43,16 +43,17 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       <motion.button
         onClick={onClick}
         onFocus={onFocus}
-        type={type}
+        type={action}
         disabled={disabled}
-        className={`${styles.button} ${getStatus(btnType)} ${classname || ''}`}
+        className={`${styles.button} ${getStatus(type)} ${classname || ''}`}
         style={style}
         whileTap={buttonVariants.whileTap}
         ref={ref}
         id={id}
       >
         <span>
-          {icon && <>{icon}</>} {text}
+          {Icon && <Icon className={styles.icon} />}
+          {text}
         </span>
       </motion.button>
     );
