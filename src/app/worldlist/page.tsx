@@ -3,15 +3,17 @@ import { Suspense, useEffect, useState } from 'react';
 import styles from './page.module.scss'
 import { Table, Thead, Tr, Td, Th, TBody } from '@/components/Table/Table';
 import Chip from '@/components/Chip/Chip';
-import { FaBookmark } from "react-icons/fa6";
-import { GoCpu, GoAlertFill } from "react-icons/go";
+import BookmarkIcon from '@/icons/page-worldlist/bookmark.svg';
+import CpuIcon from '@/icons/page-worldlist/cpu.svg';
+import AlertIcon from '@/icons/page-worldlist/alertFill.svg';
+import CopyIcon from '@/icons/copy.svg';
+import DeblurIcon from '@/icons/page-worldlist/deblur.svg';
+import LensBlurIcon from '@/icons/page-worldlist/lensBlur.svg';
 import Button from '@/components/Buttons/Button';
-import { FaCopy } from 'react-icons/fa';
-import { MdDeblur, MdLensBlur } from "react-icons/md";
 import worldBlockWorlds from '@/consts/worldBlockWords';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import { toast } from '@/utils/toast';
-import Loader from '@/components/Loader/Loader';
+import Loader from '@/modules/Loader/Loader';
 import { usePage500 } from '@/shared/hooks/page500';
 
 interface Worlds {
@@ -141,18 +143,18 @@ const WorldList = () => {
       <PageWrapper title={`Список открытых миров (${result?.length})`}>
         <div className={styles.buttonGroup}>
           <Button 
-            btnType='Primary' 
+            type='Primary' 
             text='Скопировать' 
-            type='button' 
+            action='button' 
             onClick={copyWorlds} 
-            icon={<FaCopy />}
+            icon={CopyIcon}
           />
           <Button 
-            btnType='Secondary' 
+            type='Secondary' 
             text={sensMode === true ? 'Выключить чувствительный режим' : 'Включить чувствительный режим'}
-            type='button' 
+            action='button' 
             onClick={sensitiveMode}
-            icon={sensMode === true ? <MdDeblur /> : <MdLensBlur />}
+            icon={sensMode === true ? DeblurIcon : LensBlurIcon}
           />
         </div>
         <Table>
@@ -171,11 +173,11 @@ const WorldList = () => {
                   <Td>{world.players}</Td>
                   <Td className={styles.ChipContainer}>
                     {world.static === true ? (
-                      <Chip label="Статичный" size="small" icon={<FaBookmark />} />
+                      <Chip label="Статичный" size="small" icon={BookmarkIcon} />
                     ) : world.ssmp === true ? (
-                      <Chip label="SSMP" size="small" icon={<GoCpu />} />
+                      <Chip label="SSMP" size="small" icon={CpuIcon} />
                     ) : world.static || world.ssmp === false ? (
-                      <Chip label="Нет меток" size="small" icon={<GoAlertFill />} />
+                      <Chip label="Нет меток" size="small" icon={AlertIcon} />
                     ) : null}
                   </Td>
                 </Tr>

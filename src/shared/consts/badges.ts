@@ -1,6 +1,13 @@
 import React, { ReactNode } from "react";
-import { FaRobot, FaUserCog, FaUserSlash, FaSatellite } from "react-icons/fa";
-import { FaCode, FaCrown, FaMedal, FaUserShield, FaYoutube } from "react-icons/fa6";
+import CodeIcon from '@/icons/badges/code.svg';
+import CrownIcon from '@/icons/badges/crown.svg';
+import MedalIcon from '@/icons/medal.svg';
+import RobotIcon from '@/icons/badges/robot.svg';
+import SatelLiteIcon from '@/icons/badges/satelLite.svg';
+import UserCogIcon from '@/icons/badges/userCog.svg';
+import UserShieldIcon from '@/icons/badges/userShield.svg';
+import UserSlashIcon from '@/icons/badges/userSlash.svg';
+import YoutubeIcon from '@/icons/badges/youtube.svg';
 
 type BadgeProps = {
   id: number;
@@ -28,7 +35,7 @@ export const staffBadges: BadgeProps[] = [
     title: "Создатель TRAINING SANDBOX",
     category: "staff",
     description: "Когда-то этот игрок создал LSGOV TRAINING — ныне TRAINING SANDBOX",
-    icon: React.createElement(FaCrown),
+    icon: React.createElement(CodeIcon),
     accid: [1, 2],
     color: "#000000",
     textColor: "red",
@@ -38,7 +45,7 @@ export const staffBadges: BadgeProps[] = [
     title: "Разработчик TRAINING SANDBOX",
     category: "staff",
     description: "Этот игрок учавствует в разработке TRAINING SANDBOX",
-    icon: React.createElement(FaUserCog),
+    icon: React.createElement(CrownIcon),
     verify: 3,
     color: "#B72A2A",
     textColor: "#B72A2A"
@@ -48,7 +55,7 @@ export const staffBadges: BadgeProps[] = [
     title: "Администратор TRAINING SANDBOX",
     category: "staff",
     description: "Этот игрок является администратором TRAINING SANDBOX",
-    icon: React.createElement(FaUserShield),
+    icon: React.createElement(UserCogIcon),
     minModer: 999,
     maxModer: 9999,
     color: "#B72A2A",
@@ -59,7 +66,7 @@ export const staffBadges: BadgeProps[] = [
     title: "Команда TRAINING SANDBOX",
     category: "staff",
     description: "Этот игрок является подтвержденным членом команды TRAINING SANDBOX",
-    icon: React.createElement(FaUserShield),
+    icon: React.createElement(UserShieldIcon),
     minModer: 1,
     maxModer: 9999,
     color: "#0f4c816c",
@@ -70,7 +77,7 @@ export const staffBadges: BadgeProps[] = [
     title: "Команда сайта",
     category: "staff",
     description: "Этот игрок является разработчиком или помогал в разработке сайта TRAINING CHECKER",
-    icon: React.createElement(FaCode),
+    icon: React.createElement(CodeIcon),
     accid: [113145, 125043, 271552],
     color: "rgb(42 170 104 / 42%)",
     textColor: "rgb(42 170 104)"
@@ -82,7 +89,7 @@ export const playerBadges: BadgeProps[] = [
     title: "Ветеран",
     category: "player",
     description: `Этот значок вручается игрокам, зарегистрировавшим свой аккаунт в числе первых 130000`,
-    icon: React.createElement(FaMedal),
+    icon: React.createElement(MedalIcon),
     color: "#00a5a26c",
     minAccId: 0,
     maxAccId: 130000,
@@ -93,7 +100,7 @@ export const playerBadges: BadgeProps[] = [
     title: "Ютубер",
     category: "player",
     description: "Значок был вручен игроку за поддержку сообщества в части рекламы посредством создания контента",
-    icon: React.createElement(FaYoutube),
+    icon: React.createElement(YoutubeIcon),
     color: "#fe0032",
     verify: 1,
     textColor: "#fe0032"
@@ -103,7 +110,7 @@ export const playerBadges: BadgeProps[] = [
     title: "Бывший член команды TRAINING SANDBOX",
     category: "player",
     description: "Значок был вручен игроку за поддержку сервера в качестве члена команды проекта",
-    icon: React.createElement(FaUserSlash),
+    icon: React.createElement(UserSlashIcon),
     color: "#ababab",
     verify: 4,
     textColor: "#ababab"
@@ -113,7 +120,7 @@ export const playerBadges: BadgeProps[] = [
     title: "Бот",
     category: "player",
     description: "Этот аккаунт управляется не человеком, а ботом и является официальным пользовательским ботом TRAINING SANDBOX",
-    icon: React.createElement(FaRobot),
+    icon: React.createElement(RobotIcon),
     color: "rgb(144, 203, 255)",
     accid: [605187, 659622, 659678],
     textColor: "rgb(144, 203, 255)"
@@ -123,7 +130,7 @@ export const playerBadges: BadgeProps[] = [
     title: "Легион Хроноса",
     category: "player",
     description: "Объединение, воплощающее власть, контроль и абсолютный порядок. Управляемый системой Хронос, легион стремится к доминированию над временем и пространством, обеспечивая строгую дисциплину и непреклонную власть.",
-    icon: React.createElement(FaSatellite),
+    icon: React.createElement(SatelLiteIcon),
     color: "#b22424",
     nicknameIncludes: "czo.ooo",
     textColor: "#b22424"

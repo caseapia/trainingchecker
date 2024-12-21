@@ -1,6 +1,7 @@
 import React from "react";
-import { FaHammer, FaCheckCircle } from "react-icons/fa";
-import { FaGear } from "react-icons/fa6";
+import CheckIcon from '@/icons/checkCircle.svg';
+import HammerIcon from '@/icons/hammer.svg';
+import GearIcon from '@/icons/changelog/elements/gear.svg';
 
 type Props = {
   route: string;
@@ -18,7 +19,7 @@ export const changeLog: Props[] = [
     author: "dontkillme",
     date: "21-12-2024",
     color: "rgb(31 240 145)",
-    icon: React.createElement(FaCheckCircle),
+    icon: React.createElement(CheckIcon),
   },
   {
     route: "6-12_changelog",
@@ -26,7 +27,7 @@ export const changeLog: Props[] = [
     author: "dontkillme",
     date: "06-12-2024",
     color: "rgb(31 240 145)",
-    icon: React.createElement(FaHammer),
+    icon: React.createElement(HammerIcon),
   },
   {
     route: "changelog-new",
@@ -34,7 +35,7 @@ export const changeLog: Props[] = [
     author: "dontkillme",
     date: "12-01-2024",
     color: "#f01f4b",
-    icon: React.createElement(FaGear),
+    icon: React.createElement(GearIcon),
   },
   {
     route: "old-updates",
@@ -42,7 +43,7 @@ export const changeLog: Props[] = [
     author: "dontkillme",
     date: "12-01-2024",
     color: "rgb(31 240 145)",
-    icon: React.createElement(FaHammer),
+    icon: React.createElement(HammerIcon),
   },
 ];
 

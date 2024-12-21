@@ -3,10 +3,10 @@ interface Props {
   children: React.ReactNode;
   className?: string;
   isOpen: boolean; 
-  firstButtonIcon?: React.ReactNode;
+  firstButtonIcon?: React.FC<React.SVGProps<SVGElement>>;
   firstButtonContent?: string;
   firstButtonAction?: () => void;
-  secondButtonIcon?: React.ReactNode;
+  secondButtonIcon?: React.FC<React.SVGProps<SVGElement>>;
   secondButtonContent?: string;
   secondButtonAction?: () => void;
   onClose: () => void;

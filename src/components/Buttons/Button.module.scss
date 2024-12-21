@@ -13,9 +13,11 @@
     span {
       display: flex;
     }
-    svg {
+    .icon {
       margin-right: 6px;
       margin-bottom: 2px;
+      width: 16px;
+      height: 16px;
     }
     &:disabled {
       cursor: not-allowed;

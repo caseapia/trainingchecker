@@ -12,7 +12,6 @@
   box-shadow: 0 2px 4px var(--shadow-color);
   cursor: pointer;
   transition: .2s;
-  font-size: calc(.6* var(--size));
   margin-right: 7px;
   border: 1px solid white;
     &:hover {
@@ -26,5 +25,9 @@
       justify-content: center;
       align-items: center;
       vertical-align: middle;
+    }
+    svg {
+      width: calc(.6* var(--size));
+      height: calc(.6* var(--size));
     }
 }
