@@ -55,21 +55,21 @@ export const Modal = ({
 }: Props) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-        onClose();
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (event: MouseEvent) => {
+  //     if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+  //       onClose();
+  //     }
+  //   };
 
-    if (isOpen) {
-      document.addEventListener('mouseup', handleClickOutside);
-    }
+  //   if (isOpen) {
+  //     document.addEventListener('mouseup', handleClickOutside);
+  //   }
 
-    return () => {
-      document.removeEventListener('mouseup', handleClickOutside);
-    };
-  }, [isOpen, onClose]);
+  //   return () => {
+  //     document.removeEventListener('mouseup', handleClickOutside);
+  //   };
+  // }, [isOpen, onClose]);
 
   return (
     <AnimatePresence>
