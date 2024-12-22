@@ -151,7 +151,7 @@ export const Header = () => {
           </motion.div>
         )}
       </AnimatePresence>
-        <header className={styles.header}>
+        <header className={`${styles.header} ${!isMobile ? styles.pc : ''}`}>
           {isMobile && (
             <Button 
               type="Outlined"
