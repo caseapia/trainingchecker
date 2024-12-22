@@ -10,6 +10,7 @@
   width: 100%;
   cursor: pointer;
   user-select: none;
+  border: 1px solid transparent;
     span {
       display: flex;
     }
@@ -58,6 +59,14 @@
     &:enabled {
       &:hover {
         background: lighten(#FF6955, 7%);
+      }
+    }
+}
+.Outlined {
+  background: transparent;
+    &:enabled {
+      &:hover {
+        background-color: #656c7633;
       }
     }
 }

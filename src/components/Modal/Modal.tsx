@@ -27,7 +27,7 @@ const modalVariants = {
     opacity: 1, 
     transition: { 
       duration: 0.2 
-    } 
+    }
   },
   exit: { 
     scale: 0.9, 

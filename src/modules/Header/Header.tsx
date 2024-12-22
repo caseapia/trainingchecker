@@ -1,13 +1,35 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Header.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { isMobileDevice } from "@/hooks/isMobileDevice";
 import { Elements } from "@/shared/consts/headerElements";
 import BootstrapTooltip from "@/components/Styles/TooltipStyles";
 import BarsIcon from '@/icons/components/header/bars.svg';
+import Button from "@/components/Buttons/Button";
+
+const headerVariants = {
+  hidden: {
+    x: -500,
+    transition: { 
+      duration: 0.5 
+    }
+  },
+  visible: {
+    x: 0,
+    transition: { 
+      duration: 0.5 
+    }
+  },
+  exit: {
+    x: -500,
+    transition: { 
+      duration: 0.5 
+    }
+  },
+}
 
 export const Header = () => {
   const isMobile = isMobileDevice();
@@ -15,6 +37,23 @@ export const Header = () => {
   const [activePage, setActivePage] = useState<string>("main");
   const router = useRouter();
   const [online, setOnline] = useState<number>(0);
+  const windowRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (windowRef.current && !windowRef.current.contains(e.target as Node)) {
+        setIsMobileMenuOpened(false);
+      };
+    }
+
+    if (isMobileMenuOpened) {
+      document.addEventListener('mouseup', handleClickOutside);
+    };
+
+    return () => {
+      document.removeEventListener('mouseup', handleClickOutside);
+    };
+  }, [isMobileMenuOpened])
 
   useEffect(() => {
     const currentPath = window.location.pathname.split("/")[1] || "main";
@@ -56,7 +95,7 @@ export const Header = () => {
     getPlayers();
   }, []);
 
-  const renderMenuItems = (isMobileView = false) => (
+  const renderMenuItems = () => (
     Elements.map(({ id, link, icon, text, tooltipText, isDisabled, isNew, style }) => (
       <motion.li 
         key={id} 
@@ -89,29 +128,37 @@ export const Header = () => {
   );
 
   return (
-    <header className={isMobile ? `${styles.header} ${styles.mobile__header}` : styles.header}>
-      <h1>
-        TRAINING <span className={styles.redspan}>CHECKER</span>
-      </h1>
-      {isMobile ? (
-        <>
-          <button className={styles.mobile__button} onClick={toggleMobileMenu}>
-            <BarsIcon />
-          </button>
-          {isMobileMenuOpened && (
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0 }}
-              className={styles.mobile__menu}
-            >
-              <ul className={styles.mobile__menu__list}>{renderMenuItems(true)}</ul>
-            </motion.div>
-          )}
-        </>
-      ) : (
-        <ul className={styles.list}>{renderMenuItems()}</ul>
-      )}
-    </header>
+      <>
+      <AnimatePresence>
+        {isMobileMenuOpened && (
+          <motion.div
+            className={styles.mobileMenu}
+            variants={headerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            ref={windowRef}
+            key="mobileMenu"
+          >
+            {renderMenuItems()}
+          </motion.div>
+        )}
+      </AnimatePresence>
+        <header className={styles.header}>
+          <h1 className={isMobile ? styles.mobileHeader : ''}>
+            {isMobile && (
+              <Button 
+              type="Outlined"
+              action="button"
+              icon={BarsIcon}
+              onClick={toggleMobileMenu}
+              style={{ width: 'fit-content' }}
+            />
+            )}
+            TRAINING&nbsp;<span className={styles.redspan}>CHECKER</span>
+          </h1>
+          {!isMobile && <ul className={styles.list}>{renderMenuItems()}</ul>}
+      </header>
+    </>
   );
 };

@@ -34,6 +34,8 @@ const Button = forwardRef<HTMLButtonElement, Props>(
           return styles.Secondary;
         case 'Danger':
           return styles.Danger;
+        case 'Outlined':
+          return styles.Outlined;
         default:
           return styles.Primary;
       }
@@ -53,7 +55,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       >
         <span>
           {Icon && <Icon className={styles.icon} />}
-          {text}
+          {text && text}
         </span>
       </motion.button>
     );
