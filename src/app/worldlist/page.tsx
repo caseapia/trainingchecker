@@ -15,6 +15,7 @@ import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import { toast } from '@/utils/toast';
 import Loader from '@/modules/Loader/Loader';
 import { usePage500 } from '@/shared/hooks/page500';
+import { useRouter } from 'next/navigation';
 
 interface Worlds {
   name: string;
@@ -30,6 +31,15 @@ const WorldList = () => {
   const [sensMode, setSensMode] = useState<boolean>(false);
   const [originalWorlds, setOriginalWorlds] = useState<Worlds[] | null>(null);
   const triggerPage500 = usePage500();
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('../');
+    toast.error('Эта страница отключена и временно недоступна. Пожалуйста, попробуйте позже.', { 
+      title: 'Ошибка',
+      lifeTime: 5000, 
+    })
+  }, [])
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;

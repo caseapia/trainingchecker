@@ -5,6 +5,7 @@ import { BadgeRenderer } from '@/components/BadgeRenderer/BadgeRenderer';
 import { Table, Thead, Tr, Td, TBody, Th } from '@/components/Table/Table';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import Loader from '@/modules/Loader/Loader';
+import { usePage500 } from '@/shared/hooks/page500';
 
 interface Player {
   id: number;
@@ -16,8 +17,12 @@ interface Player {
 
 function Players() {
   const [result, setResult] = useState<Player[] | null>(null);
+  const [isloaded, setIsLoaded] = useState<boolean>(false);
+  const triggerPage500 = usePage500();
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     const getPlayers = async () => {
       const url = process.env.NEXT_PUBLIC_API_ONLINE_URL;
 
@@ -28,16 +33,29 @@ function Players() {
       try {
         const response = await fetch(url);
         if (!response.ok) {
+          setIsLoaded(false);
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const jsonResponse = await response.json();
         setResult(jsonResponse.data);
+        setIsLoaded(true);
       } catch (err) {
         console.error('Error:', err);
+        setIsLoaded(false);
+      } finally {
+        clearTimeout(timeoutId);
       }
     };
 
     getPlayers();
+
+    timeoutId = setTimeout(() => {
+      if (!isloaded) {
+        triggerPage500();
+      }
+    }, 4000);
+
+    return () => clearTimeout(timeoutId);
   }, []);
   return (
     <Suspense fallback={<Loader />}>
