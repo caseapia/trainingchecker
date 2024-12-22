@@ -57,7 +57,6 @@ const PlayerInfo = () => {
   const [isNoAccess, setIsNoAccess] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const triggerPage500 = usePage500();
-  let timeoutId: NodeJS.Timeout;
 
   useEffect(() => {
     if (nickname === null || nickname === '') {
@@ -66,68 +65,69 @@ const PlayerInfo = () => {
         title: 'Ошибка', 
         lifeTime: 5000 
       })
-      clearTimeout(timeoutId);
     }
   }, [searchParams, router]);
 
-  const fetchPlayerData = async () => {
+  const getData = async () => {
     if (!nickname) return;
-    const url = `${process.env.NEXT_PUBLIC_API_USER_URL}/${nickname}`;
-
-    if (!url) {
-      throw new Error('Url is not defined')
-    }
   
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        setIsDataLoaded(false);
-        setIsNoAccess(true);
-        if (response.status === 404) {
-          router.push('../');
-          toast.error(`Игрок с никнеймом ${nickname} не найден. Перенаправляем вас на главную страницу`, { 
-            title: 'Игрок не найден', 
-            lifeTime: 5000 
-          })
-          clearTimeout(timeoutId);
+      const url = `${process.env.NEXT_PUBLIC_API_USER_URL}/${nickname}`;
+  
+      try {
+        const response = await fetch(url);
+  
+        if (!response.ok) {
+          if (response.status === 404) {
+            router.push('../');
+            toast.error(`Игрок с никнеймом ${nickname} не найден. Перенаправляем вас на главную страницу`, {
+              title: 'Игрок не найден',
+              lifeTime: 5000,
+            });
+          }
         }
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const result = await response.json();
-      setPlayerData({
-        id: Number(result.data.id),
-        login: result.data.login,
-        access: Number(result.data.access),
-        moder: Number(result.data.moder),
-        verify: Number(result.data.verify),
-        verifyText: result.data.verifyText,
-        mute: Number(result.data.mute),
-        online: Number(result.data.online),
-        regdate: result.data.regdate,
-        lastlogin: result.data.lastlogin,
-        playerid: Number(result.data.playerid),
-        warn: result.data.warn as Array<{ reason: string; bantime: string; admin: string; }>,
-      });
-      setIsDataLoaded(true);
-      clearTimeout(timeoutId);
-    } catch (error) {
-      console.error(error);
-    }
-  };
   
-  useEffect(() => {
-    timeoutId = setTimeout(() => {
-      if (!isLoaded) {
-        triggerPage500();
+        const result = await response.json();
+        setPlayerData({
+          id: Number(result.data.id),
+          login: result.data.login,
+          access: Number(result.data.access),
+          moder: Number(result.data.moder),
+          verify: Number(result.data.verify),
+          verifyText: result.data.verifyText,
+          mute: Number(result.data.mute),
+          online: Number(result.data.online),
+          regdate: result.data.regdate,
+          lastlogin: result.data.lastlogin,
+          playerid: Number(result.data.playerid),
+          warn: result.data.warn as Array<{ reason: string; bantime: string; admin: string }>,
+        });
+        setIsDataLoaded(true);
+        setIsLoaded(true);
+      } catch (error) {
+        console.error(error);
+        setIsNoAccess(true);
       }
-    }, 8000);
-    fetchPlayerData();
-  }, [nickname]);
-  
+  }
+
   const refreshData = () => {
-    fetchPlayerData();
-    toast.success(`Информация об игроке ${playerData.login} была обновлена`, { title: "Успешно!", lifeTime: 5000 })
-  };
+    getData();
+    toast.success(`Информация об игроке ${nickname} успешно обновлена`, {
+      title: 'Успешно',
+      lifeTime: 5000,
+    })
+  }
+
+  useEffect(() => {
+    getData();
+  
+    const timeoutId = setTimeout(() => {
+      if (!isLoaded) {
+        triggerPage500(); 
+      }
+    }, 5000);
+  
+    return () => clearTimeout(timeoutId);
+  }, [nickname, isLoaded, router, triggerPage500, getData]);
 
   useEffect(() => {
     if (!playerData.lastlogin) return;
@@ -291,7 +291,7 @@ const PlayerInfo = () => {
             text="Обновить" 
             action="button" 
             icon={RefreshIcon} 
-            onClick={refreshData} 
+            onClick={refreshData}
           />
           <Button 
             type='Secondary'

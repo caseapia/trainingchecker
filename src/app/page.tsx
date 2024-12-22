@@ -9,13 +9,16 @@ import { toast } from "@/utils/toast";
 import CheckIcon from '@/icons/checkCircle.svg';
 import UserIcon from '@/icons/user.svg';
 import GithubIcon from '@/icons/page-main/github.svg';
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const [isButtonLoading, setIsButtonLoading] = useState<boolean>(false);
   const [lastUpdate, setLastUpdate] = useState<string>('');
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const InputElement = useRef<HTMLInputElement>(null);
   const ButtonElement = useRef<HTMLButtonElement>(null);
   const FormElement = useRef<HTMLFormElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const commits = async () => {
@@ -47,15 +50,32 @@ export default function Home() {
     commits();
   }, []);
 
-  function validation(event: React.FormEvent) {
+  const validation = async (e: React.FormEvent) => {
+    e.preventDefault();
     if (InputElement.current && InputElement.current.value.length === 0) {
-      event.preventDefault();
+      e.preventDefault();
       if (ButtonElement.current) {
         ButtonElement.current.disabled = true;
       }
-      toast.error('Вы не заполнили поле никнейма', { title: "Поле никнейма не заполнено", lifeTime: 4000, })
+      toast.error('Вы не заполнили поле никнейма', { 
+        title: "Поле никнейма не заполнено", 
+        lifeTime: 4000, 
+      })
     } else {
-      FormElement.current?.submit;
+      const nickname = InputElement.current?.value.trim();
+      if (nickname) {
+        setIsButtonLoading(true);
+        try {
+          // setTimeout(() => {
+          //   router.push(`/player?nickname=${encodeURIComponent(nickname)}`);
+          // }, 3000);
+          setTimeout(() => {
+            router.push(`/player?nickname=${encodeURIComponent(nickname)}`);
+          }, 700)
+        } finally {
+          return true;
+        }
+      }
       if (ButtonElement.current) {
         ButtonElement.current.disabled = false;
       }
@@ -101,7 +121,7 @@ export default function Home() {
                 <p>Последнее обновление было {lastUpdate}</p>
               </div>
               <form 
-                action="./player" 
+                onSubmit={validation}
                 method="get" 
                 className={styles.FormContainer} 
                 ref={FormElement}
@@ -120,9 +140,9 @@ export default function Home() {
                   text="Проверить" 
                   action="submit" 
                   icon={CheckIcon}
-                  onClick={validation} 
                   ref={ButtonElement} 
-                  disabled 
+                  disabled
+                  isLoading={isButtonLoading}
                 />
               </form>
             </>
