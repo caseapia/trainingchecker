@@ -1,7 +1,6 @@
 import React from "react";
 import CheckIcon from '@/icons/checkCircle.svg';
-import HammerIcon from '@/icons/hammer.svg';
-import GearIcon from '@/icons/changelog/elements/gear.svg';
+import MobileIcon from '@/icons/changelog/elements/mobile.svg';
 
 type Props = {
   route: string;
@@ -14,36 +13,20 @@ type Props = {
 
 export const changeLog: Props[] = [
   {
+    route: "mobile-and-states",
+    title: "Мобильная адаптация, новые состояния и...",
+    author: "dontkillme",
+    date: "21-12-2024",
+    color: "#8B5CF6",
+    icon: React.createElement(MobileIcon),
+  },
+  {
     route: "toast-updates",
     title: "Обновление системы уведомлений",
     author: "dontkillme",
     date: "21-12-2024",
     color: "rgb(31 240 145)",
     icon: React.createElement(CheckIcon),
-  },
-  {
-    route: "6-12_changelog",
-    title: "Бейджи и уведомления",
-    author: "dontkillme",
-    date: "06-12-2024",
-    color: "rgb(31 240 145)",
-    icon: React.createElement(HammerIcon),
-  },
-  {
-    route: "changelog-new",
-    title: "Новое оформление страницы изменений",
-    author: "dontkillme",
-    date: "12-01-2024",
-    color: "#f01f4b",
-    icon: React.createElement(GearIcon),
-  },
-  {
-    route: "old-updates",
-    title: "Обновления, опубликованные до новой системы патчноутов",
-    author: "dontkillme",
-    date: "12-01-2024",
-    color: "rgb(31 240 145)",
-    icon: React.createElement(HammerIcon),
   },
 ];
 
