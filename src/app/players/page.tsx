@@ -59,7 +59,7 @@ function Players() {
   }, []);
   return (
     <Suspense fallback={<Loader />}>
-      <PageWrapper title={`Список игроков в сети (${result?.length || "Загрузка..."})`}>
+      <PageWrapper title={`Список игроков в сети`}>
         {result ? (
           <Table>
             <Thead>
