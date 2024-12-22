@@ -91,8 +91,8 @@ export const Modal = ({
               style={titleStyle}
             >
               {title && <div className={styles.Title}>{title}</div>}
-              <div className={styles.Close} onClick={onClose}>
-                <XmarkIcon />
+              <div className={styles.Close}>
+                <XmarkIcon onClick={onClose} />
               </div>
             </div>
             <div className={styles.Body}>{children}</div>
