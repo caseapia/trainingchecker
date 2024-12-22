@@ -1,10 +1,13 @@
 .IconContainer {
-  font-size: 120px;
   display: flex;
   width: 100%;
   justify-content: center;
   color: var(--color-danger);
   margin-bottom: 10px;
+    svg {
+      width: 120px;
+      height: 120px;
+    }
 }
 .container {
   border: 1px solid #242830;
