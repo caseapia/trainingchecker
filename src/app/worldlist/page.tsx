@@ -34,14 +34,6 @@ const WorldList = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.push('../');
-    toast.error('Эта страница отключена и временно недоступна. Пожалуйста, попробуйте позже.', { 
-      title: 'Ошибка',
-      lifeTime: 5000, 
-    })
-  }, [])
-
-  useEffect(() => {
     let timeoutId: NodeJS.Timeout;
   
     const getWorlds = async () => {

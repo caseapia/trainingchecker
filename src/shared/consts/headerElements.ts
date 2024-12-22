@@ -53,7 +53,7 @@ export const Elements: HeaderProps[] = [
     icon: React.createElement(ListIcon),
     link: "/worldlist",
     isNew: false,
-    isDisabled: true,
+    isDisabled: false,
     tooltipText: "Эта вкладка временно недоступна и отключена на серверной части. Мы оповестим вас, когда все ошибки будут исправлены.",
     isMobileAvailable: true,
   },
@@ -64,6 +64,6 @@ export const Elements: HeaderProps[] = [
     link: "/changelog",
     isNew: true,
     isDisabled: false,
-    isMobileAvailable: false,
+    isMobileAvailable: true,
   },
 ];
