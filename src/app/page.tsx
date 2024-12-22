@@ -19,6 +19,11 @@ export default function Home() {
   const ButtonElement = useRef<HTMLButtonElement>(null);
   const FormElement = useRef<HTMLFormElement>(null);
   const router = useRouter();
+  const dateOptions: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }
 
   useEffect(() => {
     const commits = async () => {
@@ -40,7 +45,12 @@ export default function Home() {
         if (Array.isArray(cmts) && cmts.length > 0) {
           const lastcmtday = cmts[0].commit.committer.date;
           const lastUpdate = new Date(lastcmtday).toLocaleString();
-          setLastUpdate(lastUpdate);
+          setLastUpdate(
+            new Date(lastUpdate).toLocaleDateString(
+              'ru-RU', 
+              dateOptions
+            )
+          );
         }
         setIsLoaded(true);
       } catch (err) {
