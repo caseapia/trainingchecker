@@ -3,6 +3,8 @@ import styles from './Button.module.scss';
 import { motion } from "framer-motion";
 import Props from './types';
 import { useGenerateId } from '@/shared/hooks/useGenerateId';
+import Lottie from 'lottie-react';
+import LoadingIcon from '@/icons/LoadingIcon.json';
 
 const buttonVariants = {
   whileTap: {
@@ -20,7 +22,8 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       type, 
       disabled = false, 
       classname, 
-      style 
+      style,
+      isLoading = false,
     }, ref
   ) => {
     const id = useGenerateId();
@@ -46,7 +49,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         onClick={onClick}
         onFocus={onFocus}
         type={action}
-        disabled={disabled}
+        disabled={isLoading === true ? true : disabled}
         className={`${styles.button} ${getStatus(type)} ${classname || ''}`}
         style={style}
         whileTap={buttonVariants.whileTap}
@@ -54,8 +57,13 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         id={id}
       >
         <span>
-          {Icon && <Icon className={styles.icon} />}
-          {text && text}
+          {!isLoading && Icon && <Icon className={styles.icon} /> }
+          {isLoading ? (
+            <Lottie 
+              animationData={LoadingIcon}
+              className={styles.icon__loading}
+            />
+          ) : text && text}
         </span>
       </motion.button>
     );

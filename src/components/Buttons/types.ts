@@ -14,6 +14,7 @@ interface Props {
   disabled?: boolean;
   classname?: string;
   style?: React.CSSProperties;
+  isLoading?: boolean;
 }
 
 export default Props;
