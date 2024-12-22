@@ -6,12 +6,6 @@ import { useGenerateId } from '@/shared/hooks/useGenerateId';
 import Lottie from 'lottie-react';
 import LoadingIcon from '@/icons/LoadingIcon.json';
 
-const buttonVariants = {
-  whileTap: {
-    scale: 0.95,
-  },
-};
-
 const Button = forwardRef<HTMLButtonElement, Props>(
   ({ 
       icon: Icon, 
@@ -52,7 +46,6 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         disabled={isLoading === true ? true : disabled}
         className={`${styles.button} ${getStatus(type)} ${classname || ''}`}
         style={style}
-        whileTap={buttonVariants.whileTap}
         ref={ref}
         id={id}
       >
