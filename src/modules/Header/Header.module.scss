@@ -8,8 +8,6 @@
 }
 
 .header {
-  display: grid;
-  place-items: center;
   margin-top: 40px;
   width: 100%;
 }
@@ -95,7 +93,10 @@
 
 .mobileHeader {
   display: flex;
-  font-size: 16px;
+  font-size: 1.7em;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 .mobileMenu {
   position: absolute;
@@ -104,6 +105,13 @@
   height: 100%;
   background: #1a1717;
   padding: 15px;
+    &__title {
+      text-align: center;
+      margin-bottom: 10px;
+        h1 {
+          font-size: 120%;
+        }
+    }
     li {
       list-style-type: none;
       margin-bottom: 7px;

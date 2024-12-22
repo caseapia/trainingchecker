@@ -140,23 +140,28 @@ export const Header = () => {
             ref={windowRef}
             key="mobileMenu"
           >
-            {renderMenuItems()}
+            <section className={styles.mobileMenu__title}>
+              <h1>
+                TRAINING&nbsp;<span className={styles.redspan}>CHECKER</span>
+              </h1>
+            </section>
+            <section className={styles.mobileMenu__items}>
+              {renderMenuItems()}
+            </section>
           </motion.div>
         )}
       </AnimatePresence>
         <header className={styles.header}>
-          <h1 className={isMobile ? styles.mobileHeader : ''}>
-            {isMobile && (
-              <Button 
+          {isMobile && (
+            <Button 
               type="Outlined"
               action="button"
               icon={BarsIcon}
               onClick={toggleMobileMenu}
               style={{ width: 'fit-content' }}
             />
-            )}
-            TRAINING&nbsp;<span className={styles.redspan}>CHECKER</span>
-          </h1>
+          )}
+          {!isMobile && <h1>TRAINING&nbsp;<span className={styles.redspan}>CHECKER</span></h1>}
           {!isMobile && <ul className={styles.list}>{renderMenuItems()}</ul>}
       </header>
     </>
