@@ -1,17 +1,14 @@
-@keyframes hoveranimation {
-  0% { width: 0%; }
-  100% { width: 100%; }
-}
-
 .redspan {
   color: #f01f4b;
 }
 
 .header {
-  display: grid;
-  place-items: center;
   margin-top: 40px;
   width: 100%;
+    &.pc {
+      display: grid;
+      place-items: center;
+    }
 }
 
 .badge {
@@ -93,50 +90,62 @@
     }
 }
 
-.mobile__header {
+.mobileHeader {
   display: flex;
+  font-size: 1.7em;
   justify-content: center;
+  align-items: center;
+  width: 100%;
 }
-
-.mobile__button {
-  border: none;
-  background: none;
-  color: white;
+.mobileMenu {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  transition: transform 0.3s ease;
-    svg {
-      width: 20px;
-      height: 20px;
-    }
-}
-
-.mobile__menu {
-  z-index: 9999;
-  background-color: #0f0f0f;
-  position: absolute;
-  top: 40px;
-  right: 10px;
+  z-index: 99999;
+  width: 70%;
+  height: 100%;
+  background: #1a1717;
   padding: 15px;
-  border-radius: 15px;
-    ul {
-      list-style: none;
-      margin: 0;
-      display: grid;
-      gap: 7px;
-      li {
-        padding: 7px;
-        background: lighten(#1a17175c, 5%);
-        border-radius: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: .4s;
-          svg {
-            width: 18px;
-            height: 18px;
+    &__title {
+      text-align: center;
+      margin-bottom: 10px;
+        h1 {
+          font-size: 120%;
+        }
+    }
+    li {
+      list-style-type: none;
+      margin-bottom: 7px;
+      white-space: nowrap;
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+    }
+    a, .disabled_element {
+      color: var(--color-defaultText) !important;
+      transition: .4s;
+      font-weight: 440;
+      display: flex;
+      align-items: center;
+      text-decoration: none !important;
+      border-radius: 6px;
+      padding-inline: 8px;
+      padding-block: 6px;
+      opacity: .9;
+      justify-content: flex-start !important;
+        &:not(.active) {
+          &:hover {
+            background-color: #656c7633;
+            opacity: 1;
           }
-      }
+        }
+        span {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+            svg {
+              margin-right: 5px;
+              width: 16px;
+              height: 16px;
+            }
+        }
     }
 }
