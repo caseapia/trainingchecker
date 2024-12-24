@@ -15,6 +15,8 @@ interface Props {
   classname?: string;
   style?: React.CSSProperties;
   isLoading?: boolean;
+  ariaLabel?: string;
+  ariaLabelledBy?: string;
 }
 
 export default Props;

@@ -84,6 +84,14 @@ const PlayerInfo = () => {
               lifeTime: 5000,
             });
           }
+          // if (response.status === 429) {
+          //   router.push('../');
+          //   toast.error('Превышен лимит запросов к серверу, пожалуйста, повторите попытку позже', {
+          //     title: 'Ошибка сервера',
+          //     lifeTime: 5000,
+          //   });
+          //   return;
+          // }
         }
   
         const result = await response.json();
@@ -292,6 +300,7 @@ const PlayerInfo = () => {
             action="button" 
             icon={RefreshIcon} 
             onClick={refreshData}
+            ariaLabel='Обновить информацию об игроке'
           />
           <Button 
             type='Secondary'
@@ -300,6 +309,7 @@ const PlayerInfo = () => {
             disabled={playerData.warn.length > 0 ? false : true}
             onClick={openModal}
             icon={HammerIcon}
+            ariaLabel='Открыть список наказаний игрока'
           />
         </div>
       </div>

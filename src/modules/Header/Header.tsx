@@ -9,6 +9,7 @@ import { Elements } from "@/shared/consts/headerElements";
 import BootstrapTooltip from "@/components/Styles/TooltipStyles";
 import BarsIcon from '@/icons/components/header/bars.svg';
 import Button from "@/components/Buttons/Button";
+import Badge from "@/components/InlineBadge/Badge";
 
 const headerVariants = {
   hidden: {
@@ -38,17 +39,18 @@ export const Header = () => {
   const router = useRouter();
   const [online, setOnline] = useState<number>(0);
   const windowRef = useRef<HTMLDivElement | null>(null);
+  const [isBadgeLoading, setIsBadgeLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (windowRef.current && !windowRef.current.contains(e.target as Node)) {
         setIsMobileMenuOpened(false);
-      };
+      }
     }
 
     if (isMobileMenuOpened) {
       document.addEventListener('mouseup', handleClickOutside);
-    };
+    }
 
     return () => {
       document.removeEventListener('mouseup', handleClickOutside);
@@ -71,27 +73,32 @@ export const Header = () => {
       setIsMobileMenuOpened(false);
     }
   };
-
+  
   useEffect(() => {
-    const getPlayers = async () => {
+    const getPlayers = () => {
       const url = process.env.NEXT_PUBLIC_API_ONLINE_URL;
-
+      
       if (!url) {
+        console.error('API URL is not defined.');
         return;
       }
-
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const jsonResponse = await response.json();
-        setOnline(jsonResponse.data.length);
-      } catch (err) {
-        console.error('Error:', err);
-      }
+      
+      fetch(url)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((jsonResponse) => {
+          setOnline(jsonResponse.data.length);
+          setIsBadgeLoading(false);
+        })
+        .catch((err) => {
+          console.error('Error:', err);
+        });
     };
-
+    
     getPlayers();
   }, []);
 
@@ -118,8 +125,19 @@ export const Header = () => {
           >
             <span>
               {icon} {text}
-              {isNew && <span className={`${styles.badge} ${styles.new}`}>new</span>}
-              {id === 'players' && <span className={styles.badge}>{online}</span>}
+              {isNew && (
+                <Badge
+                  badgeType="danger"
+                  content="new"
+                />
+              )}
+              {id === 'players' && (
+                <Badge
+                  badgeType="blue"
+                  handler={online}
+                  isLoading={isBadgeLoading}
+                />
+              )}
             </span>
           </Link>
         )}

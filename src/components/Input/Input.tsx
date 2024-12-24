@@ -13,8 +13,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
     disabled = false, 
     placeholder, 
     icon: Icon, 
-    name, 
-    onError, 
+    name,
     required = false,
   }, ref) => {
     const string = useGenerateId();
@@ -31,7 +30,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
           onInput={onInput}
           onChange={onChange}
           onClick={onClick}
-          className={`${styles.input} ${Icon ? styles.WithIcon : `${styles.WithoutIcon}`} ${classname || ''} ${onError ? styles.Error : ''}`} 
+          className={`${styles.input} ${Icon ? styles.WithIcon : `${styles.WithoutIcon}`} ${classname || ''}`}
           disabled={disabled}
           placeholder={placeholder}
           name={name}

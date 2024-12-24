@@ -41,7 +41,9 @@ const Toast = () => {
             <div 
               className={`${toast.lifeTime ? styles.ProgressBar : ''}`}
               style={{ animationDuration: `${toast.lifeTime}ms` }}
-            ></div>
+            >
+
+            </div>
           </motion.div>
         ))}
       </AnimatePresence>
