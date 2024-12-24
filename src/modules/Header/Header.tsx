@@ -74,32 +74,41 @@ export const Header = () => {
     }
   };
   
-  useEffect(() => {
-    const getPlayers = () => {
-      const url = process.env.NEXT_PUBLIC_API_ONLINE_URL;
-      
-      if (!url) {
-        console.error('API URL is not defined.');
-        return;
-      }
-      
-      fetch(url)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((jsonResponse) => {
-          setOnline(jsonResponse.data.length);
-          setIsBadgeLoading(false);
-        })
-        .catch((err) => {
-          console.error('Error:', err);
-        });
-    };
+  const getPlayers = () => {
+    const url = process.env.NEXT_PUBLIC_API_ONLINE_URL;
     
+    if (!url) {
+      console.error('API URL is not defined.');
+      return;
+    }
+    
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((jsonResponse) => {
+        setOnline(jsonResponse.data.length);
+        setIsBadgeLoading(false);
+      })
+      .catch((err) => {
+        console.error('Error:', err);
+      });
+  };
+  
+  useEffect(() => {
     getPlayers();
+  }, []);
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getPlayers();
+      console.log(`Player counter has been updated`);
+    }, 3000);
+    
+    return () => clearInterval(interval);
   }, []);
 
   const renderMenuItems = () => (
