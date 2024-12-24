@@ -10,27 +10,7 @@ import BootstrapTooltip from "@/components/Styles/TooltipStyles";
 import BarsIcon from '@/icons/components/header/bars.svg';
 import Button from "@/components/Buttons/Button";
 import Badge from "@/components/InlineBadge/Badge";
-
-const headerVariants = {
-  hidden: {
-    x: -500,
-    transition: { 
-      duration: 0.5 
-    }
-  },
-  visible: {
-    x: 0,
-    transition: { 
-      duration: 0.5 
-    }
-  },
-  exit: {
-    x: -500,
-    transition: { 
-      duration: 0.5 
-    }
-  },
-}
+import headerVariants from './variant';
 
 export const Header = () => {
   const isMobile = isMobileDevice();

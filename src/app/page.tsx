@@ -143,7 +143,7 @@ export default function Home() {
                   required={true}
                 />
                 <Button 
-                  type="Primary" 
+                  type="Primary"
                   text="Проверить" 
                   action="submit" 
                   icon={UserSearchIcon}

@@ -6,11 +6,7 @@ import Lottie from 'lottie-react';
 import success from '@/public/assets/lotties/success.json';
 import defaultNotify from '@/public/assets/lotties/defaultNotify.json'; 
 import error from '@/public/assets/lotties/error.json';
-
-const ToastAnimation = {
-  initial: { bottom: '-80px', opacity: 0, marginTop: 0, transition: { duration: 0.3 }},
-  animate: { bottom: '20px', opacity: 1, marginTop: '20px', transition: { duration: 0.3 } },
-};
+import ToastAnimation from './variant';
 
 const Toast = () => {
   const { toasts, removeToast } = useToast();

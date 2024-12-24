@@ -5,26 +5,13 @@ import styles from "./BadgeRenderer.module.scss";
 import BootstrapTooltip from "../Styles/TooltipStyles";
 import { Modal } from "../Modal/Modal";
 import { isMobileDevice } from "@/shared/hooks/isMobileDevice";
+import BadgeRendererProps from './props';
 
-type BadgeRendererProps = {
-  player?: {
-    id?: number;
-    login?: string;
-    lastlogin?: string;
-    moder?: number;
-    access?: number;
-    verify?: number;
-    verifyText?: string;
-    mute?: number;
-    online?: number;
-    regdate?: string;
-  };
-};
 
 const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedBadge, setSelectedBadge] = useState<BadgeProps | undefined>(undefined);
-  const isMobile = isMobileDevice();
+  const isMobile: boolean = isMobileDevice();
 
   const badgesToShow = allBadges.filter((badge) => {
     if (!player) return false;
@@ -50,16 +37,14 @@ const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player }) => {
       (badge.minRegDate !== undefined && !(player.regdate ?? '').includes(badge.minRegDate)) ||
       (badge.maxRegDate !== undefined && (player.regdate ?? '').includes(badge.maxRegDate))
     ) return false;
-    if (
-      badge.nicknameIncludes !== undefined &&
+    return !(badge.nicknameIncludes !== undefined &&
       (
         Array.isArray(badge.nicknameIncludes)
           ? badge.nicknameIncludes.some(nick => (player.login ?? '').includes(nick))
           : !(player.login ?? '').includes(badge.nicknameIncludes)
-      )
-    ) return false;
+      ));
 
-    return true;
+    
   });
 
   useEffect(() => {
