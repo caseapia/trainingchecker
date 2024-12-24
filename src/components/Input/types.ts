@@ -9,6 +9,5 @@ interface Props {
   placeholder?: string;
   icon?: React.FC<React.SVGProps<SVGElement>>;
   name?: string;
-  onError?: string;
   required?: boolean;
 }

@@ -1,5 +1,7 @@
 .input {
-  background: #232527;
+  $bg: #232527;
+  $effectbg: #2e3133;
+  background: $bg;
   border: 1px solid transparent;
   border-radius: 10px;
   outline: none;
@@ -9,12 +11,14 @@
   width: 100%;
     &:focus {
       color: white;
+      box-shadow: rgba($bg, 0.5) 0 0 0 4px;
+      background: $effectbg;
     }
     &:focus + .icon {
       color: white;
     }
     &:hover {
-      background: #2e3133;
+      background: $effectbg;
     }
     &.WithIcon {
       padding: 13px 40px;

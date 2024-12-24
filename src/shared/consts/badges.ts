@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
 import CodeIcon from '@/icons/badges/code.svg';
-import CrownIcon from '@/icons/badges/crown.svg';
 import MedalIcon from '@/icons/medal.svg';
 import RobotIcon from '@/icons/badges/robot.svg';
 import SatelLiteIcon from '@/icons/badges/satelLite.svg';
@@ -42,16 +41,6 @@ export const staffBadges: BadgeProps[] = [
   },
   {
     id: 2,
-    title: "Разработчик TRAINING SANDBOX",
-    category: "staff",
-    description: "Этот игрок учавствует в разработке TRAINING SANDBOX",
-    icon: React.createElement(CrownIcon),
-    verify: 3,
-    color: "#B72A2A",
-    textColor: "#B72A2A"
-  },
-  {
-    id: 3,
     title: "Администратор TRAINING SANDBOX",
     category: "staff",
     description: "Этот игрок является администратором TRAINING SANDBOX",
@@ -62,7 +51,7 @@ export const staffBadges: BadgeProps[] = [
     textColor: "#B72A2A",
   },
   {
-    id: 4,
+    id: 3,
     title: "Команда TRAINING SANDBOX",
     category: "staff",
     description: "Этот игрок является подтвержденным членом команды TRAINING SANDBOX",
@@ -73,7 +62,7 @@ export const staffBadges: BadgeProps[] = [
     textColor: "rgb(96 158 213)"
   },
   {
-    id: 5,
+    id: 4,
     title: "Команда сайта",
     category: "staff",
     description: "Этот игрок является разработчиком или помогал в разработке сайта TRAINING CHECKER",
@@ -122,7 +111,7 @@ export const playerBadges: BadgeProps[] = [
     description: "Этот аккаунт управляется не человеком, а ботом и является официальным пользовательским ботом TRAINING SANDBOX",
     icon: React.createElement(RobotIcon),
     color: "rgb(144, 203, 255)",
-    accid: [605187, 659622, 659678],
+    accid: [605187, 659622, 659678, 37707],
     textColor: "rgb(144, 203, 255)"
   },
   {

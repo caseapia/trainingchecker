@@ -18,6 +18,8 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       classname, 
       style,
       isLoading = false,
+      ariaLabel,
+      ariaLabelledBy,
     }, ref
   ) => {
     const id = useGenerateId();
@@ -48,6 +50,8 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         style={style}
         ref={ref}
         id={id}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
       >
         <span>
           {!isLoading && Icon && <Icon className={styles.icon} /> }

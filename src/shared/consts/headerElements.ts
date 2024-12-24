@@ -62,7 +62,7 @@ export const Elements: HeaderProps[] = [
     id: "changelog",
     icon: React.createElement(CopyIcon),
     link: "/changelog",
-    isNew: true,
+    isNew: false,
     isDisabled: false,
     isMobileAvailable: true,
   },
