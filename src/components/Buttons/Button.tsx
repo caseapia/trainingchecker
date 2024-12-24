@@ -35,6 +35,8 @@ const Button = forwardRef<HTMLButtonElement, Props>(
           return styles.Danger;
         case 'Outlined':
           return styles.Outlined;
+	      case 'Violet':
+					return styles.Violet;
         default:
           return styles.Primary;
       }
@@ -45,7 +47,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         onClick={onClick}
         onFocus={onFocus}
         type={action}
-        disabled={isLoading === true ? true : disabled}
+        disabled={isLoading ? true : disabled}
         className={`${styles.button} ${getStatus(type)} ${classname || ''}`}
         style={style}
         ref={ref}

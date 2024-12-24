@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 export type ButtonIcon = FC<React.SVGProps<SVGElement>>;
-export type ButtonTypes = "Primary" | "Transparent" | "Secondary" | "Danger" | "Outlined";
+export type ButtonTypes = "Primary" | "Transparent" | "Secondary" | "Danger" | "Outlined" | "Violet";
 type ButtonActions = "submit" | "reset" | "button";
 
 interface Props {

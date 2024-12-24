@@ -40,16 +40,29 @@
 .Primary {
   $bg: #99384d;
   $effectbg: lighten($bg, 7%);
-  background: #99384d;
-  border: 1px solid transparent;
+  background: $bg;
     &:enabled {
       &:hover {
         background: $effectbg
       }
       &:focus-visible {
-        box-shadow: rgba($effectbg, 0.5) 0px 0px 0px 4px;
+        box-shadow: rgba($effectbg, 0.5) 0 0 0 4px;
       }
     }
+}
+.Violet {
+	$bg: #cba6f7;
+	$effectbg: lighten($bg, 7%);
+	background: $bg;
+	color: black;
+		&:enabled {
+			&:hover {
+        background: $effectbg
+      }
+      &:focus-visible {
+        box-shadow: rgba($effectbg, 0.5) 0 0 0 4px;
+      }
+		}
 }
 .Transparent {
   $bg: #99384d;
@@ -61,7 +74,7 @@
         border-color: $effectbg
       }
       &:focus-visible {
-        box-shadow: rgba($effectbg, 0.5) 0px 0px 0px 4px;
+        box-shadow: rgba($effectbg, 0.5) 0 0 0 4px;
       }
     }
 }
