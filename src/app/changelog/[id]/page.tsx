@@ -1,5 +1,4 @@
 "use client"
-import { useRouter } from 'next/navigation';
 import { useParams } from 'next/navigation';
 import styles from './page.module.scss';
 import React, { useEffect, useState } from 'react';
@@ -13,7 +12,6 @@ import Loader from '@/modules/Loader/Loader';
 
 const page = () => {
   const { id } = useParams();
-  const router = useRouter();
   const [content, setContent] = useState<string>("");
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 

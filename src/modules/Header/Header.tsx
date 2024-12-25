@@ -85,7 +85,6 @@ export const Header = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       getPlayers();
-      console.log(`Player counter has been updated`);
     }, 3000);
     
     return () => clearInterval(interval);

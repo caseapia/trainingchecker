@@ -15,15 +15,8 @@ import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import { toast } from '@/utils/toast';
 import Loader from '@/modules/Loader/Loader';
 import { usePage500 } from '@/shared/hooks/page500';
-import { useRouter } from 'next/navigation';
-
-interface Worlds {
-  name: string;
-  players: number;
-  static: boolean;
-  ssmp: boolean;
-  timestamp: number;
-}
+import { useTransformTextColor } from '@/shared/hooks/useTransofrmTextColor';
+import Worlds from './types';
 
 const WorldList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -31,7 +24,7 @@ const WorldList = () => {
   const [sensMode, setSensMode] = useState<boolean>(false);
   const [originalWorlds, setOriginalWorlds] = useState<Worlds[] | null>(null);
   const triggerPage500 = usePage500();
-  const router = useRouter();
+	const transformedWorldName = useTransformTextColor;
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
@@ -47,7 +40,7 @@ const WorldList = () => {
       try {
         const response = await fetch(url);
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          console.log(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
         setResult(data.worlds);
@@ -74,29 +67,6 @@ const WorldList = () => {
     };
   }, []);
 
-  const transformWorldName = (text: string) => {
-    const regex = /{(.*?)}/g;
-    const parts = text.split(regex);
-    const elements = [];
-
-    for (let i = 0; i < parts.length; i++) {
-      if (i % 2 === 1) {
-        const color = parts[i].trim();
-        const formattedColor = color.startsWith('#') ? color : `#${color}`;
-        const nextText = parts[i + 1];
-        if (nextText) {
-          elements.push(
-            <span key={i} style={{ color: formattedColor }}>{nextText}</span>
-          );
-          i++;
-        }
-      } else if (parts[i]) {
-        elements.push(parts[i]);
-      }
-    }
-    return elements;
-  };
-
   const copyWorlds = () => {
     if (result && result.length > 0) {
       const toCopyContent = result
@@ -105,16 +75,16 @@ const WorldList = () => {
           const staticCondition = world.static;
 
           const ssmp = () => {
-            return ssmpCondition === true ? ' // Использует SSMP' : '';
+            return ssmpCondition ? ' // Использует SSMP' : '';
           };
           const staticW = () => {
-            return staticCondition === true ? ' // Статичный' : ''
+            return staticCondition ? ' // Статичный' : ''
           };
           return `Название: ${world.name} // Игроков: ${world.players}${ssmp()}${staticW()}`;
         })
         .join(';\n')
       const worldsCounter = result.length;
-      const isSensModeActive = sensMode === true ? 'Чувствительный режим включен' : '';
+      const isSensModeActive = sensMode ? 'Чувствительный режим включен' : '';
 
       navigator.clipboard.writeText(`${isSensModeActive}\n\n${toCopyContent}\n\nВсего миров: ${worldsCounter}`);
       toast.success('Список открытых миров скопирован в ваш буфер обмена', { title: 'Успешно' });
@@ -123,7 +93,7 @@ const WorldList = () => {
 
   const sensitiveMode = () => {
     if (result) {
-      if (sensMode === false) {
+      if (!sensMode) {
         const filteredWorlds = result.filter(world =>
           !worldBlockWorlds.some(forbiddenWord =>
             world.name.toLowerCase().includes(forbiddenWord)
@@ -153,10 +123,10 @@ const WorldList = () => {
           />
           <Button 
             type='Secondary' 
-            text={sensMode === true ? 'Выключить чувствительный режим' : 'Включить чувствительный режим'}
+            text={sensMode ? 'Выключить чувствительный режим' : 'Включить чувствительный режим'}
             action='button' 
             onClick={sensitiveMode}
-            icon={sensMode === true ? DeblurIcon : LensBlurIcon}
+            icon={sensMode ? DeblurIcon : LensBlurIcon}
           />
         </div>
         <Table>
@@ -171,16 +141,16 @@ const WorldList = () => {
             {result && result.length > 0 && (
               result.map((world, index) => (
                 <Tr key={index}>
-                  <Td>{transformWorldName(world.name)}</Td>
+                  <Td>{transformedWorldName(world.name)}</Td>
                   <Td>{world.players}</Td>
                   <Td className={styles.ChipContainer}>
-                    {world.static === true ? (
+                    {world.static ? (
                       <Chip label="Статичный" size="small" icon={BookmarkIcon} />
-                    ) : world.ssmp === true ? (
+                    ) : world.ssmp ? (
                       <Chip label="SSMP" size="small" icon={CpuIcon} />
-                    ) : world.static || world.ssmp === false ? (
-                      <Chip label="Нет меток" size="small" icon={AlertIcon} />
-                    ) : null}
+                    ) : !(world.static || !world.ssmp) ? null : (
+	                    <Chip label="Нет меток" size="small" icon={AlertIcon}/>
+                    )}
                   </Td>
                 </Tr>
               ))
