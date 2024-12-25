@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import styles from './Button.module.scss';
-import { motion } from "framer-motion";
+import buttonTypes from './buttonTypes.module.scss';
 import Props from './types';
 import { useGenerateId } from '@/shared/hooks/useGenerateId';
 import Lottie from 'lottie-react';
@@ -13,7 +13,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       text, 
       onClick, 
       onFocus, 
-      type, 
+      type = 'default',
       disabled = false, 
       classname, 
       style,
@@ -23,32 +23,14 @@ const Button = forwardRef<HTMLButtonElement, Props>(
     }, ref
   ) => {
     const id = useGenerateId();
-    const getStatus = (btnType: string): string => {
-      switch (btnType) {
-        case 'Primary':
-          return styles.Primary;
-        case 'Transparent':
-          return styles.Transparent;
-        case 'Secondary':
-          return styles.Secondary;
-        case 'Danger':
-          return styles.Danger;
-        case 'Outlined':
-          return styles.Outlined;
-	      case 'Violet':
-					return styles.Violet;
-        default:
-          return styles.Primary;
-      }
-    };
 
     return (
-      <motion.button
+      <button
         onClick={onClick}
         onFocus={onFocus}
         type={action}
         disabled={isLoading ? true : disabled}
-        className={`${styles.button} ${getStatus(type)} ${classname || ''}`}
+        className={`${styles.button} ${buttonTypes[type] || 'default'} ${classname || ''}`}
         style={style}
         ref={ref}
         id={id}
@@ -64,7 +46,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
             />
           ) : text && text}
         </span>
-      </motion.button>
+      </button>
     );
   }
 );

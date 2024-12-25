@@ -5,7 +5,7 @@
   padding: 12px 20px;
   border-radius: 10px;
   transition: .3s ease;
-  color: #fff;
+  color: white !important;
   font-size: 16px;
   width: 100%;
   cursor: pointer;
@@ -15,93 +15,25 @@
     span {
       display: flex;
     }
-    .icon {
-      margin-right: 6px;
-      margin-bottom: 2px;
-      width: 16px;
-      height: 16px;
-        &__loading {
-          height: 18px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-            svg {
-              height: 50px !important;
-              margin: 0;
-              padding: 0 !important;
-            }
-        }
-    }
     &:disabled {
       cursor: not-allowed;
       opacity: 0.5;
     }
 }
-.Primary {
-  $bg: #99384d;
-  $effectbg: lighten($bg, 7%);
-  background: $bg;
-    &:enabled {
-      &:hover {
-        background: $effectbg
-      }
-      &:focus-visible {
-        box-shadow: rgba($effectbg, 0.5) 0 0 0 4px;
-      }
-    }
-}
-.Violet {
-	$bg: #cba6f7;
-	$effectbg: lighten($bg, 7%);
-	background: $bg;
-	color: black;
-		&:enabled {
-			&:hover {
-        background: $effectbg
-      }
-      &:focus-visible {
-        box-shadow: rgba($effectbg, 0.5) 0 0 0 4px;
-      }
+.icon {
+	margin-right: 6px;
+	margin-bottom: 2px;
+	width: 16px;
+	height: 16px;
+	&__loading {
+		height: 18px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		svg {
+			height: 50px !important;
+			margin: 0;
+			padding: 0 !important;
 		}
-}
-.Transparent {
-  $bg: #99384d;
-  $effectbg: lighten($bg, 7%);
-  background: transparent;
-  border: 2px solid $bg;
-    &:enabled {
-      &:hover {
-        border-color: $effectbg
-      }
-      &:focus-visible {
-        box-shadow: rgba($effectbg, 0.5) 0 0 0 4px;
-      }
-    }
-}
-.Secondary {
-  border: 1px solid #191B1D;
-  background: transparent;
-    &:enabled {
-      &:hover {
-        background: #202325;
-        border: 1px solid #191B1D;
-      }
-    }
-}
-.Danger {
-  border: 1px solid transparent;
-  background: #FF6955;
-    &:enabled {
-      &:hover {
-        background: lighten(#FF6955, 7%);
-      }
-    }
-}
-.Outlined {
-  background: transparent;
-    &:enabled {
-      &:hover {
-        background-color: #656c7633;
-      }
-    }
+	}
 }
