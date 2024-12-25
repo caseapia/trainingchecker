@@ -5,12 +5,23 @@ import { Analytics } from "@vercel/analytics/react";
 import { ToastProvider } from "@/components/Toast/context/ToastContext";
 import ToastInitializer from "@/components/Toast/ToastInitializer";
 import Toast from "@/components/Toast/Toast";
+import { toast } from '@/utils/toast';
+import React, {useEffect} from "react";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+	
+	useEffect(() => {
+		if (window.location.hostname.includes('dev')) {
+			toast.basic('Эта версия сайта является нестабильной и предназначена для тестирования, возможны баги', {
+				title: 'Внимание!',
+			})
+		}
+	}, []);
+	
   return (
     <html lang="en">
       <head>

@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 
 export type ButtonIcon = FC<React.SVGProps<SVGElement>>;
-export type ButtonTypes = "Primary" | "Transparent" | "Secondary" | "Danger" | "Outlined";
+export type ButtonTypes = "Primary" | "Transparent" | "Secondary" | "Danger" | "Outlined" | "Violet";
 type ButtonActions = "submit" | "reset" | "button";
 
 interface Props {
@@ -19,4 +19,18 @@ interface Props {
   ariaLabelledBy?: string;
 }
 
+interface LinkedButtonProps {
+	href: string;
+	icon?: ButtonIcon;
+	type: ButtonTypes;
+	text?: string;
+	disabled?: boolean;
+	classname?: string;
+	style?: React.CSSProperties;
+	ariaLabel?: string;
+	ariaLabelledBy?: string;
+	target?: '_blank' | '_self' | '_parent' | '_top';
+}
+
 export default Props;
+export type {LinkedButtonProps};

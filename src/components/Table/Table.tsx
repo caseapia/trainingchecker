@@ -1,17 +1,8 @@
 import React from 'react';
 import styles from './Table.module.scss';
+import {TableProps, Props} from './types';
 
-interface Props {
-  children?: React.ReactNode;
-  style?: React.CSSProperties;
-  colSpan?: number;
-  className?: string;
-}
-interface TableProps {
-  width?: number;
-  className?: string;
-  children?: React.ReactNode;
-}
+
 
 const Thead = ({ children, className }: Props) => {
   return (

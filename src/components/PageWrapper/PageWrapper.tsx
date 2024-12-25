@@ -1,11 +1,6 @@
 import React from 'react';
 import styles from './PageWrapper.module.scss';
-
-interface Props {
-  title?: React.ReactNode;
-  children: React.ReactNode;
-  classname?: string;
-}
+import Props from './types';
 
 const PageWrapper = ({ title, children, classname }: Props) => {
   return (

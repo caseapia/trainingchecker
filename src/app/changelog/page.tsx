@@ -1,8 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import styles from "./page.module.scss";
-import { isMobileDevice } from "@/shared/hooks/isMobileDevice";
-import { useRouter } from "next/navigation";
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import { changeLog } from "@/consts/changelog";
 import Button from "@/components/Buttons/Button";
@@ -14,8 +12,6 @@ import Loader from "@/modules/Loader/Loader";
 
 const Changelog = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const isMobile = isMobileDevice();
-  const router = useRouter();
 
   useEffect(() => {
     if (changeLog) {

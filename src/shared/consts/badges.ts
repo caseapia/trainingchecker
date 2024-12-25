@@ -7,6 +7,8 @@ import UserCogIcon from '@/icons/badges/userCog.svg';
 import UserShieldIcon from '@/icons/badges/userShield.svg';
 import UserSlashIcon from '@/icons/badges/userSlash.svg';
 import YoutubeIcon from '@/icons/badges/youtube.svg';
+import PullRequestIcon from '@/icons/badges/pullRequest.svg'
+import CrownIcon from '@/icons/badges/crown.svg';
 
 type BadgeProps = {
   id: number;
@@ -34,7 +36,7 @@ export const staffBadges: BadgeProps[] = [
     title: "Создатель TRAINING SANDBOX",
     category: "staff",
     description: "Когда-то этот игрок создал LSGOV TRAINING — ныне TRAINING SANDBOX",
-    icon: React.createElement(CodeIcon),
+    icon: React.createElement(CrownIcon),
     accid: [1, 2],
     color: "#000000",
     textColor: "red",
@@ -67,7 +69,16 @@ export const staffBadges: BadgeProps[] = [
     category: "staff",
     description: "Этот игрок является разработчиком или помогал в разработке сайта TRAINING CHECKER",
     icon: React.createElement(CodeIcon),
-    accid: [113145, 125043, 271552],
+    accid: 113145,
+    color: "rgb(42 170 104 / 42%)",
+    textColor: "rgb(42 170 104)"
+  },  {
+    id: 5,
+    title: "Помощь в разработке сайта",
+    category: "staff",
+    description: "Этот игрок неоднократно помогал в разработке сайта, предложив или создав что-то своё",
+    icon: React.createElement(PullRequestIcon),
+    accid: [125043, 271552],
     color: "rgb(42 170 104 / 42%)",
     textColor: "rgb(42 170 104)"
   },

@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState, Suspense  } from 'react';
+import {useEffect, useState, Suspense} from 'react';
 import styles from './page.module.scss';
 import { BadgeRenderer } from '@/components/BadgeRenderer/BadgeRenderer';
 import Button from '@/components/Buttons/Button';
@@ -17,21 +17,8 @@ import { toast } from '@/utils/toast';
 import Loader from '@/modules/Loader/Loader';
 import Chip from '@/components/Chip/Chip';
 import { usePage500 } from '@/shared/hooks/page500';
-
-type PlayerData = {
-  id: number;
-  login: string;
-  access: number;
-  moder: number;
-  verify: number;
-  verifyText: string;
-  mute: number;
-  online: number;
-  regdate: string;
-  lastlogin: string;
-  playerid: number;
-  warn: Array<{ reason: string; bantime: string; admin: string; }>;
-}
+import {useTransformTextColor} from "@/hooks/useTransofrmTextColor";
+import PlayerData from './types';
 
 const PlayerInfo = () => {
   const router = useRouter();
@@ -54,9 +41,9 @@ const PlayerInfo = () => {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [diffInDays, setDiffInDays] = useState(NaN);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [isNoAccess, setIsNoAccess] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const triggerPage500 = usePage500();
+	const transformedVerificationText = useTransformTextColor;
 
   useEffect(() => {
     if (nickname === null || nickname === '') {
@@ -84,14 +71,6 @@ const PlayerInfo = () => {
               lifeTime: 5000,
             });
           }
-          // if (response.status === 429) {
-          //   router.push('../');
-          //   toast.error('Превышен лимит запросов к серверу, пожалуйста, повторите попытку позже', {
-          //     title: 'Ошибка сервера',
-          //     lifeTime: 5000,
-          //   });
-          //   return;
-          // }
         }
   
         const result = await response.json();
@@ -113,7 +92,6 @@ const PlayerInfo = () => {
         setIsLoaded(true);
       } catch (error) {
         console.error(error);
-        setIsNoAccess(true);
       }
   }
 
@@ -155,7 +133,7 @@ const PlayerInfo = () => {
 
   useEffect(() => {
     const getPageValid = () => {
-      if (isDataLoaded === true) {
+      if (isDataLoaded) {
         setIsLoaded(true);
       } else {
         setIsLoaded(false);
@@ -163,29 +141,6 @@ const PlayerInfo = () => {
     }
     getPageValid();
   })
-
-  const transformVerificationText = (text: string) => {
-    const regex = /{(.*?)}/g;
-    const parts = text.split(regex);
-    const elements = [];
-
-    for (let i = 0; i < parts.length; i++) {
-      if (i % 2 === 1) {
-        const color = parts[i].trim();
-        const formattedColor = color.startsWith('#') ? color : `#${color}`;
-        const nextText = parts[i + 1];
-        if (nextText) {
-          elements.push(
-            <span key={i} style={{ color: formattedColor }}>{nextText}</span>
-          );
-          i++;
-        }
-      } else if (parts[i]) {
-        elements.push(parts[i]);
-      }
-    }
-    return elements;
-  };
 
   const getDaySuffix = (days: number) => {
     const lastDigit = days % 10;
@@ -269,7 +224,7 @@ const PlayerInfo = () => {
         <strong>Должность:</strong> <Chip label={getModer()} color={getColor()} />
         <p><strong>Верификация:</strong> {`${getVerify()} (ID: ${playerData.verify})`}</p>
         {playerData.verify > 0 && (
-          <p><strong>Текст верификации:</strong> {transformVerificationText(playerData.verifyText)}</p>
+          <p><strong>Текст верификации:</strong> {transformedVerificationText(playerData.verifyText)}</p>
         )}
         <p><strong>Время мута:</strong> {playerData.mute ? `${playerData.mute}` : <span style={{ color: '#91ec66e7' }}>Нет</span>}</p>
         <p><strong>Дата регистрации:</strong> 
@@ -290,10 +245,10 @@ const PlayerInfo = () => {
             <span style={{ color: '#91ec66e7' }}>Сейчас в сети <span style={{ color: 'white' }}>(ID: {playerData.playerid})</span></span>
           ) : null}
         </p>
-        <hr className={styles.ProfileLine} />
-        <h5 className={styles.h5}>Значки</h5>
-        <BadgeRenderer player={playerData} />
-        <div className={styles.ButtonGroup}>
+	      <hr className={styles.ProfileLine}/>
+	      <h5 className={styles.h5}>Значки</h5>
+	      <BadgeRenderer player={playerData}/>
+	      <div className={styles.ButtonGroup}>
           <Button 
             type="Secondary" 
             text="Обновить" 
@@ -306,7 +261,7 @@ const PlayerInfo = () => {
             type='Secondary'
             text='Наказания'
             action='button'
-            disabled={playerData.warn.length > 0 ? false : true}
+            disabled={playerData.warn.length <= 0}
             onClick={openModal}
             icon={HammerIcon}
             ariaLabel='Открыть список наказаний игрока'

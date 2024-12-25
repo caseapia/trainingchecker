@@ -4,39 +4,7 @@ import Button from '../Buttons/Button';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import Props from './types';
-
-const backdropVariants = {
-  hidden: { 
-    opacity: 0 
-  },
-  visible: { 
-    opacity: 1 
-  },
-  exit: { 
-    opacity: 0 
-  },
-};
-
-const modalVariants = {
-  hidden: { 
-    scale: 0.9, 
-    opacity: 0 
-  },
-  visible: { 
-    scale: 1, 
-    opacity: 1, 
-    transition: { 
-      duration: 0.2 
-    }
-  },
-  exit: { 
-    scale: 0.9, 
-    opacity: 0, 
-    transition: { 
-      duration: 0.2 
-    } 
-  },
-};
+import {backdropVariants, modalVariants} from './variants';
 
 export const Modal = ({
   title,
@@ -101,7 +69,7 @@ export const Modal = ({
                 <div className={styles.ButtonGroup}>
                   {firstButtonContent && (
                     <Button
-                      type="Primary"
+                      type="Violet"
                       text={firstButtonContent}
                       action="button"
                       icon={FirstIcon}

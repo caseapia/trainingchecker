@@ -6,14 +6,7 @@ import { Table, Thead, Tr, Td, TBody, Th } from '@/components/Table/Table';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import Loader from '@/modules/Loader/Loader';
 import { usePage500 } from '@/shared/hooks/page500';
-
-interface Player {
-  id: number;
-  login: string;
-  playerid: number;
-  lastlogin: string;
-  moder: number;
-}
+import Player from './types';
 
 function Players() {
   const [result, setResult] = useState<Player[] | null>(null);
@@ -34,7 +27,7 @@ function Players() {
         const response = await fetch(url);
         if (!response.ok) {
           setIsLoaded(false);
-          throw new Error(`HTTP error! status: ${response.status}`);
+          console.log(`HTTP error! status: ${response.status}`);
         }
         const jsonResponse = await response.json();
         setResult(jsonResponse.data);

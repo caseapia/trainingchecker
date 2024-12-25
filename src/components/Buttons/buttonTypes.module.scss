@@ -1,0 +1,68 @@
+.Primary {
+	$bg: #99384d;
+	$effectbg: lighten($bg, 7%);
+	background: $bg;
+	&:enabled {
+		&:hover {
+			background: $effectbg
+		}
+		&:focus-visible {
+			box-shadow: rgba($effectbg, 0.5) 0 0 0 4px;
+		}
+	}
+}
+.Violet {
+	$bg: #cba6f7;
+	$effectbg: lighten($bg, 7%);
+	background: $bg;
+	color: black;
+	&:enabled {
+		&:hover {
+			background: $effectbg
+		}
+		&:focus-visible {
+			box-shadow: rgba($effectbg, 0.5) 0 0 0 4px;
+		}
+	}
+}
+.Transparent {
+	$bg: #99384d;
+	$effectbg: lighten($bg, 7%);
+	background: transparent;
+	border: 2px solid $bg;
+	&:enabled {
+		&:hover {
+			border-color: $effectbg
+		}
+		&:focus-visible {
+			box-shadow: rgba($effectbg, 0.5) 0 0 0 4px;
+		}
+	}
+}
+.Secondary {
+	border: 1px solid #191B1D;
+	background: transparent;
+	&:enabled {
+		&:hover {
+			background: #202325;
+			border: 1px solid #191B1D;
+		}
+	}
+}
+.Danger {
+	border: 1px solid transparent;
+	background: #FF6955;
+	&:enabled {
+		&:hover {
+			background: lighten(#FF6955, 7%);
+		}
+	}
+}
+.Outlined {
+	background: transparent;
+	&:enabled {
+		&:hover {
+			background-color: #656c7633;
+		}
+	}
+}
