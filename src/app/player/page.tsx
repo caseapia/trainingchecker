@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from 'next/navigation';
-import {useEffect, useState, Suspense} from 'react';
+import {useEffect, useState, Suspense, useCallback} from 'react';
 import styles from './page.module.scss';
 import { BadgeRenderer } from '@/components/BadgeRenderer/BadgeRenderer';
 import Button from '@/components/Buttons/Button';
@@ -16,7 +16,6 @@ import PageWrapper from '@/components/PageWrapper/PageWrapper';
 import { toast } from '@/utils/toast';
 import Loader from '@/modules/Loader/Loader';
 import Chip from '@/components/Chip/Chip';
-import { usePage500 } from '@/shared/hooks/page500';
 import {useTransformTextColor} from "@/hooks/useTransofrmTextColor";
 import PlayerData from './types';
 
@@ -38,62 +37,59 @@ const PlayerInfo = () => {
     playerid: NaN,
     warn: []
   });
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [diffInDays, setDiffInDays] = useState(NaN);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const triggerPage500 = usePage500();
 	const transformedVerificationText = useTransformTextColor;
-
-  useEffect(() => {
-    if (nickname === null || nickname === '') {
-      router.push('../');
-      toast.error('Страница не может быть открыта без указания конкретного игрока, переносим вас обратно...', { 
-        title: 'Ошибка', 
-        lifeTime: 5000 
-      })
-    }
-  }, [searchParams, router]);
-
-  const getData = async () => {
-    if (!nickname) return;
-  
-      const url = `${process.env.NEXT_PUBLIC_API_USER_URL}/${nickname}`;
-  
-      try {
-        const response = await fetch(url);
-  
-        if (!response.ok) {
-          if (response.status === 404) {
-            router.push('../');
-            toast.error(`Игрок с никнеймом ${nickname} не найден. Перенаправляем вас на главную страницу`, {
-              title: 'Игрок не найден',
-              lifeTime: 5000,
-            });
-          }
-        }
-  
-        const result = await response.json();
-        setPlayerData({
-          id: Number(result.data.id),
-          login: result.data.login,
-          access: Number(result.data.access),
-          moder: Number(result.data.moder),
-          verify: Number(result.data.verify),
-          verifyText: result.data.verifyText,
-          mute: Number(result.data.mute),
-          online: Number(result.data.online),
-          regdate: result.data.regdate,
-          lastlogin: result.data.lastlogin,
-          playerid: Number(result.data.playerid),
-          warn: result.data.warn as Array<{ reason: string; bantime: string; admin: string }>,
-        });
-        setIsDataLoaded(true);
-        setIsLoaded(true);
-      } catch (error) {
-        console.error(error);
-      }
-  }
+	
+	useEffect(() => {
+		if (!nickname) {
+			router.push('../');
+			toast.error('Страница не может быть открыта без указания конкретного игрока, переносим вас обратно...', {
+				title: 'Ошибка',
+				lifeTime: 5000
+			});
+		}
+	}, [nickname, router]);
+	
+	const getData = useCallback(async () => {
+		if (!nickname) return;
+		
+		const url = `${process.env.NEXT_PUBLIC_API_USER_URL}/${nickname}`;
+		
+		try {
+			const response = await fetch(url);
+			
+			if (!response.ok) {
+				if (response.status === 404) {
+					router.push('../');
+					toast.error(`Игрок с никнеймом ${nickname} не найден. Перенаправляем вас на главную страницу`, {
+						title: 'Игрок не найден',
+						lifeTime: 5000,
+					});
+				}
+			}
+			
+			const result = await response.json();
+			setPlayerData({
+				id: Number(result.data.id),
+				login: result.data.login,
+				access: Number(result.data.access),
+				moder: Number(result.data.moder),
+				verify: Number(result.data.verify),
+				verifyText: result.data.verifyText,
+				mute: Number(result.data.mute),
+				online: Number(result.data.online),
+				regdate: result.data.regdate,
+				lastlogin: result.data.lastlogin,
+				playerid: Number(result.data.playerid),
+				warn: result.data.warn as Array<{ reason: string; bantime: string; admin: string }>,
+			});
+			setIsLoaded(true);
+		} catch (error) {
+			console.error(error);
+		}
+	}, [nickname, router]);
 
   const refreshData = () => {
     getData();
@@ -102,18 +98,10 @@ const PlayerInfo = () => {
       lifeTime: 5000,
     })
   }
-
-  useEffect(() => {
-    getData();
-  
-    const timeoutId = setTimeout(() => {
-      if (!isLoaded) {
-        triggerPage500(); 
-      }
-    }, 5000);
-  
-    return () => clearTimeout(timeoutId);
-  }, [nickname, isLoaded, router, triggerPage500, getData]);
+	
+	useEffect(() => {
+		getData();
+	}, [nickname]);
 
   useEffect(() => {
     if (!playerData.lastlogin) return;
@@ -130,17 +118,6 @@ const PlayerInfo = () => {
   
     dates();
   }, [playerData.lastlogin]);
-
-  useEffect(() => {
-    const getPageValid = () => {
-      if (isDataLoaded) {
-        setIsLoaded(true);
-      } else {
-        setIsLoaded(false);
-      }
-    }
-    getPageValid();
-  })
 
   const getDaySuffix = (days: number) => {
     const lastDigit = days % 10;

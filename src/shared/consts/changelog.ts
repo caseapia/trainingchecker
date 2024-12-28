@@ -12,7 +12,7 @@ type Props = {
 };
 
 export const changeLog: Props[] = [
-  {
+	{
     route: "mobile-and-states",
     title: "Мобильная адаптация, новые состояния и...",
     author: "dontkillme",

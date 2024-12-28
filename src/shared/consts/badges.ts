@@ -8,7 +8,7 @@ import UserShieldIcon from '@/icons/badges/userShield.svg';
 import UserSlashIcon from '@/icons/badges/userSlash.svg';
 import YoutubeIcon from '@/icons/badges/youtube.svg';
 import PullRequestIcon from '@/icons/badges/pullRequest.svg'
-import CrownIcon from '@/icons/badges/crown.svg';
+import TrainingLogoIcon from '@/icons/badges/traininglogo.svg';
 
 type BadgeProps = {
   id: number;
@@ -36,7 +36,7 @@ export const staffBadges: BadgeProps[] = [
     title: "Создатель TRAINING SANDBOX",
     category: "staff",
     description: "Когда-то этот игрок создал LSGOV TRAINING — ныне TRAINING SANDBOX",
-    icon: React.createElement(CrownIcon),
+    icon: React.createElement(TrainingLogoIcon),
     accid: [1, 2],
     color: "#000000",
     textColor: "red",

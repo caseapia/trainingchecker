@@ -27,7 +27,7 @@ const Badge = ({
 				{!isLoading && (
 					<>
 						{content && content}
-						{handlerContent && handlerContent}
+						{handler && handlerContent}
 					</>
 				)}
 				{isLoading && (
