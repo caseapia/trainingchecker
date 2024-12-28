@@ -10,6 +10,7 @@ import BootstrapTooltip from "@/components/Styles/TooltipStyles";
 import BarsIcon from '@/icons/components/header/bars.svg';
 import Button from "@/components/Buttons/Button";
 import Badge from "@/components/InlineBadge/Badge";
+import UserIcon from '@/icons/user.svg';
 import headerVariants from './variant';
 
 export const Header = () => {
@@ -101,7 +102,7 @@ export const Header = () => {
           <BootstrapTooltip title={tooltipText}>
             <span className={styles.disabled_element} style={style}>
               {icon} {text}
-              {isNew && <span className={`${styles.badge} ${styles.new}`}>new</span>}
+              {isNew && <Badge badgeType="danger" content="new" /> }
             </span>
           </BootstrapTooltip>
         ) : (

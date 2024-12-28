@@ -3,7 +3,9 @@ import {LinkedButtonProps} from "@/components/Buttons/types";
 import Link from "next/link";
 import styles from "./Button.module.scss";
 import {useGenerateId} from "@/hooks/useGenerateId";
-import buttonTypes from "@/components/Buttons/buttonTypes.module.scss";
+import btnTypes from "@/components/Buttons/buttonTypes.module.scss";
+import btnRadius from './buttonRadius.module.scss';
+import btnSizes from './buttonSizes.module.scss';
 
 const LinkedButton = forwardRef<HTMLAnchorElement, LinkedButtonProps>((
 	{
@@ -16,12 +18,14 @@ const LinkedButton = forwardRef<HTMLAnchorElement, LinkedButtonProps>((
     ariaLabelledBy,
 		text,
 		target = '_self',
+		radius = 'medium',
+		size = 'full',
   }, ref) => {
 		const id = useGenerateId();
 		return (
 			<Link
 				href={href}
-				className={`${styles.button} ${buttonTypes[type]} ${classname || ''}`}
+				className={`${styles.button} ${btnTypes[type]} ${btnRadius[radius]} ${btnSizes[size]} ${classname || ''}`}
 				style={style}
 				role="button"
 				id={id}

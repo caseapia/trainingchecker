@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 
 export type ButtonIcon = FC<React.SVGProps<SVGElement>>;
 export type ButtonTypes = "Primary" | "Transparent" | "Secondary" | "Danger" | "Outlined" | "Violet";
+export type Radius = 'squared' | 'small' | 'medium' | 'large' | 'extra-large' | 'rounded';
+export type Sizes = 'small' | 'medium' | 'large' | 'full';
 type ButtonActions = "submit" | "reset" | "button";
 
 interface Props {
@@ -17,6 +19,8 @@ interface Props {
   isLoading?: boolean;
   ariaLabel?: string;
   ariaLabelledBy?: string;
+	radius?: Radius;
+	size?: Sizes;
 }
 
 interface LinkedButtonProps {
@@ -30,6 +34,8 @@ interface LinkedButtonProps {
 	ariaLabel?: string;
 	ariaLabelledBy?: string;
 	target?: '_blank' | '_self' | '_parent' | '_top';
+	radius?: Radius;
+	size?: Sizes;
 }
 
 export default Props;

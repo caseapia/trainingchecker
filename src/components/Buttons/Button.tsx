@@ -1,6 +1,8 @@
 import { forwardRef } from 'react';
 import styles from './Button.module.scss';
-import buttonTypes from './buttonTypes.module.scss';
+import btnTypes from './buttonTypes.module.scss';
+import btnRadius from './buttonRadius.module.scss';
+import btnSizes from './buttonSizes.module.scss';
 import Props from './types';
 import { useGenerateId } from '@/shared/hooks/useGenerateId';
 import Lottie from 'lottie-react';
@@ -20,6 +22,8 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       isLoading = false,
       ariaLabel,
       ariaLabelledBy,
+	    radius = 'medium',
+	    size = 'full',
     }, ref
   ) => {
     const id = useGenerateId();
@@ -30,7 +34,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         onFocus={onFocus}
         type={action}
         disabled={isLoading ? true : disabled}
-        className={`${styles.button} ${buttonTypes[type] || 'default'} ${classname || ''}`}
+        className={`${styles.button} ${btnTypes[type] || 'default'} ${btnRadius[radius]} ${btnSizes[size]} ${classname || ''}`}
         style={style}
         ref={ref}
         id={id}
@@ -40,7 +44,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         <span>
           {!isLoading && Icon && <Icon className={styles.icon} /> }
           {isLoading ? (
-            <Lottie 
+            <Lottie
               animationData={LoadingIcon}
               className={styles.icon__loading}
             />

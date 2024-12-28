@@ -87,7 +87,10 @@ const WorldList = () => {
       const isSensModeActive = sensMode ? 'Чувствительный режим включен' : '';
 
       navigator.clipboard.writeText(`${isSensModeActive}\n\n${toCopyContent}\n\nВсего миров: ${worldsCounter}`);
-      toast.success('Список открытых миров скопирован в ваш буфер обмена', { title: 'Успешно' });
+      toast.success('Список открытых миров скопирован в ваш буфер обмена', {
+				title: 'Успешно',
+	      lifeTime: 5000,
+      });
     }
   };
 
@@ -101,11 +104,17 @@ const WorldList = () => {
         );
         setResult(filteredWorlds);
         setSensMode(true);
-        toast.success('Чувствительный режим включен', { title: 'Успешно' });
+        toast.success('Чувствительный режим включен', {
+					title: 'Успешно',
+	        lifeTime: 5000,
+				});
       } else {
         setResult(originalWorlds);
         setSensMode(false);
-        toast.success('Чувствительный режим выключен', { title: 'Успешно' });
+        toast.success('Чувствительный режим выключен', {
+					title: 'Успешно',
+	        lifeTime: 5000,
+				});
       }
     }
   }
