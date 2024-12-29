@@ -59,15 +59,6 @@ export const Elements: HeaderProps[] = [
     isMobileAvailable: true,
   },
   {
-    text: "Список изменений",
-    id: "changelog",
-    icon: createElement(CopyIcon),
-    link: "/changelog",
-    isNew: false,
-    isDisabled: false,
-    isMobileAvailable: true,
-  },
-  {
     text: "Мониторинг копчейза",
     id: "copchase",
     icon: createElement(CopchaseIcon),
@@ -75,5 +66,14 @@ export const Elements: HeaderProps[] = [
     isNew: true,
     isDisabled: false,
     isMobileAvailable: true,
-  }
+  },
+  // {
+  //   text: "Список изменений",
+  //   id: "changelog",
+  //   icon: createElement(CopyIcon),
+  //   link: "/changelog",
+  //   isNew: false,
+  //   isDisabled: true,
+  //   isMobileAvailable: true,
+  // },
 ];

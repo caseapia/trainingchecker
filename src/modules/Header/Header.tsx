@@ -147,7 +147,7 @@ export const Header = () => {
             key="mobileMenu"
           >
             <section className={styles.mobileMenu__title}>
-              <h1>
+              <h1 translate={'no'}>
                 TRAINING&nbsp;<span className={styles.redspan}>CHECKER</span>
               </h1>
             </section>
@@ -167,7 +167,7 @@ export const Header = () => {
               style={{ width: 'fit-content' }}
             />
           )}
-          {!isMobile && <h1>TRAINING&nbsp;<span className={styles.redspan}>CHECKER</span></h1>}
+          {!isMobile && <h1 translate={'no'}>TRAINING&nbsp;<span className={styles.redspan}>CHECKER</span></h1>}
           {!isMobile && <ul className={styles.list}>{renderMenuItems()}</ul>}
       </header>
     </>
