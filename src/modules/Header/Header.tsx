@@ -10,7 +10,6 @@ import BootstrapTooltip from "@/components/Styles/TooltipStyles";
 import BarsIcon from '@/icons/components/header/bars.svg';
 import Button from "@/components/Buttons/Button";
 import Badge from "@/components/InlineBadge/Badge";
-import UserIcon from '@/icons/user.svg';
 import headerVariants from './variant';
 
 export const Header = () => {
