@@ -90,7 +90,7 @@ const Page = () => {
         </TBody>
       </Table>
     </PageWrapper>
-  ) : <Loader/> ;
+  ) : <Loader/>;
 };
 
 export default Page;

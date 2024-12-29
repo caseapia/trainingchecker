@@ -69,7 +69,7 @@ export default function Home() {
       }
       toast.error('Вы не заполнили поле никнейма', { 
         title: "Поле никнейма не заполнено", 
-        lifeTime: 4000, 
+        lifeTime: 4000,
       })
     } else {
       const nickname = InputElement.current?.value.trim();
@@ -95,13 +95,19 @@ export default function Home() {
       const textContent = InputElement.current.value || '';
       if (cyrillicPattern.test(textContent)) {
         InputElement.current.value = '';
-        toast.error('Никнейм не может состоять из символов кириллицы', { title: "Ошибка", lifeTime: 4000, })
+        toast.error('Никнейм не может состоять из символов кириллицы', {
+          title: "Ошибка",
+          lifeTime: 4000,
+        })
         if (ButtonElement.current) {
           ButtonElement.current.disabled = true;
         }
         toast.clear();
       } else if (InputElement.current && InputElement.current.value.length === 0) {
-        toast.error('Поле никнейма не может быть пустым', { title: "Ошибка", lifeTime: 4000, })
+        toast.error('Поле никнейма не может быть пустым', {
+          title: "Ошибка",
+          lifeTime: 4000,
+        })
         if (ButtonElement.current) {
           ButtonElement.current.disabled = true;
         }
