@@ -38,7 +38,7 @@ export default function Home() {
           headers['Authorization'] = process.env.NEXT_PRIVATE_API_KEY
         }
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          console.error(`HTTP error! status: ${response.status}`);
         }
         const cmts = await response.json();
 
@@ -79,8 +79,8 @@ export default function Home() {
           setTimeout(() => {
             router.push(`/player?nickname=${encodeURIComponent(nickname)}`);
           }, 400)
-        } finally {
-          return true;
+        } catch (err) {
+          console.error(err);
         }
       }
       if (ButtonElement.current) {

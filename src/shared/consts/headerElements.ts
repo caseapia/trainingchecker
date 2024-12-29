@@ -1,9 +1,10 @@
-import React from "react";
+import React, {createElement} from "react";
 import HomeIcon from '@/icons/components/header/home.svg';
 import ListIcon from '@/icons/components/header/list.svg';
 import UserIcon from '@/icons/user.svg';
 import MedalIcon from '@/icons/medal.svg';
 import CopyIcon from '@/icons/copy.svg';
+import CopchaseIcon from '@/icons/components/header/copchase.svg';
 
 type HeaderProps = {
   icon: React.ReactNode;
@@ -23,7 +24,7 @@ export const Elements: HeaderProps[] = [
   {
     text: "Главная",
     id: "main",
-    icon: React.createElement(HomeIcon),
+    icon: createElement(HomeIcon),
     link: "../",
     isNew: false,
     isDisabled: false,
@@ -32,7 +33,7 @@ export const Elements: HeaderProps[] = [
   {
     text: "Игроки в сети",
     id: "players",
-    icon: React.createElement(UserIcon),
+    icon: createElement(UserIcon),
     link: "/players",
     isNew: false,
     isDisabled: false,
@@ -41,7 +42,7 @@ export const Elements: HeaderProps[] = [
   {
     text: "Список значков",
     id: "badges",
-    icon: React.createElement(MedalIcon),
+    icon: createElement(MedalIcon),
     link: "/badges",
     isNew: false,
     isDisabled: false,
@@ -50,7 +51,7 @@ export const Elements: HeaderProps[] = [
   {
     text: "Список миров",
     id: "worldlist",
-    icon: React.createElement(ListIcon),
+    icon: createElement(ListIcon),
     link: "/worldlist",
     isNew: false,
     isDisabled: false,
@@ -60,10 +61,19 @@ export const Elements: HeaderProps[] = [
   {
     text: "Список изменений",
     id: "changelog",
-    icon: React.createElement(CopyIcon),
+    icon: createElement(CopyIcon),
     link: "/changelog",
     isNew: false,
     isDisabled: false,
     isMobileAvailable: true,
   },
+  {
+    text: "Мониторинг копчейза",
+    id: "copchase",
+    icon: createElement(CopchaseIcon),
+    link: '/copchase',
+    isNew: true,
+    isDisabled: false,
+    isMobileAvailable: true,
+  }
 ];
