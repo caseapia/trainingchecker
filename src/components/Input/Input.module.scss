@@ -20,6 +20,9 @@
     &:hover {
       background: $effectbg;
     }
+    &:hover + .icon {
+      color: white;
+    }
     &.WithIcon {
       padding: 13px 40px;
     }

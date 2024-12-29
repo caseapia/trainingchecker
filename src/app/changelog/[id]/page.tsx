@@ -36,7 +36,8 @@ const page = () => {
         const fileResponse = await fetch(file.download_url);
 
         if (!fileResponse.ok) {
-          throw new Error(`Failed to fetch file: ${file.name}, status: ${fileResponse.status}`);
+          console.error(`Failed to fetch file: ${file.name}, status: ${fileResponse.status}`);
+          continue
         }
 
         const text = await fileResponse.text();

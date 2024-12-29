@@ -38,7 +38,7 @@ export default function Home() {
           headers['Authorization'] = process.env.NEXT_PRIVATE_API_KEY
         }
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          console.error(`HTTP error! status: ${response.status}`);
         }
         const cmts = await response.json();
 
@@ -69,7 +69,7 @@ export default function Home() {
       }
       toast.error('Вы не заполнили поле никнейма', { 
         title: "Поле никнейма не заполнено", 
-        lifeTime: 4000, 
+        lifeTime: 4000,
       })
     } else {
       const nickname = InputElement.current?.value.trim();
@@ -79,8 +79,8 @@ export default function Home() {
           setTimeout(() => {
             router.push(`/player?nickname=${encodeURIComponent(nickname)}`);
           }, 400)
-        } finally {
-          return true;
+        } catch (err) {
+          console.error(err);
         }
       }
       if (ButtonElement.current) {
@@ -95,13 +95,19 @@ export default function Home() {
       const textContent = InputElement.current.value || '';
       if (cyrillicPattern.test(textContent)) {
         InputElement.current.value = '';
-        toast.error('Никнейм не может состоять из символов кириллицы', { title: "Ошибка", lifeTime: 4000, })
+        toast.error('Никнейм не может состоять из символов кириллицы', {
+          title: "Ошибка",
+          lifeTime: 4000,
+        })
         if (ButtonElement.current) {
           ButtonElement.current.disabled = true;
         }
         toast.clear();
       } else if (InputElement.current && InputElement.current.value.length === 0) {
-        toast.error('Поле никнейма не может быть пустым', { title: "Ошибка", lifeTime: 4000, })
+        toast.error('Поле никнейма не может быть пустым', {
+          title: "Ошибка",
+          lifeTime: 4000,
+        })
         if (ButtonElement.current) {
           ButtonElement.current.disabled = true;
         }

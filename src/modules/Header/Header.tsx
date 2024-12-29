@@ -10,7 +10,6 @@ import BootstrapTooltip from "@/components/Styles/TooltipStyles";
 import BarsIcon from '@/icons/components/header/bars.svg';
 import Button from "@/components/Buttons/Button";
 import Badge from "@/components/InlineBadge/Badge";
-import UserIcon from '@/icons/user.svg';
 import headerVariants from './variant';
 
 export const Header = () => {
@@ -86,7 +85,7 @@ export const Header = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       getPlayers();
-    }, 3000);
+    }, 5000);
     
     return () => clearInterval(interval);
   }, []);
@@ -148,7 +147,7 @@ export const Header = () => {
             key="mobileMenu"
           >
             <section className={styles.mobileMenu__title}>
-              <h1>
+              <h1 translate={'no'}>
                 TRAINING&nbsp;<span className={styles.redspan}>CHECKER</span>
               </h1>
             </section>
@@ -168,7 +167,7 @@ export const Header = () => {
               style={{ width: 'fit-content' }}
             />
           )}
-          {!isMobile && <h1>TRAINING&nbsp;<span className={styles.redspan}>CHECKER</span></h1>}
+          {!isMobile && <h1 translate={'no'}>TRAINING&nbsp;<span className={styles.redspan}>CHECKER</span></h1>}
           {!isMobile && <ul className={styles.list}>{renderMenuItems()}</ul>}
       </header>
     </>
