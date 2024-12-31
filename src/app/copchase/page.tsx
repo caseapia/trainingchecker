@@ -5,6 +5,7 @@ import { Table, Thead, Tr, Td, Th, TBody } from '@/components/Table/Table';
 import Loader from "@/modules/Loader/Loader";
 import Types from './types';
 import styles from './page.module.scss';
+import {toast} from "@/utils/toast";
 
 const Page = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -24,6 +25,11 @@ const Page = () => {
         const response = await fetch(url);
         if (!response.ok) {
           console.error(`HTTP error! status: ${response.status}`);
+          toast.error(`Произошла ошибка сервера при обработке запроса: ${response.status} ${response.statusText}`, {
+            title: 'Ошибка',
+            lifeTime: 10000,
+          });
+          setIsLoaded(false);
         }
         const data = await response.json();
         if (Array.isArray(data.lobbies)) {
@@ -36,13 +42,12 @@ const Page = () => {
           }));
           setChData(output);
           console.log(output)
+          setIsLoaded(true);
         } else {
           console.error("Unexpected data format")
         }
       } catch (err) {
         console.error(err);
-      } finally {
-        setIsLoaded(true);
       }
     }
     fetchData();
