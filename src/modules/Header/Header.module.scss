@@ -38,17 +38,11 @@
       &:last-of-type { 
         margin-right: 0; 
       }
-      a, .disabled_element {
-        color: var(--color-defaultText) !important;
-        transition: .4s;
-        font-weight: 440;
-        display: flex;
-        align-items: center;
-        text-decoration: none !important;
-        border-radius: 6px;
+      .linkElement, .disabled_element {
         padding-inline: 8px;
         padding-block: 6px;
         opacity: .9;
+        font-weight: 440;
           &:not(.active) {
             &:hover {
               background-color: #656c7633;

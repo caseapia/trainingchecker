@@ -1,8 +1,8 @@
 import { forwardRef } from 'react';
 import styles from './Button.module.scss';
-import btnTypes from './buttonTypes.module.scss';
-import btnRadius from './buttonRadius.module.scss';
-import btnSizes from './buttonSizes.module.scss';
+import btnTypes from './types.module.scss';
+import btnRadius from './radius.module.scss';
+import btnSizes from './sizes.module.scss';
 import Props from './types';
 import { useGenerateId } from '@/shared/hooks/useGenerateId';
 import Lottie from 'lottie-react';

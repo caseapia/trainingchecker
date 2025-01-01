@@ -36,6 +36,8 @@ interface LinkedButtonProps {
 	target?: '_blank' | '_self' | '_parent' | '_top';
 	radius?: Radius;
 	size?: Sizes;
+	onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+	children?: React.ReactNode;
 }
 
 export default Props;

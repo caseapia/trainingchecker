@@ -78,7 +78,7 @@ export const Modal = ({
                   )}
                   {secondButtonContent && (
                     <Button
-                    type="Secondary"
+                      type="Outlined"
                       text={secondButtonContent}
                       action="button"
                       icon={SecondIcon}
