@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./Header.module.scss";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { isMobileDevice } from "@/hooks/isMobileDevice";
@@ -9,6 +8,7 @@ import { Elements } from "@/shared/consts/headerElements";
 import BootstrapTooltip from "@/components/Styles/TooltipStyles";
 import BarsIcon from '@/icons/components/header/bars.svg';
 import Button from "@/components/Buttons/Button";
+import LinkedButton from "@/components/Buttons/LinkedButton";
 import Badge from "@/components/InlineBadge/Badge";
 import headerVariants from './variant';
 
@@ -105,11 +105,13 @@ export const Header = () => {
             </span>
           </BootstrapTooltip>
         ) : (
-          <Link
+          <LinkedButton
             href={link}
             onClick={() => handleNavigation(id)}
             style={style}
-            draggable="false"
+            type="Outlined"
+            radius="small"
+            classname={styles.linkElement}
           >
             <span>
               {icon} {text}
@@ -127,7 +129,7 @@ export const Header = () => {
                 />
               )}
             </span>
-          </Link>
+          </LinkedButton>
         )}
       </motion.li>
     ))

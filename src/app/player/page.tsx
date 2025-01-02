@@ -249,12 +249,12 @@ const PlayerInfo = () => {
         isOpen={isModalOpen} 
         onClose={closeModal} 
         title={`Список наказаний ${playerData.login} (${playerData.id})`} 
-        firstButtonContent='Закрыть' 
-        firstButtonIcon={CheckIcon} 
-        firstButtonAction={closeModal}
-        secondButtonContent='Скопировать' 
-        secondButtonIcon={CopyIcon}
-        secondButtonAction={copyPunishments}
+        secondButtonContent='Закрыть'
+        secondButtonIcon={CheckIcon}
+        secondButtonAction={closeModal}
+        firstButtonContent='Скопировать'
+        firstButtonIcon={CopyIcon}
+        firstButtonAction={copyPunishments}
       >
         {playerData.warn.length > 0 ? (
           <Table width={100}>
