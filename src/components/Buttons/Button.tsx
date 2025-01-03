@@ -20,7 +20,6 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       classname, 
       style,
       isLoading = false,
-      ariaLabel,
       ariaLabelledBy,
 	    radius = 'medium',
 	    size = 'full',
@@ -51,12 +50,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
 
     return (
       <button
-        onClick={(e) => {
-          if (!disabled && !isLoading) {
-            handleRipple(e);
-            onClick?.(e);
-          }
-        }}
+        onClick={(e) => {handleRipple(e); onClick?.(e);}}
         onFocus={onFocus}
         type={action}
         disabled={isLoading ? true : disabled}
@@ -64,7 +58,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         style={style}
         ref={ref}
         id={id}
-        aria-label={ariaLabel}
+        aria-label={text}
         aria-labelledby={ariaLabelledBy}
       >
         <span>

@@ -67,8 +67,7 @@ export default function Home() {
       if (ButtonElement.current) {
         ButtonElement.current.disabled = true;
       }
-      toast.error('Вы не заполнили поле никнейма', { 
-        title: "Поле никнейма не заполнено", 
+      toast.error('Вы не заполнили поле никнейма', {
         lifeTime: 4000,
       })
     } else {
@@ -96,7 +95,6 @@ export default function Home() {
       if (cyrillicPattern.test(textContent)) {
         InputElement.current.value = '';
         toast.error('Никнейм не может состоять из символов кириллицы', {
-          title: "Ошибка",
           lifeTime: 4000,
         })
         if (ButtonElement.current) {
@@ -105,7 +103,6 @@ export default function Home() {
         toast.clear();
       } else if (InputElement.current && InputElement.current.value.length === 0) {
         toast.error('Поле никнейма не может быть пустым', {
-          title: "Ошибка",
           lifeTime: 4000,
         })
         if (ButtonElement.current) {
@@ -153,10 +150,9 @@ export default function Home() {
                   text="Проверить" 
                   action="submit" 
                   icon={UserSearchIcon}
-                  ref={ButtonElement} 
+                  ref={ButtonElement}
                   disabled
                   isLoading={isButtonLoading}
-                  ariaLabel="Проверить"
                 />
               </form>
             </>
