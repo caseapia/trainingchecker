@@ -15,11 +15,12 @@ export const Input = forwardRef<HTMLInputElement, Props>(
     icon: Icon, 
     name,
     required = false,
+    value
   }, ref) => {
     const string = useGenerateId();
 
     return (
-      <>
+      <div className={styles.InputWrapper}>
         <label htmlFor={string} className={styles.label}>
           {label}{' '}
           {required && <span className={styles.Required}>*</span>}
@@ -36,9 +37,10 @@ export const Input = forwardRef<HTMLInputElement, Props>(
           name={name}
           ref={ref}
           required={required}
+          value={value}
         />
         {Icon && <Icon className={styles.icon} width={18} height={18} />}
-      </>
+      </div>
     );
   }
 );

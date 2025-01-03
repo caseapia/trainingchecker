@@ -16,13 +16,12 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
       id,
       type,
       content,
-      title: options?.title,
       className: options?.className,
       onClose: () => removeToast(id),
       lifeTime: options?.lifeTime
     };
     setToasts((prevToasts) => [...prevToasts, newToast]);
-    {options?.lifeTime && (
+    {options?.lifeTime && options?.lifeTime !== -1 && (
       setTimeout(() => removeToast(id), newToast.lifeTime!)
     )}
   };
