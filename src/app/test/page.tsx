@@ -37,17 +37,32 @@ const Page = () => {
       />
       <section className={styles.gap}>
         <Button
-        type="Primary"
-        action="button"
-        text="Primary button"
-        size="medium"
-      />
+          type="Primary"
+          action="button"
+          text="Primary button"
+          size="medium"
+        />
         <Button
           type="Primary"
           action="button"
           text="Primary button with icon"
           icon={UserIcon}
           size="medium"
+        />
+        <Button
+          type="Primary"
+          action="button"
+          text="Primary disabled button"
+          size="medium"
+          disabled
+        />
+        <Button
+          type="Primary"
+          action="button"
+          text="Primary disabled button with icon"
+          icon={UserIcon}
+          size="medium"
+          disabled
         />
         <Button
           type="Secondary"
