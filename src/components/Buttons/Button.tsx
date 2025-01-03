@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import React, { forwardRef, MouseEvent } from 'react';
 import styles from './Button.module.scss';
 import btnTypes from './types.module.scss';
 import btnRadius from './radius.module.scss';
@@ -20,7 +20,6 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       classname, 
       style,
       isLoading = false,
-      ariaLabel,
       ariaLabelledBy,
 	    radius = 'medium',
 	    size = 'full',
@@ -28,9 +27,30 @@ const Button = forwardRef<HTMLButtonElement, Props>(
   ) => {
     const id = useGenerateId();
 
+    const handleRipple =  (e: MouseEvent<HTMLButtonElement>) => {
+      const button = e.currentTarget;
+      const ripple = document.createElement('span');
+      const rect = button.getBoundingClientRect();
+
+      const size = Math.max(rect.width, rect.height);
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+
+      ripple.style.width = ripple.style.height = `${size}px`;
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+      ripple.className = styles.ripple;
+
+      button.appendChild(ripple);
+
+      ripple.addEventListener('animationend', () => {
+        ripple.remove();
+      });
+    }
+
     return (
       <button
-        onClick={onClick}
+        onClick={(e) => {handleRipple(e); onClick?.(e);}}
         onFocus={onFocus}
         type={action}
         disabled={isLoading ? true : disabled}
@@ -38,11 +58,11 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         style={style}
         ref={ref}
         id={id}
-        aria-label={ariaLabel}
+        aria-label={text}
         aria-labelledby={ariaLabelledBy}
       >
         <span>
-          {!isLoading && Icon && <Icon className={styles.icon} /> }
+          {!isLoading && Icon && <Icon className={styles.icon}/>}
           {isLoading ? (
             <Lottie
               animationData={LoadingIcon}

@@ -15,6 +15,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
     icon: Icon, 
     name,
     required = false,
+    value
   }, ref) => {
     const string = useGenerateId();
 
@@ -36,6 +37,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
           name={name}
           ref={ref}
           required={required}
+          value={value}
         />
         {Icon && <Icon className={styles.icon} width={18} height={18} />}
       </>

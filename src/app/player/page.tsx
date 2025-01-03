@@ -46,7 +46,6 @@ const PlayerInfo = () => {
 		if (!nickname) {
 			router.push('../');
 			toast.error('Страница не может быть открыта без указания конкретного игрока, переносим вас обратно...', {
-				title: 'Ошибка',
 				lifeTime: 5000
 			});
 		}
@@ -64,7 +63,6 @@ const PlayerInfo = () => {
 				if (response.status === 404) {
 					router.push('../');
 					toast.error(`Игрок с никнеймом ${nickname} не найден. Перенаправляем вас на главную страницу`, {
-						title: 'Игрок не найден',
 						lifeTime: 5000,
 					});
 				}
@@ -94,7 +92,6 @@ const PlayerInfo = () => {
   const refreshData = () => {
     getData();
     toast.success(`Информация об игроке ${nickname} успешно обновлена`, {
-      title: 'Успешно',
       lifeTime: 5000,
     })
   }
@@ -139,12 +136,11 @@ const PlayerInfo = () => {
         .join(';\n');
       const punishmentsCount = playerData.warn.length;
       navigator.clipboard.writeText(`Список наказаний ${playerData.login} (${playerData.id})\n\n${punishments}\n\nВсего наказаний: ${punishmentsCount}`);
-      toast.success(`Наказания игрока ${playerData.login} были помещены в ваш буфер обмена`, { 
-        title: "Данные о наказаниях скопированы",
+      toast.success(`Наказания игрока ${playerData.login} были помещены в ваш буфер обмена`, {
         lifeTime: 5000, 
       })
     } else {
-      toast.error(`Игрок ${playerData.login} не имеет наказаний`, { title: "Ошибка!" })
+      toast.error(`Игрок ${playerData.login} не имеет наказаний`,)
     }
   }
 

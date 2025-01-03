@@ -1,0 +1,12 @@
+.gap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  button {
+    margin-top: 10px;
+  }
+  input {
+    margin-top: 10px;
+  }
+}

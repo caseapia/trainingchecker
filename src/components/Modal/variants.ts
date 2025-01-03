@@ -13,20 +13,20 @@ const backdropVariants = {
 const modalVariants = {
 	hidden: {
 		scale: 0.9,
-		opacity: 0
+		opacity: 0,
 	},
 	visible: {
 		scale: 1,
 		opacity: 1,
 		transition: {
-			duration: 0.2
+			duration: 0.2,
 		}
 	},
 	exit: {
 		scale: 0.9,
 		opacity: 0,
 		transition: {
-			duration: 0.2
+			duration: 0.2,
 		}
 	},
 };

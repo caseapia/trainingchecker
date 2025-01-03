@@ -26,7 +26,6 @@ const Page = () => {
         if (!response.ok) {
           console.error(`HTTP error! status: ${response.status}`);
           toast.error(`Произошла ошибка сервера при обработке запроса: ${response.status} ${response.statusText}`, {
-            title: 'Ошибка',
             lifeTime: 10000,
           });
           setIsLoaded(false);

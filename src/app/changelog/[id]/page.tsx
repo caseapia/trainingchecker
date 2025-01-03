@@ -25,7 +25,7 @@ const page = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       if (response.status === 500) {
-        toast.error(`Ошибка отправки запроса к GitHub. Отправляем новый запрос`, { title: "Ошибка", lifeTime: 5000 } )
+        toast.error(`Ошибка отправки запроса к GitHub. Отправляем новый запрос`, { lifeTime: 5000 })
         return;
       }
 

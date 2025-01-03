@@ -31,11 +31,11 @@ const Toast = () => {
               />
             </section>
             <section className={styles.Body}>
-              {toast.title && <div className={styles.Title}>{toast.title}</div>}
+              <div className={styles.Title}>{toast.type === 'success' ? 'Успешно' : toast.type === 'error' ? 'Ошибка' : 'Внимание'}</div>
               {toast.content && <div className={styles.Content}>{toast.content}</div>}
             </section>
             <div 
-              className={`${toast.lifeTime ? styles.ProgressBar : ''}`}
+              className={`${toast.lifeTime && toast.lifeTime !== -1 ? styles.ProgressBar : ''}`}
               style={{ animationDuration: `${toast.lifeTime}ms` }}
             >
 

@@ -3,7 +3,6 @@ interface Toast {
 	content: string;
 	className?: string;
 	type?: 'success' | 'error' | 'default';
-	title?: string;
 	onClose: () => void;
 	lifeTime?: number;
 }
@@ -13,7 +12,7 @@ interface ToastContextType {
 	addToast: (
 		type: 'success' | 'error' | 'default',
 		content: string,
-		options?: { title?: string, className?: string, lifeTime?: number, }
+		options?: { className?: string, lifeTime?: number, }
 	) => void;
 	removeToast: (id: string) => void;
 }
