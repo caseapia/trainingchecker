@@ -6,20 +6,21 @@ import { ToastProvider } from "@/components/Toast/context/ToastContext";
 import ToastInitializer from "@/components/Toast/ToastInitializer";
 import Toast from "@/components/Toast/Toast";
 import { toast } from '@/utils/toast';
-import React, {useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import Snow from "@/modules/Snow/Snow";
+import DebugMenu from '@/modules/Debug/debugMenu';
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-	
+	const [isDev, setIsDev] = useState(false);
+
 	useEffect(() => {
-		if (window.location.hostname.includes('dev')) {
-			toast.basic('Эта версия сайта является нестабильной и предназначена для тестирования, возможны баги', {
-				title: 'Внимание!',
-			})
+		if (window.location.hostname.includes('dev') || window.location.hostname.includes('localhost')) {
+			toast.basic('Эта версия сайта является нестабильной и предназначена для тестирования, возможны баги',)
+      setIsDev(true);
 		}
 	}, []);
 	
@@ -34,8 +35,13 @@ export default function RootLayout({
         <title>TRAINING CHECKER</title>
       </head>
       <body>
-        <Snow />
         <ToastProvider>
+          {isDev && (
+            <DebugMenu />
+          )}
+          {!isDev && (
+            <Snow/>
+          )}
           <Header />
           {children}
           <Toast />
