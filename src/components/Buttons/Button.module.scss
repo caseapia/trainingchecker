@@ -11,12 +11,31 @@
   user-select: none;
   border: 1px solid transparent;
   outline: 0;
+  position: relative;
+  overflow: hidden;
     span {
       display: flex;
     }
     &:disabled {
       cursor: not-allowed;
       opacity: 0.5;
+    }
+    &:enabled {
+      .ripple {
+        position: absolute;
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple-animation 1.5s linear;
+        background: rgba(255, 255, 255, 0.3);
+        pointer-events: none;
+        opacity: 1;
+      }
+      @keyframes ripple-animation {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
     }
 }
 .icon {
