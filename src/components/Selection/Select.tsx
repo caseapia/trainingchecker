@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import types from './types';
 import styles from './Select.module.scss';
 import sizes from './Sizes.module.scss';
@@ -19,14 +19,24 @@ const Select = (
   }: types & { onChange: (option: string) => void }
 ) => {
   const id = useGenerateId();
+  const iconRef = useRef<SVGElement>(null);
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
-    setIsOpened(false);
+    handleSelectionClick();
     onChange(option);
   };
+
+  const handleSelectionClick = () => {
+    setIsOpened(!isOpened)
+    if (!isOpened) {
+      iconRef.current?.setAttribute('transform', 'rotate(180)');
+    } else {
+      iconRef.current?.setAttribute('transform', 'rotate(0)');
+    }
+  }
 
   return (
     <AnimatePresence>
@@ -43,11 +53,11 @@ const Select = (
           className={styles.Selection}
           id={id}
           role="listbox"
-          onClick={() => setIsOpened(!isOpened)}
+          onClick={handleSelectionClick}
         >
           <p className={styles.SelectedOption}>
             {selectedOption || defaultString}
-            {!isOpened ? <CaretDownIcon /> : <CaretUpIcon />}
+            <CaretDownIcon ref={iconRef} />
           </p>
         </div>
         {isOpened && (

@@ -7,7 +7,6 @@ import ToastInitializer from "@/components/Toast/ToastInitializer";
 import Toast from "@/components/Toast/Toast";
 import { toast } from '@/utils/toast';
 import React, { useEffect, useState } from "react";
-import Snow from "@/modules/Snow/Snow";
 import DebugMenu from '@/modules/Debug/debugMenu';
 
 export default function RootLayout({
@@ -25,7 +24,7 @@ export default function RootLayout({
 	}, []);
 	
   return (
-    <html lang="en">
+    <html lang="ru">
       <head>
         <link
           rel="shortcut icon"
@@ -38,9 +37,6 @@ export default function RootLayout({
         <ToastProvider>
           {isDev && (
             <DebugMenu />
-          )}
-          {!isDev && (
-            <Snow/>
           )}
           <Header />
           {children}
