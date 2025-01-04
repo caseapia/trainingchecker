@@ -7,6 +7,7 @@ import Select from '@/components/Selection/Select';
 import Input from '@/components/Input/Input';
 import {toast} from "@/utils/toast";
 import {useGenerateId} from "@/hooks/useGenerateId";
+import Cookies from "js-cookie";
 
 const DebugMenu = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -56,12 +57,21 @@ const DebugMenu = () => {
 
     switch (type) {
       case 1:
-        return toast.basic(`${text} (lifeTime: ${lifeTime})`, { lifeTime: lifeTime })
+        return toast.basic(`${text} (lifeTime: ${lifeTime})`, {
+          lifeTime: lifeTime,
+        })
       case 2:
         return toast.error(`${text} (lifeTime: ${lifeTime})`, { lifeTime: lifeTime })
       case 3:
         return toast.success(`${text} (lifeTime: ${lifeTime})`, { lifeTime: lifeTime })
     }
+  }
+
+  const removeCookies = () => {
+    Cookies.remove('cookieAccess');
+    Cookies.remove('metricsAccess');
+    toast.success('All cookies have been removed.')
+    window.location.reload();
   }
 
   return (
@@ -72,22 +82,33 @@ const DebugMenu = () => {
           type="Primary"
           text="Call toast"
           onClick={() => setIsModalOpen(true)}
+          size="small"
         />
         <Button
           action="button"
           type="Primary"
           text="Highlight all elements"
           onClick={highlightElements}
+          size="small"
         />
         <Button
           action="button"
           type="Primary"
           text="Call modal"
+          size="small"
         />
         <LinkedButton
           type="Primary"
           text="Refer to test page"
           href="./test"
+          size="small"
+        />
+        <Button
+          action="button"
+          type="Primary"
+          text="Remove all cookies"
+          size="small"
+          onClick={removeCookies}
         />
       </div>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Select toast settings">

@@ -5,7 +5,6 @@ import Select from '@/components/Selection/Select';
 import { useRouter } from "next/navigation";
 import {toast} from "@/utils/toast";
 import Button from "@/components/Buttons/Button";
-import Input from "@/components/Input/Input";
 import UserIcon from '@/icons/user.svg';
 import styles from './test.module.scss'
 

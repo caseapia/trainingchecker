@@ -19,6 +19,7 @@ const Toast = () => {
             key={toast.id}
             className={`${styles.Toast} ${toast.type === "success" ? styles.success : toast.type === "error" ? styles.error : styles.default} ${toast.className || ''}`}
             onClick={() => removeToast(toast.id)}
+            onMouseUp={toast.clickAction}
             initial={ToastAnimation.initial}
             animate={ToastAnimation.animate}
             exit={ToastAnimation.initial}

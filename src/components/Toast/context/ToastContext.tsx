@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, {createContext, useContext, useState, ReactNode, MouseEvent} from 'react';
 import {Toast, ToastContextType} from './types';
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
@@ -7,9 +7,13 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
   const addToast = (
-      type: 'success' | 'error' | 'default', 
+      type: 'success' | 'error' | 'default',
       content: string,
-      options?: { title?: string, className?: string, lifeTime?: number, }
+      options?: {
+        className?: string,
+        lifeTime?: number,
+        clickAction?: (event: MouseEvent<HTMLDivElement>) => void,
+      }
     ) => {
     const id = Math.random().toString(36).substring(2, 9);
     const newToast: Toast = {
@@ -18,7 +22,8 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
       content,
       className: options?.className,
       onClose: () => removeToast(id),
-      lifeTime: options?.lifeTime
+      lifeTime: options?.lifeTime,
+      clickAction: options?.clickAction,
     };
     setToasts((prevToasts) => [...prevToasts, newToast]);
     {options?.lifeTime && options?.lifeTime !== -1 && (

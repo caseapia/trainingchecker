@@ -6,7 +6,6 @@ export const usePage500 = () => {
 
   const triggerPage500 = () => {
     toast.error('Ответ от сервера не получен, работаем над перезагрузкой страницы', {
-      title: 'Непредвиденная ошибка',
       lifeTime: 10000,
     });
     router.push(window.location.href);
