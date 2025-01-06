@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const useGenerateId = (): string => {
+export const useGenerateId = (length: number): string => {
   const [id, setId] = useState<string>("");
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export const useGenerateId = (): string => {
       return result;
     };
 
-    const newID = generateId(6);
+    const newID = generateId(length);
     setId(newID);
   }, []);
 

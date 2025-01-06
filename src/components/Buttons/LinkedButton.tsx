@@ -23,7 +23,7 @@ const LinkedButton = forwardRef<HTMLAnchorElement, LinkedButtonProps>((
 		onClick,
 		children,
   }, ref) => {
-		const id = useGenerateId();
+		const id = useGenerateId(6);
 		return (
 			<Link
 				href={href}
