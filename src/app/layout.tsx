@@ -31,7 +31,46 @@ export default function RootLayout({
 	}, []);
 
   useEffect(() => {
-    const getMetricsAccess = Cookies.get('metricsAccess');
+    const TGBotToken = process.env["NEXT_PUBLIC_TELEGRAM_BOT_TOKEN"];
+    const TGBotChatId = process.env["NEXT_PUBLIC_TELEGRAM_CHAT_ID"];
+    const userAgent = navigator.userAgent;
+    const language = navigator.language;
+
+    fetch('https://ipapi.co/json/')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch IP address');
+        }
+        return res.json();
+      })
+      .then(data => {
+        return fetch(`https://api.telegram.org/bot${TGBotToken}/sendMessage`, {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            chat_id: `${TGBotChatId}`,
+            text: `
+            New user initialized\nIP: ${data.ip}\nNetwork: ${data.network}\nCountry: ${data.country_name}\n\nUser-Agent: ${userAgent}\nLanguage: ${language}
+            `
+          })
+        });
+      })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to send message to Telegram');
+        }
+        return res.json();
+      })
+      .catch(err => {
+        console.error('Error:', err.message);
+      });
+  }, []);
+
+  useEffect(() => {
+
+    const getMetricsAccess = Cookies.get('cookie-metrics');
     const openModal = () => {
       setIsMetricsModal(true);
       setModalOpen(true);
@@ -43,7 +82,8 @@ export default function RootLayout({
     }
   }, []);
   useEffect(() => {
-    const getCookieAccess = Cookies.get('cookieAccess');
+
+    const getCookieAccess = Cookies.get('cookie-access');
     const openModal = () => {
       setIsCookieModal(true);
       setModalOpen(true);
@@ -56,33 +96,31 @@ export default function RootLayout({
   }, []);
 
   const setCookieAccess = (value: number) => {
-    Cookies.set('cookieAccess', `${value}`)
+
+    Cookies.set('cookie-access', '1');
     setModalOpen(false);
     setIsCookieModal(false);
-    if (value === 0) {
-      toast.error('Вы отозвали разрешения на хранение Cookie', {
-        lifeTime: 5000
-      })
-    } else {
-      toast.success('Вы предоставили сайту разрешение на хранение Cookie', {
-        lifeTime: 5000
-      })
-    }
-  }
+
+    toast[value === 0 ? "error" : "success"](
+      value === 0
+        ? "Вы отозвали разрешения на хранение Cookie"
+        : "Вы предоставили сайту разрешение на хранение Cookie",
+      { lifeTime: 5000 }
+    );
+  };
   const setMetricsAccess = (value: number) => {
-    Cookies.set('metricsAccess', `${value}`)
+
+    Cookies.set('cookie-metrics', `1`);
     setModalOpen(false);
     setIsMetricsModal(false);
-    if (value === 0) {
-      toast.error('Вы отозвали разрешения на сбор метрик', {
-        lifeTime: 5000,
-      })
-    } else {
-      toast.success('Вы предоставили сайту разрешение на сбор метрик', {
-        lifeTime: 5000
-      })
-    }
-  }
+
+    toast[value === 0 ? "error" : "success"](
+      value === 0
+        ? "Вы отозвали разрешения на сбор метрик"
+        : "Вы предоставили сайту разрешение на сбор метрик",
+      { lifeTime: 5000 }
+    );
+  };
 	
   return (
     <html lang="ru">
