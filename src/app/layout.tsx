@@ -12,7 +12,8 @@ import Cookies from "js-cookie";
 import { Modal } from "@/components/Modal/Modal";
 import CheckIcon from "@/icons/checkCircle.svg";
 import XIcon from '@/icons/components/modal/xmark.svg';
-import {useMetric} from "@/hooks/useMetric";
+import { sendMetric } from "@/hooks/useMetric";
+import {metric, setMetricInstance} from "@/utils/metric";
 
 export default function RootLayout({
   children,
@@ -23,13 +24,6 @@ export default function RootLayout({
   const [isModalOpen, setModalOpen] = useState<boolean>(false)
   const [isCookieModal, setIsCookieModal] = useState<boolean>(false)
   const [isMetricsModal, setIsMetricsModal] = useState<boolean>(false)
-  const { error } = useMetric("New user initialized");
-
-  useEffect(() => {
-    if (error) {
-      console.error("Ошибка при отправке метрик:", error);
-    }
-  }, [error]);
 
 	useEffect(() => {
 		if (window.location.hostname.includes('dev') || window.location.hostname.includes('localhost')) {
@@ -37,6 +31,10 @@ export default function RootLayout({
       setIsDev(true);
 		}
 	}, []);
+
+  useEffect(() => {
+    setMetricInstance(sendMetric);
+  }, []);
 
   useEffect(() => {
     const getMetricsAccess = Cookies.get('cookie-metrics');
@@ -51,7 +49,6 @@ export default function RootLayout({
     }
   }, []);
   useEffect(() => {
-
     const getCookieAccess = Cookies.get('cookie-access');
     const openModal = () => {
       setIsCookieModal(true);
@@ -64,55 +61,14 @@ export default function RootLayout({
     }
   }, []);
 
-  const sendMetricMessage = async (message: string) => {
-    const getMetricsAccess = Cookies.get('cookie-metrics');
-    if (getMetricsAccess !== '0') {
-      const TGBotToken = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
-      const TGBotChatId = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID;
-
-      try {
-        const res = await fetch("https://ipapi.co/json/");
-        if (!res.ok) {
-          return;
-        }
-        const data = await res.json();
-        const userAgent = navigator.userAgent;
-        const language = navigator.language;
-
-        const fullMessage = `${message}\n` +
-          `**IP:** ${data.ip}\n` +
-          `**City:** ${data.city}\n` +
-          `**Region:** ${data.region}\n` +
-          `**Country:** ${data.country_name}\n` +
-          `**Language:** ${language}\n` +
-          `**User-Agent:** ${userAgent}`;
-
-        const telegramRes = await fetch(`https://api.telegram.org/bot${TGBotToken}/sendMessage`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            chat_id: TGBotChatId,
-            text: fullMessage,
-          }),
-        });
-
-        if (!telegramRes.ok) {
-          return;
-        }
-      } catch (err: any) {
-        console.error(err.message);
-      }
-    }
-  };
-
-  const setCookieAccess = async (value: number) => {
-
+  const setCookieAccess = (value: number) => {
     Cookies.set('cookie-access', `${value}`);
     setModalOpen(false);
     setIsCookieModal(false);
-    await sendMetricMessage(`Cookie access is now: ${value === 0 ? 'denied' : 'allowed'}`);
+    metric.send({
+      action: 'Изменено разрешение Cookie-Access',
+      additionMessage: `Новое значение ${value === 0 ? 'запрещено' : 'разрешено'}`
+    })
 
     toast[value === 0 ? "error" : "success"](
       value === 0
@@ -121,12 +77,14 @@ export default function RootLayout({
       { lifeTime: 5000 }
     );
   };
-  const setMetricsAccess = async (value: number) => {
-
+  const setMetricsAccess = (value: number) => {
     Cookies.set('cookie-metrics', `${value}`);
     setModalOpen(false);
     setIsMetricsModal(false);
-    await sendMetricMessage(`Metrics access is now: ${value === 0 ? 'denied' : 'allowed'}`);
+    metric.send({
+      action: 'Изменено разрешение Metrics-Access',
+      additionMessage: `Новое значение ${value === 0 ? 'запрещено' : 'разрешено'}`
+    })
 
     toast[value === 0 ? "error" : "success"](
       value === 0

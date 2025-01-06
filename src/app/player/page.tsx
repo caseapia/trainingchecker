@@ -18,6 +18,8 @@ import Loader from '@/modules/Loader/Loader';
 import Chip from '@/components/Chip/Chip';
 import {useTransformTextColor} from "@/hooks/useTransofrmTextColor";
 import PlayerData from './types';
+import {metric, setMetricInstance} from "@/utils/metric";
+import {sendMetric} from "@/hooks/useMetric";
 
 const PlayerInfo = () => {
   const router = useRouter();
@@ -41,6 +43,10 @@ const PlayerInfo = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const transformedVerificationText = useTransformTextColor;
+
+  useEffect(() => {
+    setMetricInstance(sendMetric);
+  }, []);
 	
 	useEffect(() => {
 		if (!nickname) {
@@ -94,6 +100,9 @@ const PlayerInfo = () => {
     toast.success(`Информация об игроке ${nickname} успешно обновлена`, {
       lifeTime: 5000,
     })
+    metric.send({
+      action: `Обновлена информация об игроке ${nickname}`
+  })
   }
 	
 	useEffect(() => {

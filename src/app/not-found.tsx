@@ -4,9 +4,21 @@ import styles from './not-found.module.scss';
 import Button from "@/components/Buttons/Button";
 import LinkedButton from "@/components/Buttons/LinkedButton";
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
+import {useEffect} from "react";
+import {metric, setMetricInstance} from "@/utils/metric";
+import {sendMetric} from "@/hooks/useMetric";
 
 const NotFound = () => {
 
+  useEffect(() => {
+    setMetricInstance(sendMetric);
+  }, []);
+
+  useEffect(() => {
+    metric.send({
+      action: 'Вызвана страница 404'
+    })
+  }, []);
 
   return (
     <PageWrapper>

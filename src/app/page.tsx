@@ -10,6 +10,8 @@ import UserSearchIcon from '@/icons/page-main/userSearch.svg';
 import UserIcon from '@/icons/user.svg';
 import GithubIcon from '@/icons/page-main/github.svg';
 import { useRouter } from "next/navigation";
+import { sendMetric } from "@/hooks/useMetric";
+import {metric, setMetricInstance} from "@/utils/metric";
 
 export default function Home() {
   const [isButtonLoading, setIsButtonLoading] = useState<boolean>(false);
@@ -24,6 +26,10 @@ export default function Home() {
     month: 'long',
     day: 'numeric',
   }
+
+  useEffect(() => {
+    setMetricInstance(sendMetric);
+  }, []);
 
   useEffect(() => {
     const commits = async () => {
@@ -62,6 +68,10 @@ export default function Home() {
 
   const validation = async (e: React.FormEvent) => {
     e.preventDefault();
+    metric.send({
+      action: 'Проверка валидности',
+      additionMessage: 'Пользователь нажал на кнопку'
+    })
     if (InputElement.current && InputElement.current.value.length === 0) {
       e.preventDefault();
       if (ButtonElement.current) {
@@ -70,14 +80,20 @@ export default function Home() {
       toast.error('Вы не заполнили поле никнейма', {
         lifeTime: 4000,
       })
+      metric.send({
+        action: "Пользователь столкнулся с ошибкой",
+        error: "Вы не заполнили поле никнейма",
+      })
     } else {
       const nickname = InputElement.current?.value.trim();
       if (nickname) {
         setIsButtonLoading(true);
         try {
-          setTimeout(() => {
-            router.push(`/player?nickname=${encodeURIComponent(nickname)}`);
-          }, 400)
+          metric.send({
+            action: 'Проверка валидности',
+            additionMessage: 'Пользователь начал выполнять поиск по ' + nickname
+          })
+          router.push(`/player?nickname=${encodeURIComponent(nickname)}`);
         } catch (err) {
           console.error(err);
         }
@@ -97,6 +113,10 @@ export default function Home() {
         toast.error('Никнейм не может состоять из символов кириллицы', {
           lifeTime: 4000,
         })
+        metric.send({
+          action: "Пользователь столкнулся с ошибкой",
+          error: "Никнейм не может состоять из символов кириллицы",
+        })
         if (ButtonElement.current) {
           ButtonElement.current.disabled = true;
         }
@@ -104,6 +124,10 @@ export default function Home() {
       } else if (InputElement.current && InputElement.current.value.length === 0) {
         toast.error('Поле никнейма не может быть пустым', {
           lifeTime: 4000,
+        })
+        metric.send({
+          action: "Пользователь столкнулся с ошибкой",
+          error: "Поле никнейма не может быть пустым",
         })
         if (ButtonElement.current) {
           ButtonElement.current.disabled = true;
