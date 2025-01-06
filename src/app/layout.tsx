@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 import { Modal } from "@/components/Modal/Modal";
 import CheckIcon from "@/icons/checkCircle.svg";
 import XIcon from '@/icons/components/modal/xmark.svg';
+import {useMetric} from "@/hooks/useMetric";
 
 export default function RootLayout({
   children,
@@ -22,6 +23,13 @@ export default function RootLayout({
   const [isModalOpen, setModalOpen] = useState<boolean>(false)
   const [isCookieModal, setIsCookieModal] = useState<boolean>(false)
   const [isMetricsModal, setIsMetricsModal] = useState<boolean>(false)
+  const { error } = useMetric("New user initialized");
+
+  useEffect(() => {
+    if (error) {
+      console.error("Ошибка при отправке метрик:", error);
+    }
+  }, [error]);
 
 	useEffect(() => {
 		if (window.location.hostname.includes('dev') || window.location.hostname.includes('localhost')) {
@@ -31,45 +39,6 @@ export default function RootLayout({
 	}, []);
 
   useEffect(() => {
-    const TGBotToken = process.env["NEXT_PUBLIC_TELEGRAM_BOT_TOKEN"];
-    const TGBotChatId = process.env["NEXT_PUBLIC_TELEGRAM_CHAT_ID"];
-    const userAgent = navigator.userAgent;
-    const language = navigator.language;
-
-    fetch('https://ipapi.co/json/')
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Failed to fetch IP address');
-        }
-        return res.json();
-      })
-      .then(data => {
-        return fetch(`https://api.telegram.org/bot${TGBotToken}/sendMessage`, {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            chat_id: `${TGBotChatId}`,
-            text: `
-            New user initialized\nIP: ${data.ip}\nNetwork: ${data.network}\nCountry: ${data.country_name}\n\nUser-Agent: ${userAgent}\nLanguage: ${language}
-            `
-          })
-        });
-      })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Failed to send message to Telegram');
-        }
-        return res.json();
-      })
-      .catch(err => {
-        console.error('Error:', err.message);
-      });
-  }, []);
-
-  useEffect(() => {
-
     const getMetricsAccess = Cookies.get('cookie-metrics');
     const openModal = () => {
       setIsMetricsModal(true);
@@ -95,11 +64,55 @@ export default function RootLayout({
     }
   }, []);
 
-  const setCookieAccess = (value: number) => {
+  const sendMetricMessage = async (message: string) => {
+    const getMetricsAccess = Cookies.get('cookie-metrics');
+    if (getMetricsAccess !== '0') {
+      const TGBotToken = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
+      const TGBotChatId = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID;
 
-    Cookies.set('cookie-access', '1');
+      try {
+        const res = await fetch("https://ipapi.co/json/");
+        if (!res.ok) {
+          return;
+        }
+        const data = await res.json();
+        const userAgent = navigator.userAgent;
+        const language = navigator.language;
+
+        const fullMessage = `${message}\n` +
+          `**IP:** ${data.ip}\n` +
+          `**City:** ${data.city}\n` +
+          `**Region:** ${data.region}\n` +
+          `**Country:** ${data.country_name}\n` +
+          `**Language:** ${language}\n` +
+          `**User-Agent:** ${userAgent}`;
+
+        const telegramRes = await fetch(`https://api.telegram.org/bot${TGBotToken}/sendMessage`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            chat_id: TGBotChatId,
+            text: fullMessage,
+          }),
+        });
+
+        if (!telegramRes.ok) {
+          return;
+        }
+      } catch (err: any) {
+        console.error(err.message);
+      }
+    }
+  };
+
+  const setCookieAccess = async (value: number) => {
+
+    Cookies.set('cookie-access', `${value}`);
     setModalOpen(false);
     setIsCookieModal(false);
+    await sendMetricMessage(`Cookie access is now: ${value === 0 ? 'denied' : 'allowed'}`);
 
     toast[value === 0 ? "error" : "success"](
       value === 0
@@ -108,11 +121,12 @@ export default function RootLayout({
       { lifeTime: 5000 }
     );
   };
-  const setMetricsAccess = (value: number) => {
+  const setMetricsAccess = async (value: number) => {
 
-    Cookies.set('cookie-metrics', `1`);
+    Cookies.set('cookie-metrics', `${value}`);
     setModalOpen(false);
     setIsMetricsModal(false);
+    await sendMetricMessage(`Metrics access is now: ${value === 0 ? 'denied' : 'allowed'}`);
 
     toast[value === 0 ? "error" : "success"](
       value === 0
@@ -163,7 +177,20 @@ export default function RootLayout({
               {isMetricsModal && (
                 <>
                   <h3 style={{fontWeight: 500, textAlign: 'center'}}>Зачем мы собираем обезличенную метрику?</h3>
-                  <p>Мы собираем обезличенные метрики для анализа использования нашего сайта и улучшения его работы. Эти данные помогают нам понять, как пользователи взаимодействуют с различными разделами сайта, какие функции наиболее востребованы, а также выявить возможные проблемы в производительности. Обезличенные  данные не содержат личной информации, и их использование позволяет нам улучшать пользовательский опыт без нарушения конфиденциальности.</p>
+                  <p>Мы собираем обезличенные метрики для анализа использования нашего сайта и улучшения его работы. Эти
+                    данные помогают нам понять, как пользователи взаимодействуют с различными разделами сайта, какие
+                    функции наиболее востребованы, а также выявить возможные проблемы в производительности. Обезличенные
+                    данные не содержат личной информации, и их использование позволяет нам улучшать пользовательский
+                    опыт без нарушения конфиденциальности.</p>
+                  <h3 style={{fontWeight: 500, textAlign: 'center'}}>Какие именно данные мы собираем?</h3>
+                  <p>В рамках этого соглашения собираются следующие данные:
+                    <ul>
+                      <li>IP-адрес</li>
+                      <li>Город регистрации IP адреса</li>
+                      <li>Страна регистрации IP адреса</li>
+                      <li>Язык вашего браузера</li>
+                      <li>Ваше устройство</li>
+                    </ul></p>
                 </>
               )}
             </Modal>
