@@ -14,7 +14,7 @@ const DebugMenu = () => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const toastText = useRef<HTMLInputElement>(null);
   const toastLifetime = useRef<HTMLInputElement>(null);
-  const text = useGenerateId();
+  const text = useGenerateId(6);
 
   const highlightElements = () => {
     const elements = document.querySelectorAll<HTMLElement>("*");
@@ -68,8 +68,10 @@ const DebugMenu = () => {
   }
 
   const removeCookies = () => {
-    Cookies.remove('cookieAccess');
-    Cookies.remove('metricsAccess');
+    const allCookies = Cookies.get();
+    Object.keys(allCookies).forEach(cookieName => {
+      Cookies.remove(cookieName);
+    })
     toast.success('All cookies have been removed.')
     window.location.reload();
   }

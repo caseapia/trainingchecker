@@ -12,7 +12,7 @@ const Chip = ({
   image, 
   color, 
 }: Props) => {
-  const id = useGenerateId();
+  const id = useGenerateId(6);
   return (
     <div 
       id={id} 

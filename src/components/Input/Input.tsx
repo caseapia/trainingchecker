@@ -17,7 +17,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
     required = false,
     value
   }, ref) => {
-    const string = useGenerateId();
+    const string = useGenerateId(12);
 
     return (
       <>

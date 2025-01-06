@@ -25,7 +25,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
 	    size = 'full',
     }, ref
   ) => {
-    const id = useGenerateId();
+    const id = useGenerateId(6);
 
     const handleRipple =  (e: MouseEvent<HTMLButtonElement>) => {
       const button = e.currentTarget;
