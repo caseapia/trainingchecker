@@ -19,6 +19,17 @@ export const Input = forwardRef<HTMLInputElement, Props>(
   }, ref) => {
     const string = useGenerateId(12);
 
+    const getType = (type: any) => {
+      switch (type) {
+        case 'text':
+          return `${styles.input} ${Icon ? styles.WithIcon : `${styles.WithoutIcon}`}`
+        case 'checkbox':
+          return `${styles.checkbox}`
+        default:
+          return `${styles.input} ${Icon ? styles.WithIcon : `${styles.WithoutIcon}`}`
+      }
+    }
+
     return (
       <>
         <label htmlFor={string} className={styles.label}>
@@ -31,7 +42,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
           onInput={onInput}
           onChange={onChange}
           onClick={onClick}
-          className={`${styles.input} ${Icon ? styles.WithIcon : `${styles.WithoutIcon}`} ${classname || ''}`}
+          className={`${getType(type)} ${classname || ''}`}
           disabled={disabled}
           placeholder={placeholder}
           name={name}
