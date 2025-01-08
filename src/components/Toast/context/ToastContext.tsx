@@ -13,17 +13,19 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
         className?: string,
         lifeTime?: number,
         clickAction?: (event: MouseEvent<HTMLDivElement>) => void,
+        isExitButton?: boolean,
       }
     ) => {
     const id = Math.random().toString(36).substring(2, 9);
     const newToast: Toast = {
       id,
-      type,
+      type: 'default',
       content,
       className: options?.className,
       onClose: () => removeToast(id),
       lifeTime: options?.lifeTime,
       clickAction: options?.clickAction,
+      isExitButton: options?.isExitButton ?? true,
     };
     setToasts((prevToasts) => [...prevToasts, newToast]);
     {options?.lifeTime && options?.lifeTime !== -1 && (

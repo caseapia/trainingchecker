@@ -12,16 +12,19 @@ export const toast = {
     className?: string,
     lifeTime?: number,
     clickAction?: (e: MouseEvent<HTMLDivElement>) => void,
+    isExitButton?: boolean,
   }) => toastLet.addToast('success', content, options),
   error: (content: string, options?: {
     className?: string,
     lifeTime?: number,
     clickAction?: (e: MouseEvent<HTMLDivElement>) => void,
+    isExitButton?: boolean,
   }) => toastLet.addToast('error', content, options),
   basic: (content: string, options?: {
     className?: string,
     lifeTime?: number,
     clickAction?: (e: MouseEvent<HTMLDivElement>) => void,
+    isExitButton?: boolean,
   }) => toastLet.addToast('default', content, options),
   clear: () => toastLet.removeToast,
 }

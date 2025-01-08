@@ -7,9 +7,28 @@ import success from '@/public/assets/lotties/success.json';
 import defaultNotify from '@/public/assets/lotties/defaultNotify.json'; 
 import error from '@/public/assets/lotties/error.json';
 import ToastAnimation from './variant';
+import XIcon from '@/icons/components/modal/xmark.svg';
 
 const Toast = () => {
   const { toasts, removeToast } = useToast();
+
+  const getType = (type: any) => {
+    switch (type) {
+      case 'success':
+        return styles.success
+      case 'error':
+        return styles.error
+      case 'basic':
+        return styles.default
+      case 'default':
+        return styles.default
+    }
+  }
+
+  const handleClick = (toast: any) => {
+    toast.clickAction(toast);
+    removeToast(toast.id);
+  }
 
   return (
     <div className={`${styles.ToastWrapper}`}>
@@ -17,9 +36,8 @@ const Toast = () => {
         {toasts.map((toast) => (
           <motion.div
             key={toast.id}
-            className={`${styles.Toast} ${toast.type === "success" ? styles.success : toast.type === "error" ? styles.error : styles.default} ${toast.className || ''}`}
-            onClick={() => removeToast(toast.id)}
-            onMouseUp={toast.clickAction}
+            className={`${styles.Toast} ${getType(toast.type)} ${toast.className || ''} ${toast.clickAction ? styles.clickable : ''}`}
+            onClick={toast.clickAction ? () => handleClick(toast) : undefined}
             initial={ToastAnimation.initial}
             animate={ToastAnimation.animate}
             exit={ToastAnimation.initial}
@@ -32,7 +50,12 @@ const Toast = () => {
               />
             </section>
             <section className={styles.Body}>
-              <div className={styles.Title}>{toast.type === 'success' ? 'Успешно' : toast.type === 'error' ? 'Ошибка' : 'Внимание'}</div>
+              <div className={styles.Title}>
+                {toast.type === 'success' ? 'Успешно' : toast.type === 'error' ? 'Ошибка' : 'Внимание'}
+                {toast.isExitButton && (
+                  <XIcon onClick={() => removeToast(toast.id)} />
+                )}
+              </div>
               {toast.content && <div className={styles.Content}>{toast.content}</div>}
             </section>
             <div 
