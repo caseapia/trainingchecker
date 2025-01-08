@@ -19,7 +19,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
     const id = Math.random().toString(36).substring(2, 9);
     const newToast: Toast = {
       id,
-      type: 'default',
+      type: type ?? 'default',
       content,
       className: options?.className,
       onClose: () => removeToast(id),

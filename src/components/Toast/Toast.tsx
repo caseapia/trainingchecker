@@ -18,9 +18,7 @@ const Toast = () => {
         return styles.success
       case 'error':
         return styles.error
-      case 'basic':
-        return styles.default
-      case 'default':
+      default:
         return styles.default
     }
   }
@@ -43,7 +41,7 @@ const Toast = () => {
             exit={ToastAnimation.initial}
           >
             <section className={styles.IconContainer}>
-              <Lottie 
+              <Lottie
                 animationData={toast.type === 'success' ? success : toast.type === 'error' ? error : defaultNotify}
                 loop={false}
                 style={{ height: '80px', width: '80px' }}
@@ -58,7 +56,7 @@ const Toast = () => {
               </div>
               {toast.content && <div className={styles.Content}>{toast.content}</div>}
             </section>
-            <div 
+            <div
               className={`${toast.lifeTime && toast.lifeTime !== -1 ? styles.ProgressBar : ''}`}
               style={{ animationDuration: `${toast.lifeTime}ms` }}
             >
