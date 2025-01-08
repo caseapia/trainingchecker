@@ -211,20 +211,13 @@ const PlayerInfo = () => {
         return 'Игрок';
     }
   }
-  const getColor = () => {
-    if (playerData.moder >= 1 && playerData.moder <= 998) {
-      return '#0f4c816c';
-    } else if (playerData.moder >= 998) {
-      return '#B72A2A6c';
-    }
-  }
 
   return isLoaded ? (
     <>
       <div className={styles.ResultWrapper}>
         <p><strong>ID:</strong> {playerData.id}</p>
         <p><strong>Ник:</strong> {playerData.login}</p>
-        <strong>Должность:</strong> <Chip label={getModer()} color={getColor()} />
+        <strong>Должность:</strong> <Chip label={getModer()} />
         <p><strong>Верификация:</strong> {`${getVerify()} (ID: ${playerData.verify})`}</p>
         {playerData.verify > 0 && (
           <p><strong>Текст верификации:</strong> {transformedVerificationText(playerData.verifyText)}</p>
