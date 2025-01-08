@@ -16,7 +16,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       onClick, 
       onFocus, 
       type = 'default',
-      disabled = false, 
+      disabled = false,
       classname, 
       style,
       isLoading = false,
@@ -47,14 +47,28 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         ripple.remove();
       });
     }
+    const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+      if (!disabled) {
+        onClick?.(e);
+      } else {
+        e.preventDefault();
+      }
+    }
+    const handleMouseDown = (e: MouseEvent<HTMLButtonElement>) => {
+      if (!disabled) {
+        handleRipple(e);
+      } else {
+        return;
+      }
+    }
 
     return (
       <button
-        onClick={(e) => {handleRipple(e); onClick?.(e);}}
+        onClick={handleClick}
         onFocus={onFocus}
+        onMouseDown={handleMouseDown}
         type={action}
-        disabled={isLoading ? true : disabled}
-        className={`${styles.button} ${btnTypes[type] || 'default'} ${btnRadius[radius]} ${btnSizes[size]} ${classname || ''}`}
+        className={`${styles.button} ${btnTypes[type] || 'default'} ${btnRadius[radius]} ${btnSizes[size]} ${classname || ''} ${isLoading ? btnTypes.disabled : ''} ${disabled ? btnTypes.disabled : ''}`}
         style={style}
         ref={ref}
         id={id}
@@ -62,13 +76,15 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         aria-labelledby={ariaLabelledBy}
       >
         <span>
-          {!isLoading && Icon && <Icon className={styles.icon}/>}
-          {isLoading ? (
+          {!isLoading && Icon && (
+            <Icon className={styles.icon} />
+          ) || isLoading && (
             <Lottie
               animationData={LoadingIcon}
               className={styles.icon__loading}
             />
-          ) : text && text}
+          )}
+          {text && text}
         </span>
       </button>
     );

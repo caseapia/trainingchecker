@@ -19,12 +19,13 @@ import Chip from '@/components/Chip/Chip';
 import {useTransformTextColor} from "@/hooks/useTransofrmTextColor";
 import PlayerData from './types';
 import {metric, setMetricInstance} from "@/utils/metric";
-import {sendMetric} from "@/hooks/useMetric";
+import {sendMetric} from "@/hooks/sendMetric";
 
 const PlayerInfo = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const nickname = searchParams.get('nickname');
+  const [buttonState, setButtonState] = useState<boolean>(false);
   const [playerData, setPlayerData] = useState<PlayerData>({
     id: NaN,
     login: '',
@@ -46,10 +47,19 @@ const PlayerInfo = () => {
 
   useEffect(() => {
     setMetricInstance(sendMetric);
+    // TODO: Добавить более точную информацию о странице
+    metric.send({
+      action: 'Инициализирован профиль игрока',
+      additionMessage: `${nickname}`,
+    })
   }, []);
 	
 	useEffect(() => {
 		if (!nickname) {
+      metric.send({
+        action: 'Пользователь перешел на страницу player без указания игрока',
+        error: 'Страница не может быть открыта без указания конкретного игрока',
+      });
 			router.push('../');
 			toast.error('Страница не может быть открыта без указания конкретного игрока, переносим вас обратно...', {
 				lifeTime: 5000
@@ -67,6 +77,10 @@ const PlayerInfo = () => {
 			
 			if (!response.ok) {
 				if (response.status === 404) {
+          metric.send({
+            action: 'Пользователь ввел несуществующий никнейм',
+            error: `Игрок с никнеймом ${nickname} не найден`,
+          });
 					router.push('../');
 					toast.error(`Игрок с никнеймом ${nickname} не найден. Перенаправляем вас на главную страницу`, {
 						lifeTime: 5000,
@@ -96,10 +110,15 @@ const PlayerInfo = () => {
 	}, [nickname, router]);
 
   const refreshData = () => {
+    let lifeTime = 5000;
     getData();
-    toast.success(`Информация об игроке ${nickname} успешно обновлена`, {
-      lifeTime: 5000,
+    toast.success(`Информация об игроке ${nickname} успешно обновлена, вы не сможете обновить информацию еще ${lifeTime / 1000} секунд.`, {
+      lifeTime: lifeTime,
     })
+    setButtonState(true);
+    setTimeout(() => {
+      setButtonState(false);
+    }, 5000)
     metric.send({
       action: `Обновлена информация об игроке ${nickname}`
   })
@@ -144,7 +163,9 @@ const PlayerInfo = () => {
         .map(warn => `${warn.admin} // ${warn.reason} // ${warn.bantime}`)
         .join(';\n');
       const punishmentsCount = playerData.warn.length;
-      navigator.clipboard.writeText(`Список наказаний ${playerData.login} (${playerData.id})\n\n${punishments}\n\nВсего наказаний: ${punishmentsCount}`);
+      navigator.clipboard.writeText(
+        `Список наказаний ${playerData.login} (${playerData.id})\n\n${punishments}\n\nВсего наказаний: ${punishmentsCount}`
+      );
       toast.success(`Наказания игрока ${playerData.login} были помещены в ваш буфер обмена`, {
         lifeTime: 5000, 
       })
@@ -231,13 +252,14 @@ const PlayerInfo = () => {
 	      <h5 className={styles.h5}>Значки</h5>
 	      <BadgeRenderer player={playerData}/>
 	      <div className={styles.ButtonGroup}>
-          <Button 
-            type="Secondary" 
-            text="Обновить" 
-            action="button" 
-            icon={RefreshIcon} 
+          <Button
+            type="Secondary"
+            text="Обновить"
+            action="button"
+            icon={RefreshIcon}
             onClick={refreshData}
             ariaLabel='Обновить информацию об игроке'
+            disabled={buttonState}
           />
           <Button 
             type='Secondary'

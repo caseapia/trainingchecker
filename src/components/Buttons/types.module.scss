@@ -2,7 +2,7 @@
 	$bg: #99384d;
 	$effectbg: lighten($bg, 7%);
 	background: $bg;
-	&:enabled {
+	&:not(.disabled) {
 		&:hover {
 			background: $effectbg
 		}
@@ -16,7 +16,7 @@
 	$effectbg: lighten($bg, 7%);
 	background: $bg;
 	color: black;
-	&:enabled {
+	&:not(.disabled) {
 		&:hover {
 			background: $effectbg
 		}
@@ -30,7 +30,7 @@
 	$effectbg: lighten($bg, 7%);
 	background: transparent;
 	border: 2px solid $bg;
-	&:enabled {
+	&:not(.disabled) {
 		&:hover {
 			border-color: $effectbg
 		}
@@ -42,7 +42,7 @@
 .Secondary {
 	border: 1px solid #191B1D;
 	background: transparent;
-	&:enabled {
+	&:not(.disabled) {
 		&:hover {
 			background: #202325;
 			border: 1px solid #191B1D;
@@ -52,7 +52,7 @@
 .Danger {
 	border: 1px solid transparent;
 	background: #FF6955;
-	&:enabled {
+	&:not(.disabled) {
 		&:hover {
 			background: lighten(#FF6955, 7%);
 		}
@@ -60,9 +60,13 @@
 }
 .Outlined {
 	background: transparent;
-	&:enabled {
+	&:not(.disabled) {
 		&:hover {
 			background-color: #656c7633;
 		}
 	}
+}
+.disabled {
+	cursor: not-allowed;
+	opacity: 0.5;
 }

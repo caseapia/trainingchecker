@@ -8,6 +8,7 @@ interface Toast {
 	onClose: () => void;
 	lifeTime?: number;
 	clickAction?: (e: MouseEvent<HTMLDivElement>) => void;
+	isExitButton?: boolean;
 }
 
 interface ToastContextType {
@@ -19,6 +20,7 @@ interface ToastContextType {
 			className?: string,
 			lifeTime?: number,
 			clickAction?: (e: MouseEvent<HTMLDivElement>) => void,
+			isExitButton?: boolean,
 		}
 	) => void;
 	removeToast: (id: string) => void;

@@ -14,6 +14,7 @@ const DebugMenu = () => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const toastText = useRef<HTMLInputElement>(null);
   const toastLifetime = useRef<HTMLInputElement>(null);
+  const toastClosable = useRef<HTMLInputElement>(null);
   const text = useGenerateId(6);
 
   const highlightElements = () => {
@@ -132,6 +133,11 @@ const DebugMenu = () => {
           label="Toast lifetime"
           type="number"
           ref={toastLifetime}
+        />
+        <Input
+          label="Closable"
+          type="checkbox"
+          ref={toastClosable}
         />
         <Button
           type="Primary"

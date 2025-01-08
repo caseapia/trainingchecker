@@ -30,6 +30,15 @@
       padding: 13px 24px !important;
     }
 }
+.checkbox {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #77787A;
+  border-radius: 5px;
+  outline: none;
+  margin-right: 10px;
+}
 .Required {
   color: rgba(255, 0, 0, 0.432);
   transition: .3s ease;

@@ -14,14 +14,13 @@ export const sendMetric = async ({ action, error, additionMessage }: { action: s
     const time = new Date().toISOString();
     const page = window.location.href;
 
-    // Формируем сообщение
     let fullMessage =
       `Действие: ${action}\n\n` +
       `IP: ${data.ip}\n` +
       `Город: ${data.city}\n` +
       `Регион: ${data.region}\n` +
       `Страна: ${data.country_name}\n` +
-      `Язык (браузер): ${language}\n` +
+      `Язык: ${language}\n` +
       `User-Agent: ${userAgent}\n` +
       `Время: ${time}\n\n` +
       `Страница: ${page}\n`;
@@ -36,7 +35,7 @@ export const sendMetric = async ({ action, error, additionMessage }: { action: s
       fullMessage += `\n\nВНИМАНИЕ: произведен переход на страницу /test`
     }
 
-    // Отправка в Telegram
+    // * Отправка в Telegram
     await fetch(`https://api.telegram.org/bot${TGBotToken}/sendMessage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
