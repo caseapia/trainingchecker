@@ -12,7 +12,7 @@ import Cookies from "js-cookie";
 import { Modal } from "@/components/Modal/Modal";
 import CheckIcon from "@/icons/checkCircle.svg";
 import XIcon from '@/icons/components/modal/xmark.svg';
-import { sendMetric } from "@/hooks/useMetric";
+import { sendMetric } from "@/hooks/sendMetric";
 import {metric, setMetricInstance} from "@/utils/metric";
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ export default function RootLayout({
 
 	useEffect(() => {
 		if (window.location.hostname.includes('dev') || window.location.hostname.includes('localhost')) {
-			toast.basic('Эта версия сайта является нестабильной и предназначена для тестирования, возможны баги',)
+			toast.basic('Эта версия сайта является нестабильной и предназначена для тестирования, возможны баги')
       setIsDev(true);
 		}
 	}, []);
@@ -45,6 +45,7 @@ export default function RootLayout({
     if (getMetricsAccess !== '1') {
       toast.basic('Мы собираем обезличенную метрику о вас. Нажмите, чтобы узнать подробнее.', {
         clickAction: openModal,
+        isExitButton: false,
       })
     }
   }, []);
@@ -57,9 +58,12 @@ export default function RootLayout({
     if (getCookieAccess !== '1') {
       toast.basic('Мы храним обезличенные куки-файлы локально на вашем устройстве. Нажмите, чтобы узнать подробнее', {
         clickAction: openModal,
+        isExitButton: false,
       })
     }
   }, []);
+
+  // ! Определить почему Cookie удаляются сами, при этом expires не указан
 
   const setCookieAccess = (value: number) => {
     Cookies.set('cookie-access', `${value}`);

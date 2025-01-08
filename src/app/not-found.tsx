@@ -6,7 +6,7 @@ import LinkedButton from "@/components/Buttons/LinkedButton";
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import {useEffect} from "react";
 import {metric, setMetricInstance} from "@/utils/metric";
-import {sendMetric} from "@/hooks/useMetric";
+import {sendMetric} from "@/hooks/sendMetric";
 
 const NotFound = () => {
 
