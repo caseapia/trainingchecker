@@ -10,11 +10,12 @@ import UserSearchIcon from '@/icons/page-main/userSearch.svg';
 import UserIcon from '@/icons/user.svg';
 import GithubIcon from '@/icons/page-main/github.svg';
 import { useRouter } from "next/navigation";
-import { sendMetric } from "@/hooks/useMetric";
+import { sendMetric } from "@/hooks/sendMetric";
 import {metric, setMetricInstance} from "@/utils/metric";
 
 export default function Home() {
   const [isButtonLoading, setIsButtonLoading] = useState<boolean>(false);
+  const [buttonState, setButtonState] = useState<boolean>(true);
   const [lastUpdate, setLastUpdate] = useState<string>('');
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const InputElement = useRef<HTMLInputElement>(null);
@@ -74,9 +75,7 @@ export default function Home() {
     })
     if (InputElement.current && InputElement.current.value.length === 0) {
       e.preventDefault();
-      if (ButtonElement.current) {
-        ButtonElement.current.disabled = true;
-      }
+      setButtonState(true);
       toast.error('Вы не заполнили поле никнейма', {
         lifeTime: 4000,
       })
@@ -98,9 +97,7 @@ export default function Home() {
           console.error(err);
         }
       }
-      if (ButtonElement.current) {
-        ButtonElement.current.disabled = false;
-      }
+      setButtonState(true)
       toast.clear();
     }
   }
@@ -117,9 +114,7 @@ export default function Home() {
           action: "Пользователь столкнулся с ошибкой",
           error: "Никнейм не может состоять из символов кириллицы",
         })
-        if (ButtonElement.current) {
-          ButtonElement.current.disabled = true;
-        }
+        setButtonState(true);
         toast.clear();
       } else if (InputElement.current && InputElement.current.value.length === 0) {
         toast.error('Поле никнейма не может быть пустым', {
@@ -129,14 +124,10 @@ export default function Home() {
           action: "Пользователь столкнулся с ошибкой",
           error: "Поле никнейма не может быть пустым",
         })
-        if (ButtonElement.current) {
-          ButtonElement.current.disabled = true;
-        }
+        setButtonState(true);
       } else {
         toast.clear();
-        if (ButtonElement.current) {
-          ButtonElement.current.disabled = false;
-        }
+        setButtonState(false)
       }
     }
   }
@@ -175,7 +166,7 @@ export default function Home() {
                   action="submit" 
                   icon={UserSearchIcon}
                   ref={ButtonElement}
-                  disabled
+                  disabled={buttonState}
                   isLoading={isButtonLoading}
                 />
               </form>

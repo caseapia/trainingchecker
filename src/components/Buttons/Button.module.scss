@@ -16,10 +16,6 @@
     span {
       display: flex;
     }
-    &:disabled {
-      cursor: not-allowed;
-      opacity: 0.5;
-    }
 }
 .icon {
 	margin-right: 6px;
