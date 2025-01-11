@@ -28,6 +28,7 @@ export const BootstrapTooltip = styled(({ className, ...props }: TooltipProps) =
       backdropFilter: 'blur(10px)',
       boxShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
       border: '1px solid black',
+      fontWeight: 400,
     },
 }));
 
