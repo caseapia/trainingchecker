@@ -7,6 +7,7 @@ import {toast} from "@/utils/toast";
 import Button from "@/components/Buttons/Button";
 import UserIcon from '@/icons/user.svg';
 import styles from './test.module.scss'
+import BootstrapTooltip from "@/components/Styles/TooltipStyles";
 
 const Page = () => {
   const [selectedOption, setSelectedOption] = React.useState<string | null>(null);
@@ -129,6 +130,12 @@ const Page = () => {
           size="medium"
         />
       </section>
+      <BootstrapTooltip title="Test Tooltip">
+        <button>Hover me and get tooltip</button>
+      </BootstrapTooltip>
+      <BootstrapTooltip title="Test Tooltsip">
+        <button>Hover me and get tooltip</button>
+      </BootstrapTooltip>
     </PageWrapper>
   );
 };

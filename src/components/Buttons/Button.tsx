@@ -23,6 +23,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       ariaLabelledBy,
 	    radius = 'medium',
 	    size = 'full',
+      ...props
     }, ref
   ) => {
     const id = useGenerateId(6);
@@ -74,6 +75,8 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         id={id}
         aria-label={text}
         aria-labelledby={ariaLabelledBy}
+        aria-disabled={disabled}
+        {...props}
       >
         <span>
           {!isLoading && Icon && (

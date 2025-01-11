@@ -1,17 +1,20 @@
+import React, {ReactNode, FC, CSSProperties} from 'react';
+
 interface Props {
   title?: string;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   isOpen: boolean; 
-  firstButtonIcon?: React.FC<React.SVGProps<SVGElement>>;
+  firstButtonIcon?: FC<React.SVGProps<SVGElement>>;
   firstButtonContent?: string;
   firstButtonAction?: () => void;
-  secondButtonIcon?: React.FC<React.SVGProps<SVGElement>>;
+  secondButtonIcon?: FC<React.SVGProps<SVGElement>>;
   secondButtonContent?: string;
   secondButtonAction?: () => void;
   onClose: () => void;
   titleClass?: string;
-  titleStyle?: React.CSSProperties;
+  titleStyle?: CSSProperties;
+  closeButton?: boolean;
 }
 
 export default Props;

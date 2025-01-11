@@ -7,7 +7,7 @@
   height: 100%;
   backdrop-filter: blur(3px);
   background: #00000094;
-  z-index: 999;
+  z-index: 2000;
   display: grid;
   place-items: center;
 }
@@ -20,7 +20,7 @@
   max-width: 50%;
   min-width: 30%;
   max-height: 70%;
-  z-index: 1000;
+  z-index: 2001;
     @media screen and (max-width: 767px) {
       max-width: 100%;
       min-width: 100%;
