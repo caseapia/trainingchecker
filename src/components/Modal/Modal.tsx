@@ -20,12 +20,13 @@ export const Modal = ({
   secondButtonAction,
   titleClass = '',
   titleStyle,
+  closeButton = true,
 }: Props) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      if (modalRef.current && closeButton && !modalRef.current.contains(event.target as Node)) {
         onClose();
       }
     };
@@ -59,9 +60,11 @@ export const Modal = ({
               style={titleStyle}
             >
               {title && <div className={styles.Title}>{title}</div>}
-              <div className={styles.Close}>
-                <XmarkIcon onClick={onClose} />
-              </div>
+              {closeButton && (
+                <div className={styles.Close}>
+                  <XmarkIcon onClick={onClose}/>
+                </div>
+              )}
             </div>
             <div className={styles.Body}>{children}</div>
             <div className={styles.Footer}>

@@ -21,6 +21,7 @@ interface Props {
   ariaLabelledBy?: string;
 	radius?: Radius;
 	size?: Sizes;
+	[key: string]: any;
 }
 
 interface LinkedButtonProps {

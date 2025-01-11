@@ -129,6 +129,7 @@ export default function RootLayout({
               secondButtonContent="Отказаться"
               secondButtonIcon={XIcon}
               secondButtonAction={isCookieModal ? () => setCookieAccess(0) : isMetricsModal ? () => setMetricsAccess(0) : undefined}
+              closeButton={false}
             >
               {isCookieModal && (
                 <>
