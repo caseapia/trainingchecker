@@ -14,6 +14,9 @@ import CheckIcon from "@/icons/checkCircle.svg";
 import XIcon from '@/icons/components/modal/xmark.svg';
 import { sendMetric } from "@/hooks/sendMetric";
 import {metric, setMetricInstance} from "@/utils/metric";
+import ThemeSwitcher from "@/modules/ThemeSwitcher/ThemeSwitcher";
+import {ThemeProvider} from "@/modules/ThemeSwitcher/ThemeSwitcherContext";
+import getUserTheme from '@/modules/ThemeSwitcher/ThemeSwitcher';
 
 export default function RootLayout({
   children,
@@ -108,16 +111,17 @@ export default function RootLayout({
         />
         <title>TRAINING CHECKER</title>
       </head>
-      <body>
+      <ThemeProvider>
+        <body>
         <ToastProvider>
           {isDev && (
-            <DebugMenu />
+            <DebugMenu/>
           )}
-          <Header />
+          <Header/>
           {children}
-          <Toast />
-          <ToastInitializer />
-          <Analytics />
+          <Toast/>
+          <ToastInitializer/>
+          <Analytics/>
           {isModalOpen && (
             <Modal
               isOpen={isModalOpen}
@@ -133,8 +137,12 @@ export default function RootLayout({
             >
               {isCookieModal && (
                 <>
-                  <h3 style={{ fontWeight: 500, textAlign: 'center' }}>Зачем мы используем cookie-файлы?</h3>
-                  <p>Cookie-файлы необходимы для улучшения пользовательского опыта на нашем сайте. Мы используем их для хранения ваших предпочтений, а также для анализа поведения на сайте. Это помогает нам предоставлять более персонализированный контент и улучшать функциональность сайта. Cookie также используются для обеспечения безопасности и правильной работы некоторых функций, таких как сохранение ваших настроек.</p>
+                  <h3 style={{fontWeight: 500, textAlign: 'center'}}>Зачем мы используем cookie-файлы?</h3>
+                  <p>Cookie-файлы необходимы для улучшения пользовательского опыта на нашем сайте. Мы используем их для
+                    хранения ваших предпочтений, а также для анализа поведения на сайте. Это помогает нам предоставлять
+                    более персонализированный контент и улучшать функциональность сайта. Cookie также используются для
+                    обеспечения безопасности и правильной работы некоторых функций, таких как сохранение ваших
+                    настроек.</p>
                 </>
               )}
               {isMetricsModal && (
@@ -146,20 +154,21 @@ export default function RootLayout({
                     данные не содержат личной информации, и их использование позволяет нам улучшать пользовательский
                     опыт без нарушения конфиденциальности.</p>
                   <h3 style={{fontWeight: 500, textAlign: 'center'}}>Какие именно данные мы собираем?</h3>
-                  <p>В рамках этого соглашения собираются следующие данные:
-                    <ul>
-                      <li>IP-адрес</li>
-                      <li>Город регистрации IP адреса</li>
-                      <li>Страна регистрации IP адреса</li>
-                      <li>Язык вашего браузера</li>
-                      <li>Ваше устройство</li>
-                    </ul></p>
+                  <p>В рамках этого соглашения собираются следующие данные:</p>
+                  <ul>
+                    <li>IP-адрес</li>
+                    <li>Город регистрации IP адреса</li>
+                    <li>Страна регистрации IP адреса</li>
+                    <li>Язык вашего браузера</li>
+                    <li>Ваше устройство</li>
+                  </ul>
                 </>
               )}
             </Modal>
           )}
+          <ThemeSwitcher/>
         </ToastProvider>
-      </body>
-    </html>
+        </body>
+      </ThemeProvider></html>
   );
 }
