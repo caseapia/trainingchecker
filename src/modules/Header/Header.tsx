@@ -117,6 +117,7 @@ export const Header = () => {
             type="Outlined"
             radius="small"
             classname={styles.linkElement}
+            ripple={false}
           >
             <span>
               {icon} {text}

@@ -46,7 +46,7 @@
           &:not(.active) {
             &:hover {
               background-color: #656c7633;
-              opacity: 1;
+              opacity: 1 !important;
             }
           }
           span {
