@@ -5,32 +5,26 @@ import { Analytics } from "@vercel/analytics/react";
 import { ToastProvider } from "@/components/Toast/context/ToastContext";
 import ToastInitializer from "@/components/Toast/ToastInitializer";
 import Toast from "@/components/Toast/Toast";
-import { toast } from '@/utils/toast';
+// import { toast } from '@/utils/toast';
 import React, { useEffect, useState } from "react";
 import DebugMenu from '@/modules/Debug/debugMenu';
+import setTitle from "@/hooks/setTitle";
 // import Cookies from "js-cookie";
-import { Modal } from "@/components/Modal/Modal";
-import CheckIcon from "@/icons/checkCircle.svg";
-import XIcon from '@/icons/components/modal/xmark.svg';
+// import { Modal } from "@/components/Modal/Modal";
+// import CheckIcon from "@/icons/checkCircle.svg";
+// import XIcon from '@/icons/components/modal/xmark.svg';
 // import { sendMetric } from "@/hooks/sendMetric";
 // import {metric, setMetricInstance} from "@/utils/metric";
-import ThemeSwitcher from "@/modules/ThemeSwitcher/ThemeSwitcher";
-import {ThemeProvider} from "@/modules/ThemeSwitcher/ThemeSwitcherContext";
-import getUserTheme from '@/modules/ThemeSwitcher/ThemeSwitcher';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({children}: {children: React.ReactNode}) {
 	const [isDev, setIsDev] = useState<boolean>(false);
-  const [isModalOpen, setModalOpen] = useState<boolean>(false)
+  // const [isModalOpen, setModalOpen] = useState<boolean>(false)
   // const [isCookieModal, setIsCookieModal] = useState<boolean>(false)
   // const [isMetricsModal, setIsMetricsModal] = useState<boolean>(false)
+  setTitle();
 
 	useEffect(() => {
 		if (window.location.hostname.includes('dev') || window.location.hostname.includes('localhost')) {
-			toast.basic('Эта версия сайта является нестабильной и предназначена для тестирования, возможны баги')
       setIsDev(true);
 		}
 	}, []);
@@ -107,9 +101,7 @@ export default function RootLayout({
           href="/assets/icons/favicon.png"
           type="image/x-icon"
         />
-        <title>TRAINING CHECKER</title>
       </head>
-      <ThemeProvider>
         <body>
         <ToastProvider>
           {isDev && (
@@ -164,9 +156,8 @@ export default function RootLayout({
           {/*    )}*/}
           {/*  </Modal>*/}
           {/*)}*/}
-          <ThemeSwitcher/>
         </ToastProvider>
         </body>
-      </ThemeProvider></html>
+      </html>
   );
 }
