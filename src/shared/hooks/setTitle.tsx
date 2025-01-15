@@ -1,46 +1,46 @@
-import {useEffect} from "react";
-import {usePathname} from "next/navigation";
-import { useSearchParams } from 'next/navigation';
+"use client";
+import { useEffect, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 
-export const setTitle = () => {
+export const useTitle = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [nickname, setNickname] = useState<string | null>(null);
+
+  useEffect(() => {
+    setNickname(searchParams.get("nickname"));
+  }, [searchParams]);
 
   useEffect(() => {
     let title: string;
     const pathParts = pathname.split("/");
     const page = pathParts[1];
-    const nickname = searchParams.get('nickname');
 
     switch (page) {
       case "not-found":
-        title = 'Страница не найдена';
+        title = "Страница не найдена";
         break;
-      case 'player':
-        title = `Player ${nickname}`;
+      case "player":
+        title = `Player ${nickname || "Unknown"}`;
         break;
-      case 'players':
-        title = 'Players'
+      case "players":
+        title = "Players";
         break;
-      case 'badges':
-        title = 'Badges';
+      case "badges":
+        title = "Badges";
         break;
-      case 'worldlist':
-        title = 'Worlds';
+      case "worldlist":
+        title = "Worlds";
         break;
-      case 'copchase':
-        title = 'Copchase monitoring';
+      case "copchase":
+        title = "Copchase monitoring";
         break;
       default:
-        title = ''
+        title = "";
     }
 
-    if (page === '' ) {
-      document.title = 'TRAINING CHECKER';
-    } else {
-      document.title = `${title} - TRAINING CHECKER`;
-    }
-  }, [pathname]);
-}
+    document.title = page ? `${title} - TRAINING CHECKER` : "TRAINING CHECKER";
+  }, [pathname, nickname]);
+};
 
-export default setTitle;
+export default useTitle;
