@@ -23,6 +23,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       ariaLabelledBy,
 	    radius = 'medium',
 	    size = 'full',
+      ripple = true,
       ...props
     }, ref
   ) => {
@@ -56,7 +57,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       }
     }
     const handleMouseDown = (e: MouseEvent<HTMLButtonElement>) => {
-      if (!disabled) {
+      if (!disabled && ripple) {
         handleRipple(e);
       } else {
         return;
@@ -76,6 +77,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         aria-label={text}
         aria-labelledby={ariaLabelledBy}
         aria-disabled={disabled}
+        data-ripple={ripple}
         {...props}
       >
         <span>

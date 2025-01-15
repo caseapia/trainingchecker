@@ -17,10 +17,10 @@ interface Props {
   classname?: string;
   style?: React.CSSProperties;
   isLoading?: boolean;
-  ariaLabel?: string;
   ariaLabelledBy?: string;
 	radius?: Radius;
 	size?: Sizes;
+	ripple?: boolean;
 	[key: string]: any;
 }
 
@@ -32,13 +32,14 @@ interface LinkedButtonProps {
 	disabled?: boolean;
 	classname?: string;
 	style?: React.CSSProperties;
-	ariaLabel?: string;
 	ariaLabelledBy?: string;
 	target?: '_blank' | '_self' | '_parent' | '_top';
 	radius?: Radius;
 	size?: Sizes;
 	onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 	children?: React.ReactNode;
+	ripple?: boolean;
+	[key: string]: any;
 }
 
 export default Props;
