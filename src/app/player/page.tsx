@@ -110,10 +110,9 @@ const PlayerInfo = () => {
 	}, [nickname, router]);
 
   const refreshData = () => {
-    let lifeTime = 5000;
     getData();
-    toast.success(`Информация об игроке ${nickname} успешно обновлена, вы не сможете обновить информацию еще ${lifeTime / 1000} секунд.`, {
-      lifeTime: lifeTime,
+    toast.success(`Информация об игроке ${nickname} успешно обновлена`, {
+      lifeTime: 5000,
     })
     setButtonState(true);
     setTimeout(() => {
@@ -251,7 +250,6 @@ const PlayerInfo = () => {
             action="button"
             icon={RefreshIcon}
             onClick={refreshData}
-            ariaLabel='Обновить информацию об игроке'
             disabled={buttonState}
           />
           <Button 
@@ -261,7 +259,6 @@ const PlayerInfo = () => {
             disabled={playerData.warn.length <= 0}
             onClick={openModal}
             icon={HammerIcon}
-            ariaLabel='Открыть список наказаний игрока'
           />
         </div>
       </div>
