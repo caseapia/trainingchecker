@@ -14,11 +14,11 @@ const NotFound = () => {
     setMetricInstance(sendMetric);
   }, []);
 
-  useEffect(() => {
-    metric.send({
-      action: 'Вызвана страница 404'
-    })
-  }, []);
+  // useEffect(() => {
+  //   metric.send({
+  //     action: 'Вызвана страница 404'
+  //   })
+  // }, []);
 
   return (
     <PageWrapper>
