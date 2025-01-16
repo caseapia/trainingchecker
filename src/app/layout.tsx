@@ -21,7 +21,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   // const [isModalOpen, setModalOpen] = useState<boolean>(false)
   // const [isCookieModal, setIsCookieModal] = useState<boolean>(false)
   // const [isMetricsModal, setIsMetricsModal] = useState<boolean>(false)
-  setTitle();
+  // setTitle();
 
 	useEffect(() => {
 		if (window.location.hostname.includes('dev') || window.location.hostname.includes('localhost')) {
@@ -101,6 +101,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
           href="/assets/icons/favicon.png"
           type="image/x-icon"
         />
+        <title>TRAINING CHECKER</title>
       </head>
         <body>
         <ToastProvider>

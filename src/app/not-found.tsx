@@ -5,14 +5,14 @@ import Button from "@/components/Buttons/Button";
 import LinkedButton from "@/components/Buttons/LinkedButton";
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import {Suspense, useEffect} from "react";
-import {metric, setMetricInstance} from "@/utils/metric";
-import {sendMetric} from "@/hooks/sendMetric";
+// import {metric, setMetricInstance} from "@/utils/metric";
+// import {sendMetric} from "@/hooks/sendMetric";
 
 const NotFound = () => {
 
-  useEffect(() => {
-    setMetricInstance(sendMetric);
-  }, []);
+  // useEffect(() => {
+  //   setMetricInstance(sendMetric);
+  // }, []);
 
   // useEffect(() => {
   //   metric.send({
