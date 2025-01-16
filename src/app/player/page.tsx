@@ -48,18 +48,18 @@ const PlayerInfo = () => {
   useEffect(() => {
     setMetricInstance(sendMetric);
     // TODO: Добавить более точную информацию о странице
-    metric.send({
-      action: 'Инициализирован профиль игрока',
-      additionMessage: `${nickname}`,
-    })
+    // metric.send({
+    //   action: 'Инициализирован профиль игрока',
+    //   additionMessage: `${nickname}`,
+    // })
   }, []);
 	
 	useEffect(() => {
 		if (!nickname) {
-      metric.send({
-        action: 'Пользователь перешел на страницу player без указания игрока',
-        error: 'Страница не может быть открыта без указания конкретного игрока',
-      });
+      // metric.send({
+      //   action: 'Пользователь перешел на страницу player без указания игрока',
+      //   error: 'Страница не может быть открыта без указания конкретного игрока',
+      // });
 			router.push('../');
 			toast.error('Страница не может быть открыта без указания конкретного игрока, переносим вас обратно...', {
 				lifeTime: 5000
@@ -77,10 +77,10 @@ const PlayerInfo = () => {
 			
 			if (!response.ok) {
 				if (response.status === 404) {
-          metric.send({
-            action: 'Пользователь ввел несуществующий никнейм',
-            error: `Игрок с никнеймом ${nickname} не найден`,
-          });
+          // metric.send({
+          //   action: 'Пользователь ввел несуществующий никнейм',
+          //   error: `Игрок с никнеймом ${nickname} не найден`,
+          // });
 					router.push('../');
 					toast.error(`Игрок с никнеймом ${nickname} не найден. Перенаправляем вас на главную страницу`, {
 						lifeTime: 5000,
@@ -110,18 +110,17 @@ const PlayerInfo = () => {
 	}, [nickname, router]);
 
   const refreshData = () => {
-    let lifeTime = 5000;
     getData();
-    toast.success(`Информация об игроке ${nickname} успешно обновлена, вы не сможете обновить информацию еще ${lifeTime / 1000} секунд.`, {
-      lifeTime: lifeTime,
+    toast.success(`Информация об игроке ${nickname} успешно обновлена`, {
+      lifeTime: 5000,
     })
     setButtonState(true);
     setTimeout(() => {
       setButtonState(false);
     }, 5000)
-    metric.send({
-      action: `Обновлена информация об игроке ${nickname}`
-  })
+    // metric.send({
+    //   action: `Обновлена информация об игроке ${nickname}`
+    // })
   }
 	
 	useEffect(() => {
@@ -251,7 +250,6 @@ const PlayerInfo = () => {
             action="button"
             icon={RefreshIcon}
             onClick={refreshData}
-            ariaLabel='Обновить информацию об игроке'
             disabled={buttonState}
           />
           <Button 
@@ -261,7 +259,6 @@ const PlayerInfo = () => {
             disabled={playerData.warn.length <= 0}
             onClick={openModal}
             icon={HammerIcon}
-            ariaLabel='Открыть список наказаний игрока'
           />
         </div>
       </div>

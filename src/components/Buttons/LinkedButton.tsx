@@ -1,4 +1,4 @@
-import {forwardRef} from "react";
+import {forwardRef, MouseEvent} from "react";
 import {LinkedButtonProps} from "@/components/Buttons/types";
 import Link from "next/link";
 import styles from "./Button.module.scss";
@@ -14,29 +14,70 @@ const LinkedButton = forwardRef<HTMLAnchorElement, LinkedButtonProps>((
 		type = 'default',
 		classname,
 		style,
-		ariaLabel,
     ariaLabelledBy,
 		text,
 		target = '_self',
+		disabled = false,
 		radius = 'medium',
 		size = 'full',
 		onClick,
 		children,
+		ripple = true,
+		...props
   }, ref) => {
 		const id = useGenerateId(6);
+
+		const handleRipple =  (e: MouseEvent<HTMLAnchorElement>) => {
+			const button = e.currentTarget;
+			const ripple = document.createElement('span');
+			const rect = button.getBoundingClientRect();
+
+			const size = Math.max(rect.width, rect.height);
+			const x = e.clientX - rect.left - size / 2;
+			const y = e.clientY - rect.top - size / 2;
+
+			ripple.style.width = ripple.style.height = `${size}px`;
+			ripple.style.left = `${x}px`;
+			ripple.style.top = `${y}px`;
+			ripple.className = styles.ripple;
+
+			button.appendChild(ripple);
+
+			ripple.addEventListener('animationend', () => {
+				ripple.remove();
+			});
+		}
+		const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
+			if (!disabled) {
+				onClick?.(e);
+			} else {
+				e.preventDefault();
+			}
+		}
+		const handleMouseDown = (e: MouseEvent<HTMLAnchorElement>) => {
+			if (!disabled && ripple) {
+				handleRipple(e);
+			} else {
+				return;
+			}
+		}
+
 		return (
 			<Link
 				href={href}
-				className={`${styles.button} ${btnTypes[type]} ${btnRadius[radius]} ${btnSizes[size]} ${classname || ''}`}
+				className={`${styles.button} ${btnTypes[type]} ${btnRadius[radius]} ${btnSizes[size]} ${classname || ''} ${disabled ? btnTypes.disabled : ''}`}
 				style={style}
+				onMouseDown={handleMouseDown}
 				role="button"
 				id={id}
-				aria-label={ariaLabel}
+				aria-label={text}
 				aria-labelledby={ariaLabelledBy}
 				ref={ref}
 				target={target}
-				onClick={onClick}
+				onClick={handleClick}
 				draggable="false"
+				data-ripple={ripple}
+				{...props}
 			>
         <span>
           {Icon && <Icon className={styles.icon} />}

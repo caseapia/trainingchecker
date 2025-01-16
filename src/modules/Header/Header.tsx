@@ -44,6 +44,11 @@ export const Header = () => {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpened((prev) => !prev);
+    if (isMobileMenuOpened) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
   };
 
   const handleNavigation = (page: string) => {
@@ -112,6 +117,7 @@ export const Header = () => {
             type="Outlined"
             radius="small"
             classname={styles.linkElement}
+            ripple={false}
           >
             <span>
               {icon} {text}

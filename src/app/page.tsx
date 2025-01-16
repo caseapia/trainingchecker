@@ -69,29 +69,29 @@ export default function Home() {
 
   const validation = async (e: React.FormEvent) => {
     e.preventDefault();
-    metric.send({
-      action: 'Проверка валидности',
-      additionMessage: 'Пользователь нажал на кнопку'
-    })
+    // metric.send({
+    //   action: 'Проверка валидности',
+    //   additionMessage: 'Пользователь нажал на кнопку'
+    // })
     if (InputElement.current && InputElement.current.value.length === 0) {
       e.preventDefault();
       setButtonState(true);
       toast.error('Вы не заполнили поле никнейма', {
         lifeTime: 4000,
       })
-      metric.send({
-        action: "Пользователь столкнулся с ошибкой",
-        error: "Вы не заполнили поле никнейма",
-      })
+      // metric.send({
+      //   action: "Пользователь столкнулся с ошибкой",
+      //   error: "Вы не заполнили поле никнейма",
+      // })
     } else {
       const nickname = InputElement.current?.value.trim();
       if (nickname) {
         setIsButtonLoading(true);
         try {
-          metric.send({
-            action: 'Проверка валидности',
-            additionMessage: 'Пользователь начал выполнять поиск по ' + nickname
-          })
+          // metric.send({
+          //   action: 'Проверка валидности',
+          //   additionMessage: 'Пользователь начал выполнять поиск по ' + nickname
+          // })
           router.push(`/player?nickname=${encodeURIComponent(nickname)}`);
         } catch (err) {
           console.error(err);
@@ -110,20 +110,20 @@ export default function Home() {
         toast.error('Никнейм не может состоять из символов кириллицы', {
           lifeTime: 4000,
         })
-        metric.send({
-          action: "Пользователь столкнулся с ошибкой",
-          error: "Никнейм не может состоять из символов кириллицы",
-        })
+        // metric.send({
+        //   action: "Пользователь столкнулся с ошибкой",
+        //   error: "Никнейм не может состоять из символов кириллицы",
+        // })
         setButtonState(true);
         toast.clear();
       } else if (InputElement.current && InputElement.current.value.length === 0) {
         toast.error('Поле никнейма не может быть пустым', {
           lifeTime: 4000,
         })
-        metric.send({
-          action: "Пользователь столкнулся с ошибкой",
-          error: "Поле никнейма не может быть пустым",
-        })
+        // metric.send({
+        //   action: "Пользователь столкнулся с ошибкой",
+        //   error: "Поле никнейма не может быть пустым",
+        // })
         setButtonState(true);
       } else {
         toast.clear();
