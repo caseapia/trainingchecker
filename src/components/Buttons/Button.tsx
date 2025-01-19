@@ -80,15 +80,17 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         data-ripple={ripple}
         {...props}
       >
-        <span>
+        <span className={styles.iconContainer}>
           {!isLoading && Icon && (
             <Icon className={styles.icon} />
           ) || isLoading && (
-            <Lottie
-              animationData={LoadingIcon}
-              className={styles.icon__loading}
-            />
+          <Lottie
+            animationData={LoadingIcon}
+            className={styles.icon__loading}
+          />
           )}
+        </span>
+        <span className={styles.textContainer}>
           {text && text}
         </span>
       </button>
