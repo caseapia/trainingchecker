@@ -2,5 +2,5 @@
   --color-danger: #dc3545;
   --color-muted: #edededc7;
   --color-defaultText: #ededed;
-  --color-defaultPageBackground: linear-gradient(144deg, rgb(110 36 52) -462%, rgba(0, 0, 0, 1) 128%);
+  --color-defaultPageBackground: linear-gradient(144deg, #622230 -716%, #000 128%);
 }

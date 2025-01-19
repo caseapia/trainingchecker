@@ -79,9 +79,13 @@ const LinkedButton = forwardRef<HTMLAnchorElement, LinkedButtonProps>((
 				data-ripple={ripple}
 				{...props}
 			>
+				<span className={styles.iconContainer}>
+					{Icon && <Icon className={styles.icon} />}
+				</span>
+				<span className={styles.textContainer}>
+					{text && text}
+				</span>
         <span>
-          {Icon && <Icon className={styles.icon} />}
-	        {text && text}
 					{children && children}
         </span>
 			</Link>
