@@ -63,17 +63,8 @@ export const Elements: HeaderProps[] = [
     id: "copchase",
     icon: createElement(CopchaseIcon),
     link: '/copchase',
-    isNew: true,
+    isNew: false,
     isDisabled: false,
     isMobileAvailable: true,
   },
-  // {
-  //   text: "Список изменений",
-  //   id: "changelog",
-  //   icon: createElement(CopyIcon),
-  //   link: "/changelog",
-  //   isNew: false,
-  //   isDisabled: true,
-  //   isMobileAvailable: true,
-  // },
 ];
