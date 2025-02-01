@@ -13,18 +13,21 @@ export const toast = {
     lifeTime?: number,
     clickAction?: (e: MouseEvent<HTMLDivElement>) => void,
     isExitButton?: boolean,
+    isByModal?: boolean;
   }) => toastLet.addToast('success', content, options),
   error: (content: string, options?: {
     className?: string,
     lifeTime?: number,
     clickAction?: (e: MouseEvent<HTMLDivElement>) => void,
     isExitButton?: boolean,
+    isByModal?: boolean;
   }) => toastLet.addToast('error', content, options),
   basic: (content: string, options?: {
     className?: string,
     lifeTime?: number,
     clickAction?: (e: MouseEvent<HTMLDivElement>) => void,
     isExitButton?: boolean,
+    isByModal?: boolean;
   }) => toastLet.addToast('default', content, options),
   clear: () => toastLet.removeToast,
 }

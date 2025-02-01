@@ -34,7 +34,7 @@ const Toast = () => {
         {toasts.map((toast) => (
           <motion.div
             key={toast.id}
-            className={`${styles.Toast} ${getType(toast.type)} ${toast.className || ''} ${toast.clickAction ? styles.clickable : ''}`}
+            className={`${styles.Toast} ${getType(toast.type)} ${toast.className || ''} ${toast.clickAction ? styles.clickable : ''} ${toast.isByModal ? styles.ByModal : ''}`}
             onClick={toast.clickAction ? () => handleClick(toast) : undefined}
             initial={ToastAnimation.initial}
             animate={ToastAnimation.animate}

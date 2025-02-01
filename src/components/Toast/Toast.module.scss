@@ -9,6 +9,9 @@
   z-index: 1001;
   bottom: 0;
 }
+.ByModal {
+  z-index: 9999999 !important;
+}
 .Toast {
   padding: 12px 20px;
   position: relative;

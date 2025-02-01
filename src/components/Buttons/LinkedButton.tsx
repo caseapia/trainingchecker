@@ -1,11 +1,13 @@
 import {forwardRef, MouseEvent} from "react";
 import {LinkedButtonProps} from "@/components/Buttons/types";
 import Link from "next/link";
-import styles from "./Button.module.scss";
 import {useGenerateId} from "@/hooks/useGenerateId";
+
+import styles from "./Button.module.scss";
 import btnTypes from "@/components/Buttons/types.module.scss";
 import btnRadius from './radius.module.scss';
 import btnSizes from './sizes.module.scss';
+import btnGlowes from './glow.module.scss';
 
 const LinkedButton = forwardRef<HTMLAnchorElement, LinkedButtonProps>((
 	{
@@ -23,6 +25,7 @@ const LinkedButton = forwardRef<HTMLAnchorElement, LinkedButtonProps>((
 		onClick,
 		children,
 		ripple = true,
+		glow,
 		...props
   }, ref) => {
 		const id = useGenerateId(6);
@@ -65,7 +68,7 @@ const LinkedButton = forwardRef<HTMLAnchorElement, LinkedButtonProps>((
 		return (
 			<Link
 				href={href}
-				className={`${styles.button} ${btnTypes[type]} ${btnRadius[radius]} ${btnSizes[size]} ${classname || ''} ${disabled ? btnTypes.disabled : ''}`}
+				className={`${styles.button} ${btnTypes[type]} ${btnGlowes[glow] || ''} ${btnRadius[radius]} ${btnSizes[size]} ${classname || ''} ${disabled ? btnTypes.disabled : ''}`}
 				style={style}
 				onMouseDown={handleMouseDown}
 				role="button"

@@ -17,6 +17,7 @@ import Loader from '@/modules/Loader/Loader';
 import { usePage500 } from '@/shared/hooks/page500';
 import { useTransformTextColor } from '@/shared/hooks/useTransofrmTextColor';
 import Worlds from './types';
+import Badge from '@/components/InlineBadge/Badge';
 
 const WorldList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -116,23 +117,43 @@ const WorldList = () => {
     }
   }
 
+  const getBadgeColor = () => {
+    const worlds = result?.length ?? 0;
+
+    if (worlds < 4) {
+      return 'danger';
+    }
+    return 'default';
+  }
+
   return isLoaded ? (
     <Suspense fallback={<Loader />}>
-      <PageWrapper title={`Список открытых миров (${result?.length})`}>
+      <PageWrapper title={
+        <>
+          <span>Список открытых миров</span>
+          <Badge
+            type={getBadgeColor()}
+            handler={result?.length}
+            size="medium"
+          />
+        </>
+      }>
         <div className={styles.buttonGroup}>
           <Button 
-            type='Primary' 
+            type='Primary'
             text='Скопировать' 
             action='button' 
             onClick={copyWorlds} 
             icon={CopyIcon}
           />
           <Button 
-            type='Secondary' 
+            type='Outlined'
             text={sensMode ? 'Выключить чувствительный режим' : 'Включить чувствительный режим'}
             action='button' 
             onClick={sensitiveMode}
             icon={sensMode ? DeblurIcon : LensBlurIcon}
+            glow='red'
+            ripple={false}
           />
         </div>
         <Table>
