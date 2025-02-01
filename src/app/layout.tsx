@@ -11,6 +11,7 @@ import Snow from "@/modules/Snow/Snow";
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   const snow = settings.find(s => s.option === 'snow')?.value || false;
+  const devTools = settings.find(s => s.option === 'devTools')?.value || false;
   // setTitle();
 	
   return (
@@ -24,6 +25,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         <title>TRAINING CHECKER</title>
       </head>
         <body>
+        {devTools}
         {snow && <Snow />}
         <ToastProvider>
           <Header/>

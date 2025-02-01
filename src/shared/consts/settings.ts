@@ -1,7 +1,7 @@
 import React, {ReactNode} from "react";
 
 type props = {
-  option: 'preloader' | 'loadTime' | 'snow' | 'headerText';
+  option: 'preloader' | 'loadTime' | 'snow' | 'headerText' | 'devTools';
   value: string | number | ReactNode | boolean;
 }[];
 
@@ -21,6 +21,10 @@ export const settings: props = [
   {
     option: 'headerText',
     value: 'TRAINING&nbsp;<span style="color: #f01f4b">CHECKER</span>',
+  },
+  {
+    option: 'devTools',
+    value: false,
   },
 ];
 
