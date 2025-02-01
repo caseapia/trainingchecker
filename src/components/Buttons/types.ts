@@ -4,6 +4,7 @@ export type ButtonIcon = FC<React.SVGProps<SVGElement>>;
 export type ButtonTypes = "Primary" | "Transparent" | "Secondary" | "Danger" | "Outlined" | "Violet";
 export type Radius = 'squared' | 'small' | 'medium' | 'large' | 'extra-large' | 'rounded';
 export type Sizes = 'small' | 'medium' | 'large' | 'full';
+export type GlowVariants = 'blue' | 'red';
 type ButtonActions = "submit" | "reset" | "button";
 
 interface Props {
@@ -21,6 +22,7 @@ interface Props {
 	radius?: Radius;
 	size?: Sizes;
 	ripple?: boolean;
+	glow?: GlowVariants;
 	[key: string]: any;
 }
 
@@ -39,6 +41,7 @@ interface LinkedButtonProps {
 	onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 	children?: React.ReactNode;
 	ripple?: boolean;
+	glow?: GlowVariants;
 	[key: string]: any;
 }
 

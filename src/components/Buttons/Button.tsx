@@ -7,6 +7,7 @@ import Props from './types';
 import { useGenerateId } from '@/shared/hooks/useGenerateId';
 import Lottie from 'lottie-react';
 import LoadingIcon from '@/icons/LoadingIcon.json';
+import btnGlowes from "@/components/Buttons/glow.module.scss";
 
 const Button = forwardRef<HTMLButtonElement, Props>(
   ({ 
@@ -24,6 +25,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
 	    radius = 'medium',
 	    size = 'full',
       ripple = true,
+      glow,
       ...props
     }, ref
   ) => {
@@ -70,7 +72,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(
         onFocus={onFocus}
         onMouseDown={handleMouseDown}
         type={action}
-        className={`${styles.button} ${btnTypes[type] || 'default'} ${btnRadius[radius]} ${btnSizes[size]} ${classname || ''} ${isLoading ? btnTypes.disabled : ''} ${disabled ? btnTypes.disabled : ''}`}
+        className={`${styles.button} ${btnTypes[type] || 'default'} ${btnGlowes[glow] || ''} ${btnRadius[radius]} ${btnSizes[size]} ${classname || ''} ${isLoading ? btnTypes.disabled : ''} ${disabled ? btnTypes.disabled : ''}`}
         style={style}
         ref={ref}
         id={id}

@@ -10,7 +10,7 @@ import Player from './types';
 
 function Players() {
   const [result, setResult] = useState<Player[] | null>(null);
-  const [isloaded, setIsLoaded] = useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const triggerPage500 = usePage500();
 
   useEffect(() => {
@@ -43,7 +43,7 @@ function Players() {
     getPlayers();
 
     timeoutId = setTimeout(() => {
-      if (!isloaded) {
+      if (!isLoaded) {
         triggerPage500();
       }
     }, 4000);

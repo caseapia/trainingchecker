@@ -9,6 +9,9 @@
   z-index: 1001;
   bottom: 0;
 }
+.ByModal {
+  z-index: 9999999 !important;
+}
 .Toast {
   padding: 12px 20px;
   position: relative;
@@ -24,7 +27,7 @@
     &.default {
       background: #1339FF;
 	      svg g path {
-		      fill: #ffffff;
+		      fill: var(--color-white);
 	      }
     }
     &.error {
@@ -46,7 +49,7 @@
     .Title {
       font-weight: bolder;
       font-size: 18px;
-      color: #fff;
+      color: var(--color-white);
       margin-bottom: 3px;
       display: flex;
       justify-content: space-between;

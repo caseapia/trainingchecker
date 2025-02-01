@@ -11,15 +11,17 @@ import Button from "@/components/Buttons/Button";
 import LinkedButton from "@/components/Buttons/LinkedButton";
 import Badge from "@/components/InlineBadge/Badge";
 import headerVariants from './variant';
+import settings from '@/consts/settings';
 
 export const Header = () => {
   const isMobile = isMobileDevice();
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState<boolean>(false);
   const [activePage, setActivePage] = useState<string>("main");
   const router = useRouter();
-  const [online, setOnline] = useState<number>(0);
+  const [online, setOnline] = useState<number>(NaN);
   const windowRef = useRef<HTMLDivElement | null>(null);
   const [isBadgeLoading, setIsBadgeLoading] = useState<boolean>(true);
+  const headerText = settings.find(s => s.option === 'headerText')?.value || '';
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -95,6 +97,15 @@ export const Header = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const getBadgeColor = () => {
+    if (online <= 20) {
+      return 'danger';
+    } else if (online <= 50) {
+      return 'warning';
+    }
+    return 'blue';
+  }
+
   const renderMenuItems = () => (
     Elements.map(({ id, link, icon, text, tooltipText, isDisabled, isNew, style }) => (
       <motion.li 
@@ -106,7 +117,7 @@ export const Header = () => {
           <BootstrapTooltip title={tooltipText}>
             <span className={styles.disabled_element} style={style}>
               {icon} {text}
-              {isNew && <Badge badgeType="danger" content="new" /> }
+              {isNew && <Badge type="danger" content="new" /> }
             </span>
           </BootstrapTooltip>
         ) : (
@@ -121,19 +132,8 @@ export const Header = () => {
           >
             <span>
               {icon} {text}
-              {isNew && (
-                <Badge
-                  badgeType="danger"
-                  content="new"
-                />
-              )}
-              {id === 'players' && (
-                <Badge
-                  badgeType="blue"
-                  handler={online}
-                  isLoading={isBadgeLoading}
-                />
-              )}
+              {isNew && <Badge type="danger" content="new" />}
+              {id === 'players' && <Badge type={getBadgeColor()} handler={online} isLoading={isBadgeLoading} />}
             </span>
           </LinkedButton>
         )}
@@ -175,7 +175,7 @@ export const Header = () => {
               style={{ width: 'fit-content' }}
             />
           )}
-          {!isMobile && <h1 translate={'no'}>TRAINING&nbsp;<span className={styles.redspan}>CHECKER</span></h1>}
+          {!isMobile && <h1 translate={'no'} dangerouslySetInnerHTML={{__html: headerText}}></h1>}
           {!isMobile && <ul className={styles.list}>{renderMenuItems()}</ul>}
       </header>
     </>

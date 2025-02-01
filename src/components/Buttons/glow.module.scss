@@ -1,0 +1,16 @@
+.blue {
+  &:hover {
+    background: rgba(62, 153, 252, 0.4) !important;
+  }
+  &:active {
+    background: rgba(62, 153, 252, 0.7) !important;
+  }
+}
+.red {
+  &:hover {
+    background: rgba(153, 56, 77, 0.4) !important;
+  }
+  &:active {
+    background: rgba(153, 56, 77, 0.7) !important;
+  }
+}

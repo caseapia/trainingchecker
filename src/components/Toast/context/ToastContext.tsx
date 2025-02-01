@@ -14,6 +14,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
         lifeTime?: number,
         clickAction?: (event: MouseEvent<HTMLDivElement>) => void,
         isExitButton?: boolean,
+        isByModal?: boolean,
       }
     ) => {
     const id = Math.random().toString(36).substring(2, 9);
@@ -26,6 +27,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
       lifeTime: options?.lifeTime,
       clickAction: options?.clickAction,
       isExitButton: options?.isExitButton ?? true,
+      isByModal: options?.isByModal ?? false,
     };
     setToasts((prevToasts) => [...prevToasts, newToast]);
     {options?.lifeTime && options?.lifeTime !== -1 && (

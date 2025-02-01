@@ -166,7 +166,7 @@ const PlayerInfo = () => {
         `Список наказаний ${playerData.login} (${playerData.id})\n\n${punishments}\n\nВсего наказаний: ${punishmentsCount}`
       );
       toast.success(`Наказания игрока ${playerData.login} были помещены в ваш буфер обмена`, {
-        lifeTime: 5000, 
+        isByModal: true,
       })
     } else {
       toast.error(`Игрок ${playerData.login} не имеет наказаний`,)

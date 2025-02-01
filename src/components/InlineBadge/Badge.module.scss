@@ -2,32 +2,16 @@
   padding: 0.2em 0.5em;
   margin-left: 10px;
   font-weight: 600;
-  color: #fff;
-  font-size: 13px;
+  color: var(--color-white);
   border-radius: 0.25rem;
   text-transform: uppercase;
   display: inline-block;
-    &.danger {
-      background: #99384d;
-    }
-    &.blue {
-      background: #1339FF;
-    }
-    &.warning {
-      background: rgba(245, 123, 0, 0.705);
-    }
-    &.success {
-      background: rgb(56, 142, 60)
-    }
-    &.default {
-      background: #6c757d;
-    }
     .loading {
-      height: 13px;
       display: flex;
       justify-content: center;
       align-items: center;
       width: 13px;
+      height: 13px;
         svg {
           margin: 0;
           padding: 0 !important;
