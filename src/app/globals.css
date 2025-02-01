@@ -12,7 +12,7 @@ body {
   color: var(--color-defaultText);
   background: var(--color-defaultPageBackground);
   font-family: "Roboto", sans-serif;
-  font-size: 17px;
+  font-size: var(--size-m);
   font-style: normal;
   min-height: 100vh;
 }
@@ -27,7 +27,7 @@ ul {
   margin: 0;
 }
 a {
-  color: #0088cc;
+  color: var(--color-link);
   background-color: transparent;
   text-decoration: none;
   transition: color .3s;
@@ -35,18 +35,18 @@ a {
       text-decoration: underline;
     }
     &:hover {
-      color: #ccc;
+      color: #00aaff;
       text-decoration: none;
       cursor: pointer;
     }
 }
 ::selection {
   background-color: #0070f3;
-  color: #fff;
+  color: var(--color-white);
 }
 ::-webkit-scrollbar {
   width: 5px;
-  background-color: transparent;
+  background-color: var(--color-black);
 }
 ::-webkit-scrollbar-thumb {
   background: #b3425a;

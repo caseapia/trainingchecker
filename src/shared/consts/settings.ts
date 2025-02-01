@@ -20,7 +20,7 @@ export const settings: props = [
   },
   {
     option: 'headerText',
-    value: 'TRAINING&nbsp;<span style="color: #f01f4b">CHECKER</span>',
+    value: 'TRAINING&nbsp;<span style="color: var(--color-red)">CHECKER</span>',
   },
   {
     option: 'devTools',

@@ -1,6 +1,15 @@
 :root {
+  /*Colors*/
   --color-danger: #dc3545;
   --color-muted: #edededc7;
   --color-defaultText: #ededed;
+  --color-link: #0088cc;
+  --color-black: #000;
+  --color-white: #fff;
+  --color-gray: #ccc;
+  --color-red: #f01f4b;
   --color-defaultPageBackground: linear-gradient(144deg, #622230 -716%, #000 128%);
+
+  /*Sizes*/
+  --size-m: 17px;
 }

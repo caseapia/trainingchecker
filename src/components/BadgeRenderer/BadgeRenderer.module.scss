@@ -4,7 +4,7 @@
   height: var(--size);
   border-radius: calc(var(--size) / 2);
   background: gray;
-  color: white;
+  color: var(--color-white);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -13,7 +13,7 @@
   cursor: pointer;
   transition: .2s;
   margin-right: 7px;
-  border: 1px solid white;
+  border: 1px solid var(--color-white);
     &:hover {
       transform: scale(1.2,1.2);
     }
@@ -27,7 +27,7 @@
       vertical-align: middle;
     }
     svg {
-	    fill: white;
+	    fill: var(--color-white);
       width: calc(.6* var(--size));
       height: calc(.6* var(--size));
     }
