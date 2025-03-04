@@ -18,8 +18,7 @@ import Loader from '@/modules/Loader/Loader';
 import Chip from '@/components/Chip/Chip';
 import {useTransformTextColor} from "@/hooks/useTransofrmTextColor";
 import PlayerData from './types';
-import {metric, setMetricInstance} from "@/utils/metric";
-import {sendMetric} from "@/hooks/sendMetric";
+import {formatUnixDate} from "@/utils/formatUnixDate";
 
 const PlayerInfo = () => {
   const router = useRouter();
@@ -44,22 +43,9 @@ const PlayerInfo = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const transformedVerificationText = useTransformTextColor;
-
-  useEffect(() => {
-    setMetricInstance(sendMetric);
-    // TODO: Добавить более точную информацию о странице
-    // metric.send({
-    //   action: 'Инициализирован профиль игрока',
-    //   additionMessage: `${nickname}`,
-    // })
-  }, []);
 	
 	useEffect(() => {
 		if (!nickname) {
-      // metric.send({
-      //   action: 'Пользователь перешел на страницу player без указания игрока',
-      //   error: 'Страница не может быть открыта без указания конкретного игрока',
-      // });
 			router.push('../');
 			toast.error('Страница не может быть открыта без указания конкретного игрока, переносим вас обратно...', {
 				lifeTime: 5000
@@ -77,10 +63,6 @@ const PlayerInfo = () => {
 			
 			if (!response.ok) {
 				if (response.status === 404) {
-          // metric.send({
-          //   action: 'Пользователь ввел несуществующий никнейм',
-          //   error: `Игрок с никнеймом ${nickname} не найден`,
-          // });
 					router.push('../');
 					toast.error(`Игрок с никнеймом ${nickname} не найден. Перенаправляем вас на главную страницу`, {
 						lifeTime: 5000,
@@ -118,9 +100,6 @@ const PlayerInfo = () => {
     setTimeout(() => {
       setButtonState(false);
     }, 5000)
-    // metric.send({
-    //   action: `Обновлена информация об игроке ${nickname}`
-    // })
   }
 	
 	useEffect(() => {
@@ -221,7 +200,7 @@ const PlayerInfo = () => {
         {playerData.verify > 0 && (
           <p><strong>Текст верификации:</strong> {transformedVerificationText(playerData.verifyText)}</p>
         )}
-        <p><strong>Время мута:</strong> {playerData.mute ? `${playerData.mute}` : <span style={{ color: '#91ec66e7' }}>Нет</span>}</p>
+        <p><strong>Время мута:</strong> {playerData.mute ? `${formatUnixDate(playerData.mute)}` : <span style={{ color: '#91ec66e7' }}>Нет</span>}</p>
         <p><strong>Дата регистрации:</strong> 
           {
             playerData.regdate === '1970-01-01 03:00:00'
