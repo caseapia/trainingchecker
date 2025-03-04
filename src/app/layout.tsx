@@ -23,7 +23,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
         type="image/x-icon"
       />
       <title>TRAINING CHECKER</title>
-      <meta name="theme-color" content='#202020'/>
+      <meta name="theme-color" content='#000'/>
     </head>
     <body>
     {devTools}
