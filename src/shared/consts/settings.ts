@@ -1,8 +1,8 @@
-import React, {ReactNode} from "react";
+import {ReactNode} from "react";
 
 type props = {
-  option: 'preloader' | 'loadTime' | 'snow' | 'headerText' | 'devTools';
-  value: string | number | ReactNode | boolean;
+  option: 'preloader' | 'loadTime' | 'snow' | 'headerText' | 'devTools' | 'themeColor';
+  value: string | number | ReactNode | boolean | bigint;
 }[];
 
 export const settings: props = [
@@ -26,6 +26,10 @@ export const settings: props = [
     option: 'devTools',
     value: false,
   },
+  {
+    option: 'themeColor',
+    value: '#202020',
+  }
 ];
 
 export default settings
