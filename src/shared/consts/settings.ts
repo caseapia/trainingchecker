@@ -26,10 +26,6 @@ export const settings: props = [
     option: 'devTools',
     value: false,
   },
-  {
-    option: 'themeColor',
-    value: '#202020',
-  }
 ];
 
 export default settings
