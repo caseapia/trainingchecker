@@ -1,24 +1,25 @@
 "use client";
-import { useSearchParams } from 'next/navigation';
+import {useSearchParams} from 'next/navigation';
 import {useEffect, useState, Suspense, useCallback} from 'react';
 import styles from './page.module.scss';
-import { BadgeRenderer } from '@/components/BadgeRenderer/BadgeRenderer';
+import {BadgeRenderer} from '@/components/BadgeRenderer/BadgeRenderer';
 import Button from '@/components/Buttons/Button';
 import CheckIcon from '@/icons/checkCircle.svg';
 import CopyIcon from '@/icons/copy.svg';
 import HammerIcon from '@/icons/hammer.svg';
 import RefreshIcon from '@/icons/page-player/refresh.svg';
-import { Modal } from '@/components/Modal/Modal';
+import {Modal} from '@/components/Modal/Modal';
 import Link from 'next/link';
-import { Table, Thead, Tr, Td, TBody, Th } from '@/components/Table/Table';
-import { useRouter } from 'next/navigation';
+import {Table, Thead, Tr, Td, TBody, Th} from '@/components/Table/Table';
+import {useRouter} from 'next/navigation';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
-import { toast } from '@/utils/toast';
+import {toast} from '@/utils/toast';
 import Loader from '@/modules/Loader/Loader';
 import Chip from '@/components/Chip/Chip';
 import {useTransformTextColor} from "@/hooks/useTransofrmTextColor";
 import PlayerData from './types';
-import {formatUnixDate} from "@/utils/formatUnixDate";
+import {formatToMinutes} from "@/utils/formatToMinutes";
+import {getDaySuffix, getMinuteSuffix} from "@/utils/getSuffix";
 
 const PlayerInfo = () => {
   const router = useRouter();
@@ -39,57 +40,57 @@ const PlayerInfo = () => {
     playerid: NaN,
     warn: []
   });
-  const [diffInDays, setDiffInDays] = useState(NaN);
+  const [diffInDays, setDiffInDays] = useState<number>(NaN);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-	const transformedVerificationText = useTransformTextColor;
-	
-	useEffect(() => {
-		if (!nickname) {
-			router.push('../');
-			toast.error('Страница не может быть открыта без указания конкретного игрока, переносим вас обратно...', {
-				lifeTime: 5000
-			});
-		}
-	}, [nickname, router]);
-	
-	const getData = useCallback(async () => {
-		if (!nickname) return;
-		
-		const url = `${process.env.NEXT_PUBLIC_API_USER_URL}/${nickname}`;
-		
-		try {
-			const response = await fetch(url);
-			
-			if (!response.ok) {
-				if (response.status === 404) {
-					router.push('../');
-					toast.error(`Игрок с никнеймом ${nickname} не найден. Перенаправляем вас на главную страницу`, {
-						lifeTime: 5000,
-					});
-				}
-			}
-			
-			const result = await response.json();
-			setPlayerData({
-				id: Number(result.data.id),
-				login: result.data.login,
-				access: Number(result.data.access),
-				moder: Number(result.data.moder),
-				verify: Number(result.data.verify),
-				verifyText: result.data.verifyText,
-				mute: Number(result.data.mute),
-				online: Number(result.data.online),
-				regdate: result.data.regdate,
-				lastlogin: result.data.lastlogin,
-				playerid: Number(result.data.playerid),
-				warn: result.data.warn as Array<{ reason: string; bantime: string; admin: string }>,
-			});
-			setIsLoaded(true);
-		} catch (error) {
-			console.error(error);
-		}
-	}, [nickname, router]);
+  const transformedVerificationText = useTransformTextColor;
+
+  useEffect(() => {
+    if (!nickname) {
+      router.push('../');
+      toast.error('Страница не может быть открыта без указания конкретного игрока, переносим вас обратно...', {
+        lifeTime: 5000
+      });
+    }
+  }, [nickname, router]);
+
+  const getData = useCallback(async () => {
+    if (!nickname) return;
+
+    const url = `${process.env.NEXT_PUBLIC_API_USER_URL}/${nickname}`;
+
+    try {
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        if (response.status === 404) {
+          router.push('../');
+          toast.error(`Игрок с никнеймом ${nickname} не найден. Перенаправляем вас на главную страницу`, {
+            lifeTime: 5000,
+          });
+        }
+      }
+
+      const result = await response.json();
+      setPlayerData({
+        id: Number(result.data.id),
+        login: result.data.login,
+        access: Number(result.data.access),
+        moder: Number(result.data.moder),
+        verify: Number(result.data.verify),
+        verifyText: result.data.verifyText,
+        mute: Number(result.data.mute),
+        online: Number(result.data.online),
+        regdate: result.data.regdate,
+        lastlogin: result.data.lastlogin,
+        playerid: Number(result.data.playerid),
+        warn: result.data.warn as Array<{ reason: string; bantime: string; admin: string }>,
+      });
+      setIsLoaded(true);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [nickname, router]);
 
   const refreshData = () => {
     getData();
@@ -101,40 +102,30 @@ const PlayerInfo = () => {
       setButtonState(false);
     }, 5000)
   }
-	
-	useEffect(() => {
-		getData();
-	}, [nickname]);
+
+  useEffect(() => {
+    getData();
+  }, [nickname]);
 
   useEffect(() => {
     if (!playerData.lastlogin) return;
-  
+
     const dates = () => {
       const today = new Date();
       const lastLoginDate = new Date(playerData.lastlogin);
-  
+
       const diffInTime = today.getTime() - lastLoginDate.getTime();
       const diffInDays = Math.floor(diffInTime / (1000 * 3600 * 24));
-  
+
       setDiffInDays(diffInDays);
     };
-  
+
     dates();
   }, [playerData.lastlogin]);
 
-  const getDaySuffix = (days: number) => {
-    const lastDigit = days % 10;
-    const lastTwoDigits = days % 100;
-  
-    if (lastTwoDigits >= 11 && lastTwoDigits <= 19) return "дней";
-    if (lastDigit === 1) return "день";
-    if (lastDigit >= 2 && lastDigit <= 4) return "дня";
-    return "дней";
-  };
-
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-  
+
   const copyPunishments = () => {
     if (playerData.warn.length > 0) {
       const punishments = playerData.warn
@@ -154,21 +145,21 @@ const PlayerInfo = () => {
 
   const getVerify = () => {
     switch (playerData.verify) {
-      case 1: 
+      case 1:
         return `Ютубер`
-      case 2: 
+      case 2:
         return `Автор сообщества (создатель модов)`
-      case 3: 
+      case 3:
         return `Разработчик`
-      case 4: 
+      case 4:
         return `Администратор в отставке`
-      case 5: 
+      case 5:
         return `Спонсор`
-      case 6: 
+      case 6:
         return `Создатель миров`
-      case 7: 
+      case 7:
         return `🤨`
-      default: 
+      default:
         return `Нет`
     }
   }
@@ -195,17 +186,20 @@ const PlayerInfo = () => {
       <div className={styles.ResultWrapper}>
         <p><strong>ID:</strong> {playerData.id}</p>
         <p><strong>Ник:</strong> {playerData.login}</p>
-        <strong>Должность:</strong> <Chip label={getModer()} />
+        <strong>Должность:</strong> <Chip label={getModer()}/>
         <p><strong>Верификация:</strong> {`${getVerify()} (ID: ${playerData.verify})`}</p>
         {playerData.verify > 0 && (
           <p><strong>Текст верификации:</strong> {transformedVerificationText(playerData.verifyText)}</p>
         )}
-        <p><strong>Время мута:</strong> {playerData.mute ? `${formatUnixDate(playerData.mute)}` : <span style={{ color: '#91ec66e7' }}>Нет</span>}</p>
-        <p><strong>Дата регистрации:</strong> 
+        <p><strong>Время мута:</strong> {playerData.mute ?
+          `${formatToMinutes(playerData.mute)} ${getMinuteSuffix(formatToMinutes(playerData.mute))}` :
+          <span style={{color: '#91ec66e7'}}>Нет</span>}
+        </p>
+        <p><strong>Дата регистрации:</strong>
           {
             playerData.regdate === '1970-01-01 03:00:00'
-            ? ' Зарегистрирован до 2018 года'
-            : ` ${playerData.regdate}`
+              ? ' Зарегистрирован до 2018 года'
+              : ` ${playerData.regdate}`
           }
         </p>
         <p>
@@ -216,13 +210,14 @@ const PlayerInfo = () => {
             `${playerData.lastlogin} (${diffInDays} ${getDaySuffix(diffInDays)} назад)`
           ) : null}
           {playerData.online ? (
-            <span style={{ color: '#91ec66e7' }}>Сейчас в сети <span style={{ color: 'white' }}>(ID: {playerData.playerid})</span></span>
+            <span style={{color: '#91ec66e7'}}>Сейчас в сети <span
+              style={{color: 'white'}}>(ID: {playerData.playerid})</span></span>
           ) : null}
         </p>
-	      <hr className={styles.ProfileLine}/>
-	      <h5 className={styles.h5}>Значки</h5>
-	      <BadgeRenderer player={playerData}/>
-	      <div className={styles.ButtonGroup}>
+        <hr className={styles.ProfileLine}/>
+        <h5 className={styles.h5}>Значки</h5>
+        <BadgeRenderer player={playerData}/>
+        <div className={styles.ButtonGroup}>
           <Button
             type="Secondary"
             text="Обновить"
@@ -231,7 +226,7 @@ const PlayerInfo = () => {
             onClick={refreshData}
             disabled={buttonState}
           />
-          <Button 
+          <Button
             type='Secondary'
             text='Наказания'
             action='button'
@@ -241,10 +236,10 @@ const PlayerInfo = () => {
           />
         </div>
       </div>
-      <Modal 
-        isOpen={isModalOpen} 
-        onClose={closeModal} 
-        title={`Список наказаний ${playerData.login} (${playerData.id})`} 
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title={`Список наказаний ${playerData.login} (${playerData.id})`}
         secondButtonContent='Закрыть'
         secondButtonIcon={CheckIcon}
         secondButtonAction={closeModal}
@@ -271,12 +266,12 @@ const PlayerInfo = () => {
               ))}
             </TBody>
           </Table>
-        ) : <p style={{ color: 'var(--color-danger)', textAlign: 'center' }}>У этого игрока нет наказаний</p>}
+        ) : <p style={{color: 'var(--color-danger)', textAlign: 'center'}}>У этого игрока нет наказаний</p>}
       </Modal>
     </>
   ) : (
     <>
-      <Loader />
+      <Loader/>
     </>
   );
 }
@@ -284,8 +279,8 @@ const PlayerInfo = () => {
 const Result = () => (
   <PageWrapper>
     <h1>Информация об игроке</h1>
-    <Suspense fallback={<Loader />}>
-      <PlayerInfo />
+    <Suspense fallback={<Loader/>}>
+      <PlayerInfo/>
     </Suspense>
   </PageWrapper>
 );
