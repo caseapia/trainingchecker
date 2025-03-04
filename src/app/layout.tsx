@@ -12,7 +12,7 @@ import Snow from "@/modules/Snow/Snow";
 export default function RootLayout({children}: { children: React.ReactNode }) {
   const snow = settings.find(s => s.option === 'snow')?.value || false;
   const devTools = settings.find(s => s.option === 'devTools')?.value || false;
-  const themeColor = settings.find(s => s.option === 'themeColor')?.value
+  const themeColor: string = settings.find(s => s.option === 'themeColor')?.value
   // setTitle();
 
   return (
@@ -24,7 +24,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
         type="image/x-icon"
       />
       <title>TRAINING CHECKER</title>
-      {themeColor && <meta name="theme-color" content={themeColor}/>}
+      <meta name="theme-color" content={themeColor}/>
     </head>
     <body>
     {devTools}
