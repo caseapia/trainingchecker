@@ -1,12 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, {useState, useRef} from 'react';
 import types from './types';
 import styles from './Select.module.scss';
 import sizes from './Sizes.module.scss';
 import CaretDownIcon from '@/icons/components/selection/caretdown.svg';
 import CaretUpIcon from '@/icons/components/selection/caretup.svg';
-import { useGenerateId } from '@/shared/hooks/useGenerateId';
 import {AnimatePresence, motion} from "framer-motion";
 import listVariants from './variants';
+import useId from "@mui/utils/useId";
 
 const Select = (
   {
@@ -18,7 +18,7 @@ const Select = (
     size = 'full',
   }: types & { onChange: (option: string) => void }
 ) => {
-  const id = useGenerateId(12);
+  const id = useId();
   const iconRef = useRef<SVGElement>(null);
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -57,7 +57,7 @@ const Select = (
         >
           <p className={styles.SelectedOption}>
             {selectedOption || defaultString}
-            <CaretDownIcon ref={iconRef} />
+            <CaretDownIcon ref={iconRef}/>
           </p>
         </div>
         {isOpened && (

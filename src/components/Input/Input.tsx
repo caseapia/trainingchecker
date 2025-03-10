@@ -1,23 +1,24 @@
-import { forwardRef } from "react";
+import {forwardRef} from "react";
 import styles from './Input.module.scss';
-import { useGenerateId } from '@/shared/hooks/useGenerateId';
+import useId from "@mui/utils/useId";
 
 export const Input = forwardRef<HTMLInputElement, Props>(
-  ({ 
-    label, 
-    type, 
-    onInput, 
-    onClick, 
-    onChange, 
-    classname, 
-    disabled = false, 
-    placeholder, 
-    icon: Icon, 
-    name,
-    required = false,
-    value
-  }, ref) => {
-    const string = useGenerateId(12);
+  ({
+     label,
+     type,
+     onInput,
+     onClick,
+     onChange,
+     classname,
+     disabled = false,
+     placeholder,
+     icon: Icon,
+     name,
+     required = false,
+     value,
+     marginBottom = 0,
+   }, ref) => {
+    const string = useId();
 
     const getType = (type: any) => {
       switch (type) {
@@ -31,27 +32,29 @@ export const Input = forwardRef<HTMLInputElement, Props>(
     }
 
     return (
-      <>
+      <div className={styles.inputContainer}>
         <label htmlFor={string} className={styles.label}>
           {label}{' '}
-          {required && <span className={styles.Required}>*</span>}
+          {required && <span className={styles.required}>*</span>}
         </label>
-        <input
-          type={type}
-          id={string}
-          onInput={onInput}
-          onChange={onChange}
-          onClick={onClick}
-          className={`${getType(type)} ${classname || ''}`}
-          disabled={disabled}
-          placeholder={placeholder}
-          name={name}
-          ref={ref}
-          required={required}
-          value={value}
-        />
-        {Icon && <Icon className={styles.icon} width={18} height={18} />}
-      </>
+        <div className={`${styles.input} ${getType(type)}`} style={{marginBottom: `${marginBottom}px`}}>
+          {Icon && <Icon className={styles.icon} width={18} height={18}/>}
+          <input
+            type={type}
+            id={string}
+            onInput={onInput}
+            onChange={onChange}
+            onClick={onClick}
+            className={classname || ''}
+            disabled={disabled}
+            placeholder={placeholder}
+            name={name}
+            ref={ref}
+            required={required}
+            value={value}
+          />
+        </div>
+      </div>
     );
   }
 );

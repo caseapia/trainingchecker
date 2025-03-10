@@ -1,37 +1,37 @@
-import React, { forwardRef, MouseEvent } from 'react';
+import React, {forwardRef, MouseEvent} from 'react';
 import styles from './Button.module.scss';
 import btnTypes from './types.module.scss';
 import btnRadius from './radius.module.scss';
 import btnSizes from './sizes.module.scss';
 import Props from './types';
-import { useGenerateId } from '@/shared/hooks/useGenerateId';
 import Lottie from 'lottie-react';
 import LoadingIcon from '@/icons/LoadingIcon.json';
 import btnGlowes from "@/components/Buttons/glow.module.scss";
+import useId from "@mui/utils/useId";
 
 const Button = forwardRef<HTMLButtonElement, Props>(
-  ({ 
-      icon: Icon, 
-      action, 
-      text, 
-      onClick, 
-      onFocus, 
-      type = 'default',
-      disabled = false,
-      classname, 
-      style,
-      isLoading = false,
-      ariaLabelledBy,
-	    radius = 'medium',
-	    size = 'full',
-      ripple = true,
-      glow,
-      ...props
-    }, ref
+  ({
+     icon: Icon,
+     action,
+     text,
+     onClick,
+     onFocus,
+     type = 'default',
+     disabled = false,
+     classname,
+     style,
+     isLoading = false,
+     ariaLabelledBy,
+     radius = 'medium',
+     size = 'full',
+     ripple = true,
+     glow,
+     ...props
+   }, ref
   ) => {
-    const id = useGenerateId(6);
+    const id = useId();
 
-    const handleRipple =  (e: MouseEvent<HTMLButtonElement>) => {
+    const handleRipple = (e: MouseEvent<HTMLButtonElement>) => {
       const button = e.currentTarget;
       const ripple = document.createElement('span');
       const rect = button.getBoundingClientRect();
@@ -84,12 +84,12 @@ const Button = forwardRef<HTMLButtonElement, Props>(
       >
         <span className={styles.iconContainer}>
           {!isLoading && Icon && (
-            <Icon className={styles.icon} />
+            <Icon className={styles.icon}/>
           ) || isLoading && (
-          <Lottie
-            animationData={LoadingIcon}
-            className={styles.icon__loading}
-          />
+            <Lottie
+              animationData={LoadingIcon}
+              className={styles.icon__loading}
+            />
           )}
         </span>
         <span className={styles.textContainer}>

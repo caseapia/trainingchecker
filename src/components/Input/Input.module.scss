@@ -1,68 +1,76 @@
-.input {
-  $bg: #232527;
-  $effectbg: #2e3133;
-  background: $bg;
-  border: 1px solid transparent;
-  border-radius: 10px;
-  outline: none;
-  color: #77787A;
-  font-size: 16px;
-  transition: .3s ease;
-  width: 100%;
-    &:focus {
-      color: var(--color-white);
-      box-shadow: rgba($bg, 0.5) 0 0 0 4px;
-      background: $effectbg;
-    }
-    &:focus + .icon {
-      color: var(--color-white);
-    }
-    &:hover {
-      background: $effectbg;
-    }
-    &:hover + .icon {
-      color: var(--color-white);
-    }
-    &.WithIcon {
-      padding: 13px 40px;
-    }
-    &.WithoutIcon {
-      padding: 13px 24px !important;
-    }
-}
-.checkbox {
-  appearance: none;
-  width: 24px;
-  height: 24px;
-  border: 1px solid #77787A;
-  border-radius: 5px;
-  outline: none;
-  margin-right: 10px;
-}
-.Required {
-  color: rgba(255, 0, 0, 0.432);
-  transition: .3s ease;
-}
-.Error {
-  border: 1px solid #FF6955;
-}
 .label {
   color: #77787A;
-  transition: .3s ease;
-  width: 100%;
-  margin-bottom: 5px;
-    &:hover {
-      color: var(--color-white);
-        .Required {
-          color: red;
-        }
+  transition: .3s;
+
+  .required {
+    color: var(--color-danger);
+    opacity: .6;
+    transition: .3s;
+  }
+
+  &:hover {
+    color: var(--color-defaultText);
+
+    .required {
+      opacity: 1;
     }
+  }
 }
+
+.input {
+  width: 100%;
+  padding: 0 10px;
+  background: #232527;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  transition: .3s;
+  margin-top: 3px;
+
+  &:focus-within {
+    background: #2e3133;
+
+    .icon {
+      color: var(--color-defaultText);
+    }
+
+    input {
+      color: var(--color-defaultText);
+    }
+  }
+
+  input {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: transparent;
+    outline: 0;
+    color: #77787A;
+    transition: .3s;
+    font-size: var(--size-m);
+    font-family: "Roboto", sans-serif;
+    padding: 14px 0 14px 0;
+
+    &:hover {
+      color: var(--color-defaultText);
+    }
+  }
+
+  &:hover {
+    background: #2e3133;
+
+    .icon {
+      color: var(--color-defaultText);
+    }
+
+    input {
+      color: var(--color-defaultText);
+    }
+  }
+}
+
 .icon {
-  transition: .3s ease;
-  position: absolute;
   color: #77787A;
-  display: inline-flex;
-  margin-left: 12px;
-  margin-top: 39px;
+  margin-right: 10px;
+  transition: .3s;
 }

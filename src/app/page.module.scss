@@ -1,21 +1,20 @@
 .gapped {
   gap: 20px;
 }
+
 .readmeWrapper {
   width: 50%;
   line-height: 25px;
-    @media screen and (max-width: 767px) {
-      width: 90%;
-    }
+  @media screen and (max-width: 767px) {
+    width: 90%;
+  }
 }
+
 .FormContainer {
   display: flex;
   flex-direction: column;
   width: 50%;
-    @media screen and (max-width: 767px) {
-      width: 90%;
-    }
-    input {
-      margin-bottom: 10px;
-    }
+  @media screen and (max-width: 767px) {
+    width: 90%;
+  }
 }
