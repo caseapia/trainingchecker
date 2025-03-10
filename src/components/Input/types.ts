@@ -10,5 +10,6 @@ interface Props {
   icon?: React.FC<React.SVGProps<SVGElement>>;
   name?: string;
   required?: boolean;
-  value?: string | number
+  value?: string | number;
+  marginBottom?: number;
 }

@@ -1,18 +1,17 @@
-import React, {createElement} from "react";
+import {createElement, CSSProperties, ReactNode} from "react";
 import HomeIcon from '@/icons/components/header/home.svg';
 import ListIcon from '@/icons/components/header/list.svg';
 import UserIcon from '@/icons/user.svg';
 import MedalIcon from '@/icons/medal.svg';
-import CopyIcon from '@/icons/copy.svg';
 import CopchaseIcon from '@/icons/components/header/copchase.svg';
 
 type HeaderProps = {
-  icon: React.ReactNode;
+  icon: ReactNode;
   text: string;
   className?: string;
   link: string;
   id: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   isNew: boolean;
   tooltipText?: string;
   isDisabled: boolean;

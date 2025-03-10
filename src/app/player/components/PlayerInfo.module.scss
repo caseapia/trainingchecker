@@ -1,0 +1,44 @@
+.ResultWrapper {
+  border-radius: 5px;
+  padding: 10px;
+  width: 25%;
+  line-height: 2.225rem;
+  border: 1px solid #242830;
+  margin-top: 10px;
+  @media screen and (max-width: 767px) {
+    width: 90%;
+  }
+}
+
+.ProfileLine {
+  margin: 1rem 0;
+  color: inherit;
+  opacity: .25;
+  border: 0 double var(--color-white);
+  border-top-width: 1px;
+}
+
+.h5 {
+  margin-bottom: .5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  font-size: 1.25rem;
+}
+
+.ButtonGroup {
+  display: flex;
+  margin-top: 15px;
+  flex-direction: row;
+
+  button {
+    margin-right: 10px;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}
+
+.noPunish {
+  text-align: center;
+}
