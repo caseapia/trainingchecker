@@ -1,72 +1,100 @@
 # TrainingChecker
 
-TrainingChecker is a web application built with TypeScript. It helps you get info from <a href="https://forum.training-server.com/d/3921-training-api" target="_blank" rel="noopener noreferrer">TRAINING API</a> using soft and fluent interface.
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Ftrainingchecker.vercel.app)](https://trainingchecker.vercel.app)
+[![GitHub stars](https://img.shields.io/github/stars/caseapia/trainingchecker)](https://github.com/caseapia/trainingchecker/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/caseapia/trainingchecker)](https://github.com/caseapia/trainingchecker/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/caseapia/trainingchecker)](https://github.com/caseapia/trainingchecker/issues)
+[![GitHub license](https://img.shields.io/github/license/caseapia/trainingchecker)](https://github.com/caseapia/trainingchecker/blob/main/LICENSE)
 
-## Features
+## Описание проекта
 
-- Get copchase lobby params
-- Get worldlist of TRAINING SERVER
-- Get player info
-- Get actually server online
+**TrainingChecker** — это веб-приложение, разработанное с использованием TypeScript, предназначенное для упрощения взаимодействия с TRAINING API. Оно предоставляет удобный интерфейс для получения информации о сервере TRAINING.
 
-## Getting Started
+## Функциональность
 
-Follow these instructions to get a copy of the project up and running on your local machine.
+- **Получение параметров лобби Copchase**: позволяет узнать текущие настройки лобби режима Copchase.
+- **Просмотр списка миров сервера TRAINING**: отображает актуальный список миров, доступных на сервере.
+- **Получение информации об игроке**: предоставляет детальную информацию о конкретном игроке.
+- **Отображение текущего онлайна сервера**: показывает количество игроков, находящихся на сервере в данный момент.
 
-### Prerequisites
+## Начало работы
 
-- Node.js
-- npm (Node Package Manager)
+### Предварительные требования
 
-### Installation
+Перед началом работы убедитесь, что у вас установлены следующие программные компоненты:
 
-1. Clone the repository:
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/)
+
+### Установка
+
+1. **Клонируйте репозиторий**:
+
     ```bash
     git clone https://github.com/caseapia/trainingchecker.git
     ```
-2. Navigate to the project directory:
+
+2. **Перейдите в директорию проекта**:
+
     ```bash
     cd trainingchecker
     ```
-3. Install dependencies:
+
+3. **Установите зависимости**:
+
     ```bash
     npm install
     ```
 
-### Running the Application
+### Запуск приложения
 
-1. Start the development server:
+1. **Запустите сервер разработки**:
+
     ```bash
     npm start
     ```
-2. Open your browser and go to `http://localhost:3000` to view the application.
 
-## Deployment
+2. **Откройте браузер** и перейдите по адресу `http://localhost:3000`, чтобы увидеть приложение в действии.
 
-The application is deployed on Vercel. You can view it [here](https://trainingchecker.vercel.app).
+## Деплоймент
 
-## Contributing
+Приложение развернуто на платформе Vercel и доступно по следующему адресу:
 
-1. Fork the repository.
-2. Create your feature branch:
+[![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-blue)](https://trainingchecker.vercel.app)
+
+## Внесение вклада
+
+Мы приветствуем вклад в развитие проекта! Для этого выполните следующие шаги:
+
+1. **Сделайте форк репозитория**.
+2. **Создайте ветку для новой функциональности**:
+
     ```bash
-    git checkout -b feature/my-new-feature
+    git checkout -b feature/новая-функциональность
     ```
-3. Commit your changes:
+
+3. **Закоммитьте изменения**:
+
     ```bash
-    git commit -m 'Add some feature'
+    git commit -m 'Добавлена новая функциональность'
     ```
-4. Push to the branch:
+
+4. **Отправьте изменения в удаленный репозиторий**:
+
     ```bash
-    git push origin feature/my-new-feature
+    git push origin feature/новая-функциональность
     ```
-5. Create a new Pull Request.
 
-## License
+5. **Создайте Pull Request** для рассмотрения ваших изменений.
 
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+## Лицензия
 
-## Acknowledgments
+Этот проект лицензирован под лицензией MIT. Подробнее см. файл [LICENSE](https://github.com/caseapia/trainingchecker/blob/main/LICENSE).
 
-- Hat tip to anyone whose code was used
-- Inspiration
+## Контакты
+
+Если у вас есть вопросы или предложения, пожалуйста, создайте [issue](https://github.com/caseapia/trainingchecker/issues) в этом репозитории.
+
+---
+
+*Примечание*: SAMP сервер TRAINING не имеет отношения к созданию данного сайта. Этот сайт является частным и использует TRAINING API в соответствии с разрешением его создателя.
