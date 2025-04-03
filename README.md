@@ -70,4 +70,3 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 
 - Hat tip to anyone whose code was used
 - Inspiration
-- etc
