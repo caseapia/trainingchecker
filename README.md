@@ -4,7 +4,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/caseapia/trainingchecker)](https://github.com/caseapia/trainingchecker/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/caseapia/trainingchecker)](https://github.com/caseapia/trainingchecker/network/members)
 [![GitHub issues](https://img.shields.io/github/issues/caseapia/trainingchecker)](https://github.com/caseapia/trainingchecker/issues)
-
+[![GitHub license](https://img.shields.io/github/license/caseapia/trainingchecker)](https://github.com/caseapia/trainingchecker/blob/main/LICENSE)
 
 ## Описание проекта
 
