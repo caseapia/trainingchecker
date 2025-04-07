@@ -5,6 +5,7 @@ import {Table, Td, TBody, Th, Tr, Thead} from "@/components/Table/Table";
 import Loader from "@/modules/Loader/Loader";
 import Admins from './types';
 import Link from "next/link";
+import formatUnixDate from "@/utils/formatUnixDate";
 
 const Page = () => {
   const [isLoaded, setLoaded] = useState<boolean>(false);
@@ -52,7 +53,7 @@ const Page = () => {
                 <Tr key={index}>
                   <Td>{item.id}</Td>
                   <Td><Link href={`/player?nickname=${item.login}`}>{item.login}</Link></Td>
-                  <Td>{item.lastLogin}</Td>
+                  <Td>{formatUnixDate(item.lastLogin)}</Td>
                   <Td>{item.warn}</Td>
                 </Tr>
               );
