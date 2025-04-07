@@ -31,6 +31,7 @@ a {
   background-color: transparent;
   text-decoration: none;
   transition: color .3s;
+  font-weight: 500;
     &:visited {
       text-decoration: underline;
     }
