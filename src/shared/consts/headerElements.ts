@@ -4,6 +4,7 @@ import ListIcon from '@/icons/components/header/list.svg';
 import UserIcon from '@/icons/user.svg';
 import MedalIcon from '@/icons/medal.svg';
 import CopchaseIcon from '@/icons/components/header/copchase.svg';
+import AdminIcon from '@/icons/components/header/admin.svg';
 
 type HeaderProps = {
   icon: ReactNode;
@@ -66,4 +67,13 @@ export const Elements: HeaderProps[] = [
     isDisabled: false,
     isMobileAvailable: true,
   },
+  {
+    text: "Администраторы",
+    id: 'admins',
+    icon: createElement(AdminIcon),
+    link: '/admins',
+    isNew: true,
+    isDisabled: false,
+    isMobileAvailable: true
+  }
 ];
