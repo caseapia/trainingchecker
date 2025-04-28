@@ -1,10 +1,10 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import styles from "./Header.module.scss";
-import { useRouter } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
-import { isMobileDevice } from "@/hooks/isMobileDevice";
-import { Elements } from "@/shared/consts/headerElements";
+import {useRouter} from "next/navigation";
+import {AnimatePresence, motion} from "framer-motion";
+import {isMobileDevice} from "@/hooks/isMobileDevice";
+import {Elements} from "@/shared/consts/headerElements";
 import BootstrapTooltip from "@/components/Styles/TooltipStyles";
 import BarsIcon from '@/icons/components/header/bars.svg';
 import Button from "@/components/Buttons/Button";
@@ -60,15 +60,15 @@ export const Header = () => {
       setIsMobileMenuOpened(false);
     }
   };
-  
+
   const getPlayers = () => {
     const url = process.env.NEXT_PUBLIC_API_ONLINE_URL;
-    
+
     if (!url) {
       console.error('API URL is not defined.');
       return;
     }
-    
+
     fetch(url)
       .then((response) => {
         if (!response.ok) {
@@ -84,16 +84,16 @@ export const Header = () => {
         console.error('Error:', err);
       });
   };
-  
+
   useEffect(() => {
     getPlayers();
   }, []);
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       getPlayers();
     }, 5000);
-    
+
     return () => clearInterval(interval);
   }, []);
 
@@ -107,9 +107,9 @@ export const Header = () => {
   }
 
   const renderMenuItems = () => (
-    Elements.map(({ id, link, icon, text, tooltipText, isDisabled, isNew, style }) => (
-      <motion.li 
-        key={id} 
+    Elements.map(({id, link, icon, text, tooltipText, isDisabled, isNew, style}) => (
+      <motion.li
+        key={id}
         className={activePage === id ? styles.active : ""}
         draggable="false"
       >
@@ -117,7 +117,7 @@ export const Header = () => {
           <BootstrapTooltip title={tooltipText}>
             <span className={styles.disabled_element} style={style}>
               {icon} {text}
-              {isNew && <Badge type="danger" content="new" /> }
+              {isNew && <Badge type="danger" content="new"/>}
             </span>
           </BootstrapTooltip>
         ) : (
@@ -132,8 +132,8 @@ export const Header = () => {
           >
             <span>
               {icon} {text}
-              {isNew && <Badge type="danger" content="new" />}
-              {id === 'players' && <Badge type={getBadgeColor()} handler={online} isLoading={isBadgeLoading} />}
+              {isNew && <Badge type="danger" content="new"/>}
+              {id === 'players' && <Badge type={getBadgeColor()} handler={online} isLoading={isBadgeLoading}/>}
             </span>
           </LinkedButton>
         )}
@@ -142,7 +142,7 @@ export const Header = () => {
   );
 
   return (
-      <>
+    <>
       <AnimatePresence>
         {isMobileMenuOpened && (
           <motion.div
@@ -165,18 +165,18 @@ export const Header = () => {
           </motion.div>
         )}
       </AnimatePresence>
-        <header className={`${styles.header} ${!isMobile ? styles.pc : ''}`}>
-          {isMobile && (
-            <Button 
-              type="Outlined"
-              action="button"
-              icon={BarsIcon}
-              onClick={toggleMobileMenu}
-              style={{ width: 'fit-content' }}
-            />
-          )}
-          {!isMobile && <h1 translate={'no'} dangerouslySetInnerHTML={{__html: headerText}}></h1>}
-          {!isMobile && <ul className={styles.list}>{renderMenuItems()}</ul>}
+      <header className={`${styles.header} ${!isMobile ? styles.pc : ''}`}>
+        {isMobile && (
+          <Button
+            type="Outlined"
+            action="button"
+            icon={BarsIcon}
+            onClick={toggleMobileMenu}
+            style={{width: 'fit-content'}}
+          />
+        )}
+        {!isMobile && <h1 translate={'no'} dangerouslySetInnerHTML={{__html: headerText}}></h1>}
+        {!isMobile && <ul className={styles.list}>{renderMenuItems()}</ul>}
       </header>
     </>
   );

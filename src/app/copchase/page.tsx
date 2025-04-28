@@ -1,8 +1,8 @@
 "use client";
 import React, {useEffect, useState} from 'react';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
-import { Table, Thead, Tr, Td, Th, TBody } from '@/components/Table/Table';
-import Loader from "@/modules/Loader/Loader";
+import {Table, Thead, Tr, Td, Th, TBody} from '@/components/Table/Table';
+import TableLoader from '@/modules/Loaders/TableLoader';
 import Types from './types';
 import styles from './page.module.scss';
 import {toast} from "@/utils/toast";
@@ -69,32 +69,36 @@ const Page = () => {
     }
   }
 
-  return isLoaded ? (
+  return (
     <PageWrapper title="Мониторинг копчейза">
       <Table>
-        <Thead>
-          <Tr>
-            <Th>Номер</Th>
-            <Th>Статус</Th>
-            <Th>Время</Th>
-            <Th>Рейтинг</Th>
-            <Th>Игроков</Th>
-          </Tr>
-        </Thead>
-        <TBody>
-          {chData.map((item, index) => (
-            <Tr key={index}>
-              <Td>{item.id}</Td>
-              <Td>{getStatus(item.id)}</Td>
-              <Td>{item.time || "0:00"}</Td>
-              <Td>{item.rating}</Td>
-              <Td>{item.players}</Td>
-            </Tr>
-          ))}
-        </TBody>
+        {isLoaded ? (
+          <>
+            <Thead>
+              <Tr>
+                <Th>Номер</Th>
+                <Th>Статус</Th>
+                <Th>Время</Th>
+                <Th>Рейтинг</Th>
+                <Th>Игроков</Th>
+              </Tr>
+            </Thead>
+            <TBody>
+              {chData.map((item, index) => (
+                <Tr key={index}>
+                  <Td>{item.id}</Td>
+                  <Td>{getStatus(item.id)}</Td>
+                  <Td>{item.time || "0:00"}</Td>
+                  <Td>{item.rating}</Td>
+                  <Td>{item.players}</Td>
+                </Tr>
+              ))}
+            </TBody>
+          </>
+        ) : <TableLoader rows={2} columns={5}/>}
       </Table>
     </PageWrapper>
-  ) : <Loader/>;
+  );
 };
 
 export default Page;

@@ -3,31 +3,21 @@ import React, {useEffect, useState} from 'react';
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import {Table, Td, TBody, Th, Tr, Thead} from "@/components/Table/Table";
 import Loader from "@/modules/Loader/Loader";
-import Admins from './types';
 import Link from "next/link";
 import formatUnixDate from "@/utils/formatUnixDate";
+import AdminList from "@/services/AdminService";
+import Admin from "@/models/Admin";
 
 const Page = () => {
   const [isLoaded, setLoaded] = useState<boolean>(false);
-  const [result, setResult] = useState<Admins[] | null>(null);
+  const [result, setResult] = useState<Admin[] | null>(null);
 
   useEffect(() => {
     const getAdmins = async () => {
-      const url = process.env.NEXT_PUBLIC_API_ADMINS_URL
-
-      if (!url) {
-        return;
-      }
-
       try {
-        const r = await fetch(url);
+        const response = await AdminList();
 
-        if (!r.ok) {
-          console.error(`HTTP error! status: ${r.status}`);
-        }
-        const jsonResponse = await r.json();
-        console.log(jsonResponse);
-        setResult(jsonResponse);
+        setResult(response);
         setLoaded(true);
       } catch (err) {
         console.error(err)
