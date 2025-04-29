@@ -13,12 +13,12 @@ import Difference from "@/hooks/difference";
 
 import styles from "./PlayerInfo.module.scss";
 import Color from '@/components/Styles/colors.module.scss';
-import Loader from "@/modules/Loader/Loader";
 import Chip from "@/components/Chip/Chip";
 import Button from "@/components/Buttons/Button";
 import {Modal} from "@/components/Modal/Modal";
 import {Table, TBody, Td, Th, Thead, Tr} from "@/components/Table/Table";
 import {BadgeRenderer} from "@/components/BadgeRenderer/BadgeRenderer";
+import PlayerLoader from "@/modules/Loaders/PlayerLoader";
 
 import RefreshIcon from "@/icons/page-player/refresh.svg";
 import HammerIcon from "@/icons/hammer.svg";
@@ -96,7 +96,7 @@ const PlayerInfo = () => {
   };
 
   if (isLoading || !playerData) {
-    return <Loader/>;
+    return <PlayerLoader/>;
   }
 
   const {id, login, moder, verify, verifyText, mute, regdate, lastlogin, online, playerid, warn} = playerData;

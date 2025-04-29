@@ -12,6 +12,7 @@ import LinkedButton from "@/components/Buttons/LinkedButton";
 import Badge from "@/components/InlineBadge/Badge";
 import headerVariants from './variant';
 import settings from '@/consts/settings';
+import {fetchPlayersCounter} from "@/services/PlayersService";
 
 export const Header = () => {
   const isMobile = isMobileDevice();
@@ -61,28 +62,16 @@ export const Header = () => {
     }
   };
 
-  const getPlayers = () => {
-    const url = process.env.NEXT_PUBLIC_API_ONLINE_URL;
+  const getPlayers = async () => {
+    const response = await fetchPlayersCounter();
 
-    if (!url) {
+    if (!response) {
       console.error('API URL is not defined.');
       return;
+    } else {
+      setOnline(response);
+      setIsBadgeLoading(false);
     }
-
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((jsonResponse) => {
-        setOnline(jsonResponse.data.length);
-        setIsBadgeLoading(false);
-      })
-      .catch((err) => {
-        console.error('Error:', err);
-      });
   };
 
   useEffect(() => {

@@ -4,52 +4,24 @@ import Link from 'next/link';
 import {BadgeRenderer} from '@/components/BadgeRenderer/BadgeRenderer';
 import {Table, Thead, Tr, Td, TBody, Th} from '@/components/Table/Table';
 import PageWrapper from '@/components/PageWrapper/PageWrapper';
-import Loader from '@/modules/Loader/Loader';
-import {usePage500} from '@/shared/hooks/page500';
-import Player from './types';
 import TableLoader from "@/modules/Loaders/TableLoader";
+import {fetchPlayersOnline} from "@/services/PlayersService";
+import PlayersInterface from "@/models/Players";
 
 const Players = () => {
-  const [result, setResult] = useState<Player[] | null>(null);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const triggerPage500 = usePage500();
+  const [result, setResult] = useState<PlayersInterface | null>(null);
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-
-    const getPlayers = async () => {
-      const url = process.env.NEXT_PUBLIC_API_ONLINE_URL;
-
-      if (!url) {
-        return;
-      }
-
+    const fetchPlayers = async () => {
       try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          setIsLoaded(false);
-          console.log(`HTTP error! status: ${response.status}`);
-        }
-        const jsonResponse = await response.json();
-        setResult(jsonResponse.data);
-        setIsLoaded(true);
-      } catch (err) {
-        console.error('Error:', err);
-        setIsLoaded(false);
-      } finally {
-        clearTimeout(timeoutId);
+        const result = await fetchPlayersOnline();
+        setResult(result);
+      } catch (error: any) {
+        console.error(error);
       }
-    };
+    }
 
-    getPlayers();
-
-    timeoutId = setTimeout(() => {
-      if (!isLoaded) {
-        triggerPage500();
-      }
-    }, 4000);
-
-    return () => clearTimeout(timeoutId);
+    fetchPlayers();
   }, []);
   return (
     <Suspense fallback={<TableLoader rows={3} columns={3}/>}>

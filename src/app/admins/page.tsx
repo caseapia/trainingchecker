@@ -2,11 +2,11 @@
 import React, {useEffect, useState} from 'react';
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
 import {Table, Td, TBody, Th, Tr, Thead} from "@/components/Table/Table";
-import Loader from "@/modules/Loader/Loader";
 import Link from "next/link";
 import formatUnixDate from "@/utils/formatUnixDate";
 import AdminList from "@/services/AdminService";
 import Admin from "@/models/Admin";
+import TableLoader from "@/modules/Loaders/TableLoader";
 
 const Page = () => {
   const [isLoaded, setLoaded] = useState<boolean>(false);
@@ -29,28 +29,30 @@ const Page = () => {
 
   return (
     <PageWrapper title="Список администраторов">
-      {isLoaded ? (
-        <Table>
-          <Thead>
-            <Th>ID</Th>
-            <Th>Никнейм</Th>
-            <Th>Последний вход</Th>
-            <Th>Выдано варнов</Th>
-          </Thead>
-          <TBody>
-            {result?.map((item, index) => {
-              return (
-                <Tr key={index}>
-                  <Td>{item.id}</Td>
-                  <Td><Link href={`/player?nickname=${item.login}`}>{item.login}</Link></Td>
-                  <Td>{formatUnixDate(item.lastLogin)}</Td>
-                  <Td>{item.warn}</Td>
-                </Tr>
-              );
-            })}
-          </TBody>
-        </Table>
-      ) : <Loader/>}
+      <Table>
+        {isLoaded ? (
+          <>
+            <Thead>
+              <Th>ID</Th>
+              <Th>Никнейм</Th>
+              <Th>Последний вход</Th>
+              <Th>Выдано варнов</Th>
+            </Thead>
+            <TBody>
+              {result?.map((item, index) => {
+                return (
+                  <Tr key={index}>
+                    <Td>{item.id}</Td>
+                    <Td><Link href={`/player?nickname=${item.login}`}>{item.login}</Link></Td>
+                    <Td>{formatUnixDate(item.lastLogin)}</Td>
+                    <Td>{item.warn}</Td>
+                  </Tr>
+                );
+              })}
+            </TBody>
+          </>
+        ) : <TableLoader rows={4} columns={4}/>}
+      </Table>
     </PageWrapper>
   );
 };
