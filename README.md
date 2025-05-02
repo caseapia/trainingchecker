@@ -6,6 +6,8 @@
 [![GitHub issues](https://img.shields.io/github/issues/caseapia/trainingchecker)](https://github.com/caseapia/trainingchecker/issues)
 [![GitHub license](https://img.shields.io/github/license/caseapia/trainingchecker)](https://github.com/caseapia/trainingchecker/blob/main/LICENSE)
 
+---
+
 ## Описание проекта
 
 **TrainingChecker** — это веб-приложение, разработанное с использованием TypeScript, предназначенное для упрощения взаимодействия с TRAINING API. Оно предоставляет удобный интерфейс для получения информации о сервере TRAINING.
