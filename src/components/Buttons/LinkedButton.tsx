@@ -10,7 +10,7 @@ interface LinkedButton extends ButtonProps {
 
 const LinkedButton: FC<LinkedButton> = ({ href, target, ...props }) => {
   return (
-    <Link href={href} target={target}>
+    <Link href={href} target={target} draggable="false">
       <Button {...props} />
     </Link>
   );
