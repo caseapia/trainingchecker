@@ -25,7 +25,7 @@ const DesktopPreloader: React.FC<LoaderProps> = ({ type, rows, columns }) => {
   return (
     <>
       {type === "Player" && <PlayerLoader/>}
-      {type === "Table" && <TableLoader rows={rows} columns={columns}/>}
+      {type === "Table" && rows !== undefined && columns !== undefined && <TableLoader rows={rows} columns={columns}/>}
       {type === "Landing" && <LandingLoader/>}
     </>
   );
