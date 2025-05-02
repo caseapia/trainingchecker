@@ -18,7 +18,7 @@ import Button from "@/components/Buttons/Button";
 import { Modal } from "@/components/Modal/Modal";
 import { Table, TBody, Td, Th, Thead, Tr } from "@/components/Table/Table";
 import { BadgeRenderer } from "@/components/BadgeRenderer/BadgeRenderer";
-import PlayerLoader from "@/modules/Loaders/PlayerLoader";
+import Loader from "@/modules/Loaders/index";
 
 import RefreshIcon from "@/icons/page-player/refresh.svg";
 import HammerIcon from "@/icons/hammer.svg";
@@ -99,7 +99,7 @@ const PlayerInfo = () => {
   };
 
   if (!playerData) {
-    return <PlayerLoader/>;
+    return <Loader type="Player"/>;
   }
 
   const { id, login, moder, verify, verifyText, mute, regdate, lastlogin, online, playerid, warn } = playerData;

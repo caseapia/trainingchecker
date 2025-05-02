@@ -6,7 +6,7 @@ import Link from "next/link";
 import formatUnixDate from "@/utils/helpers/formatUnixDate";
 import AdminList from "@/services/AdminService";
 import Admin from "@/models/Admin";
-import TableLoader from "@/modules/Loaders/TableLoader";
+import Loader from "@/modules/Loaders/index";
 
 const Page = () => {
   const [isLoaded, setLoaded] = useState<boolean>(false);
@@ -51,7 +51,7 @@ const Page = () => {
               })}
             </TBody>
           </>
-        ) : <TableLoader rows={4} columns={4}/>}
+        ) : <Loader type="Table" rows={4} columns={4}/>}
       </Table>
     </PageWrapper>
   );

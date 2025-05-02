@@ -1,18 +1,21 @@
-"use client";
+import type { Metadata } from "next";
 import "./globals.css";
-import {Header} from "@/modules/Header/Header";
-import {ToastProvider} from "@/components/Toast/context/ToastContext";
+import { Header } from "@/modules/Header/Header";
+import { ToastProvider } from "@/components/Toast/context/ToastContext";
 import ToastInitializer from "@/components/Toast/ToastInitializer";
 import Toast from "@/components/Toast/Toast";
 import React from "react";
-import setTitle from "@/hooks/setTitle";
-import settings from '@/consts/settings';
+import settings from "@/consts/settings";
 import Snow from "@/modules/Snow/Snow";
+import DynamicTitle from "@/hooks/setTitle";
 
-export default function RootLayout({children}: { children: React.ReactNode }) {
-  const snow = settings.find(s => s.option === 'snow')?.value || false;
-  const devTools = settings.find(s => s.option === 'devTools')?.value || false;
-  // setTitle();
+export const metadata: Metadata = {
+  title: "TRAINING CHECKER",
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const snow = settings.find(s => s.option === "snow")?.value || false;
+  const devTools = settings.find(s => s.option === "devTools")?.value || false;
 
   return (
     <html lang="ru">
@@ -22,13 +25,13 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
         href="/assets/icons/favicon.png"
         type="image/x-icon"
       />
-      <title>TRAINING CHECKER</title>
-      <meta name="theme-color" content='#000'/>
+      <meta name="theme-color" content="#000"/>
     </head>
     <body>
     {devTools}
     {snow && <Snow/>}
     <ToastProvider>
+      <DynamicTitle/>
       <Header/>
       {children}
       <Toast/>

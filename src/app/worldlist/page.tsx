@@ -11,7 +11,7 @@ import { toast } from "@/utils/toast";
 import { usePage500 } from "@/shared/hooks/page500";
 import { useTransformTextColor } from "@/utils/helpers/transformToColored";
 import Badge from "@/components/InlineBadge/Badge";
-import TableLoader from "@/modules/Loaders/TableLoader";
+import Loader from "@/modules/Loaders/index";
 import { World } from "@/models/Worlds";
 import { getWorlds } from "@/services/WorldsService";
 
@@ -107,7 +107,7 @@ const WorldList = () => {
   }
 
   return (
-    <Suspense fallback={<TableLoader rows={3} columns={3}/>}>
+    <Suspense fallback={<Loader type="Table" rows={3} columns={3}/>}>
       <PageWrapper title={
         <>
           <span>Список открытых миров</span>
@@ -170,7 +170,7 @@ const WorldList = () => {
               </TBody>
             </>
           ) : (
-            <TableLoader rows={3} columns={3}/>
+            <Loader type="Table" rows={3} columns={3}/>
           )}
         </Table>
       </PageWrapper>

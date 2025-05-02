@@ -1,11 +1,11 @@
 "use client";
-import React, {useEffect, useState, Suspense} from 'react';
-import Link from 'next/link';
-import {BadgeRenderer} from '@/components/BadgeRenderer/BadgeRenderer';
-import {Table, Thead, Tr, Td, TBody, Th} from '@/components/Table/Table';
-import PageWrapper from '@/components/PageWrapper/PageWrapper';
-import TableLoader from "@/modules/Loaders/TableLoader";
-import {fetchPlayersOnline} from "@/services/PlayersService";
+import React, { useEffect, useState, Suspense } from "react";
+import Link from "next/link";
+import { BadgeRenderer } from "@/components/BadgeRenderer/BadgeRenderer";
+import { Table, Thead, Tr, Td, TBody, Th } from "@/components/Table/Table";
+import PageWrapper from "@/components/PageWrapper/PageWrapper";
+import Loader from "@/modules/Loaders/index";
+import { fetchPlayersOnline } from "@/services/PlayersService";
 import PlayersInterface from "@/models/Players";
 
 const Players = () => {
@@ -24,7 +24,7 @@ const Players = () => {
     fetchPlayers();
   }, []);
   return (
-    <Suspense fallback={<TableLoader rows={3} columns={3}/>}>
+    <Suspense fallback={<Loader type="Table" rows={3} columns={3}/>}>
       <PageWrapper title="Список игроков в сети">
         <Table>
           {result ? (
@@ -42,7 +42,7 @@ const Players = () => {
                     <Td>{player.playerid}</Td>
                     <Td>
                       <Link
-                        style={{marginRight: '6px'}}
+                        style={{ marginRight: "6px" }}
                         href={`../player?nickname=${player.login}`}>
                         {player.login}
                       </Link>
@@ -53,7 +53,7 @@ const Players = () => {
                 ))}
               </TBody>
             </>
-          ) : (<TableLoader rows={3} columns={3}/>)}
+          ) : (<Loader type="Table" rows={3} columns={3}/>)}
         </Table>
       </PageWrapper>
     </Suspense>

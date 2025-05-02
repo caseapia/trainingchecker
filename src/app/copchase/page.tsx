@@ -1,10 +1,10 @@
 "use client";
-import React, {useEffect, useState} from 'react';
-import PageWrapper from '@/components/PageWrapper/PageWrapper';
-import {Table, Thead, Tr, Td, Th, TBody} from '@/components/Table/Table';
-import TableLoader from '@/modules/Loaders/TableLoader';
-import {fetchCopchaseLobbies, getStatus} from "@/services/CopchaseService";
-import {CopchaseLobbies} from "@/models/Copchase";
+import React, { useEffect, useState } from "react";
+import PageWrapper from "@/components/PageWrapper/PageWrapper";
+import { Table, Thead, Tr, Td, Th, TBody } from "@/components/Table/Table";
+import Loader from "@/modules/Loaders/index";
+import { fetchCopchaseLobbies, getStatus } from "@/services/CopchaseService";
+import { CopchaseLobbies } from "@/models/Copchase";
 
 const Page = () => {
   const [isLoaded, setLoaded] = useState(false);
@@ -47,7 +47,7 @@ const Page = () => {
               ))}
             </TBody>
           </>
-        ) : <TableLoader rows={2} columns={5}/>}
+        ) : <Loader type="Table" rows={2} columns={5}/>}
       </Table>
     </PageWrapper>
   );
