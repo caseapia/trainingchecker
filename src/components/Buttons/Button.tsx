@@ -26,6 +26,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       size = "full",
       ripple = true,
       glow,
+      ariaLabel,
       ...props
     }, ref
   ) => {
@@ -76,7 +77,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         style={style}
         ref={ref}
         id={id}
-        aria-label={children ? String(children) : ""}
+        aria-label={typeof children === "string" ? children : ariaLabel ? ariaLabel : ""}
         aria-labelledby={ariaLabelledBy}
         aria-disabled={disabled}
         data-ripple={ripple}

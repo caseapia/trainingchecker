@@ -23,6 +23,7 @@ interface ButtonProps {
   ripple?: boolean;
   glow?: GlowVariants;
   children: React.ReactNode;
+  ariaLabel?: string;
 
   [key: string]: any;
 }
