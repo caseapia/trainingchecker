@@ -4,7 +4,7 @@ import { Header } from "@/modules/Header/Header";
 import { ToastProvider } from "@/components/Toast/context/ToastContext";
 import ToastInitializer from "@/components/Toast/ToastInitializer";
 import Toast from "@/components/Toast/Toast";
-import React from "react";
+import React, { Suspense } from "react";
 import settings from "@/consts/settings";
 import Snow from "@/modules/Snow/Snow";
 import DynamicTitle from "@/hooks/setTitle";
@@ -31,7 +31,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     {devTools}
     {snow && <Snow/>}
     <ToastProvider>
-      <DynamicTitle/>
+      <Suspense fallback={null}>
+        <DynamicTitle/>
+      </Suspense>
       <Header/>
       {children}
       <Toast/>
