@@ -1,18 +1,18 @@
 "use client";
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Header.module.scss";
-import {useRouter} from "next/navigation";
-import {AnimatePresence, motion} from "framer-motion";
-import {isMobileDevice} from "@/hooks/isMobileDevice";
-import {Elements} from "@/shared/consts/headerElements";
+import { useRouter } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
+import { isMobileDevice } from "@/hooks/isMobileDevice";
+import { Elements } from "@/shared/consts/headerElements";
 import BootstrapTooltip from "@/components/Styles/TooltipStyles";
-import BarsIcon from '@/icons/components/header/bars.svg';
+import BarsIcon from "@/icons/components/header/bars.svg";
 import Button from "@/components/Buttons/Button";
 import LinkedButton from "@/components/Buttons/LinkedButton";
 import Badge from "@/components/InlineBadge/Badge";
-import headerVariants from './variant';
-import settings from '@/consts/settings';
-import {fetchPlayersCounter} from "@/services/PlayersService";
+import headerVariants from "./variant";
+import settings from "@/consts/settings";
+import { fetchPlayersCounter } from "@/services/PlayersService";
 
 export const Header = () => {
   const isMobile = isMobileDevice();
@@ -22,7 +22,7 @@ export const Header = () => {
   const [online, setOnline] = useState<number>(NaN);
   const windowRef = useRef<HTMLDivElement | null>(null);
   const [isBadgeLoading, setIsBadgeLoading] = useState<boolean>(true);
-  const headerText = settings.find(s => s.option === 'headerText')?.value || '';
+  const headerText = settings.find(s => s.option === "headerText")?.value || "";
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -32,11 +32,11 @@ export const Header = () => {
     }
 
     if (isMobileMenuOpened) {
-      document.addEventListener('mouseup', handleClickOutside);
+      document.addEventListener("mouseup", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mouseup', handleClickOutside);
+      document.removeEventListener("mouseup", handleClickOutside);
     };
   }, [isMobileMenuOpened])
 
@@ -48,9 +48,9 @@ export const Header = () => {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpened((prev) => !prev);
     if (isMobileMenuOpened) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
   };
 
@@ -66,7 +66,7 @@ export const Header = () => {
     const response = await fetchPlayersCounter();
 
     if (!response) {
-      console.error('API URL is not defined.');
+      console.error("API URL is not defined.");
       return;
     } else {
       setOnline(response);
@@ -88,15 +88,15 @@ export const Header = () => {
 
   const getBadgeColor = () => {
     if (online <= 20) {
-      return 'danger';
+      return "danger";
     } else if (online <= 50) {
-      return 'warning';
+      return "warning";
     }
-    return 'blue';
+    return "blue";
   }
 
   const renderMenuItems = () => (
-    Elements.map(({id, link, icon, text, tooltipText, isDisabled, isNew, style}) => (
+    Elements.map(({ id, link, icon: Icon, text, tooltipText, isDisabled, isNew, style }) => (
       <motion.li
         key={id}
         className={activePage === id ? styles.active : ""}
@@ -105,7 +105,7 @@ export const Header = () => {
         {isDisabled ? (
           <BootstrapTooltip title={tooltipText}>
             <span className={styles.disabled_element} style={style}>
-              {icon} {text}
+              <Icon/> {text}
               {isNew && <Badge type="danger" content="new"/>}
             </span>
           </BootstrapTooltip>
@@ -118,11 +118,12 @@ export const Header = () => {
             radius="small"
             classname={styles.linkElement}
             ripple={false}
+            icon={Icon}
           >
             <span>
-              {icon} {text}
+              {text}
               {isNew && <Badge type="danger" content="new"/>}
-              {id === 'players' && <Badge type={getBadgeColor()} handler={online} isLoading={isBadgeLoading}/>}
+              {id === "players" && <Badge type={getBadgeColor()} handler={online} isLoading={isBadgeLoading}/>}
             </span>
           </LinkedButton>
         )}
@@ -144,7 +145,7 @@ export const Header = () => {
             key="mobileMenu"
           >
             <section className={styles.mobileMenu__title}>
-              <h1 translate={'no'}>
+              <h1 translate={"no"}>
                 TRAINING&nbsp;<span className={styles.redspan}>CHECKER</span>
               </h1>
             </section>
@@ -154,17 +155,17 @@ export const Header = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      <header className={`${styles.header} ${!isMobile ? styles.pc : ''}`}>
+      <header className={`${styles.header} ${!isMobile ? styles.pc : ""}`}>
         {isMobile && (
           <Button
             type="Outlined"
             action="button"
             icon={BarsIcon}
             onClick={toggleMobileMenu}
-            style={{width: 'fit-content'}}
+            style={{ width: "fit-content" }}
           />
         )}
-        {!isMobile && <h1 translate={'no'} dangerouslySetInnerHTML={{__html: headerText}}></h1>}
+        {!isMobile && <h1 translate={"no"} dangerouslySetInnerHTML={{ __html: headerText }}></h1>}
         {!isMobile && <ul className={styles.list}>{renderMenuItems()}</ul>}
       </header>
     </>

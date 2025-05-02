@@ -1,10 +1,10 @@
-import XmarkIcon from '@/icons/components/modal/xmark.svg';
-import styles from './Modal.module.scss';
-import Button from '../Buttons/Button';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useRef } from 'react';
-import Props from './types';
-import {backdropVariants, modalVariants} from './variants';
+import XmarkIcon from "@/icons/components/modal/xmark.svg";
+import styles from "./Modal.module.scss";
+import Button from "../Buttons/Button";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import Props from "./types";
+import { backdropVariants, modalVariants } from "./variants";
 
 export const Modal = ({
   title,
@@ -18,7 +18,7 @@ export const Modal = ({
   onClose,
   firstButtonAction,
   secondButtonAction,
-  titleClass = '',
+  titleClass = "",
   titleStyle,
   closeButton = true,
 }: Props) => {
@@ -32,11 +32,11 @@ export const Modal = ({
     };
 
     if (isOpen) {
-      document.addEventListener('mouseup', handleClickOutside);
+      document.addEventListener("mouseup", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mouseup', handleClickOutside);
+      document.removeEventListener("mouseup", handleClickOutside);
     };
   }, [isOpen, onClose]);
 
@@ -51,11 +51,11 @@ export const Modal = ({
           exit="exit"
         >
           <motion.div
-            className={`${styles.Modal} ${className || ''}`}
+            className={`${styles.Modal} ${className || ""}`}
             variants={modalVariants}
             ref={modalRef}
           >
-            <div 
+            <div
               className={`${styles.Header} ${styles[titleClass]}`}
               style={titleStyle}
             >
@@ -73,20 +73,22 @@ export const Modal = ({
                   {firstButtonContent && (
                     <Button
                       type="Violet"
-                      text={firstButtonContent}
                       action="button"
                       icon={FirstIcon}
                       onClick={firstButtonAction}
-                    />
+                    >
+                      {firstButtonContent}
+                    </Button>
                   )}
                   {secondButtonContent && (
                     <Button
                       type="Outlined"
-                      text={secondButtonContent}
                       action="button"
                       icon={SecondIcon}
                       onClick={secondButtonAction}
-                    />
+                    >
+                      {secondButtonContent}
+                    </Button>
                   )}
                 </div>
               )}

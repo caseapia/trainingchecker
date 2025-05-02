@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import {useRouter, useSearchParams} from "next/navigation";
-import {useEffect, useState, useCallback} from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
-import PlayerData from "@/app/player/components/types";
-import {useTransformTextColor} from "@/hooks/useTransofrmTextColor";
-import {toast} from "@/utils/toast";
-import {formatToMinutes} from "@/utils/formatToMinutes";
-import {getDaySuffix, getMinuteSuffix} from "@/utils/getSuffix";
-import {getPlayer, getVerify, getModer} from "@/services/PlayerService";
-import Difference from "@/hooks/difference";
+import UserData from "@/models/Player";
+import { useTransformTextColor } from "@/utils/helpers/transformToColored";
+import { toast } from "@/utils/toast";
+import { formatToMinutes } from "@/utils/helpers/formatToMinutes";
+import { getDaySuffix, getMinuteSuffix } from "@/utils/helpers/getSuffix";
+import { getPlayer, getVerify, getModer } from "@/services/PlayerService";
+import Difference from "@/utils/helpers/difference";
 
 import styles from "./PlayerInfo.module.scss";
-import Color from '@/components/Styles/colors.module.scss';
+import Color from "@/components/Styles/colors.module.scss";
 import Chip from "@/components/Chip/Chip";
 import Button from "@/components/Buttons/Button";
-import {Modal} from "@/components/Modal/Modal";
-import {Table, TBody, Td, Th, Thead, Tr} from "@/components/Table/Table";
-import {BadgeRenderer} from "@/components/BadgeRenderer/BadgeRenderer";
+import { Modal } from "@/components/Modal/Modal";
+import { Table, TBody, Td, Th, Thead, Tr } from "@/components/Table/Table";
+import { BadgeRenderer } from "@/components/BadgeRenderer/BadgeRenderer";
 import PlayerLoader from "@/modules/Loaders/PlayerLoader";
 
 import RefreshIcon from "@/icons/page-player/refresh.svg";
@@ -28,30 +28,33 @@ import CopyIcon from "@/icons/copy.svg";
 const PlayerInfo = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const nickname = searchParams.get('nickname');
+  const nickname = searchParams.get("nickname");
 
-  const [playerData, setPlayerData] = useState<PlayerData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [playerData, setPlayerData] = useState<UserData | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
 
   const transformedVerificationText = useTransformTextColor;
 
   const fetchPlayerData = useCallback(async () => {
     if (!nickname) return;
 
-    setIsLoading(true);
+    if (!isLoading) {
+      setIsLoading(true);
+    }
+
     try {
       const data = await getPlayer(nickname);
-      setPlayerData(data.data);
+      setPlayerData(data);
     } catch (error: any) {
       console.error(error);
 
       if (error?.response?.status === 404) {
-        toast.error(`Игрок с ником ${nickname} не найден. Перенаправляем на главную страницу.`, {lifeTime: 5000});
-        router.push('../');
+        toast.error(`Игрок с ником ${nickname} не найден. Перенаправляем на главную страницу.`, { lifeTime: 5000 });
+        router.push("../");
       } else {
-        toast.error('Ошибка при загрузке данных. Проверьте консоль для подробностей.', {lifeTime: 10000});
+        toast.error("Ошибка при загрузке данных. Проверьте консоль для подробностей.", { lifeTime: 10000 });
       }
     } finally {
       setIsLoading(false);
@@ -60,8 +63,8 @@ const PlayerInfo = () => {
 
   useEffect(() => {
     if (!nickname) {
-      toast.error('Ник игрока не указан. Возвращаем на главную.', {lifeTime: 5000});
-      router.push('../');
+      toast.error("Ник игрока не указан. Возвращаем на главную.", { lifeTime: 5000 });
+      router.push("../");
       return;
     }
     fetchPlayerData();
@@ -70,7 +73,7 @@ const PlayerInfo = () => {
   const refreshData = async () => {
     setIsRefreshing(true);
     await fetchPlayerData();
-    toast.success(`Информация об игроке ${nickname} обновлена`, {lifeTime: 5000});
+    toast.success(`Информация об игроке ${nickname} обновлена`, { lifeTime: 5000 });
     setTimeout(() => setIsRefreshing(false), 5000);
   };
 
@@ -82,24 +85,24 @@ const PlayerInfo = () => {
 
     const punishmentsText = playerData.warn
       .map(warn => `${warn.admin} // ${warn.reason} // ${warn.bantime}`)
-      .join(';\n');
+      .join(";\n");
 
     try {
       await navigator.clipboard.writeText(
         `Список наказаний ${playerData.login} (${playerData.id})\n\n${punishmentsText}\n\nВсего наказаний: ${playerData.warn.length}`
       );
-      toast.success(`Наказания игрока ${playerData.login} скопированы в буфер обмена`, {isByModal: true});
+      toast.success(`Наказания игрока ${playerData.login} скопированы в буфер обмена`, { isByModal: true });
     } catch (error) {
       console.error(error);
-      toast.error('Не удалось скопировать в буфер обмена.');
+      toast.error("Не удалось скопировать в буфер обмена.");
     }
   };
 
-  if (isLoading || !playerData) {
+  if (!playerData) {
     return <PlayerLoader/>;
   }
 
-  const {id, login, moder, verify, verifyText, mute, regdate, lastlogin, online, playerid, warn} = playerData;
+  const { id, login, moder, verify, verifyText, mute, regdate, lastlogin, online, playerid, warn } = playerData;
 
   return (
     <>
@@ -116,7 +119,7 @@ const PlayerInfo = () => {
           : <span className={Color.colorGreen}>Нет</span>}
         </p>
         <p><strong>Дата
-          регистрации:</strong> {regdate === '1970-01-01 03:00:00' ? 'Зарегистрирован до 2018 года' : regdate}</p>
+          регистрации:</strong> {regdate === "1970-01-01 03:00:00" ? "Зарегистрирован до 2018 года" : regdate}</p>
         <p>
           <strong>Дата последнего входа:</strong>{" "}
           {online
@@ -141,20 +144,22 @@ const PlayerInfo = () => {
         <div className={styles.ButtonGroup}>
           <Button
             type="Secondary"
-            text="Обновить"
             action="button"
             icon={RefreshIcon}
             onClick={refreshData}
             disabled={isRefreshing}
-          />
+          >
+            Обновить
+          </Button>
           <Button
             type="Secondary"
-            text="Наказания"
             action="button"
             disabled={!warn.length}
             onClick={() => setIsModalOpen(true)}
             icon={HammerIcon}
-          />
+          >
+            Наказания
+          </Button>
         </div>
       </div>
 
@@ -181,8 +186,14 @@ const PlayerInfo = () => {
             <TBody>
               {warn.map((punish, idx) => (
                 <Tr key={idx}>
-                  <Td><Link href={`?nickname=${punish.admin}`}
-                            onClick={() => setIsModalOpen(false)}>{punish.admin}</Link></Td>
+                  <Td>
+                    <Link
+                      href={`?nickname=${punish.admin}`}
+                      onClick={() => setIsModalOpen(false)}
+                    >
+                      {punish.admin}
+                    </Link>
+                  </Td>
                   <Td>{punish.reason}</Td>
                   <Td>{new Date(punish.bantime).toLocaleString()}</Td>
                 </Tr>

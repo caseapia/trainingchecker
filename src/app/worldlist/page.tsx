@@ -1,26 +1,26 @@
 "use client"
-import {Suspense, useEffect, useState} from 'react';
-import styles from './page.module.scss'
+import { Suspense, useEffect, useState } from "react";
+import styles from "./page.module.scss"
 
-import {Table, Thead, Tr, Td, Th, TBody} from '@/components/Table/Table';
-import Chip from '@/components/Chip/Chip';
-import Button from '@/components/Buttons/Button';
-import worldBlockWorlds from '@/consts/worldBlockWords';
-import PageWrapper from '@/components/PageWrapper/PageWrapper';
-import {toast} from '@/utils/toast';
-import {usePage500} from '@/shared/hooks/page500';
-import {useTransformTextColor} from '@/shared/hooks/useTransofrmTextColor';
-import Badge from '@/components/InlineBadge/Badge';
+import { Table, Thead, Tr, Td, Th, TBody } from "@/components/Table/Table";
+import Chip from "@/components/Chip/Chip";
+import Button from "@/components/Buttons/Button";
+import worldBlockWorlds from "@/consts/worldBlockWords";
+import PageWrapper from "@/components/PageWrapper/PageWrapper";
+import { toast } from "@/utils/toast";
+import { usePage500 } from "@/shared/hooks/page500";
+import { useTransformTextColor } from "@/utils/helpers/transformToColored";
+import Badge from "@/components/InlineBadge/Badge";
 import TableLoader from "@/modules/Loaders/TableLoader";
-import {World} from "@/models/Worlds";
-import {getWorlds} from "@/services/WorldsService";
+import { World } from "@/models/Worlds";
+import { getWorlds } from "@/services/WorldsService";
 
-import BookmarkIcon from '@/icons/page-worldlist/bookmark.svg';
-import CpuIcon from '@/icons/page-worldlist/cpu.svg';
-import AlertIcon from '@/icons/page-worldlist/alertFill.svg';
-import CopyIcon from '@/icons/copy.svg';
-import DeblurIcon from '@/icons/page-worldlist/deblur.svg';
-import LensBlurIcon from '@/icons/page-worldlist/lensBlur.svg';
+import BookmarkIcon from "@/icons/page-worldlist/bookmark.svg";
+import CpuIcon from "@/icons/page-worldlist/cpu.svg";
+import AlertIcon from "@/icons/page-worldlist/alertFill.svg";
+import CopyIcon from "@/icons/copy.svg";
+import DeblurIcon from "@/icons/page-worldlist/deblur.svg";
+import LensBlurIcon from "@/icons/page-worldlist/lensBlur.svg";
 
 const WorldList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -39,7 +39,7 @@ const WorldList = () => {
       setIsLoaded(true);
       setBadgeLoading(false);
     } catch (err) {
-      console.error('Error:', err);
+      console.error("Error:", err);
       setIsLoaded(false);
     }
   };
@@ -61,19 +61,19 @@ const WorldList = () => {
   }, []);
 
   const formatWorldInfo = (world: World) => {
-    const ssmp = world.ssmp ? ' // Использует SSMP' : '';
-    const staticW = world.static ? ' // Статичный' : '';
+    const ssmp = world.ssmp ? " // Использует SSMP" : "";
+    const staticW = world.static ? " // Статичный" : "";
     return `Название: ${world.name} // Игроков: ${world.players}${ssmp}${staticW}`;
   };
 
   const copyWorlds = async () => {
     if (result?.length) {
-      const toCopyContent = result.map(formatWorldInfo).join(';\n');
+      const toCopyContent = result.map(formatWorldInfo).join(";\n");
       const worldsCounter = result.length;
-      const isSensModeActive = sensMode ? 'Чувствительный режим включен' : '';
+      const isSensModeActive = sensMode ? "Чувствительный режим включен" : "";
 
       await navigator.clipboard.writeText(`${isSensModeActive}\n\n${toCopyContent}\n\nВсего миров: ${worldsCounter}`);
-      toast.success('Список открытых миров скопирован в ваш буфер обмена', {lifeTime: 5000});
+      toast.success("Список открытых миров скопирован в ваш буфер обмена", { lifeTime: 5000 });
     }
   };
 
@@ -90,8 +90,8 @@ const WorldList = () => {
       setResult(filteredWorlds);
       setSensMode(!sensMode);
 
-      const message = sensMode ? 'Чувствительный режим выключен' : 'Чувствительный режим включен';
-      toast.success(message, {lifeTime: 5000});
+      const message = sensMode ? "Чувствительный режим выключен" : "Чувствительный режим включен";
+      toast.success(message, { lifeTime: 5000 });
     }
   };
 
@@ -101,9 +101,9 @@ const WorldList = () => {
     const worlds = result?.length ?? 0;
 
     if (worlds < 4) {
-      return 'danger';
+      return "danger";
     }
-    return 'default';
+    return "default";
   }
 
   return (
@@ -121,21 +121,23 @@ const WorldList = () => {
       }>
         <div className={styles.buttonGroup}>
           <Button
-            type='Primary'
-            text='Скопировать'
-            action='button'
+            type="Primary"
+            action="button"
             onClick={copyWorlds}
             icon={CopyIcon}
-          />
+          >
+            Скопировать
+          </Button>
           <Button
-            type='Outlined'
-            text={sensMode ? 'Выключить чувствительный режим' : 'Включить чувствительный режим'}
-            action='button'
+            type="Outlined"
+            action="button"
             onClick={sensitiveMode}
             icon={sensMode ? DeblurIcon : LensBlurIcon}
-            glow='red'
+            glow="red"
             ripple={false}
-          />
+          >
+            {sensMode ? "Выключить чувствительный режим" : "Включить чувствительный режим"}
+          </Button>
         </div>
         <Table>
           {isLoaded ? (

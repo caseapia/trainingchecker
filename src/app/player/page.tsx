@@ -1,7 +1,7 @@
 "use client";
-import {Suspense} from 'react';
-import PageWrapper from '@/components/PageWrapper/PageWrapper';
-import PlayerInfo from "@/app/player/components/PlayerInfo";
+import { Suspense } from "react";
+import PageWrapper from "@/components/PageWrapper/PageWrapper";
+import PlayerInfo from "@/app/player/components/playerinfo/PlayerInfo";
 import PlayerLoader from "@/modules/Loaders/PlayerLoader";
 
 const Result = () => (
