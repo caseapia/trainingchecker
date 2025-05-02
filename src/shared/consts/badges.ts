@@ -1,14 +1,14 @@
 import React, { ReactNode } from "react";
-import CodeIcon from '@/icons/badges/code.svg';
-import MedalIcon from '@/icons/medal.svg';
-import RobotIcon from '@/icons/badges/robot.svg';
-import SatelLiteIcon from '@/icons/badges/satelLite.svg';
-import UserCogIcon from '@/icons/badges/userCog.svg';
-import UserShieldIcon from '@/icons/badges/userShield.svg';
-import UserSlashIcon from '@/icons/badges/userSlash.svg';
-import YoutubeIcon from '@/icons/badges/youtube.svg';
-import PullRequestIcon from '@/icons/badges/pullRequest.svg'
-import TrainingLogoIcon from '@/icons/badges/traininglogo.svg';
+import CodeIcon from "@/icons/badges/code.svg";
+import MedalIcon from "@/icons/medal.svg";
+import RobotIcon from "@/icons/badges/robot.svg";
+import SatelLiteIcon from "@/icons/badges/satelLite.svg";
+import UserCogIcon from "@/icons/badges/userCog.svg";
+import UserShieldIcon from "@/icons/badges/userShield.svg";
+import UserSlashIcon from "@/icons/badges/userSlash.svg";
+import YoutubeIcon from "@/icons/badges/youtube.svg";
+import PullRequestIcon from "@/icons/badges/pullRequest.svg"
+import TrainingLogoIcon from "@/icons/badges/traininglogo.svg";
 
 type BadgeProps = {
   id: number;
@@ -69,16 +69,7 @@ export const staffBadges: BadgeProps[] = [
     category: "staff",
     description: "Этот игрок является разработчиком или помогал в разработке сайта TRAINING CHECKER",
     icon: React.createElement(CodeIcon),
-    accid: 113145,
-    color: "rgb(42 170 104 / 42%)",
-    textColor: "rgb(42 170 104)"
-  },  {
-    id: 5,
-    title: "Помощь в разработке сайта",
-    category: "staff",
-    description: "Этот игрок неоднократно помогал в разработке сайта, предложив или создав что-то своё",
-    icon: React.createElement(PullRequestIcon),
-    accid: [125043, 271552],
+    accid: [113145, 125043, 271552],
     color: "rgb(42 170 104 / 42%)",
     textColor: "rgb(42 170 104)"
   },

@@ -1,8 +1,8 @@
-interface Admins {
+interface Admin {
   id: number;
   login: string;
   lastLogin: number;
   warn: number;
 }
 
-export default Admins;
+export default Admin;

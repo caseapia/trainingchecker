@@ -14,27 +14,32 @@
   position: relative;
   overflow: hidden;
   flex-wrap: nowrap;
-    span {
-      display: flex;
-    }
+  font-family: "Roboto", sans-serif;
+
+  span {
+    display: flex;
+  }
 }
+
 .icon {
-	margin-right: 6px;
-	margin-bottom: 2px;
-	width: 16px;
-	height: 16px;
-	&__loading {
-		height: 18px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		svg {
-			height: 50px !important;
-			margin: 0;
-			padding: 0 !important;
-		}
-	}
+  margin-right: 6px;
+  width: 16px;
+  height: 16px;
+
+  &__loading {
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      height: 50px !important;
+      margin: 0;
+      padding: 0 !important;
+    }
+  }
 }
+
 .ripple {
   position: absolute;
   border-radius: 50%;
@@ -44,6 +49,7 @@
   pointer-events: none;
   opacity: 1;
 }
+
 @keyframes ripple-animation {
   to {
     transform: scale(4);

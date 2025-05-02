@@ -1,3 +1,4 @@
+"use client";
 import { useToast } from "./context/ToastContext";
 import { setToastInstance } from "@/utils/toast";
 

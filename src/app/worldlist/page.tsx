@@ -1,133 +1,113 @@
 "use client"
-import { Suspense, useEffect, useState } from 'react';
-import styles from './page.module.scss'
-import { Table, Thead, Tr, Td, Th, TBody } from '@/components/Table/Table';
-import Chip from '@/components/Chip/Chip';
-import BookmarkIcon from '@/icons/page-worldlist/bookmark.svg';
-import CpuIcon from '@/icons/page-worldlist/cpu.svg';
-import AlertIcon from '@/icons/page-worldlist/alertFill.svg';
-import CopyIcon from '@/icons/copy.svg';
-import DeblurIcon from '@/icons/page-worldlist/deblur.svg';
-import LensBlurIcon from '@/icons/page-worldlist/lensBlur.svg';
-import Button from '@/components/Buttons/Button';
-import worldBlockWorlds from '@/consts/worldBlockWords';
-import PageWrapper from '@/components/PageWrapper/PageWrapper';
-import { toast } from '@/utils/toast';
-import Loader from '@/modules/Loader/Loader';
-import { usePage500 } from '@/shared/hooks/page500';
-import { useTransformTextColor } from '@/shared/hooks/useTransofrmTextColor';
-import Worlds from './types';
-import Badge from '@/components/InlineBadge/Badge';
+import { Suspense, useEffect, useState } from "react";
+import styles from "./page.module.scss"
+
+import { Table, Thead, Tr, Td, Th, TBody } from "@/components/Table/Table";
+import Chip from "@/components/Chip/Chip";
+import Button from "@/components/Buttons/Button";
+import worldBlockWorlds from "@/consts/worldBlockWords";
+import PageWrapper from "@/components/PageWrapper/PageWrapper";
+import { toast } from "@/utils/toast";
+import { usePage500 } from "@/shared/hooks/page500";
+import { useTransformTextColor } from "@/utils/helpers/transformToColored";
+import Badge from "@/components/InlineBadge/Badge";
+import Loader from "@/modules/Loaders/index";
+import { World } from "@/models/Worlds";
+import { getWorlds } from "@/services/WorldsService";
+
+import BookmarkIcon from "@/icons/page-worldlist/bookmark.svg";
+import CpuIcon from "@/icons/page-worldlist/cpu.svg";
+import AlertIcon from "@/icons/page-worldlist/alertFill.svg";
+import CopyIcon from "@/icons/copy.svg";
+import DeblurIcon from "@/icons/page-worldlist/deblur.svg";
+import LensBlurIcon from "@/icons/page-worldlist/lensBlur.svg";
 
 const WorldList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [result, setResult] = useState<Worlds[] | null>(null)
+  const [result, setResult] = useState<World[] | null>(null);
   const [sensMode, setSensMode] = useState<boolean>(false);
-  const [originalWorlds, setOriginalWorlds] = useState<Worlds[] | null>(null);
+  const [originalWorlds, setOriginalWorlds] = useState<World[] | null>(null);
+  const [isBadgeLoading, setBadgeLoading] = useState<boolean>(true);
   const triggerPage500 = usePage500();
-	const transformedWorldName = useTransformTextColor;
+  const transformedWorldName = useTransformTextColor;
+
+  const getWorldsData = async () => {
+    try {
+      const response = await getWorlds();
+      setResult(response.worlds);
+      setOriginalWorlds(response.worlds);
+      setIsLoaded(true);
+      setBadgeLoading(false);
+    } catch (err) {
+      console.error("Error:", err);
+      setIsLoaded(false);
+    }
+  };
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
-  
-    const getWorlds = async () => {
-      const url = process.env.NEXT_PUBLIC_API_WORLDLIST_URL;
-  
-      if (!url) {
-        setIsLoaded(false);
-        return;
-      }
-  
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          console.log(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setResult(data.worlds);
-        setOriginalWorlds(data.worlds);
-        setIsLoaded(true);
-      } catch (err) {
-        console.error('Error:', err);
-        setIsLoaded(false);
-      } finally {
-        clearTimeout(timeoutId);
-      }
-    };
-  
+
     timeoutId = setTimeout(() => {
       if (!isLoaded) {
         triggerPage500();
       }
     }, 8000);
-  
-    getWorlds();
-  
+
+    getWorldsData();
+
     return () => {
       clearTimeout(timeoutId);
     };
   }, []);
 
-  const copyWorlds = () => {
-    if (result && result.length > 0) {
-      const toCopyContent = result
-        .map(world => {
-          const ssmpCondition = world.ssmp;
-          const staticCondition = world.static;
+  const formatWorldInfo = (world: World) => {
+    const ssmp = world.ssmp ? " // Использует SSMP" : "";
+    const staticW = world.static ? " // Статичный" : "";
+    return `Название: ${world.name} // Игроков: ${world.players}${ssmp}${staticW}`;
+  };
 
-          const ssmp = () => {
-            return ssmpCondition ? ' // Использует SSMP' : '';
-          };
-          const staticW = () => {
-            return staticCondition ? ' // Статичный' : ''
-          };
-          return `Название: ${world.name} // Игроков: ${world.players}${ssmp()}${staticW()}`;
-        })
-        .join(';\n')
+  const copyWorlds = async () => {
+    if (result?.length) {
+      const toCopyContent = result.map(formatWorldInfo).join(";\n");
       const worldsCounter = result.length;
-      const isSensModeActive = sensMode ? 'Чувствительный режим включен' : '';
+      const isSensModeActive = sensMode ? "Чувствительный режим включен" : "";
 
-      navigator.clipboard.writeText(`${isSensModeActive}\n\n${toCopyContent}\n\nВсего миров: ${worldsCounter}`);
-      toast.success('Список открытых миров скопирован в ваш буфер обмена', {
-	      lifeTime: 5000,
-      });
+      await navigator.clipboard.writeText(`${isSensModeActive}\n\n${toCopyContent}\n\nВсего миров: ${worldsCounter}`);
+      toast.success("Список открытых миров скопирован в ваш буфер обмена", { lifeTime: 5000 });
     }
   };
 
-  const sensitiveMode = () => {
+  const toggleSensitiveMode = () => {
     if (result) {
-      if (!sensMode) {
-        const filteredWorlds = result.filter(world =>
+      const filteredWorlds = sensMode
+        ? originalWorlds
+        : result.filter(world =>
           !worldBlockWorlds.some(forbiddenWord =>
             world.name.toLowerCase().includes(forbiddenWord)
           )
         );
-        setResult(filteredWorlds);
-        setSensMode(true);
-        toast.success('Чувствительный режим включен', {
-	        lifeTime: 5000,
-				});
-      } else {
-        setResult(originalWorlds);
-        setSensMode(false);
-        toast.success('Чувствительный режим выключен', {
-	        lifeTime: 5000,
-				});
-      }
+
+      setResult(filteredWorlds);
+      setSensMode(!sensMode);
+
+      const message = sensMode ? "Чувствительный режим выключен" : "Чувствительный режим включен";
+      toast.success(message, { lifeTime: 5000 });
     }
-  }
+  };
+
+  const sensitiveMode = () => toggleSensitiveMode();
 
   const getBadgeColor = () => {
     const worlds = result?.length ?? 0;
 
     if (worlds < 4) {
-      return 'danger';
+      return "danger";
     }
-    return 'default';
+    return "default";
   }
 
-  return isLoaded ? (
-    <Suspense fallback={<Loader />}>
+  return (
+    <Suspense fallback={<Loader type="Table" rows={3} columns={3}/>}>
       <PageWrapper title={
         <>
           <span>Список открытых миров</span>
@@ -135,59 +115,66 @@ const WorldList = () => {
             type={getBadgeColor()}
             handler={result?.length}
             size="medium"
+            isLoading={isBadgeLoading}
           />
         </>
       }>
         <div className={styles.buttonGroup}>
-          <Button 
-            type='Primary'
-            text='Скопировать' 
-            action='button' 
-            onClick={copyWorlds} 
+          <Button
+            type="Primary"
+            action="button"
+            onClick={copyWorlds}
             icon={CopyIcon}
-          />
-          <Button 
-            type='Outlined'
-            text={sensMode ? 'Выключить чувствительный режим' : 'Включить чувствительный режим'}
-            action='button' 
+          >
+            Скопировать
+          </Button>
+          <Button
+            type="Outlined"
+            action="button"
             onClick={sensitiveMode}
             icon={sensMode ? DeblurIcon : LensBlurIcon}
-            glow='red'
+            glow="red"
             ripple={false}
-          />
+          >
+            {sensMode ? "Выключить чувствительный режим" : "Включить чувствительный режим"}
+          </Button>
         </div>
         <Table>
-          <Thead>
-            <Tr>
-              <Th>Название</Th>
-              <Th>Онлайн</Th>
-              <Th>Метки</Th>
-            </Tr>
-          </Thead>
-          <TBody>
-            {result && result.length > 0 && (
-              result.map((world, index) => (
-                <Tr key={index}>
-                  <Td>{transformedWorldName(world.name)}</Td>
-                  <Td>{world.players}</Td>
-                  <Td className={styles.ChipContainer}>
-                    {world.static ? (
-                      <Chip label="Статичный" size="small" icon={BookmarkIcon} />
-                    ) : world.ssmp ? (
-                      <Chip label="SSMP" size="small" icon={CpuIcon} />
-                    ) : !(world.static || !world.ssmp) ? null : (
-	                    <Chip label="Нет меток" size="small" icon={AlertIcon}/>
-                    )}
-                  </Td>
+          {isLoaded ? (
+            <>
+              <Thead>
+                <Tr>
+                  <Th>Название</Th>
+                  <Th>Онлайн</Th>
+                  <Th>Метки</Th>
                 </Tr>
-              ))
-            )}
-          </TBody>
+              </Thead>
+              <TBody>
+                {result && result.length > 0 && (
+                  result.map((world, index) => (
+                    <Tr key={index}>
+                      <Td>{transformedWorldName(world.name)}</Td>
+                      <Td>{world.players}</Td>
+                      <Td className={styles.ChipContainer}>
+                        {world.static ? (
+                          <Chip label="Статичный" size="small" icon={BookmarkIcon}/>
+                        ) : world.ssmp ? (
+                          <Chip label="SSMP" size="small" icon={CpuIcon}/>
+                        ) : !(world.static || !world.ssmp) ? null : (
+                          <Chip label="Нет меток" size="small" icon={AlertIcon}/>
+                        )}
+                      </Td>
+                    </Tr>
+                  ))
+                )}
+              </TBody>
+            </>
+          ) : (
+            <Loader type="Table" rows={3} columns={3}/>
+          )}
         </Table>
       </PageWrapper>
     </Suspense>
-  ) : (
-    <Loader />
   )
 }
 

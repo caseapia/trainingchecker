@@ -1,22 +1,23 @@
-import React from 'react';
-import { useToast } from './context/ToastContext';
-import styles from './Toast.module.scss';
-import { AnimatePresence, motion } from 'framer-motion';
-import Lottie from 'lottie-react';
-import success from '@/public/assets/lotties/success.json';
-import defaultNotify from '@/public/assets/lotties/defaultNotify.json'; 
-import error from '@/public/assets/lotties/error.json';
-import ToastAnimation from './variant';
-import XIcon from '@/icons/components/modal/xmark.svg';
+"use client";
+import React from "react";
+import { useToast } from "./context/ToastContext";
+import styles from "./Toast.module.scss";
+import { AnimatePresence, motion } from "framer-motion";
+import Lottie from "lottie-react";
+import success from "@/public/assets/lotties/success.json";
+import defaultNotify from "@/public/assets/lotties/defaultNotify.json";
+import error from "@/public/assets/lotties/error.json";
+import ToastAnimation from "./variant";
+import XIcon from "@/icons/components/modal/xmark.svg";
 
 const Toast = () => {
   const { toasts, removeToast } = useToast();
 
   const getType = (type: any) => {
     switch (type) {
-      case 'success':
+      case "success":
         return styles.success
-      case 'error':
+      case "error":
         return styles.error
       default:
         return styles.default
@@ -34,7 +35,7 @@ const Toast = () => {
         {toasts.map((toast) => (
           <motion.div
             key={toast.id}
-            className={`${styles.Toast} ${getType(toast.type)} ${toast.className || ''} ${toast.clickAction ? styles.clickable : ''} ${toast.isByModal ? styles.ByModal : ''}`}
+            className={`${styles.Toast} ${getType(toast.type)} ${toast.className || ""} ${toast.clickAction ? styles.clickable : ""} ${toast.isByModal ? styles.ByModal : ""}`}
             onClick={toast.clickAction ? () => handleClick(toast) : undefined}
             initial={ToastAnimation.initial}
             animate={ToastAnimation.animate}
@@ -42,22 +43,22 @@ const Toast = () => {
           >
             <section className={styles.IconContainer}>
               <Lottie
-                animationData={toast.type === 'success' ? success : toast.type === 'error' ? error : defaultNotify}
+                animationData={toast.type === "success" ? success : toast.type === "error" ? error : defaultNotify}
                 loop={false}
-                style={{ height: '80px', width: '80px' }}
+                style={{ height: "80px", width: "80px" }}
               />
             </section>
             <section className={styles.Body}>
               <div className={styles.Title}>
-                {toast.type === 'success' ? 'Успешно' : toast.type === 'error' ? 'Ошибка' : 'Внимание'}
+                {toast.type === "success" ? "Успешно" : toast.type === "error" ? "Ошибка" : "Внимание"}
                 {toast.isExitButton && (
-                  <XIcon onClick={() => removeToast(toast.id)} />
+                  <XIcon onClick={() => removeToast(toast.id)}/>
                 )}
               </div>
               {toast.content && <div className={styles.Content}>{toast.content}</div>}
             </section>
             {toast.lifeTime && (
-              <div className={styles.ProgressBar} style={{ animationDuration: `${toast.lifeTime}ms` }} />
+              <div className={styles.ProgressBar} style={{ animationDuration: `${toast.lifeTime}ms` }}/>
             )}
           </motion.div>
         ))}

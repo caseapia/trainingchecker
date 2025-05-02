@@ -1,83 +1,60 @@
 "use client";
-import React, { useEffect, useState, Suspense } from 'react';
-import Link from 'next/link';
-import { BadgeRenderer } from '@/components/BadgeRenderer/BadgeRenderer';
-import { Table, Thead, Tr, Td, TBody, Th } from '@/components/Table/Table';
-import PageWrapper from '@/components/PageWrapper/PageWrapper';
-import Loader from '@/modules/Loader/Loader';
-import { usePage500 } from '@/shared/hooks/page500';
-import Player from './types';
+import React, { useEffect, useState, Suspense } from "react";
+import Link from "next/link";
+import { BadgeRenderer } from "@/components/BadgeRenderer/BadgeRenderer";
+import { Table, Thead, Tr, Td, TBody, Th } from "@/components/Table/Table";
+import PageWrapper from "@/components/PageWrapper/PageWrapper";
+import Loader from "@/modules/Loaders/index";
+import { fetchPlayersOnline } from "@/services/PlayersService";
+import PlayersInterface from "@/models/Players";
 
-function Players() {
-  const [result, setResult] = useState<Player[] | null>(null);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const triggerPage500 = usePage500();
+const Players = () => {
+  const [result, setResult] = useState<PlayersInterface | null>(null);
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-
-    const getPlayers = async () => {
-      const url = process.env.NEXT_PUBLIC_API_ONLINE_URL;
-
-      if (!url) {
-        return;
-      }
-
+    const fetchPlayers = async () => {
       try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          setIsLoaded(false);
-          console.log(`HTTP error! status: ${response.status}`);
-        }
-        const jsonResponse = await response.json();
-        setResult(jsonResponse.data);
-        setIsLoaded(true);
-      } catch (err) {
-        console.error('Error:', err);
-        setIsLoaded(false);
-      } finally {
-        clearTimeout(timeoutId);
+        const result = await fetchPlayersOnline();
+        setResult(result);
+      } catch (error: any) {
+        console.error(error);
       }
-    };
+    }
 
-    getPlayers();
-
-    timeoutId = setTimeout(() => {
-      if (!isLoaded) {
-        triggerPage500();
-      }
-    }, 4000);
-
-    return () => clearTimeout(timeoutId);
+    fetchPlayers();
   }, []);
   return (
-    <Suspense fallback={<Loader />}>
-      <PageWrapper title={`Список игроков в сети`}>
-        {result ? (
-          <Table>
-            <Thead>
-              <Tr>
-                <Th>ID</Th>
-                <Th>Никнейм</Th>
-                <Th>Вошел</Th>
-              </Tr>
-            </Thead>
-            <TBody>
-              {result.map((player) => (
-                <Tr key={player.id}>
-                  <Td>{player.playerid}</Td>
-                  <Td>
-                    <Link style={{ marginRight: '6px' }} href={`../player?nickname=${player.login}`}>{player.login}</Link>
-                    <BadgeRenderer player={player} />
-                  </Td>
-                  <Td>{player.lastlogin}</Td>
+    <Suspense fallback={<Loader type="Table" rows={3} columns={3}/>}>
+      <PageWrapper title="Список игроков в сети">
+        <Table>
+          {result ? (
+            <>
+              <Thead>
+                <Tr>
+                  <Th>ID</Th>
+                  <Th>Никнейм</Th>
+                  <Th>Вошел</Th>
                 </Tr>
-              ))}
-            </TBody>
-          </Table>
-        ) : (
-          <Loader />
-        )}
+              </Thead>
+              <TBody>
+                {result.map((player) => (
+                  <Tr key={player.id}>
+                    <Td>{player.playerid}</Td>
+                    <Td>
+                      <Link
+                        style={{ marginRight: "6px" }}
+                        href={`../player?nickname=${player.login}`}>
+                        {player.login}
+                      </Link>
+                      <BadgeRenderer player={player}/>
+                    </Td>
+                    <Td>{player.lastlogin}</Td>
+                  </Tr>
+                ))}
+              </TBody>
+            </>
+          ) : (<Loader type="Table" rows={3} columns={3}/>)}
+        </Table>
       </PageWrapper>
     </Suspense>
   );

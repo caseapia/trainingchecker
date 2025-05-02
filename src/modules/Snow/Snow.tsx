@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useCallback } from 'react';
-import styles from './Snow.module.scss';
+"use client"
+import React, { useEffect, useRef, useCallback } from "react";
+import styles from "./Snow.module.scss";
 
 interface Vector2 {
   x: number;
@@ -56,7 +57,7 @@ const SnowCanvas: React.FC = () => {
   }, []);
 
   const drawParticles = useCallback((ctx: CanvasRenderingContext2D) => {
-    ctx.fillStyle = 'rgb(255,255,255)';
+    ctx.fillStyle = "rgb(255,255,255)";
     particles.current.forEach((particle) => {
       ctx.fillRect(particle.position.x, particle.position.y, particle.size, particle.size);
     });
@@ -87,7 +88,7 @@ const SnowCanvas: React.FC = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     const loop = () => {
@@ -114,14 +115,14 @@ const SnowCanvas: React.FC = () => {
 
   useEffect(() => {
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener("resize", resizeCanvas);
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener("resize", resizeCanvas);
     };
   }, [resizeCanvas]);
 
-  return <canvas ref={canvasRef} id="particle_canvas" className={styles.canvas} />;
+  return <canvas ref={canvasRef} id="particle_canvas" className={styles.canvas}/>;
 };
 
 export default SnowCanvas;

@@ -1,72 +1,80 @@
 .Primary {
-	$bg: #99384d;
-	$effectbg: lighten($bg, 7%);
-	background: $bg;
-	&:not(.disabled) {
-		&:hover {
-			background: $effectbg
-		}
-		&:focus-visible {
-			box-shadow: rgba($effectbg, 0.5) 0 0 0 4px;
-		}
-	}
+  $bg: #99384d;
+  $effectbg: lighten($bg, 7%);
+  background: $bg;
+
+  &:not(.disabled) {
+    &:hover {
+      background: $effectbg
+    }
+
+    &:focus-visible {
+      box-shadow: rgba($effectbg, 0.5) 0 0 0 4px;
+    }
+  }
 }
+
 .Violet {
-	$bg: #cba6f7;
-	$effectbg: lighten($bg, 7%);
-	background: $bg;
-	color: black;
-	&:not(.disabled) {
-		&:hover {
-			background: $effectbg
-		}
-		&:focus-visible {
-			box-shadow: rgba($effectbg, 0.5) 0 0 0 4px;
-		}
-	}
+  $bg: #cba6f7;
+  $effectbg: lighten($bg, 7%);
+  background: $bg;
+  color: black !important;
+
+  &:not(.disabled) {
+    &:hover {
+      background: $effectbg
+    }
+
+    &:focus-visible {
+      box-shadow: rgba($effectbg, 0.5) 0 0 0 4px;
+    }
+  }
 }
+
 .Transparent {
-	$bg: #99384d;
-	$effectbg: lighten($bg, 7%);
-	background: transparent;
-	border: 2px solid $bg;
-	&:not(.disabled) {
-		&:hover {
-			border-color: $effectbg
-		}
-		&:focus-visible {
-			box-shadow: rgba($effectbg, 0.5) 0 0 0 4px;
-		}
-	}
+  background: transparent;
+
+  &:not(.disabled) {
+    &:hover {
+      background: #202325;
+    }
+  }
 }
+
 .Secondary {
-	border: 1px solid #191B1D;
-	background: transparent;
-	&:not(.disabled) {
-		&:hover {
-			background: #202325;
-			border: 1px solid #191B1D;
-		}
-	}
+  border: 1px solid #191B1D;
+  background: transparent;
+
+  &:not(.disabled) {
+    &:hover {
+      background: #202325;
+      border: 1px solid #191B1D;
+    }
+  }
 }
+
 .Danger {
-	border: 1px solid transparent;
-	background: #FF6955;
-	&:not(.disabled) {
-		&:hover {
-			background: lighten(#FF6955, 7%);
-		}
-	}
+  border: 1px solid transparent;
+  background: #FF6955;
+
+  &:not(.disabled) {
+    &:hover {
+      background: lighten(#FF6955, 7%);
+    }
+  }
 }
+
 .Outlined {
-	background: transparent;
-	&:not(.disabled) {
-		&:hover {
-			background-color: #656c7633;
-		}
-	}
+  background: transparent;
+
+  &:not(.disabled) {
+    &:hover {
+      background-color: #656c7633;
+    }
+  }
 }
+
 .disabled {
-	cursor: not-allowed;
-	opacity: 0.5;
+  cursor: not-allowed;
+  opacity: 0.5;
 }

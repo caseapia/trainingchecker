@@ -1,164 +1,163 @@
 "use client"
-import React, {useEffect, useState, Suspense, useRef} from "react";
+import React, { useEffect, useState, Suspense, useRef } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import BootstrapTooltip from "@/components/Styles/TooltipStyles";
+import { toast } from "@/utils/toast";
 import styles from "./page.module.scss";
-import {Input} from "@/components/Input/Input";
+import { getLastCommit } from "@/services/LandingService";
+
+import { Input } from "@/components/Input/Input";
 import Button from "@/components/Buttons/Button";
-import Loader from "@/modules/Loader/Loader";
 import PageWrapper from "@/components/PageWrapper/PageWrapper";
-import {toast} from "@/utils/toast";
-import UserSearchIcon from '@/icons/page-main/userSearch.svg';
-import UserIcon from '@/icons/user.svg';
-import GithubIcon from '@/icons/page-main/github.svg';
-import {useRouter} from "next/navigation";
+import LandingLoader from "@/modules/Loaders/LandingLoader";
+
+import UserSearchIcon from "@/icons/page-main/userSearch.svg";
+import UserIcon from "@/icons/user.svg";
+import GithubIcon from "@/icons/page-main/github.svg";
 
 export default function Home() {
-  const [isButtonLoading, setIsButtonLoading] = useState<boolean>(false);
-  const [buttonState, setButtonState] = useState<boolean>(true);
-  const [lastUpdate, setLastUpdate] = useState<string>('');
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const InputElement = useRef<HTMLInputElement>(null);
-  const ButtonElement = useRef<HTMLButtonElement>(null);
-  const FormElement = useRef<HTMLFormElement>(null);
   const router = useRouter();
   const dateOptions: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+
+  const [isButtonLoading, setIsButtonLoading] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [lastUpdate, setLastUpdate] = useState("");
+  const [lastCommit, setLastCommit] = useState("");
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const trainingApiLink = (
+    <Link href="https://forum.training-server.com/d/3921-training-api" target="_blank" rel="noopener noreferrer">
+      TRAINING API
+    </Link>
+  );
 
   useEffect(() => {
-    const commits = async () => {
+    const fetchLastCommit = async () => {
       try {
-        const response = await fetch(`https://api.github.com/repos/caseapia/trainingchecker/commits`, {});
-        const headers: HeadersInit = {
-          'Accept': 'application/vnd.github.v3+json',
-        }
-        if (process.env.NEXT_PRIVATE_API_KEY) {
-          headers['Authorization'] = process.env.NEXT_PRIVATE_API_KEY
-        }
-        if (!response.ok) {
-          console.error(`HTTP error! status: ${response.status}`);
-        }
-        const cmts = await response.json();
-
-        if (Array.isArray(cmts) && cmts.length > 0) {
-          const lastcmtday = cmts[0].commit.committer.date;
-          const lastUpdate = new Date(lastcmtday).toLocaleString();
-          setLastUpdate(
-            new Date(lastUpdate).toLocaleDateString(
-              'ru-RU',
-              dateOptions
-            )
-          );
-        }
+        const response = await getLastCommit();
+        setLastUpdate(new Date(response.commit.author.date).toLocaleDateString("ru-RU", dateOptions));
+        setLastCommit(response.commit.message);
         setIsLoaded(true);
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.error(error);
       }
     };
-    commits();
+
+    fetchLastCommit();
   }, []);
 
-  const validation = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (InputElement.current && InputElement.current.value.length === 0) {
-      e.preventDefault();
-      setButtonState(true);
-      toast.error('Вы не заполнили поле никнейма', {
-        lifeTime: 4000,
-      })
+  const validateInput = () => {
+    const input = inputRef.current?.value || "";
+    const hasCyrillic = /[а-яА-ЯёЁ]/.test(input);
+
+    if (hasCyrillic) {
+      toast.error("Никнейм не может содержать кириллицу", { lifeTime: 4000 });
+      inputRef.current!.value = "";
+      setIsButtonDisabled(true);
+    } else if (input.trim() === "") {
+      toast.error("Поле никнейма не может быть пустым", { lifeTime: 4000 });
+      setIsButtonDisabled(true);
     } else {
-      const nickname = InputElement.current?.value.trim();
-      if (nickname) {
-        setIsButtonLoading(true);
-        try {
-          router.push(`/player?nickname=${encodeURIComponent(nickname)}`);
-        } catch (err) {
-          console.error(err);
-        }
-      }
-      setButtonState(true)
       toast.clear();
+      setIsButtonDisabled(false);
     }
-  }
-  const testInput = () => {
-    const cyrillicPattern = /[а-яА-ЯёЁ]/;
-    if (InputElement && InputElement.current) {
-      const textContent = InputElement.current.value || '';
-      if (cyrillicPattern.test(textContent)) {
-        InputElement.current.value = '';
-        toast.error('Никнейм не может состоять из символов кириллицы', {
-          lifeTime: 4000,
-        })
-        setButtonState(true);
-        toast.clear();
-      } else if (InputElement.current && InputElement.current.value.length === 0) {
-        toast.error('Поле никнейма не может быть пустым', {
-          lifeTime: 4000,
-        })
-        setButtonState(true);
-      } else {
-        toast.clear();
-        setButtonState(false)
-      }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const nickname = inputRef.current?.value.trim();
+
+    if (!nickname) {
+      toast.error("Вы не заполнили поле никнейма", { lifeTime: 4000 });
+      setIsButtonDisabled(true);
+      return;
     }
-  }
+
+    setIsButtonLoading(true);
+    router.push(`/player?nickname=${encodeURIComponent(nickname)}`);
+  };
 
   return (
-    <>
-      <Suspense fallback={<Loader/>}>
-        <PageWrapper classname={styles.gapped}>
-          {isLoaded ?
-            (
-              <>
-                <div className={styles.readmeWrapper}>
-                  <p style={{textAlign: 'center'}}>SAMP сервер <a href="https://training-server.com/" target="_blank"
-                                                                  rel="noopener noreferrer">TRAINING</a> не имеет
-                    отношения к созданию данного сайта. Этот сайт является частным и использует<br/><a
-                      href="https://forum.training-server.com/d/3921-training-api" target="_blank"
-                      rel="noopener noreferrer">TRAINING API</a> в соответствии с разрешением его создателя.</p><br/>
-                  <p>Разработано для упрощения работы с <a href="https://forum.training-server.com/d/3921-training-api"
-                                                           target="_blank" rel="noopener noreferrer">TRAINING API</a>.
-                  </p>
-                  <p>Этот проект имеет открытый исходный код, вы всегда можете дополнить его или исправить,
-                    используя<br/><a href="https://github.com/1dontkillme/trainingchecker" target="_blank"
-                                     rel="noopener noreferrer"><GithubIcon width={16} height={16}/> исходный код на
-                      GitHub</a>.</p><br/>
-                  <p>Последнее обновление было {lastUpdate}</p>
-                </div>
-                <form
-                  onSubmit={validation}
-                  method="get"
-                  className={styles.FormContainer}
-                  ref={FormElement}
-                >
-                  <Input
-                    icon={UserIcon}
-                    label="Введите никнейм игрока"
-                    type="text"
-                    name="nickname"
-                    ref={InputElement}
-                    onChange={testInput}
-                    required={true}
-                    marginBottom={7}
-                  />
-                  <Button
-                    type="Primary"
-                    text="Проверить"
-                    action="submit"
-                    icon={UserSearchIcon}
-                    ref={ButtonElement}
-                    disabled={buttonState}
-                    isLoading={isButtonLoading}
-                  />
-                </form>
-              </>
-            ) : (
-              <Loader/>
-            )
-          }
-        </PageWrapper>
-      </Suspense>
-    </>
+    <Suspense fallback={<LandingLoader/>}>
+      <PageWrapper classname={styles.gapped}>
+        {isLoaded ? (
+          <>
+            <div className={styles.readmeWrapper}>
+              <section style={{ textAlign: "center", marginBottom: "1rem" }}>
+                <p>
+                  SAMP сервер{" "}
+                  <Link href="https://training-server.com/" target="_blank" rel="noopener noreferrer">
+                    TRAINING
+                  </Link>{" "}
+                  не имеет отношения к созданию данного сайта. Этот сайт является частным и
+                  использует {trainingApiLink} с разрешения его создателя.
+                </p>
+              </section>
+              <section style={{ marginBottom: "1rem" }}>
+                <p>Разработано для упрощения работы с {trainingApiLink}.</p>
+              </section>
+              <section style={{ marginBottom: "1rem" }}>
+                <p>
+                  Этот проект имеет открытый исходный код. Вы можете дополнить или исправить его через{" "}
+                  <a
+                    href="https://github.com/1dontkillme/trainingchecker"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <GithubIcon width={16} height={16}/> исходный код на GitHub
+                  </a>.
+                </p>
+              </section>
+              <section>
+                <p>
+                  Последнее обновление было{" "}
+                  <BootstrapTooltip title={lastCommit}>
+                    <span className={styles.lastUpdate}>{lastUpdate}</span>
+                  </BootstrapTooltip>
+                </p>
+              </section>
+            </div>
+
+            <form
+              onSubmit={handleSubmit}
+              method="get"
+              className={styles.FormContainer}
+              ref={formRef}
+            >
+              <Input
+                icon={UserIcon}
+                label="Введите никнейм игрока"
+                type="text"
+                name="nickname"
+                ref={inputRef}
+                onChange={validateInput}
+                required
+                marginBottom={7}
+              />
+              <Button
+                type="Primary"
+                action="submit"
+                icon={UserSearchIcon}
+                ref={null}
+                disabled={isButtonDisabled}
+                isLoading={isButtonLoading}
+              >
+                Проверить
+              </Button>
+            </form>
+          </>
+        ) : (
+          <LandingLoader/>
+        )}
+      </PageWrapper>
+    </Suspense>
   );
 }

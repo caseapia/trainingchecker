@@ -1,10 +1,11 @@
 .header {
   margin-top: 40px;
   width: 100%;
-    &.pc {
-      display: grid;
-      place-items: center;
-    }
+
+  &.pc {
+    display: grid;
+    place-items: center;
+  }
 }
 
 .badge {
@@ -16,9 +17,10 @@
   font-size: 75%;
   border-radius: 0.25rem;
   text-transform: uppercase;
-    &.new {
-      background: #d2322d;
-    }
+
+  &.new {
+    background: #d2322d;
+  }
 }
 
 .list {
@@ -28,43 +30,50 @@
   padding: 10px;
   background: #1a17175c;
   border-radius: 15px;
-    li {
-      margin-right: 5px;
-      transition: .5s;
-      &:last-of-type { 
-        margin-right: 0; 
+
+  li {
+    margin-right: 5px;
+    transition: .5s;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+
+    .linkElement, .disabled_element {
+      padding-inline: 8px;
+      padding-block: 6px;
+      opacity: .9;
+      font-weight: 440;
+
+      &:not(.active) {
+        &:hover {
+          background-color: #656c7633;
+          opacity: 1 !important;
+        }
       }
-      .linkElement, .disabled_element {
-        padding-inline: 8px;
-        padding-block: 6px;
-        opacity: .9;
-        font-weight: 440;
-          &:not(.active) {
-            &:hover {
-              background-color: #656c7633;
-              opacity: 1 !important;
-            }
-          }
-          span {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-              svg {
-                margin-right: 5px;
-                width: 16px;
-                height: 16px;
-              }
-          }
+
+      span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+          margin-right: 5px;
+          width: 16px;
+          height: 16px;
+        }
       }
     }
+  }
 }
 
 .active {
   border-radius: 6px;
-    a {
-      background-color: #656c7633;
-      opacity: 1 !important;
-    }
+
+  button {
+    background-color: #656c7633;
+    opacity: 1 !important;
+  }
 }
 
 .disabled_element {
@@ -73,11 +82,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-    svg {
-      margin-right: 5px;
-      width: 16px;
-      height: 16px;
-    }
+
+  svg {
+    margin-right: 5px;
+    width: 16px;
+    height: 16px;
+  }
 }
 
 .mobileHeader {
@@ -87,6 +97,7 @@
   align-items: center;
   width: 100%;
 }
+
 .mobileMenu {
   position: absolute;
   z-index: 99999;
@@ -94,48 +105,56 @@
   height: 100%;
   background: #1a1717;
   padding: 15px;
-    &__title {
-      text-align: center;
-      margin-bottom: 10px;
-        h1 {
-          font-size: 120%;
-        }
+
+  &__title {
+    text-align: center;
+    margin-bottom: 10px;
+
+    h1 {
+      font-size: 120%;
     }
-    li {
-      list-style-type: none;
-      margin-bottom: 7px;
-      white-space: nowrap;
-        &:last-of-type {
-          margin-bottom: 0;
-        }
+  }
+
+  li {
+    list-style-type: none;
+    margin-bottom: 7px;
+    white-space: nowrap;
+
+    &:last-of-type {
+      margin-bottom: 0;
     }
-    a, .disabled_element {
-      color: var(--color-defaultText) !important;
-      transition: .4s;
-      font-weight: 440;
+  }
+
+  a, .disabled_element {
+    color: var(--color-defaultText) !important;
+    transition: .4s;
+    font-weight: 440;
+    display: flex;
+    align-items: center;
+    text-decoration: none !important;
+    border-radius: 6px;
+    padding-inline: 8px;
+    padding-block: 6px;
+    opacity: .9;
+    justify-content: flex-start !important;
+
+    &:not(.active) {
+      &:hover {
+        background-color: #656c7633;
+        opacity: 1;
+      }
+    }
+
+    span {
       display: flex;
+      justify-content: center;
       align-items: center;
-      text-decoration: none !important;
-      border-radius: 6px;
-      padding-inline: 8px;
-      padding-block: 6px;
-      opacity: .9;
-      justify-content: flex-start !important;
-        &:not(.active) {
-          &:hover {
-            background-color: #656c7633;
-            opacity: 1;
-          }
-        }
-        span {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-            svg {
-              margin-right: 5px;
-              width: 16px;
-              height: 16px;
-            }
-        }
+
+      svg {
+        margin-right: 5px;
+        width: 16px;
+        height: 16px;
+      }
     }
+  }
 }
