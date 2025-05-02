@@ -100,7 +100,6 @@ export const Header = () => {
       <motion.li
         key={id}
         className={activePage === id ? styles.active : ""}
-        draggable="false"
       >
         {isDisabled ? (
           <BootstrapTooltip title={tooltipText}>
@@ -119,6 +118,7 @@ export const Header = () => {
             classname={styles.linkElement}
             ripple={false}
             icon={Icon}
+            ariaLabel={text}
           >
             <span>
               {text}
