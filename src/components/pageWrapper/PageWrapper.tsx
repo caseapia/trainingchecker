@@ -1,6 +1,7 @@
-import React from 'react';
-import styles from './PageWrapper.module.scss';
-import Props from './types';
+"use client"
+import React from "react";
+import styles from "./PageWrapper.module.scss";
+import Props from "./types";
 
 const PageWrapper = ({ title, children, classname, style }: Props) => {
   return (

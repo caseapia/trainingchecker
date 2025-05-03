@@ -46,9 +46,11 @@ const PlayerInfo = () => {
 
       if (error?.response?.status === 404) {
         toast.error(`Игрок с ником ${nickname} не найден. Перенаправляем на главную страницу.`, { lifeTime: 5000 });
-        router.push("../");
+        router.push("/");
       } else {
-        toast.error("Ошибка при загрузке данных. Проверьте консоль для подробностей.", { lifeTime: 10000 });
+        if (nickname !== ".") {
+          toast.error("Ошибка при загрузке данных. Проверьте консоль для подробностей.", { lifeTime: 10000 });
+        }
       }
     } finally {
       setIsLoading(false);
@@ -56,13 +58,8 @@ const PlayerInfo = () => {
   }, [nickname, router]);
 
   useEffect(() => {
-    if (!nickname) {
-      toast.error("Ник игрока не указан. Возвращаем на главную.", { lifeTime: 5000 });
-      router.push("../");
-      return;
-    }
     fetchPlayerData();
-  }, [nickname, fetchPlayerData, router]);
+  }, []);
 
   const refreshData = async () => {
     setIsRefreshing(true);
@@ -99,7 +96,7 @@ const PlayerInfo = () => {
         {verify > 0 && (
           <p><strong>Текст верификации:</strong> {textFormatter(verifyText)}</p>
         )}
-        <p><strong>Время мута:</strong>
+        <p><strong>Время мута:</strong>{" "}
           {mute
             ? `${formatToMinutes(mute)} ${getMinuteSuffix(formatToMinutes(mute))}`
             : <span className={Color.colorGreen}>Нет</span>
