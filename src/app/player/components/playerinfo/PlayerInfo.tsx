@@ -58,7 +58,17 @@ const PlayerInfo = () => {
   }, [nickname, router]);
 
   useEffect(() => {
-    fetchPlayerData();
+    if (nickname === ".") {
+      toast.error("Вы не можете совершить поиск по данному никнейму", { lifeTime: 6000 })
+      router.push("/");
+      return;
+    } else if (!nickname) {
+      toast.error("Ник игрока не указан. Возвращаем на главную.", { lifeTime: 6000 });
+      router.push("/");
+      return;
+    } else {
+      fetchPlayerData();
+    }
   }, []);
 
   const refreshData = async () => {
