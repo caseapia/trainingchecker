@@ -102,9 +102,11 @@ export const Header = () => {
       >
         {isDisabled ? (
           <BootstrapTooltip title={tooltipText}>
-            <span className={styles.disabled_element} style={style}>
+            <span className={styles.disabled_element}
+              style={style}>
               <Icon/> {text}
-              {isNew && <Badge type="danger" content="new"/>}
+              {isNew && <Badge type="danger"
+                content="new"/>}
             </span>
           </BootstrapTooltip>
         ) : (
@@ -121,8 +123,11 @@ export const Header = () => {
           >
             <span>
               {text}
-              {isNew && <Badge type="danger" content="new"/>}
-              {id === "players" && <Badge type={getBadgeColor()} handler={online} isLoading={isBadgeLoading}/>}
+              {isNew && <Badge type="danger"
+                content="new"/>}
+              {id === "players" && <Badge type={getBadgeColor()}
+                handler={online}
+                isLoading={isBadgeLoading}/>}
             </span>
           </LinkedButton>
         )}
@@ -164,7 +169,7 @@ export const Header = () => {
             style={{ width: "fit-content" }}
           />
         )}
-        {!isMobile && <h1 translate="no">TRAINING <span className={Color.colorRed}></span></h1>}
+        {!isMobile && <h1 translate="no">TRAINING <span className={Color.colorRed}>CHECKER</span></h1>}
         {!isMobile && <ul className={styles.list}>{renderMenuItems()}</ul>}
       </header>
     </>
