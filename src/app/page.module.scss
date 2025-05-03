@@ -5,6 +5,7 @@
 .readmeWrapper {
   width: 50%;
   line-height: 25px;
+  text-wrap: balance;
   @media screen and (max-width: 767px) {
     width: 90%;
   }
