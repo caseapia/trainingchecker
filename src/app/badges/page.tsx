@@ -1,9 +1,9 @@
 "use client"
-import React, {Suspense} from 'react'
-import styles from './page.module.scss';
-import { allBadges } from '@/shared/consts/badges';
-import { Table, Thead, Tr, Td, TBody } from '@/components/Table/Table';
-import PageWrapper from '@/components/PageWrapper/PageWrapper';
+import React, { Suspense } from "react"
+import styles from "./page.module.scss";
+import { allBadges } from "@/shared/consts/badges";
+import { Table, Thead, Tr, Td, TBody } from "@/components/table/Table";
+import PageWrapper from "@/components/pageWrapper/PageWrapper";
 
 const page = () => {
   const sortedBadges = allBadges.sort((a, b) => {
@@ -29,7 +29,7 @@ const page = () => {
                 <Td>
                   <span
                     className={styles.badge}
-                    style={{backgroundColor: badge.color}}
+                    style={{ backgroundColor: badge.color }}
                     key={badge.id || badge.title}
                   >
                   <span
@@ -40,7 +40,7 @@ const page = () => {
                   </span>
                   </span>
                 </Td>
-                <Td style={{color: badge.textColor}}>{badge.title}</Td>
+                <Td style={{ color: badge.textColor }}>{badge.title}</Td>
                 <Td>{badge.description}</Td>
               </Tr>
             ))}

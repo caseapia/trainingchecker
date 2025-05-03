@@ -1,6 +1,6 @@
 import XmarkIcon from "@/icons/components/modal/xmark.svg";
 import styles from "./Modal.module.scss";
-import Button from "../Buttons/Button";
+import Button from "@/components/button/Button";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import Props from "./types";

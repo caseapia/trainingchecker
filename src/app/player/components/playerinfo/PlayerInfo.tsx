@@ -2,9 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
-import Link from "next/link";
 import UserData from "@/models/Player";
-import { useTransformTextColor } from "@/utils/helpers/transformToColored";
 import { toast } from "@/utils/toast";
 import { formatToMinutes } from "@/utils/helpers/formatToMinutes";
 import { getDaySuffix, getMinuteSuffix } from "@/utils/helpers/getSuffix";
@@ -12,18 +10,16 @@ import { getPlayer, getVerify, getModer } from "@/services/PlayerService";
 import Difference from "@/utils/helpers/difference";
 
 import styles from "./PlayerInfo.module.scss";
-import Color from "@/components/Styles/colors.module.scss";
-import Chip from "@/components/Chip/Chip";
-import Button from "@/components/Buttons/Button";
-import { Modal } from "@/components/Modal/Modal";
-import { Table, TBody, Td, Th, Thead, Tr } from "@/components/Table/Table";
-import { BadgeRenderer } from "@/components/BadgeRenderer/BadgeRenderer";
+import Color from "@/components/styles/colors.module.scss";
+import Chip from "@/components/chip/Chip";
+import Button from "@/components/button/Button";
+import { BadgeRenderer } from "@/components/badgeRenderer/BadgeRenderer";
 import Loader from "@/modules/Loaders/index";
 
 import RefreshIcon from "@/icons/page-player/refresh.svg";
 import HammerIcon from "@/icons/hammer.svg";
-import CheckIcon from "@/icons/checkCircle.svg";
-import CopyIcon from "@/icons/copy.svg";
+import textFormatter from "@/utils/helpers/textFormatter";
+import Punishment from "@/app/player/components/punishments/punishment";
 
 const PlayerInfo = () => {
   const router = useRouter();
@@ -34,8 +30,6 @@ const PlayerInfo = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
-
-  const transformedVerificationText = useTransformTextColor;
 
   const fetchPlayerData = useCallback(async () => {
     if (!nickname) return;
@@ -77,32 +71,23 @@ const PlayerInfo = () => {
     setTimeout(() => setIsRefreshing(false), 5000);
   };
 
-  const copyPunishments = async () => {
-    if (!playerData?.warn.length) {
-      toast.error(`У игрока ${playerData?.login} нет наказаний.`);
-      return;
-    }
-
-    const punishmentsText = playerData.warn
-      .map(warn => `${warn.admin} // ${warn.reason} // ${warn.bantime}`)
-      .join(";\n");
-
-    try {
-      await navigator.clipboard.writeText(
-        `Список наказаний ${playerData.login} (${playerData.id})\n\n${punishmentsText}\n\nВсего наказаний: ${playerData.warn.length}`
-      );
-      toast.success(`Наказания игрока ${playerData.login} скопированы в буфер обмена`, { isByModal: true });
-    } catch (error) {
-      console.error(error);
-      toast.error("Не удалось скопировать в буфер обмена.");
-    }
-  };
-
   if (!playerData) {
     return <Loader type="Player"/>;
   }
 
-  const { id, login, moder, verify, verifyText, mute, regdate, lastlogin, online, playerid, warn } = playerData;
+  const {
+    id = "",
+    login = "",
+    moder,
+    verify,
+    verifyText,
+    mute,
+    regdate,
+    lastlogin,
+    online,
+    playerid,
+    warn = [],
+  } = playerData || {};
 
   return (
     <>
@@ -112,14 +97,17 @@ const PlayerInfo = () => {
         <strong>Должность:</strong> <Chip label={getModer(moder)}/>
         <p><strong>Верификация:</strong> {`${getVerify(verify)} (ID: ${verify})`}</p>
         {verify > 0 && (
-          <p><strong>Текст верификации:</strong> {transformedVerificationText(verifyText)}</p>
+          <p><strong>Текст верификации:</strong> {textFormatter(verifyText)}</p>
         )}
-        <p><strong>Время мута:</strong> {mute
-          ? `${formatToMinutes(mute)} ${getMinuteSuffix(formatToMinutes(mute))}`
-          : <span className={Color.colorGreen}>Нет</span>}
+        <p><strong>Время мута:</strong>
+          {mute
+            ? `${formatToMinutes(mute)} ${getMinuteSuffix(formatToMinutes(mute))}`
+            : <span className={Color.colorGreen}>Нет</span>
+          }
         </p>
-        <p><strong>Дата
-          регистрации:</strong> {regdate === "1970-01-01 03:00:00" ? "Зарегистрирован до 2018 года" : regdate}</p>
+        <p><strong>Дата регистрации:</strong>
+          {regdate === "1970-01-01 03:00:00" ? "Зарегистрирован до 2018 года" : regdate}
+        </p>
         <p>
           <strong>Дата последнего входа:</strong>{" "}
           {online
@@ -163,47 +151,14 @@ const PlayerInfo = () => {
         </div>
       </div>
 
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        title={`Список наказаний ${login} (${id})`}
-        firstButtonContent="Скопировать"
-        firstButtonIcon={CopyIcon}
-        firstButtonAction={copyPunishments}
-        secondButtonContent="Закрыть"
-        secondButtonIcon={CheckIcon}
-        secondButtonAction={() => setIsModalOpen(false)}
-      >
-        {warn.length > 0 ? (
-          <Table width={100}>
-            <Thead>
-              <Tr>
-                <Th>Администратор</Th>
-                <Th>Причина</Th>
-                <Th>Дата</Th>
-              </Tr>
-            </Thead>
-            <TBody>
-              {warn.map((punish, idx) => (
-                <Tr key={idx}>
-                  <Td>
-                    <Link
-                      href={`?nickname=${punish.admin}`}
-                      onClick={() => setIsModalOpen(false)}
-                    >
-                      {punish.admin}
-                    </Link>
-                  </Td>
-                  <Td>{punish.reason}</Td>
-                  <Td>{new Date(punish.bantime).toLocaleString()}</Td>
-                </Tr>
-              ))}
-            </TBody>
-          </Table>
-        ) : (
-          <p className={`${Color.colorDanger} ${styles.noPunish}`}>У игрока нет наказаний</p>
-        )}
-      </Modal>
+      {isModalOpen && (
+        <Punishment
+          id={Number(id)}
+          login={login}
+          warns={warn}
+          status={isModalOpen}
+          statusAction={setIsModalOpen}/>
+      )}
     </>
   );
 };

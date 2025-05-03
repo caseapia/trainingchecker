@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import PageWrapper from "@/components/PageWrapper/PageWrapper";
-import { Table, Td, TBody, Th, Tr, Thead } from "@/components/Table/Table";
+import PageWrapper from "@/components/pageWrapper/PageWrapper";
+import { Table, Td, TBody, Th, Tr, Thead } from "@/components/table/Table";
 import Link from "next/link";
 import formatUnixDate from "@/utils/helpers/formatUnixDate";
 import AdminList from "@/services/AdminService";

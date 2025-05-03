@@ -1,9 +1,9 @@
 "use client"
 import MoodSadIcon from "@/icons/page-not-found/moodSad.svg";
 import styles from "./not-found.module.scss";
-import Button from "@/components/Buttons/Button";
-import LinkedButton from "@/components/Buttons/LinkedButton";
-import PageWrapper from "@/components/PageWrapper/PageWrapper";
+import Button from "@/components/button/Button";
+import LinkedButton from "@/components/button/LinkedButton";
+import PageWrapper from "@/components/pageWrapper/PageWrapper";
 import { Suspense } from "react";
 
 const NotFound = () => {

@@ -1,9 +1,9 @@
 "use client";
 import React, { useEffect, useState, Suspense } from "react";
 import Link from "next/link";
-import { BadgeRenderer } from "@/components/BadgeRenderer/BadgeRenderer";
-import { Table, Thead, Tr, Td, TBody, Th } from "@/components/Table/Table";
-import PageWrapper from "@/components/PageWrapper/PageWrapper";
+import { BadgeRenderer } from "@/components/badgeRenderer/BadgeRenderer";
+import { Table, Thead, Tr, Td, TBody, Th } from "@/components/table/Table";
+import PageWrapper from "@/components/pageWrapper/PageWrapper";
 import Loader from "@/modules/Loaders/index";
 import { fetchPlayersOnline } from "@/services/PlayersService";
 import PlayersInterface from "@/models/Players";

@@ -5,14 +5,14 @@ import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { isMobileDevice } from "@/hooks/isMobileDevice";
 import { Elements } from "@/shared/consts/headerElements";
-import BootstrapTooltip from "@/components/Styles/TooltipStyles";
+import BootstrapTooltip from "@/components/styles/TooltipStyles";
 import BarsIcon from "@/icons/components/header/bars.svg";
-import Button from "@/components/Buttons/Button";
-import LinkedButton from "@/components/Buttons/LinkedButton";
-import Badge from "@/components/InlineBadge/Badge";
+import Button from "@/components/button/Button";
+import LinkedButton from "@/components/button/LinkedButton";
+import Badge from "@/components/inlineBadge/Badge";
 import headerVariants from "./variant";
-import settings from "@/consts/settings";
 import { fetchPlayersCounter } from "@/services/PlayersService";
+import Color from "@/components/styles/colors.module.scss";
 
 export const Header = () => {
   const isMobile = isMobileDevice();
@@ -22,7 +22,6 @@ export const Header = () => {
   const [online, setOnline] = useState<number>(NaN);
   const windowRef = useRef<HTMLDivElement | null>(null);
   const [isBadgeLoading, setIsBadgeLoading] = useState<boolean>(true);
-  const headerText = settings.find(s => s.option === "headerText")?.value || "";
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -165,7 +164,7 @@ export const Header = () => {
             style={{ width: "fit-content" }}
           />
         )}
-        {!isMobile && <h1 translate={"no"} dangerouslySetInnerHTML={{ __html: headerText }}></h1>}
+        {!isMobile && <h1 translate="no">TRAINING <span className={Color.colorRed}></span></h1>}
         {!isMobile && <ul className={styles.list}>{renderMenuItems()}</ul>}
       </header>
     </>

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import ButtonProps from "@/components/Buttons/types";
+import ButtonProps from "@/components/button/types";
 import Link from "next/link";
-import Button from "@/components/Buttons/Button";
+import Button from "@/components/button/Button";
 
 interface LinkedButton extends ButtonProps {
   href: string;
