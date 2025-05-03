@@ -1,6 +1,6 @@
 "use client";
 import { Suspense } from "react";
-import PageWrapper from "@/components/PageWrapper/PageWrapper";
+import PageWrapper from "@/components/pageWrapper/PageWrapper";
 import PlayerInfo from "@/app/player/components/playerinfo/PlayerInfo";
 import PlayerLoader from "@/modules/Loaders/PlayerLoader";
 

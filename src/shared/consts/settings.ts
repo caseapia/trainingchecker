@@ -1,25 +1,21 @@
-import {ReactNode} from "react";
+import { ReactNode } from "react";
 
 type props = {
-  option: 'loadTime' | 'snow' | 'headerText' | 'devTools' | 'themeColor';
+  option: "loadTime" | "snow" | "devTools" | "themeColor";
   value: string | number | ReactNode | boolean | bigint;
 }[];
 
 export const settings: props = [
   {
-    option: 'loadTime',
+    option: "loadTime",
     value: 2000,
   },
   {
-    option: 'snow',
+    option: "snow",
     value: false,
   },
   {
-    option: 'headerText',
-    value: 'TRAINING&nbsp;<span style="color: var(--color-red)">CHECKER</span>',
-  },
-  {
-    option: 'devTools',
+    option: "devTools",
     value: false,
   },
 ];

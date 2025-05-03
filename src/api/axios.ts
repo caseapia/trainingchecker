@@ -9,7 +9,7 @@ if (!TRAININGAPI_URL || !CHRONOAPI_URL) {
 
 const createApiClient = (baseURL: string) => axios.create({
   baseURL,
-  headers: {"Content-Type": "application/json"},
+  headers: { "Content-Type": "application/json" },
 });
 
 export const trainingApiClient = createApiClient(TRAININGAPI_URL);

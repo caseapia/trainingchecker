@@ -2,14 +2,14 @@
 import React, { useEffect, useState, Suspense, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import BootstrapTooltip from "@/components/Styles/TooltipStyles";
+import BootstrapTooltip from "@/components/styles/TooltipStyles";
 import { toast } from "@/utils/toast";
 import styles from "./page.module.scss";
 import { getLastCommit } from "@/services/LandingService";
 
-import { Input } from "@/components/Input/Input";
-import Button from "@/components/Buttons/Button";
-import PageWrapper from "@/components/PageWrapper/PageWrapper";
+import { Input } from "@/components/input/Input";
+import Button from "@/components/button/Button";
+import PageWrapper from "@/components/pageWrapper/PageWrapper";
 import LandingLoader from "@/modules/Loaders/LandingLoader";
 
 import UserSearchIcon from "@/icons/page-main/userSearch.svg";
@@ -34,7 +34,9 @@ export default function Home() {
   const formRef = useRef<HTMLFormElement>(null);
 
   const trainingApiLink = (
-    <Link href="https://forum.training-server.com/d/3921-training-api" target="_blank" rel="noopener noreferrer">
+    <Link href="https://forum.training-server.com/d/3921-training-api"
+      target="_blank"
+      rel="noopener noreferrer">
       TRAINING API
     </Link>
   );
@@ -43,6 +45,7 @@ export default function Home() {
     const fetchLastCommit = async () => {
       try {
         const response = await getLastCommit();
+
         setLastUpdate(new Date(response.commit.author.date).toLocaleDateString("ru-RU", dateOptions));
         setLastCommit(response.commit.message);
         setIsLoaded(true);
@@ -94,7 +97,9 @@ export default function Home() {
               <section style={{ textAlign: "center", marginBottom: "1rem" }}>
                 <p>
                   SAMP сервер{" "}
-                  <Link href="https://training-server.com/" target="_blank" rel="noopener noreferrer">
+                  <Link href="https://training-server.com/"
+                    target="_blank"
+                    rel="noopener noreferrer">
                     TRAINING
                   </Link>{" "}
                   не имеет отношения к созданию данного сайта. Этот сайт является частным и
@@ -112,7 +117,8 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <GithubIcon width={16} height={16}/> исходный код на GitHub
+                    <GithubIcon width={16}
+                      height={16}/> исходный код на GitHub
                   </a>.
                 </p>
               </section>
@@ -140,6 +146,7 @@ export default function Home() {
                 ref={inputRef}
                 onChange={validateInput}
                 required
+                disabled={isButtonLoading}
                 marginBottom={7}
               />
               <Button

@@ -2,15 +2,15 @@
 import { Suspense, useEffect, useState } from "react";
 import styles from "./page.module.scss"
 
-import { Table, Thead, Tr, Td, Th, TBody } from "@/components/Table/Table";
-import Chip from "@/components/Chip/Chip";
-import Button from "@/components/Buttons/Button";
+import { Table, Thead, Tr, Td, Th, TBody } from "@/components/table/Table";
+import Chip from "@/components/chip/Chip";
+import Button from "@/components/button/Button";
 import worldBlockWorlds from "@/consts/worldBlockWords";
-import PageWrapper from "@/components/PageWrapper/PageWrapper";
+import PageWrapper from "@/components/pageWrapper/PageWrapper";
 import { toast } from "@/utils/toast";
 import { usePage500 } from "@/shared/hooks/page500";
-import { useTransformTextColor } from "@/utils/helpers/transformToColored";
-import Badge from "@/components/InlineBadge/Badge";
+import textFormatter from "@/utils/helpers/textFormatter";
+import Badge from "@/components/inlineBadge/Badge";
 import Loader from "@/modules/Loaders/index";
 import { World } from "@/models/Worlds";
 import { getWorlds } from "@/services/WorldsService";
@@ -29,7 +29,6 @@ const WorldList = () => {
   const [originalWorlds, setOriginalWorlds] = useState<World[] | null>(null);
   const [isBadgeLoading, setBadgeLoading] = useState<boolean>(true);
   const triggerPage500 = usePage500();
-  const transformedWorldName = useTransformTextColor;
 
   const getWorldsData = async () => {
     try {
@@ -107,7 +106,9 @@ const WorldList = () => {
   }
 
   return (
-    <Suspense fallback={<Loader type="Table" rows={3} columns={3}/>}>
+    <Suspense fallback={<Loader type="Table"
+      rows={3}
+      columns={3}/>}>
       <PageWrapper title={
         <>
           <span>Список открытых миров</span>
@@ -153,15 +154,21 @@ const WorldList = () => {
                 {result && result.length > 0 && (
                   result.map((world, index) => (
                     <Tr key={index}>
-                      <Td>{transformedWorldName(world.name)}</Td>
+                      <Td>{textFormatter(world.name)}</Td>
                       <Td>{world.players}</Td>
                       <Td className={styles.ChipContainer}>
                         {world.static ? (
-                          <Chip label="Статичный" size="small" icon={BookmarkIcon}/>
+                          <Chip label="Статичный"
+                            size="small"
+                            icon={BookmarkIcon}/>
                         ) : world.ssmp ? (
-                          <Chip label="SSMP" size="small" icon={CpuIcon}/>
+                          <Chip label="SSMP"
+                            size="small"
+                            icon={CpuIcon}/>
                         ) : !(world.static || !world.ssmp) ? null : (
-                          <Chip label="Нет меток" size="small" icon={AlertIcon}/>
+                          <Chip label="Нет меток"
+                            size="small"
+                            icon={AlertIcon}/>
                         )}
                       </Td>
                     </Tr>
@@ -170,7 +177,9 @@ const WorldList = () => {
               </TBody>
             </>
           ) : (
-            <Loader type="Table" rows={3} columns={3}/>
+            <Loader type="Table"
+              rows={3}
+              columns={3}/>
           )}
         </Table>
       </PageWrapper>

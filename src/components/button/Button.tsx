@@ -1,13 +1,12 @@
-import React, { forwardRef, MouseEvent } from "react";
-import styles from "./Button.module.scss";
-import btnTypes from "./types.module.scss";
-import btnRadius from "./radius.module.scss";
-import btnSizes from "./sizes.module.scss";
+import React, { forwardRef, MouseEvent, useId } from "react";
+import styles from "./styles/Button.module.scss";
+import btnTypes from "./styles/types.module.scss";
+import btnRadius from "./styles/radius.module.scss";
+import btnSizes from "./styles/sizes.module.scss";
 import ButtonProps from "./types";
 import Lottie from "lottie-react";
 import LoadingIcon from "@/icons/LoadingIcon.json";
-import btnGlowes from "@/components/Buttons/glow.module.scss";
-import useId from "@mui/utils/useId";
+import btnGlowes from "@/components/button/styles/glow.module.scss";
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({
