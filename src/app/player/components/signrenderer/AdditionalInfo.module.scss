@@ -1,0 +1,25 @@
+.labels {
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #242830;
+  padding-right: 10px;
+  margin-right: 10px;
+
+  p {
+    border-bottom: 1px solid #242830;
+  }
+}
+
+.content {
+  flex: 1;
+
+  p {
+    border-bottom: 1px solid #242830;
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+}

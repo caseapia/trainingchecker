@@ -21,6 +21,7 @@ export const Modal = ({
   titleClass = "",
   titleStyle,
   closeButton = true,
+  classNameBody = "",
 }: Props) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
@@ -41,9 +42,10 @@ export const Modal = ({
   }, [isOpen, onClose]);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {isOpen && (
         <motion.div
+          key="backdrop"
           className={styles.FadeOut}
           variants={backdropVariants}
           initial="hidden"
@@ -51,6 +53,7 @@ export const Modal = ({
           exit="exit"
         >
           <motion.div
+            key="modal"
             className={`${styles.Modal} ${className || ""}`}
             variants={modalVariants}
             ref={modalRef}
@@ -66,7 +69,7 @@ export const Modal = ({
                 </div>
               )}
             </div>
-            <div className={styles.Body}>{children}</div>
+            <div className={`${styles.Body} ${classNameBody}`}>{children}</div>
             <div className={styles.Footer}>
               {(firstButtonContent || secondButtonContent) && (
                 <div className={styles.ButtonGroup}>

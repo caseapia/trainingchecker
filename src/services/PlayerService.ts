@@ -1,5 +1,5 @@
-import UserData from "@/models/Player";
-import { trainingApiClient } from "@/api/axios";
+import UserData, { AdditionalUserData } from "@/models/Player";
+import { chronoApiClient, trainingApiClient } from "@/api/axios";
 
 const Verifications: { [key: number]: string } = {
   1: "Ютубер",
@@ -20,6 +20,22 @@ export async function getPlayer(nickname: string | null): Promise<UserData> {
   const response = await trainingApiClient.get(`/user/${nickname}`);
 
   return response.data.data;
+}
+
+export async function getAdditionalInfo(nickname: string | null): Promise<AdditionalUserData> {
+  const response = await chronoApiClient.get(`/user?nickname=${nickname}`);
+  const data = response.data;
+
+  return {
+    premium: data.premium,
+    bonus_points: data.bonus_points,
+    social_credits: data.social_credits,
+    cop_chase_rating: data.cop_chase_rating,
+    achievement: data.achievement,
+    prefix: data.prefix,
+    descriptions: data.descriptions,
+    updated_at: data.updated_at,
+  };
 }
 
 export function getVerify(verify: number): string {

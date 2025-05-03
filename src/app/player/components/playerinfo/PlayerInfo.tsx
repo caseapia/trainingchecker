@@ -8,6 +8,7 @@ import { formatToMinutes } from "@/utils/helpers/formatToMinutes";
 import { getDaySuffix, getMinuteSuffix } from "@/utils/helpers/getSuffix";
 import { getPlayer, getVerify, getModer } from "@/services/PlayerService";
 import Difference from "@/utils/helpers/difference";
+import { AnimatePresence, motion } from "framer-motion";
 
 import styles from "./PlayerInfo.module.scss";
 import Color from "@/components/styles/colors.module.scss";
@@ -20,6 +21,7 @@ import RefreshIcon from "@/icons/page-player/refresh.svg";
 import HammerIcon from "@/icons/hammer.svg";
 import textFormatter from "@/utils/helpers/textFormatter";
 import Punishment from "@/app/player/components/punishments/punishment";
+import AdditionalInfo from "@/app/player/components/signrenderer/AdditionalInfo";
 
 const PlayerInfo = () => {
   const router = useRouter();
@@ -60,11 +62,11 @@ const PlayerInfo = () => {
   useEffect(() => {
     if (nickname === ".") {
       toast.error("Вы не можете совершить поиск по данному никнейму", { lifeTime: 6000 })
-      router.push("/");
+      router.push("../");
       return;
     } else if (!nickname) {
       toast.error("Ник игрока не указан. Возвращаем на главную.", { lifeTime: 6000 });
-      router.push("/");
+      router.push("../");
       return;
     } else {
       fetchPlayerData();
@@ -97,8 +99,12 @@ const PlayerInfo = () => {
   } = playerData || {};
 
   return (
-    <>
-      <div className={styles.ResultWrapper}>
+    <AnimatePresence>
+      <motion.div
+        initial={{ left: -30, opacity: 0 }}
+        animate={{ left: 0, opacity: 1 }}
+        className={styles.ResultWrapper}
+      >
         <p><strong>ID:</strong> {id}</p>
         <p><strong>Ник:</strong> {login}</p>
         <strong>Должность:</strong> <Chip label={getModer(moder)}/>
@@ -112,7 +118,7 @@ const PlayerInfo = () => {
             : <span className={Color.colorGreen}>Нет</span>
           }
         </p>
-        <p><strong>Дата регистрации:</strong>
+        <p><strong>Дата регистрации:</strong>{" "}
           {regdate === "1970-01-01 03:00:00" ? "Зарегистрирован до 2018 года" : regdate}
         </p>
         <p>
@@ -136,6 +142,11 @@ const PlayerInfo = () => {
         <h5 className={styles.h5}>Значки</h5>
         <BadgeRenderer player={playerData}/>
 
+        <hr className={styles.ProfileLine}/>
+
+        <h5 className={styles.h5}>Дополнительная информация</h5>
+        <AdditionalInfo nickname={nickname}/>
+
         <div className={styles.ButtonGroup}>
           <Button
             type="Secondary"
@@ -156,17 +167,16 @@ const PlayerInfo = () => {
             Наказания
           </Button>
         </div>
-      </div>
+      </motion.div>
 
-      {isModalOpen && (
-        <Punishment
-          id={Number(id)}
-          login={login}
-          warns={warn}
-          status={isModalOpen}
-          statusAction={setIsModalOpen}/>
-      )}
-    </>
+      <Punishment
+        id={Number(id)}
+        login={login}
+        warns={warn}
+        status={isModalOpen}
+        statusAction={setIsModalOpen}
+      />
+    </AnimatePresence>
   );
 };
 
