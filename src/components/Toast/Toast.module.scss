@@ -9,9 +9,11 @@
   z-index: 1001;
   bottom: 0;
 }
+
 .ByModal {
   z-index: 9999999 !important;
 }
+
 .Toast {
   padding: 12px 20px;
   position: relative;
@@ -21,80 +23,95 @@
   flex-direction: row;
   z-index: 1002;
   user-select: none;
-    @media screen and (max-width: 767px) {
-      width: 97%;
+  @media screen and (max-width: 767px) {
+    width: 97%;
+  }
+
+  &.default {
+    background: #1339FF;
+
+    svg g path {
+      fill: var(--color-white);
     }
-    &.default {
-      background: #1339FF;
-	      svg g path {
-		      fill: var(--color-white);
-	      }
-    }
-    &.error {
-      background: #99384d;
-    }
-    &.warning {
-      background: rgba(245, 123, 0, 0.705);
-    }
-    &.success {
-      background: rgb(56, 142, 60);
-    }
-    .IconContainer {
-      font-size: 45px;
-      margin-right: 25px;
-      display: flex;
-      align-items: center;
-      opacity: .8;
-    }
-    .Title {
-      font-weight: bolder;
-      font-size: 18px;
-      color: var(--color-white);
-      margin-bottom: 3px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      svg {
-        width: 24px;
-        height: 24px;
-        opacity: .6;
-        transition: opacity .2s;
-        cursor: pointer;
-        &:hover {
-          opacity: 1;
-        }
+  }
+
+  &.error {
+    background: #99384d;
+  }
+
+  &.warning {
+    background: rgba(245, 123, 0, 0.705);
+  }
+
+  &.success {
+    background: rgb(56, 142, 60);
+  }
+
+  .IconContainer {
+    font-size: 45px;
+    margin-right: 25px;
+    display: flex;
+    align-items: center;
+    opacity: .8;
+  }
+
+  .Title {
+    font-weight: bolder;
+    font-size: 18px;
+    color: var(--color-white);
+    margin-bottom: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      opacity: .6;
+      transition: opacity .2s;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 1;
       }
     }
-    .Body {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      justify-content: space-evenly;
-    }
-    .Footer {
-      font-weight: bold;
-      opacity: .7;
-      font-size: 13px;
-      float: right;
-    }
-    .ProgressBar {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      height: 4px;
-      background: #ffffffbb;
-      width: 100%;
-      animation: progressBar;
-      border-radius: 4px;
-    }
-    &:first-of-type {
-      margin-top: 0;
-    }
+  }
+
+  .Body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+
+  .Footer {
+    font-weight: bold;
+    opacity: .7;
+    font-size: 13px;
+    float: right;
+  }
+
+  .ProgressBar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background: #ffffffbb;
+    width: 100%;
+    animation: progressBar;
+    border-radius: 4px;
+  }
+
+  &:first-of-type {
+    margin-top: 0;
+  }
 }
+
 .clickable {
   cursor: pointer;
   transition: scale .2s;
+
   &:hover {
     scale: 1.1;
   }

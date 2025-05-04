@@ -8,7 +8,6 @@ import { formatToMinutes } from "@/utils/helpers/formatToMinutes";
 import { getDaySuffix, getMinuteSuffix } from "@/utils/helpers/getSuffix";
 import { getPlayer, getVerify, getModer } from "@/services/PlayerService";
 import Difference from "@/utils/helpers/difference";
-import { AnimatePresence, motion } from "framer-motion";
 
 import styles from "./PlayerInfo.module.scss";
 import Color from "@/components/styles/colors.module.scss";
@@ -99,12 +98,8 @@ const PlayerInfo = () => {
   } = playerData || {};
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ left: -30, opacity: 0 }}
-        animate={{ left: 0, opacity: 1 }}
-        className={styles.ResultWrapper}
-      >
+    <>
+      <div className={styles.ResultWrapper}>
         <p><strong>ID:</strong> {id}</p>
         <p><strong>Ник:</strong> {login}</p>
         <strong>Должность:</strong> <Chip label={getModer(moder)}/>
@@ -167,7 +162,7 @@ const PlayerInfo = () => {
             Наказания
           </Button>
         </div>
-      </motion.div>
+      </div>
 
       <Punishment
         id={Number(id)}
@@ -176,7 +171,7 @@ const PlayerInfo = () => {
         status={isModalOpen}
         statusAction={setIsModalOpen}
       />
-    </AnimatePresence>
+    </>
   );
 };
 
