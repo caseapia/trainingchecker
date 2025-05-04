@@ -6,6 +6,7 @@ import Link from "next/link";
 import CopyIcon from "@/icons/copy.svg";
 import CheckIcon from "@/icons/checkCircle.svg";
 import { toast } from "@/utils/toast";
+import { AnimatePresence } from "framer-motion";
 
 const Punishment: FC<Types> = ({ id, login, warns, statusAction, status }) => {
 
@@ -30,7 +31,7 @@ const Punishment: FC<Types> = ({ id, login, warns, statusAction, status }) => {
     }
   };
 
-  return (
+  return status && (
     <Modal
       isOpen={status}
       onClose={() => statusAction(false)}

@@ -20,6 +20,7 @@ import RefreshIcon from "@/icons/page-player/refresh.svg";
 import HammerIcon from "@/icons/hammer.svg";
 import textFormatter from "@/utils/helpers/textFormatter";
 import Punishment from "@/app/player/components/punishments/punishment";
+import AdditionalInfo from "@/app/player/components/signrenderer/AdditionalInfo";
 
 const PlayerInfo = () => {
   const router = useRouter();
@@ -46,9 +47,11 @@ const PlayerInfo = () => {
 
       if (error?.response?.status === 404) {
         toast.error(`Игрок с ником ${nickname} не найден. Перенаправляем на главную страницу.`, { lifeTime: 5000 });
-        router.push("../");
+        router.push("/");
       } else {
-        toast.error("Ошибка при загрузке данных. Проверьте консоль для подробностей.", { lifeTime: 10000 });
+        if (nickname !== ".") {
+          toast.error("Ошибка при загрузке данных. Проверьте консоль для подробностей.", { lifeTime: 10000 });
+        }
       }
     } finally {
       setIsLoading(false);
@@ -56,13 +59,18 @@ const PlayerInfo = () => {
   }, [nickname, router]);
 
   useEffect(() => {
-    if (!nickname) {
-      toast.error("Ник игрока не указан. Возвращаем на главную.", { lifeTime: 5000 });
+    if (nickname === ".") {
+      toast.error("Вы не можете совершить поиск по данному никнейму", { lifeTime: 6000 })
       router.push("../");
       return;
+    } else if (!nickname) {
+      toast.error("Ник игрока не указан. Возвращаем на главную.", { lifeTime: 6000 });
+      router.push("../");
+      return;
+    } else {
+      fetchPlayerData();
     }
-    fetchPlayerData();
-  }, [nickname, fetchPlayerData, router]);
+  }, []);
 
   const refreshData = async () => {
     setIsRefreshing(true);
@@ -99,13 +107,13 @@ const PlayerInfo = () => {
         {verify > 0 && (
           <p><strong>Текст верификации:</strong> {textFormatter(verifyText)}</p>
         )}
-        <p><strong>Время мута:</strong>
+        <p><strong>Время мута:</strong>{" "}
           {mute
             ? `${formatToMinutes(mute)} ${getMinuteSuffix(formatToMinutes(mute))}`
             : <span className={Color.colorGreen}>Нет</span>
           }
         </p>
-        <p><strong>Дата регистрации:</strong>
+        <p><strong>Дата регистрации:</strong>{" "}
           {regdate === "1970-01-01 03:00:00" ? "Зарегистрирован до 2018 года" : regdate}
         </p>
         <p>
@@ -129,6 +137,11 @@ const PlayerInfo = () => {
         <h5 className={styles.h5}>Значки</h5>
         <BadgeRenderer player={playerData}/>
 
+        <hr className={styles.ProfileLine}/>
+
+        <h5 className={styles.h5}>Дополнительная информация</h5>
+        <AdditionalInfo nickname={nickname}/>
+
         <div className={styles.ButtonGroup}>
           <Button
             type="Secondary"
@@ -151,14 +164,13 @@ const PlayerInfo = () => {
         </div>
       </div>
 
-      {isModalOpen && (
-        <Punishment
-          id={Number(id)}
-          login={login}
-          warns={warn}
-          status={isModalOpen}
-          statusAction={setIsModalOpen}/>
-      )}
+      <Punishment
+        id={Number(id)}
+        login={login}
+        warns={warn}
+        status={isModalOpen}
+        statusAction={setIsModalOpen}
+      />
     </>
   );
 };

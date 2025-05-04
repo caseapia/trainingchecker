@@ -19,4 +19,16 @@ interface UserData {
   warn: WarnEntry[];
 }
 
+interface AdditionalUserData {
+  premium: number;
+  bonus_points: number;
+  social_credits: number;
+  cop_chase_rating: number;
+  achievement: string;
+  prefix: string;
+  descriptions: string[];
+  updated_at: number;
+}
+
 export default UserData;
+export type { AdditionalUserData };

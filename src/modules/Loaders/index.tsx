@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import PlayerLoader from "@/modules/Loaders/PlayerLoader";
 import TableLoader from "@/modules/Loaders/TableLoader";
@@ -15,7 +16,9 @@ type LoaderProps = {
 const Loader: React.FC<LoaderProps> = ({ type, rows, columns }) => {
   const isMobile: boolean = isMobileDevice();
   return !isMobile ? (
-    <DesktopPreloader type={type} rows={rows} columns={columns}/>
+    <DesktopPreloader type={type}
+      rows={rows}
+      columns={columns}/>
   ) : (
     <MobilePreloader/>
   );
@@ -25,7 +28,8 @@ const DesktopPreloader: React.FC<LoaderProps> = ({ type, rows, columns }) => {
   return (
     <>
       {type === "Player" && <PlayerLoader/>}
-      {type === "Table" && rows !== undefined && columns !== undefined && <TableLoader rows={rows} columns={columns}/>}
+      {type === "Table" && rows !== undefined && columns !== undefined && <TableLoader rows={rows}
+        columns={columns}/>}
       {type === "Landing" && <LandingLoader/>}
     </>
   );
@@ -33,7 +37,8 @@ const DesktopPreloader: React.FC<LoaderProps> = ({ type, rows, columns }) => {
 
 const MobilePreloader = () => (
   <div style={{ display: "grid", placeItems: "center" }}>
-    <Lottie animationData={Preloader} style={{ height: "200px", width: "200px" }}/>
+    <Lottie animationData={Preloader}
+      style={{ height: "200px", width: "200px" }}/>
   </div>
 );
 
