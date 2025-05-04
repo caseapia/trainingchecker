@@ -41,6 +41,12 @@ export const Modal = ({
     };
   }, [isOpen, onClose]);
 
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && isOpen) {
+      onClose();
+    }
+  })
+
   return (
     <AnimatePresence mode="wait">
       {isOpen && (

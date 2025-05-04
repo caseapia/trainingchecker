@@ -20,7 +20,7 @@ import RefreshIcon from "@/icons/page-player/refresh.svg";
 import HammerIcon from "@/icons/hammer.svg";
 import textFormatter from "@/utils/helpers/textFormatter";
 import Punishment from "@/app/player/components/punishments/punishment";
-import AdditionalInfo from "@/app/player/components/signrenderer/AdditionalInfo";
+import AdditionalInfo from "@/app/player/components/additionalinfo/AdditionalInfo";
 
 const PlayerInfo = () => {
   const router = useRouter();
