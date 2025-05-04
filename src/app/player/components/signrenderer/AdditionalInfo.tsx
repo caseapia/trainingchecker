@@ -8,7 +8,6 @@ import { AdditionalUserData } from "@/models/Player";
 import { Modal } from "@/components/modal/Modal";
 import { toast } from "@/utils/toast";
 import styles from "./AdditionalInfo.module.scss";
-import formatUnixDate from "@/utils/helpers/formatUnixDate";
 import textFormatter from "@/utils/helpers/textFormatter";
 
 const AdditionalInfo: FC<Types> = ({ nickname }) => {
@@ -49,20 +48,20 @@ const AdditionalInfo: FC<Types> = ({ nickname }) => {
         title={`Дополнительная информация ${nickname}`}
       >
         <section className={styles.labels}>
-          <p>Прикрепленное достижение</p>
-          <p>Бонусные поинты</p>
-          <p>Рейтинг Copchase</p>
+          {info?.achievement && <p>Прикрепленное достижение</p>}
+          {info?.bonus_points && <p>Бонусные поинты</p>}
+          {info?.cop_chase_rating && <p>Рейтинг Copchase</p>}
           {/*{info?.descriptions && <p>Подписи</p>}*/}
           {info?.prefix && <p>Префикс</p>}
-          <p>Социальный кредит</p>
+          {info?.social_credits && <p>Социальный кредит</p>}
         </section>
         <section className={styles.content}>
-          <p>{textFormatter(String(info?.achievement))}</p>
-          <p>{info?.bonus_points}</p>
-          <p>{info?.cop_chase_rating}</p>
+          {info?.achievement && <p>{textFormatter(String(info?.achievement))}</p>}
+          {info?.bonus_points && <p>{info?.bonus_points}</p>}
+          {info?.cop_chase_rating && <p>{info?.cop_chase_rating}</p>}
           {/*{info?.descriptions && <p>{info?.descriptions}</p>}*/}
-          {info?.prefix && <p>{info?.prefix}</p>}
-          <p>{info?.social_credits}</p>
+          {info?.prefix && <p>{textFormatter(info?.prefix)}</p>}
+          {info?.social_credits && <p>{info?.social_credits}</p>}
         </section>
       </Modal>
     </>
