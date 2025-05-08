@@ -124,7 +124,11 @@ const PlayerInfo = () => {
           </div>
         ))}
       </section>
-      <section className={styles.buttonGroup}></section>
+      <section className={styles.buttonGroup}>
+        <Button>Дополнительная информация</Button>
+        <Button>Обновить</Button>
+        <Button type="Danger">Наказания</Button>
+      </section>
     </div>
   );
 };
