@@ -11,6 +11,12 @@ import DynamicTitle from "@/hooks/setTitle";
 
 export const metadata: Metadata = {
   title: "TRAINING CHECKER",
+  openGraph: {
+    title: "TRAINING CHECKER",
+    description: "This site is designed to help players of the SAMP server." +
+      "TRAINING Sandbox using open API"
+  },
+  description: "This site is designed to help players of the SAMP server." + "TRAINING Sandbox using open API",
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -27,6 +33,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       />
       <meta name="theme-color"
         content="#000"/>
+      <meta name="google-site-verification"
+        content="ye4U3g0JgocxViEhe5dO9xTYoYZ8qs6iynjUgOcDXhY"/>
     </head>
     <body>
     {devTools}
