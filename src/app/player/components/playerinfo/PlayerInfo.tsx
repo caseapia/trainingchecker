@@ -104,11 +104,12 @@ const PlayerInfo = () => {
     { title: "Верификация", key: `${getVerify(verify)} (ID: ${verify})` },
     { title: "Статус", key: <Chip label={getModer(moder)}/> },
     { title: "Текст верификации", key: textFormatter(verifyText) },
-    { title: "Время мута", key: `${mute ? mute : "Нет"}` },
+    { title: "Время мута", key: `${mute ? mute : "Нет"}`, className: mute ? Color.colorRed : "" },
     { title: "Дата регистрации", key: regdate === "1970-01-01 03:00:00" ? "Зарегистрирован до 2018 года" : regdate },
     {
       title: "Последний вход",
-      key: `${online ? `Сейчас в сети (ID: ${playerid})` : `${lastlogin} (${Difference(lastlogin)} ${getDaySuffix(Difference(lastlogin))} назад)`}`
+      key: `${online ? `Сейчас в сети (ID: ${playerid})` : `${lastlogin} (${Difference(lastlogin)} ${getDaySuffix(Difference(lastlogin))} назад)`}`,
+      className: online ? Color.colorGreen : ""
     }
   ]
 
