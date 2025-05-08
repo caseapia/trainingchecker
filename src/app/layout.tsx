@@ -8,6 +8,7 @@ import React, { ReactNode, Suspense } from "react";
 import settings from "@/consts/settings";
 import Snow from "@/modules/Snow/Snow";
 import DynamicTitle from "@/hooks/setTitle";
+import { Inter } from "next/font/google"
 
 export const metadata: Metadata = {
   title: "TRAINING CHECKER",
@@ -19,12 +20,18 @@ export const metadata: Metadata = {
   description: "This site is designed to help players of the SAMP server." + "TRAINING Sandbox using open API",
 }
 
+const inter = Inter({
+  subsets: ["cyrillic", "latin"],
+  preload: true,
+})
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   const snow = settings.find(s => s.option === "snow")?.value || false;
   const devTools = settings.find(s => s.option === "devTools")?.value || false;
 
   return (
-    <html lang="ru">
+    <html lang="ru"
+      className={inter.className}>
     <head>
       <link
         rel="shortcut icon"

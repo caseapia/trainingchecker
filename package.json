@@ -23,7 +23,7 @@
     "js-cookie": "^3.0.5",
     "lottie-react": "^2.4.0",
     "marked": "^15.0.2",
-    "next": "^15.3.1",
+    "next": "^15.3.2",
     "next-sitemap": "^4.2.3",
     "react": "^18.2.0",
     "react-content-loader": "^7.0.2",

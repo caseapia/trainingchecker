@@ -10,9 +10,8 @@ body {
 
 body {
   color: var(--color-defaultText);
-  background: var(--color-defaultPageBackground);
-  font-family: "Roboto", sans-serif;
-  font-size: var(--size-m);
+  background: #0c1012;
+  font-size: 16px;
   font-style: normal;
   min-height: 100vh;
 }

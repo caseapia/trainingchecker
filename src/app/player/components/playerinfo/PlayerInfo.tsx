@@ -21,6 +21,7 @@ import HammerIcon from "@/icons/hammer.svg";
 import textFormatter from "@/utils/helpers/textFormatter";
 import Punishment from "@/app/player/components/punishments/punishment";
 import AdditionalInfo from "@/app/player/components/additionalinfo/AdditionalInfo";
+import { Information } from "@/app/player/components/playerinfo/types";
 
 const PlayerInfo = () => {
   const router = useRouter();
@@ -97,81 +98,34 @@ const PlayerInfo = () => {
     warn = [],
   } = playerData || {};
 
+  const information: Information[] = [
+    { title: "ID", key: id },
+    { title: "Никнейм", key: login, className: styles.nickname },
+    { title: "Верификация", key: `${getVerify(verify)} (ID: ${verify})` },
+    { title: "Статус", key: <Chip label={getModer(moder)}/> },
+    { title: "Текст верификации", key: textFormatter(verifyText) },
+    { title: "Время мута", key: `${mute ? mute : "Нет"}` },
+    { title: "Дата регистрации", key: regdate === "1970-01-01 03:00:00" ? "Зарегистрирован до 2018 года" : regdate },
+    {
+      title: "Последний вход",
+      key: `${online ? `Сейчас в сети (ID: ${playerid})` : `${lastlogin} (${Difference(lastlogin)} ${getDaySuffix(Difference(lastlogin))} назад)`}`
+    }
+  ]
+
   return (
-    <>
-      <div className={styles.ResultWrapper}>
-        <p><strong>ID:</strong> {id}</p>
-        <p><strong>Ник:</strong> {login}</p>
-        <strong>Должность:</strong> <Chip label={getModer(moder)}/>
-        <p><strong>Верификация:</strong> {`${getVerify(verify)} (ID: ${verify})`}</p>
-        {verify > 0 && (
-          <p><strong>Текст верификации:</strong> {textFormatter(verifyText)}</p>
-        )}
-        <p><strong>Время мута:</strong>{" "}
-          {mute
-            ? `${formatToMinutes(mute)} ${getMinuteSuffix(formatToMinutes(mute))}`
-            : <span className={Color.colorGreen}>Нет</span>
-          }
-        </p>
-        <p><strong>Дата регистрации:</strong>{" "}
-          {regdate === "1970-01-01 03:00:00" ? "Зарегистрирован до 2018 года" : regdate}
-        </p>
-        <p>
-          <strong>Дата последнего входа:</strong>{" "}
-          {online
-            ? <span className={Color.colorGreen}>Сейчас в сети <span
-              className={Color.colorDefaultText}>(ID: {playerid})</span></span>
-            : (
-              <>
-                {new Date(lastlogin).toDateString() === new Date().toDateString()
-                  ? lastlogin
-                  : `${lastlogin} (${Difference(lastlogin)} ${getDaySuffix(Difference(lastlogin))} назад)`
-                }
-              </>
-            )
-          }
-        </p>
-
-        <hr className={styles.ProfileLine}/>
-
-        <h5 className={styles.h5}>Значки</h5>
-        <BadgeRenderer player={playerData}/>
-
-        <hr className={styles.ProfileLine}/>
-
-        <h5 className={styles.h5}>Дополнительная информация</h5>
-        <AdditionalInfo nickname={nickname}/>
-
-        <div className={styles.ButtonGroup}>
-          <Button
-            type="Secondary"
-            action="button"
-            icon={RefreshIcon}
-            onClick={refreshData}
-            disabled={isRefreshing}
-          >
-            Обновить
-          </Button>
-          <Button
-            type="Secondary"
-            action="button"
-            disabled={!warn.length}
-            onClick={() => setIsModalOpen(true)}
-            icon={HammerIcon}
-          >
-            Наказания
-          </Button>
-        </div>
-      </div>
-
-      <Punishment
-        id={Number(id)}
-        login={login}
-        warns={warn}
-        status={isModalOpen}
-        statusAction={setIsModalOpen}
-      />
-    </>
+    <div className={styles.wrapper}>
+      <h2 className={styles.title}>Информация об игроке</h2>
+      <section className={styles.information}>
+        {information.map(({ title, key, className = "" }, index) => (
+          <div key={index}
+            className={styles.informationItem}>
+            <p className={styles.informationItem__title}>{title}:</p>&nbsp;
+            <p className={`${styles.informationItem__key} ${className}`}>{key}</p>
+          </div>
+        ))}
+      </section>
+      <section className={styles.buttonGroup}></section>
+    </div>
   );
 };
 
