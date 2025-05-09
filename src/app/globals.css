@@ -16,6 +16,10 @@ body {
   min-height: 100vh;
 }
 
+button {
+  font-family: 'Inter', 'Inter Fallback';
+}
+
 ul {
   margin-left: 30px;
 }
@@ -32,6 +36,7 @@ a {
   text-decoration: none;
   transition: color .3s;
   font-weight: 500;
+  font-family: 'Inter', 'Inter Fallback';
 
   &:visited {
     text-decoration: underline;

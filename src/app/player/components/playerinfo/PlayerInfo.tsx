@@ -85,7 +85,7 @@ const PlayerInfo = () => {
   }
 
   const {
-    id = "",
+    id,
     login = "",
     moder,
     verify,
@@ -103,7 +103,7 @@ const PlayerInfo = () => {
     { title: "Никнейм", key: login, className: styles.nickname },
     { title: "Верификация", key: `${getVerify(verify)} (ID: ${verify})` },
     { title: "Статус", key: <Chip label={getModer(moder)}/> },
-    { title: "Текст верификации", key: textFormatter(verifyText) },
+    { title: "Текст верификации", key: verifyText ? textFormatter(verifyText) : "Нет" },
     { title: "Время мута", key: `${mute ? mute : "Нет"}`, className: mute ? Color.colorRed : "" },
     { title: "Дата регистрации", key: regdate === "1970-01-01 03:00:00" ? "Зарегистрирован до 2018 года" : regdate },
     {
@@ -116,6 +116,9 @@ const PlayerInfo = () => {
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.title}>Информация об игроке</h2>
+      <section className={styles.badges}>
+        <BadgeRenderer player={playerData}/>
+      </section>
       <section className={styles.information}>
         {information.map(({ title, key, className = "" }, index) => (
           <div key={index}
@@ -126,10 +129,32 @@ const PlayerInfo = () => {
         ))}
       </section>
       <section className={styles.buttonGroup}>
-        <Button>Дополнительная информация</Button>
-        <Button>Обновить</Button>
-        <Button type="Danger">Наказания</Button>
+        <div className={styles.buttonGroup__pair}>
+          <Button
+            onClick={refreshData}
+            disabled={isRefreshing}
+            icon={RefreshIcon}
+          >
+            Обновить
+          </Button>
+          <Button
+            type="Danger"
+            disabled={!warn.length}
+            onClick={() => setIsModalOpen(true)}
+            icon={HammerIcon}
+          >
+            Наказания
+          </Button>
+        </div>
+        <AdditionalInfo nickname={login}/>
       </section>
+      <Punishment
+        id={id}
+        login={login}
+        warns={warn}
+        status={isModalOpen}
+        statusAction={setIsModalOpen}
+      />
     </div>
   );
 };
