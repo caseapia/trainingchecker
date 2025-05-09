@@ -62,7 +62,7 @@ const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player }) => {
   });
 
   return badgesToShow.length > 0 ? (
-    <>
+    <div className={styles.container}>
       {badgesToShow.map((badge) => (
         <BootstrapTooltip
           key={badge.id || badge.title}
@@ -100,7 +100,7 @@ const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player }) => {
           <p>{selectedBadge.description}</p>
         </Modal>
       )}
-    </>
+    </div>
   ) : null;
 };
 

@@ -60,7 +60,7 @@ export const staffBadges: BadgeProps[] = [
     icon: React.createElement(UserShieldIcon),
     minModer: 1,
     maxModer: 9999,
-    color: "#0f4c816c",
+    color: "rgb(96 158 213)",
     textColor: "rgb(96 158 213)"
   },
   {

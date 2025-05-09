@@ -10,7 +10,7 @@ body {
 
 body {
   color: var(--color-defaultText);
-  background: #0c1012;
+  background: #070709;
   font-size: 16px;
   font-style: normal;
   min-height: 100vh;
@@ -56,11 +56,11 @@ a {
 
 ::-webkit-scrollbar {
   width: 5px;
-  background-color: var(--color-black);
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #b3425a;
+  background: #595a64;
   border-radius: 10px;
 }
 

@@ -100,7 +100,7 @@ const PlayerInfo = () => {
 
   const information: Information[] = [
     { title: "ID", key: id },
-    { title: "Никнейм", key: login, className: styles.nickname },
+    { title: "Никнейм", key: <>{login} <BadgeRenderer player={playerData}/></>, className: styles.nickname },
     { title: "Верификация", key: `${getVerify(verify)} (ID: ${verify})` },
     { title: "Статус", key: <Chip label={getModer(moder)}/> },
     { title: "Текст верификации", key: verifyText ? textFormatter(verifyText) : "Нет" },
@@ -116,9 +116,6 @@ const PlayerInfo = () => {
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.title}>Информация об игроке</h2>
-      <section className={styles.badges}>
-        <BadgeRenderer player={playerData}/>
-      </section>
       <section className={styles.information}>
         {information.map(({ title, key, className = "" }, index) => (
           <div key={index}
