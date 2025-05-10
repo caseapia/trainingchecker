@@ -8,7 +8,6 @@ import success from "@/public/assets/lotties/success.json";
 import defaultNotify from "@/public/assets/lotties/defaultNotify.json";
 import error from "@/public/assets/lotties/error.json";
 import ToastAnimation from "./variant";
-import XIcon from "@/icons/components/modal/xmark.svg";
 
 const Toast = () => {
   const { toasts, removeToast } = useToast();
@@ -45,21 +44,12 @@ const Toast = () => {
               <Lottie
                 animationData={toast.type === "success" ? success : toast.type === "error" ? error : defaultNotify}
                 loop={false}
-                style={{ height: "80px", width: "80px" }}
+                style={{ height: "30px", width: "30px" }}
               />
             </section>
             <section className={styles.Body}>
-              <div className={styles.Title}>
-                {toast.type === "success" ? "Успешно" : toast.type === "error" ? "Ошибка" : "Внимание"}
-                {toast.isExitButton && (
-                  <XIcon onClick={() => removeToast(toast.id)}/>
-                )}
-              </div>
               {toast.content && <div className={styles.Content}>{toast.content}</div>}
             </section>
-            {toast.lifeTime && (
-              <div className={styles.ProgressBar} style={{ animationDuration: `${toast.lifeTime}ms` }}/>
-            )}
           </motion.div>
         ))}
       </AnimatePresence>
