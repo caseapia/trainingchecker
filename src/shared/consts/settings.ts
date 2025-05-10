@@ -16,7 +16,7 @@ export const settings: props = [
   },
   {
     option: "DEV_TOOLS",
-    value: false,
+    value: true,
   },
   {
     option: "TOASTS_MAX_VISIBLE",
