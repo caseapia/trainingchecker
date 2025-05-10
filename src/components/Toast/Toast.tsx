@@ -7,10 +7,12 @@ import Lottie from "lottie-react";
 import success from "@/public/assets/lotties/success.json";
 import defaultNotify from "@/public/assets/lotties/defaultNotify.json";
 import error from "@/public/assets/lotties/error.json";
-import ToastAnimation from "./variant";
+import { ToastAnimationPC, ToastAnimationMobile } from "./variant";
+import { isMobileDevice } from "@/hooks/isMobileDevice";
 
 const Toast = () => {
   const { toasts, removeToast } = useToast();
+  const isMobile: boolean = isMobileDevice();
 
   const getType = (type: any) => {
     switch (type) {
@@ -29,16 +31,18 @@ const Toast = () => {
   }
 
   return (
-    <div className={`${styles.ToastWrapper}`}>
+    <div className={styles.ToastWrapper}>
       <AnimatePresence>
         {toasts.map((toast) => (
           <motion.div
             key={toast.id}
-            className={`${styles.Toast} ${getType(toast.type)} ${toast.className || ""} ${toast.clickAction ? styles.clickable : ""} ${toast.isByModal ? styles.ByModal : ""}`}
+            layout
+            className={`${styles.Toast} ${isMobile ? styles.mobile : ""} ${getType(toast.type)} ${toast.className || ""} ${toast.clickAction ? styles.clickable : ""} ${toast.isByModal ? styles.ByModal : ""}`}
             onClick={toast.clickAction ? () => handleClick(toast) : undefined}
-            initial={ToastAnimation.initial}
-            animate={ToastAnimation.animate}
-            exit={ToastAnimation.initial}
+            variants={!isMobile ? ToastAnimationPC : ToastAnimationMobile}
+            initial="initial"
+            animate="animate"
+            exit="exit"
           >
             <section className={styles.IconContainer}>
               <Lottie

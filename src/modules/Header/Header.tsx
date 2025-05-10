@@ -17,7 +17,7 @@ import settings from "@/consts/settings";
 
 export const Header = () => {
   const isMobile = isMobileDevice();
-  const isDevToolsEnable = Boolean(settings.find(s => s.option === "devTools")?.value);
+  const isDevToolsEnable = Boolean(settings.find(s => s.option === "DEV_TOOLS")?.value);
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const [activePage, setActivePage] = useState("main");
   const [isBadgeLoading, setIsBadgeLoading] = useState(true);

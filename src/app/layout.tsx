@@ -26,8 +26,8 @@ const inter = Inter({
 })
 
 export default function RootLayout({ children }: { children: ReactNode }) {
-  const snow = settings.find(s => s.option === "snow")?.value || false;
-  const devTools = settings.find(s => s.option === "devTools")?.value || false;
+  const snow = settings.find(s => s.option === "SNOW")?.value || false;
+  const devTools = settings.find(s => s.option === "DEV_TOOLS")?.value || false;
 
   return (
     <html lang="ru"

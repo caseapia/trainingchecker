@@ -62,7 +62,7 @@ export default function Home() {
     const hasCyrillic = /[а-яА-ЯёЁ]/.test(input);
 
     if (hasCyrillic) {
-      toast.error("Никнейм не может содержать кириллицу");
+      toast.error("Никнейм не может содержать кириллицу", { lifeTime: 4000 });
       inputRef.current!.value = "";
       setIsButtonDisabled(true);
     } else if (input.trim() === "") {

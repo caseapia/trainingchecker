@@ -1,23 +1,27 @@
 import { ReactNode } from "react";
 
 type props = {
-  option: "loadTime" | "snow" | "devTools" | "themeColor";
+  option: "LOAD_TIME" | "SNOW" | "DEV_TOOLS" | "TOASTS_MAX_VISIBLE";
   value: string | number | ReactNode | boolean | bigint;
 }[];
 
 export const settings: props = [
   {
-    option: "loadTime",
+    option: "LOAD_TIME",
     value: 2000,
   },
   {
-    option: "snow",
+    option: "SNOW",
     value: false,
   },
   {
-    option: "devTools",
+    option: "DEV_TOOLS",
     value: false,
   },
+  {
+    option: "TOASTS_MAX_VISIBLE",
+    value: 3,
+  }
 ];
 
 export default settings

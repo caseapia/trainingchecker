@@ -1,5 +1,5 @@
 import { useToast } from "@/components/Toast/context/ToastContext";
-import React, {MouseEvent} from "react";
+import { MouseEvent } from "react";
 
 let toastLet: ReturnType<typeof useToast>
 
@@ -14,20 +14,20 @@ export const toast = {
     clickAction?: (e: MouseEvent<HTMLDivElement>) => void,
     isExitButton?: boolean,
     isByModal?: boolean;
-  }) => toastLet.addToast('success', content, options),
+  }) => toastLet.addToast("success", content, options),
   error: (content: string, options?: {
     className?: string,
     lifeTime?: number,
     clickAction?: (e: MouseEvent<HTMLDivElement>) => void,
     isExitButton?: boolean,
     isByModal?: boolean;
-  }) => toastLet.addToast('error', content, options),
+  }) => toastLet.addToast("error", content, options),
   basic: (content: string, options?: {
     className?: string,
     lifeTime?: number,
     clickAction?: (e: MouseEvent<HTMLDivElement>) => void,
     isExitButton?: boolean,
     isByModal?: boolean;
-  }) => toastLet.addToast('default', content, options),
+  }) => toastLet.addToast("default", content, options),
   clear: () => toastLet.removeToast,
 }
