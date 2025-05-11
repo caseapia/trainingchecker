@@ -41,13 +41,12 @@ const AdditionalInfo: FC<Types> = ({ nickname }) => {
   return (
     <>
       <Button
-        type="Secondary"
         onClick={fetchAdditionalInfo}
         icon={EyeIcon}
         isLoading={isLoading}
         disabled={isModalOpen}
       >
-        Открыть
+        Дополнительная информация
       </Button>
       {isModalOpen && (
         <Modal

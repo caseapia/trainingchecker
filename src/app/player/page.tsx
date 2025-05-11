@@ -8,7 +8,6 @@ const Result = () => {
 
   return (
     <PageWrapper>
-      <h1>Информация об игроке</h1>
       <Suspense fallback={<PlayerLoader/>}>
         <PlayerInfo/>
       </Suspense>

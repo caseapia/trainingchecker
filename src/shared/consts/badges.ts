@@ -60,7 +60,7 @@ export const staffBadges: BadgeProps[] = [
     icon: React.createElement(UserShieldIcon),
     minModer: 1,
     maxModer: 9999,
-    color: "#0f4c816c",
+    color: "rgb(96 158 213)",
     textColor: "rgb(96 158 213)"
   },
   {
@@ -70,7 +70,7 @@ export const staffBadges: BadgeProps[] = [
     description: "Этот игрок является разработчиком или помогал в разработке сайта TRAINING CHECKER",
     icon: React.createElement(CodeIcon),
     accid: [113145, 125043, 271552],
-    color: "rgb(42 170 104 / 42%)",
+    color: "rgb(42 170 104)",
     textColor: "rgb(42 170 104)"
   },
 ]
@@ -81,7 +81,7 @@ export const playerBadges: BadgeProps[] = [
     category: "player",
     description: `Этот значок вручается игрокам, зарегистрировавшим свой аккаунт в числе первых 130000`,
     icon: React.createElement(MedalIcon),
-    color: "#00a5a26c",
+    color: "#00a5a2",
     minAccId: 0,
     maxAccId: 130000,
     textColor: "#00a5a2"

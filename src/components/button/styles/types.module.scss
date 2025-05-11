@@ -1,32 +1,22 @@
 .Primary {
-  $bg: #99384d;
-  $effectbg: lighten($bg, 7%);
-  background: $bg;
+  background: #1c1c1c;
+  border-color: #2a2a2a;
 
   &:not(.disabled) {
     &:hover {
-      background: $effectbg
-    }
-
-    &:focus-visible {
-      box-shadow: rgba($effectbg, 0.5) 0 0 0 4px;
+      background: #2a2a2a;
+      border-color: #3a3a3a;
     }
   }
 }
 
 .Violet {
-  $bg: #cba6f7;
-  $effectbg: lighten($bg, 7%);
-  background: $bg;
+  background: #cba6f7;
   color: black !important;
 
   &:not(.disabled) {
     &:hover {
-      background: $effectbg
-    }
-
-    &:focus-visible {
-      box-shadow: rgba($effectbg, 0.5) 0 0 0 4px;
+      background: #cba6f7
     }
   }
 }
@@ -54,12 +44,13 @@
 }
 
 .Danger {
-  border: 1px solid transparent;
-  background: #FF6955;
+  background: #611b1b;
+  border-color: #7a2323;
 
   &:not(.disabled) {
     &:hover {
-      background: lighten(#FF6955, 7%);
+      background: #7a2323;
+      border-color: #a82828;
     }
   }
 }

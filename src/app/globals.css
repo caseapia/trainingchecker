@@ -10,11 +10,14 @@ body {
 
 body {
   color: var(--color-defaultText);
-  background: var(--color-defaultPageBackground);
-  font-family: "Roboto", sans-serif;
-  font-size: var(--size-m);
+  background: #070709;
+  font-size: 16px;
   font-style: normal;
   min-height: 100vh;
+}
+
+button {
+  font-family: 'Inter', 'Inter Fallback';
 }
 
 ul {
@@ -33,6 +36,7 @@ a {
   text-decoration: none;
   transition: color .3s;
   font-weight: 500;
+  font-family: 'Inter', 'Inter Fallback';
 
   &:visited {
     text-decoration: underline;
@@ -52,11 +56,11 @@ a {
 
 ::-webkit-scrollbar {
   width: 5px;
-  background-color: var(--color-black);
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #b3425a;
+  background: #595a64;
   border-radius: 10px;
 }
 

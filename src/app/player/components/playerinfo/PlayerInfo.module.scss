@@ -1,44 +1,62 @@
-.ResultWrapper {
-  border-radius: 5px;
-  padding: 10px;
-  width: 25%;
-  line-height: 2.225rem;
-  border: 1px solid #242830;
-  margin-top: 10px;
-  @media screen and (max-width: 767px) {
-    width: 90%;
+.wrapper {
+  border-radius: 10px;
+  background: #070709;
+  padding: 25px 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  border: 1px solid #15191c;
+  width: 491px;
+
+  .title {
+    margin-bottom: 10px;
   }
 }
 
-.ProfileLine {
-  margin: 1rem 0;
-  color: inherit;
-  opacity: .25;
-  border: 0 double var(--color-white);
-  border-top-width: 1px;
-}
-
-.h5 {
-  margin-bottom: .5rem;
-  font-weight: 500;
-  line-height: 1.2;
-  font-size: 1.25rem;
-}
-
-.ButtonGroup {
+.informationItem {
   display: flex;
-  margin-top: 15px;
-  flex-direction: row;
+  align-items: center;
+  line-height: 35px;
+  flex-wrap: wrap;
 
-  button {
-    margin-right: 10px;
+  &__title {
+    background: linear-gradient(90deg, #c5d4e0, #9db0c3, #6e7e8f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
 
-    &:last-of-type {
-      margin-right: 0;
+    text-shadow: 0 0 1px rgba(157, 176, 195, 0.6);
+  }
+
+  &__key {
+    &.nickname {
+      font-weight: 600;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
 
-.noPunish {
-  text-align: center;
+.buttonGroup {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  &__pair {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    width: 100%;
+
+    button {
+      margin-right: 10px;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+  }
 }

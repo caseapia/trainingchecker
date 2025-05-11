@@ -15,7 +15,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       onClick,
       onFocus,
-      type = "default",
+      type = "Primary",
       disabled = false,
       classname,
       style,

@@ -11,63 +11,74 @@
   display: grid;
   place-items: center;
 }
+
 .Modal {
   overflow: auto;
   overflow-x: hidden;
-  background: #0c0c0c;
+  background: #131416;
+  border: 1px solid #3e3f42;
   padding: 15px;
   border-radius: 10px;
   max-width: 50%;
   min-width: 30%;
   max-height: 70%;
   z-index: 2001;
-    @media screen and (max-width: 767px) {
-      max-width: 100%;
-      min-width: 100%;
-      max-height: 100%;
-    }
-    .Title {
-      white-space: nowrap;
-    }
-    .Header {
-      font-weight: bolder;
-      font-size: 20px;
-      text-align: left;
-      display: flex;
-      vertical-align: middle;
-      margin-bottom: 15px;
-        .Close {
-          display: grid;
-          width: 100%;
-          justify-items: end;
-          svg {
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-          }
-        }
-    }
-    .Body {
+  @media screen and (max-width: 767px) {
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 100%;
+  }
+
+  .Title {
+    white-space: nowrap;
+  }
+
+  .Header {
+    font-weight: bolder;
+    font-size: 20px;
+    text-align: left;
+    display: flex;
+    vertical-align: middle;
+    margin-bottom: 15px;
+
+    .Close {
+      display: grid;
       width: 100%;
+      justify-items: end;
+
+      svg {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+      }
     }
-    .Footer {
-      margin-top: 15px;
-        .ButtonGroup {
-          display: flex;
-          flex-direction: row;
-            @media screen and (max-width: 767px) {
-              flex-direction: column;
-            }
-            button {
-              margin-right: 15px;
-              @media screen and (max-width: 767px) {
-                margin-bottom: 15px;
-              }
-                &:last-of-type {
-                  margin-right: 0;
-                  margin-bottom: 0;
-                }
-            }
+  }
+
+  .Body {
+    width: 100%;
+  }
+
+  .Footer {
+    margin-top: 15px;
+
+    .ButtonGroup {
+      display: flex;
+      flex-direction: row;
+      @media screen and (max-width: 767px) {
+        flex-direction: column;
+      }
+
+      button {
+        margin-right: 15px;
+        @media screen and (max-width: 767px) {
+          margin-bottom: 15px;
         }
+
+        &:last-of-type {
+          margin-right: 0;
+          margin-bottom: 0;
+        }
+      }
     }
+  }
 }

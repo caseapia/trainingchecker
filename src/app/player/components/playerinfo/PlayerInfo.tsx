@@ -4,8 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, useCallback } from "react";
 import UserData from "@/models/Player";
 import { toast } from "@/utils/toast";
-import { formatToMinutes } from "@/utils/helpers/formatToMinutes";
-import { getDaySuffix, getMinuteSuffix } from "@/utils/helpers/getSuffix";
+import { getDaySuffix } from "@/utils/helpers/getSuffix";
 import { getPlayer, getVerify, getModer } from "@/services/PlayerService";
 import Difference from "@/utils/helpers/difference";
 
@@ -21,11 +20,14 @@ import HammerIcon from "@/icons/hammer.svg";
 import textFormatter from "@/utils/helpers/textFormatter";
 import Punishment from "@/app/player/components/punishments/punishment";
 import AdditionalInfo from "@/app/player/components/additionalinfo/AdditionalInfo";
+import { Information } from "@/app/player/components/playerinfo/types";
+import { metric } from "@/utils/metric";
 
 const PlayerInfo = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const nickname = searchParams.get("nickname");
+  let error: string
 
   const [playerData, setPlayerData] = useState<UserData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -46,11 +48,13 @@ const PlayerInfo = () => {
       console.error(error);
 
       if (error?.response?.status === 404) {
-        toast.error(`Игрок с ником ${nickname} не найден. Перенаправляем на главную страницу.`, { lifeTime: 5000 });
+        error = `Игрок с ником ${nickname} не найден. Перенаправляем на главную страницу.`
+        toast.error(error, { lifeTime: 5000 });
         router.push("/");
       } else {
         if (nickname !== ".") {
-          toast.error("Ошибка при загрузке данных. Проверьте консоль для подробностей.", { lifeTime: 10000 });
+          error = `Ошибка при загрузке данных. Проверьте консоль для подробностей.`
+          toast.error(error, { lifeTime: 10000 });
         }
       }
     } finally {
@@ -60,23 +64,33 @@ const PlayerInfo = () => {
 
   useEffect(() => {
     if (nickname === ".") {
-      toast.error("Вы не можете совершить поиск по данному никнейму", { lifeTime: 6000 })
+      error = "Вы не можете совершить поиск по данному никнейму"
+      toast.error(error, { lifeTime: 6000 })
+      metric.send(error, "Error")
       router.push("../");
       return;
     } else if (!nickname) {
-      toast.error("Ник игрока не указан. Возвращаем на главную.", { lifeTime: 6000 });
+      error = "Ник игрока не указан. Возвращаем на главную."
+      toast.error(`${error}. Возвращаем на главную.`, { lifeTime: 6000 });
+      metric.send(error, "Error")
       router.push("../");
       return;
     } else {
+      metric.send("Обработка информации о запрошенном игроке", "Success")
       fetchPlayerData();
     }
   }, []);
 
   const refreshData = async () => {
     setIsRefreshing(true);
-    await fetchPlayerData();
-    toast.success(`Информация об игроке ${nickname} обновлена`, { lifeTime: 5000 });
-    setTimeout(() => setIsRefreshing(false), 5000);
+    try {
+      await fetchPlayerData();
+      toast.success(`Информация об игроке ${nickname} обновлена`, { lifeTime: 5000 });
+      await metric.send("Информация об игроке обновлена", "Success")
+      setTimeout(() => setIsRefreshing(false), 5000);
+    } catch (error: any) {
+      await metric.send(`"Ошибка при обновлении информации о игроке", ${error}`, "Error")
+    }
   };
 
   if (!playerData) {
@@ -84,7 +98,7 @@ const PlayerInfo = () => {
   }
 
   const {
-    id = "",
+    id,
     login = "",
     moder,
     verify,
@@ -97,64 +111,44 @@ const PlayerInfo = () => {
     warn = [],
   } = playerData || {};
 
+  const information: Information[] = [
+    { title: "ID", key: id },
+    { title: "Никнейм", key: <>{login} <BadgeRenderer player={playerData}/></>, className: styles.nickname },
+    { title: "Верификация", key: `${getVerify(verify)} (ID: ${verify})` },
+    { title: "Статус", key: <Chip label={getModer(moder)}/> },
+    { title: "Текст верификации", key: verifyText ? textFormatter(verifyText) : "Нет" },
+    { title: "Время мута", key: `${mute ? mute : "Нет"}`, className: mute ? Color.colorRed : "" },
+    { title: "Дата регистрации", key: regdate === "1970-01-01 03:00:00" ? "Зарегистрирован до 2018 года" : regdate },
+    {
+      title: "Последний вход",
+      key: `${online ? `Сейчас в сети (ID: ${playerid})` : `${lastlogin} (${Difference(lastlogin)} ${getDaySuffix(Difference(lastlogin))} назад)`}`,
+      className: online ? Color.colorGreen : ""
+    }
+  ]
+
   return (
-    <>
-      <div className={styles.ResultWrapper}>
-        <p><strong>ID:</strong> {id}</p>
-        <p><strong>Ник:</strong> {login}</p>
-        <strong>Должность:</strong> <Chip label={getModer(moder)}/>
-        <p><strong>Верификация:</strong> {`${getVerify(verify)} (ID: ${verify})`}</p>
-        {verify > 0 && (
-          <p><strong>Текст верификации:</strong> {textFormatter(verifyText)}</p>
-        )}
-        <p><strong>Время мута:</strong>{" "}
-          {mute
-            ? `${formatToMinutes(mute)} ${getMinuteSuffix(formatToMinutes(mute))}`
-            : <span className={Color.colorGreen}>Нет</span>
-          }
-        </p>
-        <p><strong>Дата регистрации:</strong>{" "}
-          {regdate === "1970-01-01 03:00:00" ? "Зарегистрирован до 2018 года" : regdate}
-        </p>
-        <p>
-          <strong>Дата последнего входа:</strong>{" "}
-          {online
-            ? <span className={Color.colorGreen}>Сейчас в сети <span
-              className={Color.colorDefaultText}>(ID: {playerid})</span></span>
-            : (
-              <>
-                {new Date(lastlogin).toDateString() === new Date().toDateString()
-                  ? lastlogin
-                  : `${lastlogin} (${Difference(lastlogin)} ${getDaySuffix(Difference(lastlogin))} назад)`
-                }
-              </>
-            )
-          }
-        </p>
-
-        <hr className={styles.ProfileLine}/>
-
-        <h5 className={styles.h5}>Значки</h5>
-        <BadgeRenderer player={playerData}/>
-
-        <hr className={styles.ProfileLine}/>
-
-        <h5 className={styles.h5}>Дополнительная информация</h5>
-        <AdditionalInfo nickname={nickname}/>
-
-        <div className={styles.ButtonGroup}>
+    <div className={styles.wrapper}>
+      <h2 className={styles.title}>Информация об игроке</h2>
+      <section className={styles.information}>
+        {information.map(({ title, key, className = "" }, index) => (
+          <div key={index}
+            className={styles.informationItem}>
+            <p className={styles.informationItem__title}>{title}:</p>&nbsp;
+            <p className={`${styles.informationItem__key} ${className}`}>{key}</p>
+          </div>
+        ))}
+      </section>
+      <section className={styles.buttonGroup}>
+        <div className={styles.buttonGroup__pair}>
           <Button
-            type="Secondary"
-            action="button"
-            icon={RefreshIcon}
             onClick={refreshData}
             disabled={isRefreshing}
+            icon={RefreshIcon}
           >
             Обновить
           </Button>
           <Button
-            type="Secondary"
-            action="button"
+            type="Danger"
             disabled={!warn.length}
             onClick={() => setIsModalOpen(true)}
             icon={HammerIcon}
@@ -162,16 +156,16 @@ const PlayerInfo = () => {
             Наказания
           </Button>
         </div>
-      </div>
-
+        <AdditionalInfo nickname={login}/>
+      </section>
       <Punishment
-        id={Number(id)}
+        id={id}
         login={login}
         warns={warn}
         status={isModalOpen}
         statusAction={setIsModalOpen}
       />
-    </>
+    </div>
   );
 };
 

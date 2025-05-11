@@ -8,101 +8,100 @@ import { isMobileDevice } from "@/shared/hooks/isMobileDevice";
 import BadgeRendererProps from "./props";
 
 const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player }) => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [selectedBadge, setSelectedBadge] = useState<BadgeProps | undefined>(undefined);
-  const isMobile: boolean = isMobileDevice();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedBadge, setSelectedBadge] = useState<BadgeProps>();
+  const isMobile = isMobileDevice();
+
+  if (!player) return null;
 
   const badgesToShow = allBadges.filter((badge) => {
-    if (!player) return false;
+    const {
+      id,
+      moder,
+      verify,
+      accid,
+      minModer,
+      maxModer,
+      minAccId,
+      maxAccId,
+      minRegDate,
+      maxRegDate,
+      nicknameIncludes
+    } = badge;
+    const playerModer = player.moder ?? 0;
+    const playerId = player.id ?? 0;
+    const playerLogin = player.login ?? "";
+    const playerRegdate = player.regdate ?? "";
 
-    if (badge.moder && badge.moder !== player.moder) return false;
-    if (badge.accid) {
-      if (Array.isArray(badge.accid)) {
-        if (player.id === undefined || !badge.accid.includes(player.id)) return false;
-      } else if (player.id === undefined || badge.accid !== player.id) {
-        return false;
-      }
+    if (moder && moder !== player.moder) return false;
+    if (verify && verify !== player.verify) return false;
+
+    if (accid) {
+      if (Array.isArray(accid)) {
+        if (!accid.includes(playerId)) return false;
+      } else if (accid !== playerId) return false;
     }
-    if (badge.verify && badge.verify !== player.verify) return false;
-    if (
-      (badge.minModer !== undefined && (player.moder ?? 0) < badge.minModer) ||
-      (badge.maxModer !== undefined && (player.moder ?? 0) > badge.maxModer)
-    ) {
+
+    if ((minModer !== undefined && playerModer < minModer) ||
+      (maxModer !== undefined && playerModer > maxModer) ||
+      (minAccId !== undefined && playerId < minAccId) ||
+      (maxAccId !== undefined && playerId > maxAccId) ||
+      (minRegDate && !playerRegdate.includes(minRegDate)) ||
+      (maxRegDate && playerRegdate.includes(maxRegDate))) {
       return false;
     }
-    if (
-      (badge.minAccId !== undefined && (player.id ?? 0) < badge.minAccId) ||
-      (badge.maxAccId !== undefined && (player.id ?? 0) > badge.maxAccId)
-    ) {
-      return false;
+
+    if (nicknameIncludes) {
+      const match = Array.isArray(nicknameIncludes)
+        ? nicknameIncludes.some(n => playerLogin.includes(n))
+        : playerLogin.includes(nicknameIncludes);
+      if (!match) return false;
     }
-    if (
-      (badge.minRegDate !== undefined && !(player.regdate ?? "").includes(badge.minRegDate)) ||
-      (badge.maxRegDate !== undefined && (player.regdate ?? "").includes(badge.maxRegDate))
-    ) {
-      return false;
-    }
-    return !(badge.nicknameIncludes !== undefined &&
-      (
-        Array.isArray(badge.nicknameIncludes)
-          ? badge.nicknameIncludes.some(nick => (player.login ?? "").includes(nick))
-          : !(player.login ?? "").includes(badge.nicknameIncludes)
-      ));
+
+    return true;
   });
 
-  const handleBadgeClick = (badge: BadgeProps) => {
-    if (isMobile) {
-      setSelectedBadge(badge);
-      setIsModalOpen(true);
-    } else {
-      return false;
-    }
-  }
-
-  return (
-    badgesToShow.length > 0 ? (
-      <>
-        {badgesToShow.map((badge) => (
-          <BootstrapTooltip
-            title={
-              <>
-							<span
-                style={{
-                  color: `${badge.textColor}`,
-                  fontWeight: 600,
-                }}
-              >
-								{badge.title}
-							</span>
-                {badge.description && <><br/>{badge.description}</>}
-              </>}
-            key={badge.id || badge.title}
-          >
-            <span
-              className={styles.badge}
-              style={{ backgroundColor: badge.color }}
-              key={badge.id || badge.title}
-              onClick={() => handleBadgeClick(badge)}
-            >
-              <span className={styles.BadgeIcon}>
-                {badge.icon}
+  return badgesToShow.length > 0 ? (
+    <div className={styles.container}>
+      {badgesToShow.map((badge) => (
+        <BootstrapTooltip
+          key={badge.id || badge.title}
+          title={
+            <>
+              <span style={{ color: badge.textColor, fontWeight: 600 }}>
+                {badge.title}
               </span>
-            </span>
-          </BootstrapTooltip>
-        ))}
-        {selectedBadge && (
-          <Modal
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-            title={selectedBadge.title}
-            titleStyle={{ color: `${selectedBadge.textColor}` }}
+              {badge.description && <><br/>{badge.description}</>}
+            </>
+          }
+        >
+          <span
+            className={styles.badge}
+            style={{ "--color": badge.color } as React.CSSProperties}
+            onClick={() => {
+              if (isMobile) {
+                setSelectedBadge(badge);
+                setIsModalOpen(true);
+              }
+            }}
           >
-            <p>{selectedBadge.description}</p>
-          </Modal>
-        )}
-      </>
-    ) : null
-  );
+            <span className={styles.BadgeIcon}>{badge.icon}</span>
+          </span>
+        </BootstrapTooltip>
+      ))}
+
+      {selectedBadge && (
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          title={selectedBadge.title}
+          titleStyle={{ color: selectedBadge.textColor }}
+        >
+          <p>{selectedBadge.description}</p>
+        </Modal>
+      )}
+    </div>
+  ) : null;
 };
 
 export { BadgeRenderer };

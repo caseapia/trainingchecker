@@ -7,6 +7,7 @@ import PageWrapper from "@/components/pageWrapper/PageWrapper";
 import Loader from "@/modules/Loaders/index";
 import { fetchPlayersOnline } from "@/services/PlayersService";
 import PlayersInterface from "@/models/Players";
+import styles from "./page.module.scss";
 
 const Players = () => {
   const [result, setResult] = useState<PlayersInterface | null>(null);
@@ -24,7 +25,9 @@ const Players = () => {
     fetchPlayers();
   }, []);
   return (
-    <Suspense fallback={<Loader type="Table" rows={3} columns={3}/>}>
+    <Suspense fallback={<Loader type="Table"
+      rows={3}
+      columns={3}/>}>
       <PageWrapper title="Список игроков в сети">
         <Table>
           {result ? (
@@ -40,10 +43,8 @@ const Players = () => {
                 {result.map((player) => (
                   <Tr key={player.id}>
                     <Td>{player.playerid}</Td>
-                    <Td>
-                      <Link
-                        style={{ marginRight: "6px" }}
-                        href={`../player?nickname=${player.login}`}>
+                    <Td className={styles.username}>
+                      <Link href={`../player?nickname=${player.login}`}>
                         {player.login}
                       </Link>
                       <BadgeRenderer player={player}/>
@@ -53,7 +54,9 @@ const Players = () => {
                 ))}
               </TBody>
             </>
-          ) : (<Loader type="Table" rows={3} columns={3}/>)}
+          ) : (<Loader type="Table"
+            rows={3}
+            columns={3}/>)}
         </Table>
       </PageWrapper>
     </Suspense>

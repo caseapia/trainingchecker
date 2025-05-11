@@ -1,21 +1,23 @@
 "use client"
 import React, { createContext, useContext, useState, ReactNode, MouseEvent } from "react";
 import { Toast, ToastContextType } from "./types";
+import settings from "@/shared/consts/settings";
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
 export const ToastProvider = ({ children }: { children: ReactNode }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
+  const [queue, setQueue] = useState<Toast[]>([]);
+  const MAX_VISIBLE: number = Number(settings.find(s => s.option === "TOASTS_MAX_VISIBLE")?.value);
 
   const addToast = (
     type: "success" | "error" | "default",
     content: string,
     options?: {
       className?: string,
-      lifeTime?: number,
       clickAction?: (event: MouseEvent<HTMLDivElement>) => void,
-      isExitButton?: boolean,
       isByModal?: boolean,
+      lifeTime?: number,
     }
   ) => {
     const id = Math.random().toString(36).substring(2, 9);
@@ -25,21 +27,36 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
       content,
       className: options?.className,
       onClose: () => removeToast(id),
-      lifeTime: options?.lifeTime,
       clickAction: options?.clickAction,
-      isExitButton: options?.isExitButton ?? true,
       isByModal: options?.isByModal ?? false,
+      lifeTime: options?.lifeTime ?? -1,
     };
-    setToasts((prevToasts) => [...prevToasts, newToast]);
-    {
-      options?.lifeTime && options?.lifeTime !== -1 && (
-        setTimeout(() => removeToast(id), newToast.lifeTime!)
-      )
-    }
+    setToasts(prev => {
+      if (prev.length < MAX_VISIBLE) {
+        if (newToast.lifeTime && newToast.lifeTime !== -1) {
+          setTimeout(() => removeToast(id), newToast.lifeTime!);
+        }
+        return [...prev, newToast];
+      } else {
+        setQueue(prevQueue => [...prevQueue, newToast]);
+        return prev;
+      }
+    });
   };
 
   const removeToast = (id: string) => {
-    setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id));
+    setToasts(prev => {
+      const newToasts = prev.filter(toast => toast.id !== id);
+      if (queue.length > 0) {
+        const [nextToast, ...restQueue] = queue;
+        setQueue(restQueue);
+        if (nextToast.lifeTime && nextToast.lifeTime !== -1) {
+          setTimeout(() => removeToast(nextToast.id), nextToast.lifeTime!);
+        }
+        return [...newToasts, nextToast];
+      }
+      return newToasts;
+    })
   };
 
   return (
