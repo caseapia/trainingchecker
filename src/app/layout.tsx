@@ -45,10 +45,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     </head>
     <body>
     {snow && <Snow/>}
-    <PageTracker/>
     <ToastProvider>
       <Suspense fallback={null}>
         <DynamicTitle/>
+        <PageTracker/>
       </Suspense>
       <Header/>
       {children}
