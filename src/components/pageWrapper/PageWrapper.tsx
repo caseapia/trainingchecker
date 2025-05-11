@@ -5,15 +5,10 @@ import Props from "./types";
 import { AnimatePresence, motion } from "framer-motion";
 import animateVariants from "@/components/pageWrapper/animation";
 import { setHash } from "@/utils/hashMounting";
-import { metric } from "@/utils/metric";
 
 const PageWrapper = ({ title, children, classname, style }: Props) => {
   useEffect(() => {
     setHash();
-  }, []);
-
-  useEffect(() => {
-    metric.send(`Page is loaded as ${window.location.href}`, "Success")
   }, []);
 
   return (

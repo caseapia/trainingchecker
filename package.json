@@ -30,7 +30,8 @@
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
     "react-redux": "^9.2.0",
-    "sass": "^1.80.6"
+    "sass": "^1.80.6",
+    "ua-parser-js": "^2.0.3"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",

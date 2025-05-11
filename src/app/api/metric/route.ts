@@ -1,7 +1,16 @@
 import { metricApiClient } from "@/api/axios";
+import { headers } from "next/headers";
+import { UAParser } from "ua-parser-js";
 
 export const POST = async (req: Request) => {
+  const hdr = await headers();
   const params = process.env["NEXT_PUBLIC_METRIC"];
+  const forwardedFor = hdr.get("x-forwarded-for");
+  const ip = forwardedFor?.split(",")[0]?.trim() || "Unknown";
+  const userAgent = hdr.get("user-agent") || "Unknown";
+
+  const { browser, cpu, device } = UAParser(String(userAgent));
+
   try {
     const { message, type, additionalData, hash } = await req.json();
 
@@ -11,6 +20,18 @@ export const POST = async (req: Request) => {
       Warning: 0xf59e0b,
     };
 
+    const fields = [
+      ...(additionalData
+        ? Object.entries(additionalData).map(([key, value]) => ({
+          name: key,
+          value: String(value),
+          inline: true,
+        }))
+        : []),
+      { name: "IP", value: ip, inline: true },
+      { name: "Device Info", value: `${browser.name}, ${cpu.architecture}, ${device.type || "Unknown"}`, inline: true },
+    ];
+
     const payload = {
       username: "Spidey Bot",
       embeds: [
@@ -18,13 +39,7 @@ export const POST = async (req: Request) => {
           title: `📊 ${type} Metric`,
           description: message,
           color: embedColorMap[type] || 0x3b82f6,
-          fields: additionalData
-            ? Object.entries(additionalData).map(([key, value]) => ({
-              name: key,
-              value: String(value),
-              inline: true,
-            }))
-            : [],
+          fields,
           footer: {
             text: hash ? `User Hash: ${hash}` : "Hash is not mounted",
           },
@@ -36,6 +51,7 @@ export const POST = async (req: Request) => {
     if (!params) {
       throw new Error("'NEXT_PUBLIC_METRIC' environment variable is not defined");
     }
+
     await metricApiClient.post(params, JSON.stringify(payload));
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });

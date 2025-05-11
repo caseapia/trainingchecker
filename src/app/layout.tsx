@@ -9,6 +9,7 @@ import settings from "@/consts/settings";
 import Snow from "@/modules/Snow/Snow";
 import DynamicTitle from "@/hooks/setTitle";
 import { Inter } from "next/font/google"
+import PageTracker from "@/utils/helpers/PageTracker";
 
 export const metadata: Metadata = {
   title: "TRAINING CHECKER",
@@ -27,7 +28,6 @@ const inter = Inter({
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   const snow = settings.find(s => s.option === "SNOW")?.value || false;
-  const devTools = settings.find(s => s.option === "DEV_TOOLS")?.value || false;
 
   return (
     <html lang="ru"
@@ -44,8 +44,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         content="ye4U3g0JgocxViEhe5dO9xTYoYZ8qs6iynjUgOcDXhY"/>
     </head>
     <body>
-    {devTools}
     {snow && <Snow/>}
+    <PageTracker/>
     <ToastProvider>
       <Suspense fallback={null}>
         <DynamicTitle/>
