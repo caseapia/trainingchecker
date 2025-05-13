@@ -74,8 +74,8 @@ export const Header = () => {
   }, []);
 
   const getBadgeColor = () => {
-    if (online <= 20) return "danger";
-    if (online <= 50) return "warning";
+    if (online <= 10) return "danger";
+    if (online <= 30) return "warning";
     return "blue";
   };
 
