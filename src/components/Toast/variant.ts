@@ -1,6 +1,6 @@
 export const ToastAnimationPC = {
   initial: {
-    x: "-30rem",
+    x: "15rem",
     opacity: 0,
     transition: { duration: 0.3 }
   },
@@ -10,7 +10,7 @@ export const ToastAnimationPC = {
     transition: { duration: 0.3 }
   },
   exit: {
-    x: "-30rem",
+    x: "15rem",
     opacity: 0,
     transition: { duration: 0.3 }
   }
