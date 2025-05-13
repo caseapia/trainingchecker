@@ -19,6 +19,7 @@ export const metadata: Metadata = {
       "TRAINING Sandbox using open API"
   },
   description: "This site is designed to help players of the SAMP server." + "TRAINING Sandbox using open API",
+  keywords: "SAMP, TRAINING, CHECKER, API, SAMP SERVER, TRAINING SANDBOX",
 }
 
 const inter = Inter({
