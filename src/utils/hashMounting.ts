@@ -14,15 +14,15 @@ export const setHash = (): void => {
   const storedHash = localStorage.getItem(HASH_NAME);
   const cookieHash = Cookies.get(HASH_NAME);
 
-  if (!cookieHash) {
+  if (!cookieHash || storedHash !== cookieHash) {
     const hashToSet = storedHash || createHash();
     Cookies.set(HASH_NAME, hashToSet, {
       secure: true,
       sameSite: "strict",
     });
-
     if (!storedHash) {
       localStorage.setItem(HASH_NAME, hashToSet);
     }
+
   }
 };
