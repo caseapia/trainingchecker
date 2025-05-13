@@ -1,4 +1,4 @@
-.ToastWrapper {
+.toastWrapper {
   position: fixed;
   top: 1rem;
   right: 1rem;
@@ -12,7 +12,7 @@
   z-index: 9999999;
 }
 
-.Toast {
+.toast {
   border-radius: 8px;
   padding: 12px 16px;
   display: flex;
@@ -45,6 +45,26 @@
 
   .content {
     flex: 1;
+  }
+
+  .closeContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      opacity: .7;
+      transition: opacity .2s;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
 
   &:first-of-type {

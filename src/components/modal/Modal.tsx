@@ -1,4 +1,4 @@
-import XmarkIcon from "@/icons/components/modal/xmark.svg";
+import XmarkIcon from "@/icons/components/xmark.svg";
 import styles from "./Modal.module.scss";
 import Button from "@/components/button/Button";
 import { AnimatePresence, motion } from "framer-motion";
