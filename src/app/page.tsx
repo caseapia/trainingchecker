@@ -59,10 +59,10 @@ export default function Home() {
 
   const validateInput = () => {
     const input = inputRef.current?.value || "";
-    const hasCyrillic = /[а-яА-ЯёЁ]/.test(input);
+    const hasCyrillic = /[^a-z._0-9]/i.test(input);
 
     if (hasCyrillic) {
-      toast.error("Никнейм не может содержать кириллицу", { lifeTime: 4000 });
+      toast.error("Никнейм может быть только на латинице", { lifeTime: 4000 });
       inputRef.current!.value = "";
       setIsButtonDisabled(true);
     } else if (input.trim() === "") {

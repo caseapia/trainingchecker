@@ -8,8 +8,7 @@ import { AdditionalUserData } from "@/models/Player";
 import { Modal } from "@/components/modal/Modal";
 import { toast } from "@/utils/toast";
 import styles from "./AdditionalInfo.module.scss";
-import textFormatter from "@/utils/helpers/textFormatter";
-import formatUnixDate from "@/utils/helpers/formatUnixDate";
+import { information } from "@/app/player/components/additionalinfo/information";
 
 const AdditionalInfo: FC<Types> = ({ nickname }) => {
   const [info, setInfo] = useState<AdditionalUserData | null>(null);
@@ -55,23 +54,17 @@ const AdditionalInfo: FC<Types> = ({ nickname }) => {
           classNameBody={styles.body}
           title={`Дополнительная информация ${nickname}`}
         >
-          <section className={styles.labels}>
-            {info?.achievement && <p>Прикрепленное достижение</p>}
-            {info?.bonus_points && <p>Бонусные поинты</p>}
-            {info?.cop_chase_rating && <p>Рейтинг Copchase</p>}
-            {/*{info?.descriptions && <p>Подписи</p>}*/}
-            {info?.prefix && <p>Префикс</p>}
-            {info?.social_credits && <p>Социальный кредит</p>}
-          </section>
-          <section className={styles.content}>
-            {info?.achievement && <p>{textFormatter(String(info?.achievement))}</p>}
-            {info?.bonus_points && <p>{info?.bonus_points}</p>}
-            {info?.cop_chase_rating && <p>{info?.cop_chase_rating}</p>}
-            {/*{info?.descriptions && <p>{info?.descriptions}</p>}*/}
-            {info?.prefix && <p>{textFormatter(info?.prefix)}</p>}
-            {info?.social_credits && <p>{info?.social_credits}</p>}
-            <p>Последнее обновление было: {formatUnixDate(Number(info?.updated_at))}</p>
-          </section>
+          {information(info)
+            .filter(item => String(item.key).trim() !== "")
+            .map((item) => (
+              <div
+                key={item.label}
+                className={styles.row}
+              >
+                <p className={styles.label}>{item.label}</p>
+                <p className={styles.content}>{item.key}</p>
+              </div>
+            ))}
         </Modal>
       )}
     </>

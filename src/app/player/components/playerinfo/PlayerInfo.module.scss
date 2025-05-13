@@ -6,6 +6,10 @@
   border: 1px solid #15191c;
   width: 491px;
 
+  @media screen and (max-width: 767px) {
+    width: 397px;
+  }
+
   .title {
     margin-bottom: 10px;
   }

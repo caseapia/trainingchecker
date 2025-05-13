@@ -9,6 +9,7 @@ import defaultNotify from "@/public/assets/lotties/defaultNotify.json";
 import error from "@/public/assets/lotties/error.json";
 import { ToastAnimationPC, ToastAnimationMobile } from "./variant";
 import { isMobileDevice } from "@/hooks/isMobileDevice";
+import CloseIcon from "@/icons/components/xmark.svg";
 
 const Toast = () => {
   const { toasts, removeToast } = useToast();
@@ -31,28 +32,31 @@ const Toast = () => {
   }
 
   return (
-    <div className={styles.ToastWrapper}>
+    <div className={styles.toastWrapper}>
       <AnimatePresence>
         {toasts.map((toast) => (
           <motion.div
             key={toast.id}
             layout
-            className={`${styles.Toast} ${isMobile ? styles.mobile : ""} ${getType(toast.type)} ${toast.className || ""} ${toast.clickAction ? styles.clickable : ""} ${toast.isByModal ? styles.ByModal : ""}`}
+            className={`${styles.toast} ${isMobile ? styles.mobile : ""} ${getType(toast.type)} ${toast.className || ""} ${toast.clickAction ? styles.clickable : ""} ${toast.isByModal ? styles.ByModal : ""}`}
             onClick={toast.clickAction ? () => handleClick(toast) : undefined}
             variants={!isMobile ? ToastAnimationPC : ToastAnimationMobile}
             initial="initial"
             animate="animate"
             exit="exit"
           >
-            <section className={styles.IconContainer}>
+            <section className={styles.iconContainer}>
               <Lottie
                 animationData={toast.type === "success" ? success : toast.type === "error" ? error : defaultNotify}
                 loop={false}
                 style={{ height: "30px", width: "30px" }}
               />
             </section>
-            <section className={styles.Body}>
+            <section className={styles.body}>
               {toast.content && <div className={styles.Content}>{toast.content}</div>}
+            </section>
+            <section className={styles.closeContainer}>
+              <CloseIcon onClick={() => removeToast(toast.id)}/>
             </section>
           </motion.div>
         ))}
