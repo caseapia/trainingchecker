@@ -4,13 +4,13 @@ import BadgeProps, { allBadges } from "@/consts/badges";
 import styles from "./BadgeRenderer.module.scss";
 import BootstrapTooltip from "@/components/styles/TooltipStyles";
 import { Modal } from "@/components/modal/Modal";
-import { isMobileDevice } from "@/hooks/isMobileDevice";
+import { useIsMobileDevice } from "@/hooks/isMobileDevice";
 import BadgeRendererProps from "./props";
 
 const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedBadge, setSelectedBadge] = useState<BadgeProps>();
-  const isMobile = isMobileDevice();
+  const isMobile = useIsMobileDevice();
 
   if (!player) return null;
 
