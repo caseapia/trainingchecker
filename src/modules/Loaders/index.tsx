@@ -3,7 +3,7 @@ import React from "react";
 import PlayerLoader from "@/modules/Loaders/PlayerLoader";
 import TableLoader from "@/modules/Loaders/TableLoader";
 import LandingLoader from "@/modules/Loaders/LandingLoader";
-import { isMobileDevice } from "@/hooks/isMobileDevice";
+import { useIsMobileDevice } from "@/hooks/isMobileDevice";
 import Preloader from "@/public/assets/lotties/Preloader.json";
 import Lottie from "lottie-react";
 
@@ -14,7 +14,7 @@ type LoaderProps = {
 };
 
 const Loader: React.FC<LoaderProps> = ({ type, rows, columns }) => {
-  const isMobile: boolean = isMobileDevice();
+  const isMobile: boolean = useIsMobileDevice();
   return !isMobile ? (
     <DesktopPreloader type={type}
       rows={rows}
