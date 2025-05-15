@@ -4,7 +4,7 @@ import BadgeProps, { allBadges } from "@/consts/badges";
 import styles from "./BadgeRenderer.module.scss";
 import BootstrapTooltip from "@/components/styles/TooltipStyles";
 import { Modal } from "@/components/modal/Modal";
-import { isMobileDevice } from "@/shared/hooks/isMobileDevice";
+import { isMobileDevice } from "@/hooks/isMobileDevice";
 import BadgeRendererProps from "./props";
 
 const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player }) => {

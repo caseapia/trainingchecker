@@ -1,6 +1,7 @@
 import { metricApiClient } from "@/api/axios";
 import { headers } from "next/headers";
 import { UAParser } from "ua-parser-js";
+import settings from "@/consts/settings";
 
 export const POST = async (req: Request) => {
   const hdr = await headers();
@@ -8,6 +9,7 @@ export const POST = async (req: Request) => {
   const forwardedFor = hdr.get("x-forwarded-for");
   const ip = forwardedFor?.split(",")[0]?.trim() || "Unknown";
   const userAgent = hdr.get("user-agent") || "Unknown";
+  const isDevModeEnabled = settings.find(s => s.option === "DEV_TOOLS")?.value === true;
 
   const { browser, cpu, device } = UAParser(String(userAgent));
 
@@ -36,7 +38,7 @@ export const POST = async (req: Request) => {
       username: "Spidey Bot",
       embeds: [
         {
-          title: `📊 ${type} Metric`,
+          title: `📊 ${type} Metric ${isDevModeEnabled ? "DEVELOPMENT" : ""}`,
           description: message,
           color: embedColorMap[type] || 0x3b82f6,
           fields,

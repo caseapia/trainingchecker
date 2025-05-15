@@ -8,12 +8,12 @@ import success from "@/public/assets/lotties/success.json";
 import defaultNotify from "@/public/assets/lotties/defaultNotify.json";
 import error from "@/public/assets/lotties/error.json";
 import { ToastAnimationPC, ToastAnimationMobile } from "./variant";
-import { isMobileDevice } from "@/hooks/isMobileDevice";
+import { useIsMobileDevice } from "@/hooks/isMobileDevice";
 import CloseIcon from "@/icons/components/xmark.svg";
 
 const Toast = () => {
   const { toasts, removeToast } = useToast();
-  const isMobile: boolean = isMobileDevice();
+  const isMobile: boolean = useIsMobileDevice();
 
   const getType = (type: any) => {
     switch (type) {

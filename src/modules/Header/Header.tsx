@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./Header.module.scss";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { isMobileDevice } from "@/hooks/isMobileDevice";
+import { useIsMobileDevice } from "@/hooks/isMobileDevice";
 import { Elements } from "@/shared/consts/headerElements";
 import BootstrapTooltip from "@/components/styles/TooltipStyles";
 import BarsIcon from "@/icons/components/header/bars.svg";
@@ -16,7 +16,7 @@ import Color from "@/components/styles/colors.module.scss";
 import settings from "@/consts/settings";
 
 export const Header = () => {
-  const isMobile = isMobileDevice();
+  const isMobile = useIsMobileDevice();
   const isDevToolsEnable = Boolean(settings.find(s => s.option === "DEV_TOOLS")?.value);
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const [activePage, setActivePage] = useState("main");
