@@ -7,7 +7,6 @@ import UserCogIcon from "@/icons/badges/userCog.svg";
 import UserShieldIcon from "@/icons/badges/userShield.svg";
 import UserSlashIcon from "@/icons/badges/userSlash.svg";
 import YoutubeIcon from "@/icons/badges/youtube.svg";
-import PullRequestIcon from "@/icons/badges/pullRequest.svg"
 import TrainingLogoIcon from "@/icons/badges/traininglogo.svg";
 
 type BadgeProps = {
