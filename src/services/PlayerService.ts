@@ -1,4 +1,3 @@
-"use server"
 import UserData, { AdditionalUserData } from "@/models/Player";
 import { chronoApiClient, trainingApiClient } from "@/api/axios";
 
