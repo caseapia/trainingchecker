@@ -1,5 +1,10 @@
+"use client"
 import { forwardRef, useId } from "react";
 import styles from "./Input.module.scss";
+import { AnimatePresence, motion } from "framer-motion";
+import Props from "@/components/input/types";
+import { animationWrapper } from "@/components/input/animation";
+import ErrorIcon from "@/icons/error.svg";
 
 export const Input = forwardRef<HTMLInputElement, Props>(
   ({
@@ -16,19 +21,24 @@ export const Input = forwardRef<HTMLInputElement, Props>(
     required = false,
     value,
     marginBottom = 0,
+    error,
   }, ref) => {
     const id = useId();
 
     return (
-      <div className={styles.inputContainer}>
-        <label htmlFor={id + `-${name}`}
-          className={styles.label}>
+      <div
+        className={styles.inputContainer}
+        style={{ marginBottom: `${marginBottom}px` }}
+      >
+        <label
+          htmlFor={id + `-${name}`}
+          className={styles.label}
+        >
           {label}{" "}
           {required && <span className={styles.required}>*</span>}
         </label>
         <div
           className={`${styles.input} ${classname || ""} ${disabled ? styles.disabled : ""}`}
-          style={{ marginBottom: `${marginBottom}px` }}
           role="input"
         >
           {Icon &&
@@ -53,6 +63,22 @@ export const Input = forwardRef<HTMLInputElement, Props>(
             spellCheck="false"
           />
         </div>
+        <AnimatePresence mode="wait">
+          {error && (
+            <motion.div
+              key="input-error"
+              layout
+              variants={animationWrapper}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className={styles.errorWrapper}
+            >
+              <ErrorIcon/>
+              <span className={styles.errorText}>{error.message}</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     );
   }
