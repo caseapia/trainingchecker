@@ -63,7 +63,7 @@ export const Elements: HeaderProps[] = [
     icon: CopchaseIcon,
     link: "/copchase",
     isNew: false,
-    isDisabled: true,
+    isDisabled: false,
     tooltipText: "Эта вкладка временно недоступна",
     isMobileAvailable: true,
   },
