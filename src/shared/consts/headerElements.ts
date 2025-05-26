@@ -72,7 +72,7 @@ export const Elements: HeaderProps[] = [
     id: "admins",
     icon: AdminIcon,
     link: "/admins",
-    isNew: true,
+    isNew: false,
     isDisabled: false,
     isMobileAvailable: true
   }
