@@ -27,7 +27,6 @@ const PlayerInfo = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const nickname = searchParams.get("nickname");
-  let error: string
 
   const [playerData, setPlayerData] = useState<UserData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -49,13 +48,13 @@ const PlayerInfo = () => {
 
       if (error?.response?.status === 404) {
         error = `Игрок с ником ${nickname} не найден. Перенаправляем на главную страницу.`
+        await metric.send(`${error}`, "Error")
         toast.error(error, { lifeTime: 5000 });
         router.push("/");
-      } else {
-        if (nickname !== ".") {
-          error = `Ошибка при загрузке данных. Проверьте консоль для подробностей.`
-          toast.error(error, { lifeTime: 10000 });
-        }
+      } else if (nickname !== ".") {
+        error = `Ошибка при загрузке данных. Проверьте консоль для подробностей.`
+        await metric.send(`${error}`, "Error")
+        toast.error(error, { lifeTime: 10000 });
       }
     } finally {
       setIsLoading(false);
@@ -63,23 +62,14 @@ const PlayerInfo = () => {
   }, [nickname, router]);
 
   useEffect(() => {
-    if (nickname === ".") {
-      error = "Вы не можете совершить поиск по данному никнейму"
-      toast.error(error, { lifeTime: 6000 })
-      metric.send(error, "Error")
-      router.push("../");
-      return;
-    } else if (!nickname) {
-      error = "Ник игрока не указан. Возвращаем на главную."
-      toast.error(`${error}. Возвращаем на главную.`, { lifeTime: 6000 });
-      metric.send(error, "Error")
-      router.push("../");
-      return;
-    } else {
-      metric.send("Обработка информации о запрошенном игроке", "Success")
-      fetchPlayerData();
-    }
-  }, []);
+    (async () => {
+      try {
+        await fetchPlayerData();
+      } catch (error: any) {
+        console.error(error)
+      }
+    })();
+  }, [fetchPlayerData]);
 
   const refreshData = async () => {
     setIsRefreshing(true);
