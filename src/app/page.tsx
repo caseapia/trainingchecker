@@ -3,7 +3,9 @@ import React, { useEffect, useState, Suspense, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import BootstrapTooltip from "@/components/styles/TooltipStyles";
-import { toast } from "@/utils/toast";
+import { Controller, useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import styles from "./page.module.scss";
 import { getLastCommit } from "@/services/LandingService";
 
@@ -24,11 +26,10 @@ export default function Home() {
     day: "numeric",
   };
 
-  const [isButtonLoading, setIsButtonLoading] = useState(false);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [lastUpdate, setLastUpdate] = useState("");
-  const [lastCommit, setLastCommit] = useState("");
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [lastUpdate, setLastUpdate] = useState<string>("");
+  const [lastCommit, setLastCommit] = useState<string>("");
+  const [isLoaded, setLoaded] = useState<boolean>(false);
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -48,7 +49,7 @@ export default function Home() {
 
         setLastUpdate(new Date(response.commit.author.date).toLocaleDateString("ru-RU", dateOptions));
         setLastCommit(response.commit.message);
-        setIsLoaded(true);
+        setLoaded(true);
       } catch (error) {
         console.error(error);
       }
@@ -57,36 +58,32 @@ export default function Home() {
     fetchLastCommit();
   }, []);
 
-  const validateInput = () => {
-    const input = inputRef.current?.value || "";
-    const hasCyrillic = /[^a-z._0-9]/i.test(input);
-
-    if (hasCyrillic) {
-      toast.error("Никнейм может быть только на латинице", { lifeTime: 4000 });
-      inputRef.current!.value = "";
-      setIsButtonDisabled(true);
-    } else if (input.trim() === "") {
-      toast.error("Поле никнейма не может быть пустым", { lifeTime: 4000 });
-      setIsButtonDisabled(true);
-    } else {
-      toast.clear();
-      setIsButtonDisabled(false);
-    }
+  const onSubmit = async ({ nickname }: FormValues) => {
+    setLoading(true);
+    router.push(`/player?nickname=${encodeURIComponent(nickname.trim())}`);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const nickname = inputRef.current?.value.trim();
 
-    if (!nickname) {
-      toast.error("Вы не заполнили поле никнейма", { lifeTime: 4000 });
-      setIsButtonDisabled(true);
-      return;
-    }
+  const validationSchema = z.object({
+    nickname: z
+      .string()
+      .min(1, "Введите никнейм")
+      .regex(/^[a-z._0-9]+$/i, "Эти символы запрещены для ввода")
+  });
 
-    setIsButtonLoading(true);
-    router.push(`/player?nickname=${encodeURIComponent(nickname)}`);
-  };
+  type FormValues = z.infer<typeof validationSchema>;
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<FormValues>({
+    resolver: zodResolver(validationSchema),
+    defaultValues: { nickname: "" }
+  })
+
+  const nicknameValue = watch("nickname");
 
   return (
     <Suspense fallback={<LandingLoader/>}>
@@ -133,29 +130,35 @@ export default function Home() {
             </div>
 
             <form
-              onSubmit={handleSubmit}
+              onSubmit={handleSubmit(onSubmit)}
               method="get"
               className={styles.FormContainer}
               ref={formRef}
             >
-              <Input
-                icon={UserIcon}
-                label="Введите никнейм игрока"
-                type="text"
+              <Controller
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    icon={UserIcon}
+                    label="Введите никнейм игрока"
+                    type="text"
+                    ref={inputRef}
+                    required
+                    disabled={isLoading}
+                    marginBottom={7}
+                    error={errors.nickname}
+                  />
+                )}
                 name="nickname"
-                ref={inputRef}
-                onChange={validateInput}
-                required
-                disabled={isButtonLoading}
-                marginBottom={7}
               />
               <Button
                 type="Primary"
                 action="submit"
                 icon={UserSearchIcon}
                 ref={null}
-                disabled={isButtonDisabled}
-                isLoading={isButtonLoading}
+                isLoading={isLoading}
+                disabled={!nicknameValue?.trim() || !!errors.nickname || isLoading}
               >
                 Проверить
               </Button>

@@ -47,7 +47,9 @@ const Page = () => {
               ))}
             </TBody>
           </>
-        ) : <Loader type="Table" rows={2} columns={5}/>}
+        ) : <Loader type="Table"
+          rows={2}
+          columns={3}/>}
       </Table>
     </PageWrapper>
   );
