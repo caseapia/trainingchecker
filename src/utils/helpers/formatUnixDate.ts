@@ -1,3 +1,4 @@
+"use client";
 export default function formatUnixDate(unixTimestamp: number): string {
   if (!unixTimestamp) {
     return "Сейчас";
