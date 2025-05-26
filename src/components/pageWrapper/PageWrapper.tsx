@@ -12,14 +12,13 @@ const PageWrapper = ({ title, children, classname, style }: Props) => {
   }, []);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       <motion.main
         className={`${classname || ""} ${styles.PageWrapper}`}
         style={style}
         variants={animateVariants}
         initial="initial"
         animate="animate"
-        exit="exit"
       >
         {title && <h1>{title}</h1>}
         {children}

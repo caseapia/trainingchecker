@@ -1,4 +1,4 @@
-export interface CopchaseLobbies {
+export type Lobbies = {
   number: number;
   status: string;
   time: string;
@@ -8,7 +8,7 @@ export interface CopchaseLobbies {
 
 interface Copchase {
   type: string;
-  lobbies: CopchaseLobbies[];
+  lobbies: Lobbies[];
   timestamp: number;
 }
 

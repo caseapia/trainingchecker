@@ -83,3 +83,21 @@
   margin-right: 10px;
   transition: .3s;
 }
+
+.errorWrapper {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  color: var(--color-danger);
+  font-size: 0.875rem;
+
+  svg {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+  }
+
+  .errorText {
+    line-height: 1.2;
+  }
+}
