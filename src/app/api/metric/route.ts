@@ -2,6 +2,8 @@ import { metricApiClient } from "@/api/axios";
 import { headers } from "next/headers";
 import { UAParser } from "ua-parser-js";
 import settings from "@/consts/settings";
+import axios from "axios";
+import GeoResponse from "@/models/Geo";
 
 export const POST = async (req: Request) => {
   const hdr = await headers();
@@ -12,6 +14,18 @@ export const POST = async (req: Request) => {
   const isDevModeEnabled = settings.find(s => s.option === "DEV_TOOLS")?.value === true;
 
   const { browser, cpu, device } = UAParser(String(userAgent));
+  let geoData: Partial<GeoResponse> = {};
+
+  try {
+    const geoRes = await axios.get<GeoResponse>(`https://ipwho.is/${ip}`);
+    if (geoRes.data?.success) {
+      geoData = geoRes.data;
+    }
+  } catch (e) {
+    if (isDevModeEnabled) {
+      console.error("Geo lookup failed:", e);
+    }
+  }
 
   try {
     const { message, type, additionalData, hash } = await req.json();
@@ -30,8 +44,49 @@ export const POST = async (req: Request) => {
           inline: true,
         }))
         : []),
-      { name: "IP", value: ip, inline: true },
-      { name: "Device Info", value: `${browser.name}, ${cpu.architecture}, ${device.type || "Unknown"}`, inline: true },
+      { name: "🌐 IP", value: `\`${ip}\``, inline: true },
+      {
+        name: "🗺️ Location",
+        value: [
+          `**City:** ${geoData.city || "_Unknown_"},`,
+          `**Country:** ${geoData.country || "_Unknown_"} ${geoData.flag?.emoji || ""}`,
+          `**Continent:** ${geoData.continent || "_Unknown_"}`,
+          `**EU Member:** ${geoData.is_eu ? "✅ Yes" : "❌ No"}`,
+          `**Latitude:** \`${geoData.latitude ?? "?"}\``,
+          `**Longitude:** \`${geoData.longitude ?? "?"}\``,
+        ].join("\n"),
+        inline: true,
+      },
+      {
+        name: "📡 Connection",
+        value: [
+          `**Type:** \`${geoData.type || "Unknown"}\``,
+          `**ASN:** \`${geoData.connection?.asn ?? "?"}\``,
+          `**Org:** ${geoData.connection?.org || "_Unknown_"}`,
+          `**ISP:** ${geoData.connection?.isp || "_Unknown_"}`,
+          `**Domain:** \`${geoData.connection?.domain || "?"}\``,
+        ].join("\n"),
+        inline: false,
+      },
+      {
+        name: "🕒 Timezone",
+        value: [
+          `**ID:** \`${geoData.timezone?.id || "Unknown"}\` (${geoData.timezone?.abbr || "?"})`,
+          `**UTC:** \`${geoData.timezone?.utc || "?"}\``,
+          `**Current Time:** \`${geoData.timezone?.current_time || "?"}\``,
+        ].join("\n"),
+        inline: false,
+      },
+
+      {
+        name: "💻 Device Info",
+        value: [
+          `**Browser:** ${browser.name || "Unknown"}`,
+          `**CPU Arch:** ${cpu.architecture || "Unknown"}`,
+          `**Device Type:** ${device.type || "Unknown"}`,
+        ].join("\n"),
+        inline: true,
+      },
     ];
 
     const payload = {
