@@ -8,7 +8,6 @@ import Button from "@/components/button/Button";
 import worldBlockWorlds from "@/consts/worldBlockWords";
 import PageWrapper from "@/components/pageWrapper/PageWrapper";
 import { toast } from "@/utils/toast";
-import { usePage500 } from "@/shared/hooks/page500";
 import textFormatter from "@/utils/helpers/textFormatter";
 import Badge from "@/components/inlineBadge/Badge";
 import Loader from "@/modules/Loaders/index";
@@ -28,35 +27,22 @@ const WorldList = () => {
   const [sensMode, setSensMode] = useState<boolean>(false);
   const [originalWorlds, setOriginalWorlds] = useState<World[] | null>(null);
   const [isBadgeLoading, setBadgeLoading] = useState<boolean>(true);
-  const triggerPage500 = usePage500();
-
-  const getWorldsData = async () => {
-    try {
-      const response = await getWorlds();
-      setResult(response.worlds);
-      setOriginalWorlds(response.worlds);
-      setIsLoaded(true);
-      setBadgeLoading(false);
-    } catch (err) {
-      console.error("Error:", err);
-      setIsLoaded(false);
-    }
-  };
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-
-    timeoutId = setTimeout(() => {
-      if (!isLoaded) {
-        triggerPage500();
+    const getWorldsData = async () => {
+      try {
+        const response = await getWorlds();
+        setResult(response.worlds);
+        setOriginalWorlds(response.worlds);
+        setIsLoaded(true);
+        setBadgeLoading(false);
+      } catch (err) {
+        console.error("Error:", err);
+        setIsLoaded(false);
       }
-    }, 8000);
+    };
 
     getWorldsData();
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
   }, []);
 
   const formatWorldInfo = (world: World) => {

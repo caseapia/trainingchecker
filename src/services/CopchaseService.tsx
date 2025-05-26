@@ -1,15 +1,15 @@
 "use server"
 import { chronoApiClient } from "@/api/axios";
-import { CopchaseLobbies } from "@/models/Copchase";
+import Copchase, { Lobbies } from "@/models/Copchase";
 import styles from "@/app/copchase/page.module.scss";
 
-export async function fetchCopchaseLobbies(): Promise<CopchaseLobbies> {
+export async function fetchCopchaseLobbies(): Promise<Copchase> {
   const response = await chronoApiClient.get("/copchase");
 
   return response.data;
 }
 
-export async function getStatus(chData: CopchaseLobbies[], id: number) {
+export async function getStatus(chData: Lobbies[], id: number) {
   const data = chData.find((ch) => ch.number === id);
   if (!data) return null;
 

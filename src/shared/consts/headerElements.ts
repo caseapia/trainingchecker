@@ -55,7 +55,6 @@ export const Elements: HeaderProps[] = [
     link: "/worldlist",
     isNew: false,
     isDisabled: false,
-    tooltipText: "Эта вкладка временно недоступна и отключена на серверной части. Мы оповестим вас, когда все ошибки будут исправлены.",
     isMobileAvailable: true,
   },
   {
@@ -64,7 +63,8 @@ export const Elements: HeaderProps[] = [
     icon: CopchaseIcon,
     link: "/copchase",
     isNew: false,
-    isDisabled: false,
+    isDisabled: true,
+    tooltipText: "Эта вкладка временно недоступна",
     isMobileAvailable: true,
   },
   {
