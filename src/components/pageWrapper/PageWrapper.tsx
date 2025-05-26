@@ -14,7 +14,6 @@ const PageWrapper = ({ title, children, classname, style }: Props) => {
   return (
     <AnimatePresence mode="wait">
       <motion.main
-        key={window.location.href}
         className={`${classname || ""} ${styles.PageWrapper}`}
         style={style}
         variants={animateVariants}
