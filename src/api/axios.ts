@@ -6,8 +6,6 @@ const CHRONOAPI_URL = process.env.NEXT_PUBLIC_CHRONOAPI_URL!;
 const METRICAPI_URL = "https://ptb.discord.com/api/webhooks/";
 const hash = Cookies.get("__ha_sh");
 
-console.log(hash);
-
 if (!TRAININGAPI_URL || !CHRONOAPI_URL) {
   throw new Error("API URLs are not properly defined.");
 }
@@ -21,7 +19,7 @@ const createAuthorizationApiClient = (baseURL: string) => axios.create({
   baseURL,
   headers: {
     "Content-Type": "application/json",
-    "Authorization": hash,
+    "Authorization": hash ?? "",
   },
 })
 
