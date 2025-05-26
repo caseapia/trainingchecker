@@ -1,3 +1,6 @@
+import { FieldError } from "react-hook-form";
+import React from "react";
+
 interface Props {
   label: string;
   type: "text" | "number" | "color" | "checkbox" | "password";
@@ -12,4 +15,7 @@ interface Props {
   required?: boolean;
   value?: string | number;
   marginBottom?: number;
+  error?: FieldError;
 }
+
+export default Props;

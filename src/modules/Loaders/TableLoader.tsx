@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React, { Fragment } from "react";
 import ContentLoader from "react-content-loader";
 
 interface Props {
@@ -9,11 +9,11 @@ interface Props {
 }
 
 const TableLoader = ({
-                       rows = 5,
-                       columns = 5,
-                       columnWidth = 219,
-                       gap = 35
-                     }: Props) => {
+  rows = 5,
+  columns = 5,
+  columnWidth = 219,
+  gap = 35,
+}: Props) => {
   // Overall params
   const rowHeight = 24;
   const borderRadius = 10;
