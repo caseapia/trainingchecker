@@ -15,10 +15,6 @@ export const metric = {
     }
   ) => {
     try {
-      if (isDevModeEnabled) {
-        return false;
-      }
-
       const payload = {
         message,
         type,
