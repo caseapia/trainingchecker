@@ -30,6 +30,7 @@ if (!i18n.isInitialized) {
       react: {
         useSuspense: false,
       },
+      debug: process.env.NODE_ENV === "development",
     });
 }
 

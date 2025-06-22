@@ -1,7 +1,6 @@
 import { metricApiClient } from "@/api/axios";
 import { headers } from "next/headers";
 import { UAParser } from "ua-parser-js";
-import settings from "@/consts/settings";
 import axios from "axios";
 import GeoResponse from "@/models/Geo";
 
@@ -11,7 +10,7 @@ export const POST = async (req: Request) => {
   const forwardedFor = hdr.get("x-forwarded-for");
   const ip = forwardedFor?.split(",")[0]?.trim() || "Unknown";
   const userAgent = hdr.get("user-agent") || "Unknown";
-  const isDevModeEnabled = settings.find(s => s.option === "DEV_TOOLS")?.value === true;
+  const isDevModeEnabled = process.env["NODE_ENV"] === "development";
 
   const { browser, cpu, device } = UAParser(String(userAgent));
   let geoData: Partial<GeoResponse> = {};

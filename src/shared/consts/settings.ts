@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 type props = {
-  option: "LOAD_TIME" | "SNOW" | "DEV_TOOLS" | "TOASTS_MAX_VISIBLE";
+  option: "LOAD_TIME" | "SNOW" | "TOASTS_MAX_VISIBLE";
   value: string | number | ReactNode | boolean | bigint;
 }[];
 
@@ -13,10 +13,6 @@ export const settings: props = [
   {
     option: "SNOW",
     value: false,
-  },
-  {
-    option: "DEV_TOOLS",
-    value: true,
   },
   {
     option: "TOASTS_MAX_VISIBLE",

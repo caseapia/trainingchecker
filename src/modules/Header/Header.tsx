@@ -13,12 +13,11 @@ import Badge from "@/components/inlineBadge/Badge";
 import headerVariants from "./variant";
 import { fetchPlayersCounter } from "@/services/PlayersService";
 import Color from "@/components/styles/colors.module.scss";
-import settings from "@/consts/settings";
 import { useTranslation } from "react-i18next";
 
 export const Header = () => {
   const isMobile = useIsMobileDevice();
-  const isDevToolsEnable = Boolean(settings.find(s => s.option === "DEV_TOOLS")?.value);
+  const isDevToolsEnable = process.env["NODE_ENV"] === "development";
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const [activePage, setActivePage] = useState("main");
   const [isBadgeLoading, setIsBadgeLoading] = useState(true);
