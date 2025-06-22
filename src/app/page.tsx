@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState, Suspense, useRef } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import BootstrapTooltip from "@/components/styles/TooltipStyles";
@@ -17,6 +17,7 @@ import LandingLoader from "@/modules/Loaders/LandingLoader";
 import UserSearchIcon from "@/icons/page-main/userSearch.svg";
 import UserIcon from "@/icons/user.svg";
 import GithubIcon from "@/icons/page-main/github.svg";
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
   const router = useRouter();
@@ -33,6 +34,8 @@ export default function Home() {
 
   const inputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const [tCommon] = useTranslation("common");
+  const [tErrors] = useTranslation("errors");
 
   const trainingApiLink = (
     <Link href="https://forum.training-server.com/d/3921-training-api"
@@ -67,8 +70,8 @@ export default function Home() {
   const validationSchema = z.object({
     nickname: z
       .string()
-      .min(1, "Введите никнейм")
-      .regex(/^[a-z._0-9]+$/i, "Эти символы запрещены для ввода")
+      .min(1, tCommon("inputLabel"))
+      .regex(/^[a-z._0-9]+$/i, tErrors("error_symbols"))
   });
 
   type FormValues = z.infer<typeof validationSchema>;
@@ -141,7 +144,7 @@ export default function Home() {
                   <Input
                     {...field}
                     icon={UserIcon}
-                    label="Введите никнейм игрока"
+                    label={tCommon("inputLabel")}
                     type="text"
                     ref={inputRef}
                     required
@@ -160,7 +163,7 @@ export default function Home() {
                 isLoading={isLoading}
                 disabled={!nicknameValue?.trim() || !!errors.nickname || isLoading}
               >
-                Проверить
+                {tCommon("buttonLabel")}
               </Button>
             </form>
           </>

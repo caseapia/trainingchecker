@@ -1,0 +1,18 @@
+{
+  "success_dataUpdated": "Информация об игроке {{nickname}} обновлена",
+  "info_id": "ID",
+  "info_nickname": "Никнейм",
+  "info_verify": "Верификация",
+  "info_status": "Статус",
+  "info_verifyText": "Текст верификации",
+  "info_muteTime": "Время мута",
+  "info_registerDate": "Дата регистрации",
+  "info_registerDateBefore2018": "Зарегистрирован до 2018 года",
+  "info_lastConnect": "Последний вход",
+  "info_lastConnectNow": "Сейчас в сети (ID: {{playerid}})",
+  "info_timeAgo": "назад",
+  "title": "Информация об игроке",
+  "button_refresh": "Обновить",
+  "button_punishments": "Наказания",
+  "button_additional": "Дополнительная информация"
+}
