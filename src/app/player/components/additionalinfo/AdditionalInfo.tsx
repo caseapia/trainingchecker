@@ -9,11 +9,14 @@ import { Modal } from "@/components/modal/Modal";
 import { toast } from "@/utils/toast";
 import styles from "./AdditionalInfo.module.scss";
 import { information } from "@/app/player/components/additionalinfo/information";
+import { useTranslation } from "react-i18next";
 
 const AdditionalInfo: FC<Types> = ({ nickname }) => {
   const [info, setInfo] = useState<AdditionalUserData | null>(null);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [isLoading, setLoading] = useState<boolean>(false);
+  const [tAdditional] = useTranslation("additionalinfo");
+  const [tErrors] = useTranslation("errors")
 
   const fetchAdditionalInfo = async () => {
     setLoading(true);
@@ -28,8 +31,7 @@ const AdditionalInfo: FC<Types> = ({ nickname }) => {
       console.error(error);
 
       if (error?.response?.status !== 200) {
-        toast.error("Произошла ошибка при получении дополнительной информации, обратитесь в консоль для получения" +
-          " информации об ошибке", { lifeTime: 6000 })
+        toast.error(tErrors("error_unexpected_console"), { lifeTime: 6000 })
       }
 
       setLoading(false);
@@ -45,23 +47,23 @@ const AdditionalInfo: FC<Types> = ({ nickname }) => {
         isLoading={isLoading}
         disabled={isModalOpen}
       >
-        Дополнительная информация
+        {tAdditional("title")}
       </Button>
       {isModalOpen && (
         <Modal
           isOpen={isModalOpen}
           onClose={() => setModalOpen(false)}
           classNameBody={styles.body}
-          title={`Дополнительная информация ${nickname}`}
+          title={`${tAdditional("title")} ${nickname}`}
         >
           {information(info)
             .filter(item => String(item.key).trim() !== "")
             .map((item) => (
               <div
-                key={item.label}
+                key={item.labelKey}
                 className={styles.row}
               >
-                <p className={styles.label}>{item.label}</p>
+                <p className={styles.label}>{tAdditional(item.labelKey)}</p>
                 <p className={styles.content}>{item.key}</p>
               </div>
             ))}

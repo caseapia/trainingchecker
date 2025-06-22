@@ -6,17 +6,18 @@ import BootstrapTooltip from "@/components/styles/TooltipStyles";
 import { Modal } from "@/components/modal/Modal";
 import { useIsMobileDevice } from "@/hooks/isMobileDevice";
 import BadgeRendererProps from "./props";
+import { useTranslation } from "react-i18next";
 
 const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedBadge, setSelectedBadge] = useState<BadgeProps>();
   const isMobile = useIsMobileDevice();
+  const [tBadges] = useTranslation("badges");
 
   if (!player) return null;
 
   const badgesToShow = allBadges.filter((badge) => {
     const {
-      id,
       moder,
       verify,
       accid,
@@ -63,18 +64,22 @@ const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player }) => {
 
   return badgesToShow.length > 0 ? (
     <div className={styles.container}>
-      {badgesToShow.map((badge) => (
-        <BootstrapTooltip
-          key={badge.id || badge.title}
-          title={
-            <>
+      {badgesToShow.map((badge) => {
+        const key = badge.translationKey;
+        return (
+          <BootstrapTooltip
+            key={badge.id}
+            title={
+              <>
               <span style={{ color: badge.textColor, fontWeight: 600 }}>
-                {badge.title}
+                {tBadges(`items.${key}.title`)}
               </span>
-              {badge.description && <><br/>{badge.description}</>}
-            </>
-          }
-        >
+                {tBadges(`items.${key}.description`) &&
+                  <><br/>{tBadges(`items.${key}.description`)}</>
+                }
+              </>
+            }
+          >
           <span
             className={styles.badge}
             style={{ "--color": badge.color } as React.CSSProperties}
@@ -87,17 +92,18 @@ const BadgeRenderer: React.FC<BadgeRendererProps> = ({ player }) => {
           >
             <span className={styles.BadgeIcon}>{badge.icon}</span>
           </span>
-        </BootstrapTooltip>
-      ))}
+          </BootstrapTooltip>
+        )
+      })}
 
       {selectedBadge && (
         <Modal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          title={selectedBadge.title}
+          title={`items.${selectedBadge.translationKey}.title`}
           titleStyle={{ color: selectedBadge.textColor }}
         >
-          <p>{selectedBadge.description}</p>
+          <p>{`items.${selectedBadge.translationKey}.description`}</p>
         </Modal>
       )}
     </div>

@@ -6,12 +6,15 @@ import Link from "next/link";
 import CopyIcon from "@/icons/copy.svg";
 import CheckIcon from "@/icons/checkCircle.svg";
 import { toast } from "@/utils/toast";
+import { useTranslation } from "react-i18next";
 
 const Punishment: FC<Types> = ({ id, login, warns, statusAction, status }) => {
+  const [tPunishment] = useTranslation("punishment");
+  const [tErrors] = useTranslation("errors");
 
   const copyPunishments = async () => {
     if (!warns.length) {
-      toast.error(`У игрока ${login} нет наказаний.`);
+      toast.error(tErrors("error_playerHasNoPunishments", { nickname: login }));
       return;
     }
 
@@ -20,13 +23,16 @@ const Punishment: FC<Types> = ({ id, login, warns, statusAction, status }) => {
       .join(";\n");
 
     try {
-      await navigator.clipboard.writeText(
-        `Список наказаний ${login} (${id})\n\n${punishmentsText}\n\nВсего наказаний: ${warns.length}`
-      );
-      toast.success(`Наказания игрока ${login} скопированы в буфер обмена`, { isByModal: true });
+      await navigator.clipboard.writeText(tPunishment("punishment_list", {
+        nickname: login,
+        id: id,
+        punishments: punishmentsText,
+        length: warns.length
+      }));
+      toast.success(tPunishment("successfully_copied", { nickname: login }), { isByModal: true });
     } catch (error) {
       console.error(error);
-      toast.error("Не удалось скопировать в буфер обмена.");
+      toast.error(tErrors("error_unexpectedCopyError"));
     }
   };
 
@@ -34,20 +40,20 @@ const Punishment: FC<Types> = ({ id, login, warns, statusAction, status }) => {
     <Modal
       isOpen={status}
       onClose={() => statusAction(false)}
-      title={`Список наказаний ${login} (${id})`}
-      firstButtonContent="Скопировать"
+      title={`${tPunishment("title")} ${login} (${id})`}
+      firstButtonContent={tPunishment("button_contentCopy")}
       firstButtonIcon={CopyIcon}
       firstButtonAction={copyPunishments}
-      secondButtonContent="Закрыть"
+      secondButtonContent={tPunishment("button_contentClose")}
       secondButtonIcon={CheckIcon}
       secondButtonAction={() => statusAction(false)}
     >
       <Table width={100}>
         <Thead>
           <Tr>
-            <Th>Администратор</Th>
-            <Th>Причина</Th>
-            <Th>Дата</Th>
+            <Th>{tPunishment("content_admin")}</Th>
+            <Th>{tPunishment("content_reason")}</Th>
+            <Th>{tPunishment("content_date")}</Th>
           </Tr>
         </Thead>
         <TBody>

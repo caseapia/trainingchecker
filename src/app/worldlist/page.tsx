@@ -2,7 +2,7 @@
 import { Suspense, useEffect, useState } from "react";
 import styles from "./page.module.scss"
 
-import { Table, Thead, Tr, Td, Th, TBody } from "@/components/table/Table";
+import { Table, TBody, Td, Th, Thead, Tr } from "@/components/table/Table";
 import Chip from "@/components/chip/Chip";
 import Button from "@/components/button/Button";
 import worldBlockWorlds from "@/consts/worldBlockWords";
@@ -20,6 +20,7 @@ import AlertIcon from "@/icons/page-worldlist/alertFill.svg";
 import CopyIcon from "@/icons/copy.svg";
 import DeblurIcon from "@/icons/page-worldlist/deblur.svg";
 import LensBlurIcon from "@/icons/page-worldlist/lensBlur.svg";
+import { useTranslation } from "react-i18next";
 
 const WorldList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -27,6 +28,7 @@ const WorldList = () => {
   const [sensMode, setSensMode] = useState<boolean>(false);
   const [originalWorlds, setOriginalWorlds] = useState<World[] | null>(null);
   const [isBadgeLoading, setBadgeLoading] = useState<boolean>(true);
+  const [tWorlds] = useTranslation("worlds");
 
   useEffect(() => {
     const getWorldsData = async () => {
@@ -46,19 +48,24 @@ const WorldList = () => {
   }, []);
 
   const formatWorldInfo = (world: World) => {
-    const ssmp = world.ssmp ? " // Использует SSMP" : "";
-    const staticW = world.static ? " // Статичный" : "";
-    return `Название: ${world.name} // Игроков: ${world.players}${ssmp}${staticW}`;
+    const ssmp = world.ssmp ? ` // ${tWorlds("usingSSMP")}` : "";
+    const staticW = world.static ? ` // ${tWorlds("static")}` : "";
+    return tWorlds("formatted_worldInfo", {
+      worldName: world.name,
+      worldPlayers: world.players,
+      ssmp: ssmp,
+      staticW: staticW
+    });
   };
 
   const copyWorlds = async () => {
     if (result?.length) {
       const toCopyContent = result.map(formatWorldInfo).join(";\n");
       const worldsCounter = result.length;
-      const isSensModeActive = sensMode ? "Чувствительный режим включен" : "";
+      const isSensModeActive = sensMode ? tWorlds("sensitive_modeActive") : "";
 
       await navigator.clipboard.writeText(`${isSensModeActive}\n\n${toCopyContent}\n\nВсего миров: ${worldsCounter}`);
-      toast.success("Список открытых миров скопирован в ваш буфер обмена", { lifeTime: 5000 });
+      toast.success(tWorlds("successfully_copied"), { lifeTime: 5000 });
     }
   };
 
@@ -75,7 +82,7 @@ const WorldList = () => {
       setResult(filteredWorlds);
       setSensMode(!sensMode);
 
-      const message = sensMode ? "Чувствительный режим выключен" : "Чувствительный режим включен";
+      const message = sensMode ? tWorlds("sensitive_modeDisabled") : tWorlds("sensitive_modeActive");
       toast.success(message, { lifeTime: 5000 });
     }
   };
@@ -92,12 +99,16 @@ const WorldList = () => {
   }
 
   return (
-    <Suspense fallback={<Loader type="Table"
-      rows={3}
-      columns={3}/>}>
+    <Suspense fallback={
+      <Loader
+        type="Table"
+        rows={3}
+        columns={3}/>
+    }
+    >
       <PageWrapper title={
         <>
-          <span>Список открытых миров</span>
+          <span>{tWorlds("title")}</span>
           <Badge
             type={getBadgeColor()}
             handler={result?.length}
@@ -113,7 +124,7 @@ const WorldList = () => {
             onClick={copyWorlds}
             icon={CopyIcon}
           >
-            Скопировать
+            {tWorlds("button_copy")}
           </Button>
           <Button
             type="Outlined"
@@ -123,7 +134,7 @@ const WorldList = () => {
             glow="red"
             ripple={false}
           >
-            {sensMode ? "Выключить чувствительный режим" : "Включить чувствительный режим"}
+            {sensMode ? tWorlds("button_disableSensitiveMode") : tWorlds("button_enableSensitiveMode")}
           </Button>
         </div>
         <Table>
@@ -131,9 +142,9 @@ const WorldList = () => {
             <>
               <Thead>
                 <Tr>
-                  <Th>Название</Th>
-                  <Th>Онлайн</Th>
-                  <Th>Метки</Th>
+                  <Th>{tWorlds("table_name")}</Th>
+                  <Th>{tWorlds("table_online")}</Th>
+                  <Th>{tWorlds("table_tags")}</Th>
                 </Tr>
               </Thead>
               <TBody>
@@ -144,17 +155,23 @@ const WorldList = () => {
                       <Td>{world.players}</Td>
                       <Td className={styles.ChipContainer}>
                         {world.static ? (
-                          <Chip label="Статичный"
+                          <Chip
+                            label={tWorlds("static")}
                             size="small"
-                            icon={BookmarkIcon}/>
+                            icon={BookmarkIcon}
+                          />
                         ) : world.ssmp ? (
-                          <Chip label="SSMP"
+                          <Chip
+                            label={tWorlds("ssmp")}
                             size="small"
-                            icon={CpuIcon}/>
+                            icon={CpuIcon}
+                          />
                         ) : !(world.static || !world.ssmp) ? null : (
-                          <Chip label="Нет меток"
+                          <Chip
+                            label={tWorlds("no_tags")}
                             size="small"
-                            icon={AlertIcon}/>
+                            icon={AlertIcon}
+                          />
                         )}
                       </Td>
                     </Tr>
@@ -173,4 +190,4 @@ const WorldList = () => {
   )
 }
 
-export default WorldList;
+export default WorldList; 

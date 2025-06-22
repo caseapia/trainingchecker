@@ -2,34 +2,44 @@ import { ReactNode } from "react";
 import { AdditionalUserData } from "@/models/Player";
 import textFormatter from "@/utils/helpers/textFormatter";
 
+type TranslationKeys =
+  | "achievement"
+  | "bonus_points"
+  | "copchase_rate"
+  | "prefix"
+  | "social_credits"
+  | "signs";
+
 interface InformationInterface {
-  label: string;
+  labelKey: TranslationKeys;
   key: ReactNode;
 }
 
-export const information = (info: AdditionalUserData | null): InformationInterface[] => [
+type InformationElement = Omit<InformationInterface, "label"> & { labelKey: TranslationKeys }
+
+export const information = (info: AdditionalUserData | null): InformationElement[] => [
   {
-    label: "Прикрепленное достижение",
+    labelKey: "achievement",
     key: textFormatter(String(info?.achievement)),
   },
   {
-    label: "Бонусные поинты",
+    labelKey: "bonus_points",
     key: info?.bonus_points,
   },
   {
-    label: "Рейтинг Copchase",
+    labelKey: "copchase_rate",
     key: info?.cop_chase_rating,
   },
   {
-    label: "Префикс",
+    labelKey: "prefix",
     key: textFormatter(String(info?.prefix)),
   },
   {
-    label: "Социальный кредит",
+    labelKey: "social_credits",
     key: info?.social_credits,
   },
   // {
-  //   label: "Подписи",
+  //   label: "signs",
   //   key: textFormatter(String(info?.descriptions)),
   // },
 ];

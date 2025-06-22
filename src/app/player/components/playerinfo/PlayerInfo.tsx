@@ -126,7 +126,7 @@ const PlayerInfo = () => {
     },
     {
       title: tPlayerInfo("info_lastConnect"),
-      key: `${online ? `Сейчас в сети (ID: ${playerid})` : `${lastlogin} (${Difference(lastlogin)} ${getDaySuffix(Difference(lastlogin))} ${tPlayerInfo("info_timeAgo")})`}`,
+      key: `${online ? tPlayerInfo("info_lastConnectNow", { playerid: playerid }) : `${lastlogin} (${Difference(lastlogin)} ${getDaySuffix(Difference(lastlogin))} ${tPlayerInfo("info_timeAgo")})`}`,
       className: online ? Color.colorGreen : ""
     }
   ]

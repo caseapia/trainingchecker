@@ -12,7 +12,19 @@ if (!i18n.isInitialized) {
     .init({
       fallbackLng: "en",
       supportedLngs: ["en", "ru"],
-      ns: ["common", "nav", "playerinfo", "errors"],
+      ns: [
+        "common",
+        "nav",
+        "playerinfo",
+        "errors",
+        "additionalinfo",
+        "punishment",
+        "admins",
+        "badges",
+        "badge",
+        "copchase",
+        "players"
+      ],
       defaultNS: "common",
       backend: {
         loadPath: "/locales/{{lng}}/{{ns}}.json",
