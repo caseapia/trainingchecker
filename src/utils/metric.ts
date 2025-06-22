@@ -1,9 +1,8 @@
 import axios from "axios";
-import settings from "@/consts/settings";
 import Cookies from "js-cookie";
 
 export type MetricTypes = "Error" | "Success" | "Warning"
-export const isDevModeEnabled = settings.find(s => s.option === "DEV_TOOLS")?.value === true;
+export const isDevModeEnabled = process.env["NODE_ENV"] === "development";
 
 export const metric = {
   send: async (

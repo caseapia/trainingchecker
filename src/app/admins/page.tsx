@@ -1,16 +1,18 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import PageWrapper from "@/components/pageWrapper/PageWrapper";
-import { Table, Td, TBody, Th, Tr, Thead } from "@/components/table/Table";
+import { Table, TBody, Td, Th, Thead, Tr } from "@/components/table/Table";
 import Link from "next/link";
 import formatUnixDate from "@/utils/helpers/formatUnixDate";
 import AdminList from "@/services/AdminService";
 import Admin from "@/models/Admin";
 import Loader from "@/modules/Loaders/index";
+import { useTranslation } from "react-i18next";
 
 const Page = () => {
   const [isLoaded, setLoaded] = useState<boolean>(false);
   const [result, setResult] = useState<Admin[] | null>(null);
+  const [tCopchase] = useTranslation("admins");
 
   useEffect(() => {
     const getAdmins = async () => {
@@ -28,15 +30,15 @@ const Page = () => {
   }, []);
 
   return (
-    <PageWrapper title="Список администраторов">
+    <PageWrapper title={tCopchase("title")}>
       <Table>
         {isLoaded ? (
           <>
             <Thead>
-              <Th>ID</Th>
-              <Th>Никнейм</Th>
-              <Th>Последний вход</Th>
-              <Th>Выдано варнов</Th>
+              <Th>{tCopchase("content_id")}</Th>
+              <Th>{tCopchase("content_nickname")}</Th>
+              <Th>{tCopchase("content_lastConnect")}</Th>
+              <Th>{tCopchase("content_warnsIssued")}</Th>
             </Thead>
             <TBody>
               {result?.map((item, index) => {
@@ -51,7 +53,9 @@ const Page = () => {
               })}
             </TBody>
           </>
-        ) : <Loader type="Table" rows={4} columns={4}/>}
+        ) : <Loader type="Table"
+          rows={4}
+          columns={4}/>}
       </Table>
     </PageWrapper>
   );

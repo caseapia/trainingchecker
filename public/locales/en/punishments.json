@@ -1,0 +1,10 @@
+{
+  "title": "Punishment List",
+  "punishment_list": "Punishment list of {{nickname}} ({{id}})\\n\\n{{punishments}}\\n\\nTotal Punishments: {{length}}",
+  "successfully_copied": "{{login}}'s punishments successfully copied to clipboard",
+  "button_contentCopy": "Copy",
+  "button_contentClose": "Close",
+  "content_admin": "Administrator",
+  "content_reason": "Reason",
+  "content_date": "Date"
+}

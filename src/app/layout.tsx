@@ -10,6 +10,7 @@ import Snow from "@/modules/Snow/Snow";
 import DynamicTitle from "@/hooks/setTitle";
 import { Inter } from "next/font/google"
 import PageTracker from "@/utils/helpers/PageTracker";
+import { I18nextClientProvider } from "@/i18n/I18nextProvider";
 
 export const metadata: Metadata = {
   title: "TRAINING CHECKER",
@@ -46,16 +47,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     </head>
     <body>
     {snow && <Snow/>}
-    <ToastProvider>
-      <Suspense fallback={null}>
-        <DynamicTitle/>
-        <PageTracker/>
-      </Suspense>
-      <Header/>
-      {children}
-      <Toast/>
-      <ToastInitializer/>
-    </ToastProvider>
+    <I18nextClientProvider>
+      <ToastProvider>
+        <Suspense fallback={null}>
+          <DynamicTitle/>
+          <PageTracker/>
+        </Suspense>
+        <Header/>
+        {children}
+        <Toast/>
+        <ToastInitializer/>
+      </ToastProvider>
+    </I18nextClientProvider>
     </body>
     </html>
   );

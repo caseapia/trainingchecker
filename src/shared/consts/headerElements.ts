@@ -6,9 +6,17 @@ import MedalIcon from "@/icons/medal.svg";
 import CopchaseIcon from "@/icons/components/header/copchase.svg";
 import AdminIcon from "@/icons/components/header/admin.svg";
 
+type TranslationKeys =
+  | "home"
+  | "players"
+  | "badges"
+  | "worldlist"
+  | "copchase"
+  | "admins";
+
 type HeaderProps = {
   icon: FC<React.SVGProps<SVGElement>>;
-  text: string;
+  textKey: TranslationKeys;
   className?: string;
   link: string;
   id: string;
@@ -19,10 +27,11 @@ type HeaderProps = {
   isMobileAvailable: boolean;
 };
 
+type HeaderElement = Omit<HeaderProps, "text"> & { textKey: TranslationKeys };
 
-export const Elements: HeaderProps[] = [
+export const Elements: HeaderElement[] = [
   {
-    text: "Главная",
+    textKey: "home",
     id: "main",
     icon: HomeIcon,
     link: "../",
@@ -31,7 +40,7 @@ export const Elements: HeaderProps[] = [
     isMobileAvailable: true,
   },
   {
-    text: "Игроки в сети",
+    textKey: "players",
     id: "players",
     icon: UserIcon,
     link: "/players",
@@ -40,7 +49,7 @@ export const Elements: HeaderProps[] = [
     isMobileAvailable: true,
   },
   {
-    text: "Список значков",
+    textKey: "badges",
     id: "badges",
     icon: MedalIcon,
     link: "/badges",
@@ -49,7 +58,7 @@ export const Elements: HeaderProps[] = [
     isMobileAvailable: true,
   },
   {
-    text: "Список миров",
+    textKey: "worldlist",
     id: "worldlist",
     icon: ListIcon,
     link: "/worldlist",
@@ -58,7 +67,7 @@ export const Elements: HeaderProps[] = [
     isMobileAvailable: true,
   },
   {
-    text: "Мониторинг копчейза",
+    textKey: "copchase",
     id: "copchase",
     icon: CopchaseIcon,
     link: "/copchase",
@@ -68,7 +77,7 @@ export const Elements: HeaderProps[] = [
     isMobileAvailable: true,
   },
   {
-    text: "Администраторы",
+    textKey: "admins",
     id: "admins",
     icon: AdminIcon,
     link: "/admins",

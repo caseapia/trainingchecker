@@ -1,0 +1,44 @@
+{
+  "title": "List of all badges",
+  "icon": "Icon",
+  "name": "Name",
+  "description": "Description",
+  "items": {
+    "creator": {
+      "title": "Creator of TRAINING SANDBOX",
+      "description": "This player once created LSGOV TRAINING — now known as TRAINING SANDBOX"
+    },
+    "admin": {
+      "title": "TRAINING SANDBOX Administrator",
+      "description": "This player is an administrator of TRAINING SANDBOX"
+    },
+    "team": {
+      "title": "TRAINING SANDBOX Team",
+      "description": "This player is a verified member of the TRAINING SANDBOX team"
+    },
+    "site": {
+      "title": "Site Team",
+      "description": "This player is a developer or contributor to the TRAINING CHECKER website"
+    },
+    "veteran": {
+      "title": "Veteran",
+      "description": "This badge is awarded to players who registered their account among the first 130,000"
+    },
+    "youtuber": {
+      "title": "YouTuber",
+      "description": "This badge was awarded to the player for supporting the community through content creation and promotion"
+    },
+    "exteam": {
+      "title": "Former Team Member",
+      "description": "This badge was awarded for supporting the project as a former team member"
+    },
+    "bot": {
+      "title": "Bot",
+      "description": "This account is operated by a bot and is an official user bot of TRAINING SANDBOX"
+    },
+    "chronos": {
+      "title": "Legion of Chronos",
+      "description": "An entity embodying authority, control, and absolute order. Governed by the Chronos system, the legion seeks dominance over time and space, enforcing strict discipline and unwavering authority."
+    }
+  }
+}

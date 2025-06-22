@@ -9,10 +9,20 @@ import UserSlashIcon from "@/icons/badges/userSlash.svg";
 import YoutubeIcon from "@/icons/badges/youtube.svg";
 import TrainingLogoIcon from "@/icons/badges/traininglogo.svg";
 
+type BadgeTranslationKey =
+  | "creator"
+  | "admin"
+  | "team"
+  | "site"
+  | "veteran"
+  | "youtuber"
+  | "exteam"
+  | "bot"
+  | "chronos";
+
 type BadgeProps = {
   id: number;
-  title: string;
-  description?: string;
+  translationKey: BadgeTranslationKey;
   moder?: number;
   accid?: number | number[];
   verify?: number;
@@ -32,9 +42,8 @@ type BadgeProps = {
 export const staffBadges: BadgeProps[] = [
   {
     id: 1,
-    title: "Создатель TRAINING SANDBOX",
+    translationKey: "creator",
     category: "staff",
-    description: "Когда-то этот игрок создал LSGOV TRAINING — ныне TRAINING SANDBOX",
     icon: React.createElement(TrainingLogoIcon),
     accid: [1, 2],
     color: "#000000",
@@ -42,9 +51,8 @@ export const staffBadges: BadgeProps[] = [
   },
   {
     id: 2,
-    title: "Администратор TRAINING SANDBOX",
+    translationKey: "admin",
     category: "staff",
-    description: "Этот игрок является администратором TRAINING SANDBOX",
     icon: React.createElement(UserCogIcon),
     minModer: 999,
     maxModer: 9999,
@@ -53,9 +61,8 @@ export const staffBadges: BadgeProps[] = [
   },
   {
     id: 3,
-    title: "Команда TRAINING SANDBOX",
+    translationKey: "team",
     category: "staff",
-    description: "Этот игрок является подтвержденным членом команды TRAINING SANDBOX",
     icon: React.createElement(UserShieldIcon),
     minModer: 1,
     maxModer: 9999,
@@ -64,9 +71,8 @@ export const staffBadges: BadgeProps[] = [
   },
   {
     id: 4,
-    title: "Команда сайта",
+    translationKey: "site",
     category: "staff",
-    description: "Этот игрок является разработчиком или помогал в разработке сайта TRAINING CHECKER",
     icon: React.createElement(CodeIcon),
     accid: [113145, 125043, 271552],
     color: "rgb(42 170 104)",
@@ -76,9 +82,8 @@ export const staffBadges: BadgeProps[] = [
 export const playerBadges: BadgeProps[] = [
   {
     id: 1,
-    title: "Ветеран",
+    translationKey: "veteran",
     category: "player",
-    description: `Этот значок вручается игрокам, зарегистрировавшим свой аккаунт в числе первых 130000`,
     icon: React.createElement(MedalIcon),
     color: "#00a5a2",
     minAccId: 0,
@@ -87,9 +92,8 @@ export const playerBadges: BadgeProps[] = [
   },
   {
     id: 2,
-    title: "Ютубер",
+    translationKey: "youtuber",
     category: "player",
-    description: "Значок был вручен игроку за поддержку сообщества в части рекламы посредством создания контента",
     icon: React.createElement(YoutubeIcon),
     color: "#fe0032",
     verify: 1,
@@ -97,9 +101,8 @@ export const playerBadges: BadgeProps[] = [
   },
   {
     id: 5,
-    title: "Бывший член команды TRAINING SANDBOX",
+    translationKey: "exteam",
     category: "player",
-    description: "Значок был вручен игроку за поддержку сервера в качестве члена команды проекта",
     icon: React.createElement(UserSlashIcon),
     color: "#ababab",
     verify: 4,
@@ -107,9 +110,8 @@ export const playerBadges: BadgeProps[] = [
   },
   {
     id: 6,
-    title: "Бот",
+    translationKey: "bot",
     category: "player",
-    description: "Этот аккаунт управляется не человеком, а ботом и является официальным пользовательским ботом TRAINING SANDBOX",
     icon: React.createElement(RobotIcon),
     color: "rgb(144, 203, 255)",
     accid: [605187, 659622, 659678, 37707],
@@ -117,9 +119,8 @@ export const playerBadges: BadgeProps[] = [
   },
   {
     id: 7,
-    title: "Легион Хроноса",
+    translationKey: "chronos",
     category: "player",
-    description: "Объединение, воплощающее власть, контроль и абсолютный порядок. Управляемый системой Хронос, легион стремится к доминированию над временем и пространством, обеспечивая строгую дисциплину и непреклонную власть.",
     icon: React.createElement(SatelLiteIcon),
     color: "#b22424",
     nicknameIncludes: "czo.ooo",

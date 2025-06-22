@@ -1,0 +1,18 @@
+{
+  "usingSSMP": "Uses SSMP",
+  "static": "Static",
+  "formatted_worldInfo": "Name: {{world.name}} // Players: {{world.players}}{{ssmp}}{{staticW}}",
+  "sensitive_modeActive": "Sensitive mode enabled",
+  "totalWorlds": "Total worlds",
+  "successfully_copied": "List of open worlds copied to your clipboard",
+  "sensitive_modeDisabled": "Sensitive mode disabled",
+  "title": "List of open worlds",
+  "button_copy": "Copy",
+  "button_enableSensitiveMode": "Enable sensitive mode",
+  "button_disableSensitiveMode": "Disable sensitive mode",
+  "table_name": "Name",
+  "table_online": "Online",
+  "table_tags": "Tags",
+  "no_tags": "No tags",
+  "ssmp": "SSMP"
+}

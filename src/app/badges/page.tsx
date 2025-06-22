@@ -2,10 +2,13 @@
 import React, { Suspense } from "react"
 import styles from "./page.module.scss";
 import { allBadges } from "@/shared/consts/badges";
-import { Table, Thead, Tr, Td, TBody } from "@/components/table/Table";
+import { Table, TBody, Td, Thead, Tr } from "@/components/table/Table";
 import PageWrapper from "@/components/pageWrapper/PageWrapper";
+import { useTranslation } from "react-i18next";
 
 const page = () => {
+  const [tBadges] = useTranslation("badges");
+
   const sortedBadges = allBadges.sort((a, b) => {
     if (a.category < b.category) return 1;
     if (a.category > b.category) return -1;
@@ -14,36 +17,35 @@ const page = () => {
   });
   return (
     <Suspense>
-      <PageWrapper title="Список всех значков">
+      <PageWrapper title={tBadges("title")}>
         <Table>
           <Thead>
             <Tr>
-              <Td>Иконка</Td>
-              <Td>Название</Td>
-              <Td>Описание</Td>
+              <Td>{tBadges("icon")}</Td>
+              <Td>{tBadges("name")}</Td>
+              <Td>{tBadges("description")}</Td>
             </Tr>
           </Thead>
           <TBody>
-            {sortedBadges.map((badge, index) => (
-              <Tr key={index}>
-                <Td>
-                  <span
-                    className={styles.badge}
-                    style={{ backgroundColor: badge.color }}
-                    key={badge.id || badge.title}
-                  >
-                  <span
-                    className={`${styles.BadgeIcon}`}
-                    key={badge.id || badge.title}
-                  >
-                    {badge.icon}
-                  </span>
-                  </span>
-                </Td>
-                <Td style={{ color: badge.textColor }}>{badge.title}</Td>
-                <Td>{badge.description}</Td>
-              </Tr>
-            ))}
+            {sortedBadges.map((badge, index) => {
+              const key = badge.translationKey;
+              return (
+                <Tr key={index}>
+                  <Td>
+                    <span className={styles.badge}
+                      style={{ backgroundColor: badge.color }}>
+                      <span className={styles.BadgeIcon}>{badge.icon}</span>
+                    </span>
+                  </Td>
+                  <Td style={{ color: badge.textColor }}>
+                    {tBadges(`items.${key}.title`)}
+                  </Td>
+                  <Td>
+                    {tBadges(`items.${key}.description`)}
+                  </Td>
+                </Tr>
+              );
+            })}
           </TBody>
         </Table>
       </PageWrapper>

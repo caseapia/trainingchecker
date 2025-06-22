@@ -13,17 +13,18 @@ import Badge from "@/components/inlineBadge/Badge";
 import headerVariants from "./variant";
 import { fetchPlayersCounter } from "@/services/PlayersService";
 import Color from "@/components/styles/colors.module.scss";
-import settings from "@/consts/settings";
+import { useTranslation } from "react-i18next";
 
 export const Header = () => {
   const isMobile = useIsMobileDevice();
-  const isDevToolsEnable = Boolean(settings.find(s => s.option === "DEV_TOOLS")?.value);
+  const isDevToolsEnable = process.env["NODE_ENV"] === "development";
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const [activePage, setActivePage] = useState("main");
   const [isBadgeLoading, setIsBadgeLoading] = useState(true);
   const [online, setOnline] = useState(NaN);
   const router = useRouter();
   const windowRef = useRef<HTMLDivElement | null>(null);
+  const { t } = useTranslation("nav");
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -80,35 +81,37 @@ export const Header = () => {
   };
 
   const renderMenuItems = () => (
-    Elements.map(({ id, link, icon: Icon, text, tooltipText, isDisabled, isNew, style }) => (
-      <motion.li key={id}
-        className={activePage === id ? styles.active : ""}>
-        {isDisabled ? (
-          <BootstrapTooltip title={tooltipText}>
+    Elements.map((el) => (
+      <motion.li
+        key={el.id}
+        className={activePage === el.id ? styles.active : ""}>
+        {el.isDisabled ? (
+          <BootstrapTooltip title={el.tooltipText}>
             <span className={styles.disabled_element}
-              style={style}>
-              <Icon/> {text}
-              {isNew && <Badge type="danger"
+              style={el.style}>
+              <el.icon/>
+              {t(el.textKey)}
+              {el.isNew && <Badge type="danger"
                 content="new"/>}
             </span>
           </BootstrapTooltip>
         ) : (
           <LinkedButton
-            href={link}
-            onClick={() => handleNavigation(id)}
-            style={style}
+            href={el.link}
+            onClick={() => handleNavigation(el.id)}
+            style={el.style}
             type="Outlined"
             radius="small"
             classname={styles.linkElement}
             ripple={false}
-            icon={Icon}
-            ariaLabel={text}
+            icon={el.icon}
+            ariaLabel={t(el.textKey)}
           >
             <span>
-              {text}
-              {isNew && <Badge type="danger"
+              {t(el.textKey)}
+              {el.isNew && <Badge type="danger"
                 content="new"/>}
-              {id === "players" && (
+              {el.id === "players" && (
                 <Badge
                   type={getBadgeColor()}
                   handler={online}

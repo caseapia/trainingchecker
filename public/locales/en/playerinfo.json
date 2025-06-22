@@ -1,0 +1,18 @@
+{
+  "success_dataUpdated": "Player {{nickname}}'s information has been updated",
+  "info_id": "ID",
+  "info_nickname": "Nickname",
+  "info_verify": "Verification",
+  "info_status": "Status",
+  "info_verifyText": "Verification Text",
+  "info_muteTime": "Mute Time",
+  "info_registerDate": "Date of Registration",
+  "info_registerDateBefore2018": "Registered before 2018",
+  "info_lastConnect": "Last Login",
+  "info_lastConnectNow": "Now Online (ID: {{playerid}})",
+  "info_timeAgo": "ago",
+  "title": "Player's information",
+  "button_refresh": "Refresh",
+  "button_punishments": "Punishments",
+  "button_additional": "Additional Information"
+}
