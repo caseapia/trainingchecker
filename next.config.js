@@ -21,6 +21,10 @@ const nextConfig = {
       },
     );
 
+    module.exports = {
+      staticPageGenerationTimeout: 300,
+    }
+
     fileLoaderRule.exclude = /\.svg$/i;
 
     return config;
