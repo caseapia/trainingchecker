@@ -6,6 +6,7 @@ import LandingLoader from "@/modules/Loaders/LandingLoader";
 import { useIsMobileDevice } from "@/hooks/isMobileDevice";
 import Preloader from "@/public/assets/lotties/Preloader.json";
 import Lottie from "lottie-react";
+import { useTranslation } from "react-i18next";
 
 type LoaderProps = {
   type: "Player" | "Table" | "Landing";
@@ -16,29 +17,40 @@ type LoaderProps = {
 const Loader: React.FC<LoaderProps> = ({ type, rows, columns }) => {
   const isMobile: boolean = useIsMobileDevice();
   return !isMobile ? (
-    <DesktopPreloader type={type}
+    <DesktopPreloader
+      type={type}
       rows={rows}
-      columns={columns}/>
+      columns={columns}
+    />
   ) : (
     <MobilePreloader/>
   );
 };
 
 const DesktopPreloader: React.FC<LoaderProps> = ({ type, rows, columns }) => {
+  const [tCommon] = useTranslation("common")
+
   return (
     <>
-      {type === "Player" && <PlayerLoader/>}
-      {type === "Table" && rows !== undefined && columns !== undefined && <TableLoader rows={rows}
-        columns={columns}/>}
-      {type === "Landing" && <LandingLoader/>}
+      {type === "Player" && <PlayerLoader loadingText={tCommon("loading")}/>}
+      {type === "Table" && rows !== undefined && columns !== undefined && (
+        <TableLoader
+          rows={rows}
+          columns={columns}
+          loadingText={tCommon("loading")}
+        />
+      )}
+      {type === "Landing" && <LandingLoader loadingText={tCommon("loading")}/>}
     </>
   );
 };
 
 const MobilePreloader = () => (
   <div style={{ display: "grid", placeItems: "center" }}>
-    <Lottie animationData={Preloader}
-      style={{ height: "200px", width: "200px" }}/>
+    <Lottie
+      animationData={Preloader}
+      style={{ height: "200px", width: "200px" }}
+    />
   </div>
 );
 

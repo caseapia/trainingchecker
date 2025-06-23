@@ -79,7 +79,7 @@ const PlayerInfo = () => {
     setIsRefreshing(true);
     try {
       await fetchPlayerData();
-      toast.success(tPlayerInfo("success_dataUpdated", { nickname: nickname }), { lifeTime: 5000 });
+      toast.success(tPlayerInfo("success.dataUpdated", { nickname: nickname }), { lifeTime: 5000 });
       await metric.send("Информация об игроке обновлена", "Success")
       setTimeout(() => setIsRefreshing(false), 5000);
     } catch (error: any) {
@@ -106,27 +106,27 @@ const PlayerInfo = () => {
   } = playerData || {};
 
   const information: Information[] = [
-    { title: tPlayerInfo("info_id"), key: id },
+    { title: tPlayerInfo("info.id"), key: id },
     {
-      title: tPlayerInfo("info_nickname"),
+      title: tPlayerInfo("info.nickname"),
       key: <>{login} <BadgeRenderer player={playerData}/></>,
       className: styles.nickname
     },
-    { title: tPlayerInfo("info_verify"), key: `${getVerify(verify)} (ID: ${verify})` },
-    { title: tPlayerInfo("info_status"), key: <Chip label={getModer(moder)}/> },
-    { title: tPlayerInfo("info_verifyText"), key: verifyText ? textFormatter(verifyText) : tCommon("no") },
+    { title: tPlayerInfo("info.verify"), key: `${getVerify(verify)} (ID: ${verify})` },
+    { title: tPlayerInfo("info.status"), key: <Chip label={getModer(moder)}/> },
+    { title: tPlayerInfo("info.verifyText"), key: verifyText ? textFormatter(verifyText) : tCommon("no") },
     {
-      title: tPlayerInfo("info_muteTime"),
+      title: tPlayerInfo("info.muteTime"),
       key: `${mute ? mute : tCommon("no")}`,
       className: mute ? Color.colorRed : Color.colorGreen
     },
     {
-      title: tPlayerInfo("info_registerDate"),
-      key: regdate === "1970-01-01 03:00:00" ? tPlayerInfo("info_registerDateBefore2018") : regdate
+      title: tPlayerInfo("info.registerDate"),
+      key: regdate === "1970-01-01 03:00:00" ? tPlayerInfo("info.registerDateBefore2018") : regdate
     },
     {
-      title: tPlayerInfo("info_lastConnect"),
-      key: `${online ? tPlayerInfo("info_lastConnectNow", { playerid: playerid }) : `${lastlogin} (${Difference(lastlogin)} ${getDaySuffix(Difference(lastlogin))} ${tPlayerInfo("info_timeAgo")})`}`,
+      title: tPlayerInfo("info.lastConnect"),
+      key: `${online ? tPlayerInfo("info.lastConnectNow", { playerid: playerid }) : `${lastlogin} (${Difference(lastlogin)} ${getDaySuffix(Difference(lastlogin))} ${tPlayerInfo("info.timeAgo")})`}`,
       className: online ? Color.colorGreen : ""
     }
   ]
@@ -150,7 +150,7 @@ const PlayerInfo = () => {
             disabled={isRefreshing}
             icon={RefreshIcon}
           >
-            {tPlayerInfo("button_refresh")}
+            {tPlayerInfo("button.refresh")}
           </Button>
           <Button
             type="Danger"
@@ -158,7 +158,7 @@ const PlayerInfo = () => {
             onClick={() => setIsModalOpen(true)}
             icon={HammerIcon}
           >
-            {tPlayerInfo("button_punishments")}
+            {tPlayerInfo("button.punishments")}
           </Button>
         </div>
         <AdditionalInfo nickname={login}/>

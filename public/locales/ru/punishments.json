@@ -1,10 +1,16 @@
 {
   "title": "Список наказаний",
-  "punishment_list": "Список наказаний {{nickname}} ({{id}})\\n\\n{{punishments}}\\n\\nВсего наказаний: {{length}}",
-  "successfully_copied": "Наказания игрока {{login}} скопированы в буфер обмена",
-  "button_contentCopy": "Скопировать",
-  "button_contentClose": "Закрыть",
-  "content_admin": "Администратор",
-  "content_reason": "Причина",
-  "content_date": "Дата"
+  "list": {
+    "text": "Список наказаний {{nickname}} ({{id}})\n\n{{punishments}}\n\nВсего наказаний: {{length}}",
+    "copied": "Наказания игрока {{login}} скопированы в буфер обмена"
+  },
+  "button": {
+    "copy": "Скопировать",
+    "close": "Закрыть"
+  },
+  "content": {
+    "admin": "Администратор",
+    "reason": "Причина",
+    "date": "Дата"
+  }
 }

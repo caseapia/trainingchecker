@@ -1,0 +1,15 @@
+{
+  "title": "Copchase Monitoring",
+  "content": {
+    "number": "Number",
+    "status": "Status",
+    "time": "Time",
+    "rating": "Rating",
+    "players": "Players"
+  },
+  "statuses": {
+    "waiting": "About to start",
+    "inProgress": "In progress",
+    "waitingForPlayers": "Waiting for players"
+  }
+}

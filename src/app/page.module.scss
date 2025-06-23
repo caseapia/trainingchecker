@@ -2,27 +2,6 @@
   gap: 20px;
 }
 
-.readmeWrapper {
-  width: 50%;
-  line-height: 25px;
-  text-wrap: balance;
-  @media screen and (max-width: 767px) {
-    width: 90%;
-  }
-
-  .lastUpdate {
-    text-decoration: underline;
-    text-decoration-color: rgba(0, 112, 243, 0.3);
-    transition: text-decoration-color .4s;
-    text-underline-offset: 3px;
-    cursor: default;
-
-    &:hover {
-      text-decoration-color: rgba(0, 112, 243);
-    }
-  }
-}
-
 .FormContainer {
   display: flex;
   flex-direction: column;

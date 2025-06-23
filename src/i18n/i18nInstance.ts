@@ -21,7 +21,8 @@ if (!i18n.isInitialized) {
         "badges",
         "badge",
         "copchase",
-        "players"
+        "players",
+        "suffixes"
       ],
       defaultNS: "common",
       backend: {

@@ -1,18 +1,31 @@
 {
-  "usingSSMP": "Использует SSMP",
-  "static": "Статичный",
-  "formatted_worldInfo": "Название: {{worldName}} // Игроков: {{worldPlayers}}{{ssmp}}{{staticW}}",
-  "sensitive_modeActive": "Чувствительный режим включен",
-  "totalWorlds": "Всего миров",
-  "successfully_copied": "Список открытых миров скопирован в ваш буфер обмена",
-  "sensitive_modeDisabled": "Чувствительный режим выключен",
   "title": "Список открытых миров",
-  "button_copy": "Скопировать",
-  "button_enableSensitiveMode": "Включить чувствительный режим",
-  "button_disableSensitiveMode": "Выключить чувствительный режим",
-  "table_name": "Название",
-  "table_online": "Онлайн",
-  "table_tags": "Метки",
-  "no_tags": "Нет меток",
-  "ssmp": "SSMP"
+  "status": {
+    "usingSSMP": "Использует SSMP",
+    "static": "Статичный",
+    "sensitive_modeActive": "Чувствительный режим включен",
+    "sensitive_modeDisabled": "Чувствительный режим выключен",
+    "totalWorlds": "Всего миров"
+  },
+  "formatted": {
+    "worldInfo": "Название: {{worldName}} // Игроков: {{worldPlayers}}{{ssmp}}{{staticW}}",
+    "totalWorlds": "Всего миров:"
+  },
+  "message": {
+    "successfully_copied": "Список открытых миров скопирован в ваш буфер обмена"
+  },
+  "button": {
+    "copy": "Скопировать",
+    "enableSensitiveMode": "Включить чувствительный режим",
+    "disableSensitiveMode": "Выключить чувствительный режим"
+  },
+  "table": {
+    "name": "Название",
+    "online": "Онлайн",
+    "tags": "Метки"
+  },
+  "other": {
+    "no_tags": "Нет меток",
+    "ssmp": "SSMP"
+  }
 }

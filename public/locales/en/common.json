@@ -2,5 +2,17 @@
   "inputLabel": "Enter player nickname",
   "buttonLabel": "Search",
   "no": "No",
-  "yes": "Yes"
+  "yes": "Yes",
+  "landing": {
+    "disclaimer_part1": "The SAMP server",
+    "disclaimer_part2": "TRAINING",
+    "disclaimer_part3": "is not affiliated with the creation of this website. This website is private and uses",
+    "disclaimer_part4": "with the permission of its creator.",
+    "purpose": "Developed to simplify working with",
+    "open_source_message": "This project is open source. You can contribute or correct it via the",
+    "source_code_link": "source code on GitHub",
+    "last_update_prefix": "Last updated was",
+    "training_api_link": "Training API"
+  },
+  "loading": "Loading..."
 }

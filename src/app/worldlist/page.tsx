@@ -48,9 +48,9 @@ const WorldList = () => {
   }, []);
 
   const formatWorldInfo = (world: World) => {
-    const ssmp = world.ssmp ? ` // ${tWorlds("usingSSMP")}` : "";
-    const staticW = world.static ? ` // ${tWorlds("static")}` : "";
-    return tWorlds("formatted_worldInfo", {
+    const ssmp = world.ssmp ? ` // ${tWorlds("status.usingSSMP")}` : "";
+    const staticW = world.static ? ` // ${tWorlds("status.static")}` : "";
+    return tWorlds("formatted.worldInfo", {
       worldName: world.name,
       worldPlayers: world.players,
       ssmp: ssmp,
@@ -62,10 +62,10 @@ const WorldList = () => {
     if (result?.length) {
       const toCopyContent = result.map(formatWorldInfo).join(";\n");
       const worldsCounter = result.length;
-      const isSensModeActive = sensMode ? tWorlds("sensitive_modeActive") : "";
+      const isSensModeActive = sensMode ? tWorlds("status.sensitive_modeActive") : "";
 
-      await navigator.clipboard.writeText(`${isSensModeActive}\n\n${toCopyContent}\n\nВсего миров: ${worldsCounter}`);
-      toast.success(tWorlds("successfully_copied"), { lifeTime: 5000 });
+      await navigator.clipboard.writeText(`${isSensModeActive}\n\n${toCopyContent}\n\n${tWorlds("formatted.totalWorlds")} ${worldsCounter}`);
+      toast.success(tWorlds("message.successfully_copied"), { lifeTime: 5000 });
     }
   };
 
@@ -82,7 +82,7 @@ const WorldList = () => {
       setResult(filteredWorlds);
       setSensMode(!sensMode);
 
-      const message = sensMode ? tWorlds("sensitive_modeDisabled") : tWorlds("sensitive_modeActive");
+      const message = sensMode ? tWorlds("status.sensitive_modeDisabled") : tWorlds("status.sensitive_modeActive");
       toast.success(message, { lifeTime: 5000 });
     }
   };
@@ -124,7 +124,7 @@ const WorldList = () => {
             onClick={copyWorlds}
             icon={CopyIcon}
           >
-            {tWorlds("button_copy")}
+            {tWorlds("button.copy")}
           </Button>
           <Button
             type="Outlined"
@@ -134,7 +134,7 @@ const WorldList = () => {
             glow="red"
             ripple={false}
           >
-            {sensMode ? tWorlds("button_disableSensitiveMode") : tWorlds("button_enableSensitiveMode")}
+            {sensMode ? tWorlds("button.disableSensitiveMode") : tWorlds("button.enableSensitiveMode")}
           </Button>
         </div>
         <Table>
@@ -142,9 +142,9 @@ const WorldList = () => {
             <>
               <Thead>
                 <Tr>
-                  <Th>{tWorlds("table_name")}</Th>
-                  <Th>{tWorlds("table_online")}</Th>
-                  <Th>{tWorlds("table_tags")}</Th>
+                  <Th>{tWorlds("table.name")}</Th>
+                  <Th>{tWorlds("table.online")}</Th>
+                  <Th>{tWorlds("table.tags")}</Th>
                 </Tr>
               </Thead>
               <TBody>
@@ -156,19 +156,19 @@ const WorldList = () => {
                       <Td className={styles.ChipContainer}>
                         {world.static ? (
                           <Chip
-                            label={tWorlds("static")}
+                            label={tWorlds("status.static")}
                             size="small"
                             icon={BookmarkIcon}
                           />
                         ) : world.ssmp ? (
                           <Chip
-                            label={tWorlds("ssmp")}
+                            label={tWorlds("other.ssmp")}
                             size="small"
                             icon={CpuIcon}
                           />
                         ) : !(world.static || !world.ssmp) ? null : (
                           <Chip
-                            label={tWorlds("no_tags")}
+                            label={tWorlds("other.no_tags")}
                             size="small"
                             icon={AlertIcon}
                           />
