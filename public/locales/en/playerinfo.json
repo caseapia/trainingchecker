@@ -1,18 +1,40 @@
 {
-  "success_dataUpdated": "Player {{nickname}}'s information has been updated",
-  "info_id": "ID",
-  "info_nickname": "Nickname",
-  "info_verify": "Verification",
-  "info_status": "Status",
-  "info_verifyText": "Verification Text",
-  "info_muteTime": "Mute Time",
-  "info_registerDate": "Date of Registration",
-  "info_registerDateBefore2018": "Registered before 2018",
-  "info_lastConnect": "Last Login",
-  "info_lastConnectNow": "Now Online (ID: {{playerid}})",
-  "info_timeAgo": "ago",
+  "success": {
+    "dataUpdated": "Player {{nickname}}'s information has been updated"
+  },
   "title": "Player's information",
-  "button_refresh": "Refresh",
-  "button_punishments": "Punishments",
-  "button_additional": "Additional Information"
+  "info": {
+    "id": "ID",
+    "nickname": "Nickname",
+    "verify": "Verification",
+    "status": "Status",
+    "verifyText": "Verification Text",
+    "muteTime": "Mute Time",
+    "registerDate": "Date of Registration",
+    "registerDateBefore2018": "Registered before 2018",
+    "lastConnect": "Last Login",
+    "lastConnectNow": "Now Online (ID: {{playerid}})",
+    "timeAgo": "ago"
+  },
+  "button": {
+    "refresh": "Refresh",
+    "punishments": "Punishments",
+    "additional": "Additional Information"
+  },
+  "verify": {
+    "youtuber": "YouTuber",
+    "community_author": "Community Author (Mod Creator)",
+    "developer": "Developer",
+    "retired_admin": "Retired Administrator",
+    "sponsor": "Sponsor",
+    "world_creator": "World Creator",
+    "unknown": "🤨"
+  },
+  "moderator": {
+    "player": "Player",
+    "junior": "Junior Moderator",
+    "regular": "Moderator",
+    "senior": "Senior Moderator",
+    "admin": "Administrator"
+  }
 }

@@ -1,14 +1,16 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import PageWrapper from "@/components/pageWrapper/PageWrapper";
-import { Table, Thead, Tr, Td, Th, TBody } from "@/components/table/Table";
+import { Table, TBody, Td, Th, Thead, Tr } from "@/components/table/Table";
 import Loader from "@/modules/Loaders/index";
 import { fetchCopchaseLobbies, getStatus } from "@/services/CopchaseService";
 import { Lobbies } from "@/models/Copchase";
+import { useTranslation } from "react-i18next";
 
 const Page = () => {
   const [isLoaded, setLoaded] = useState(false);
   const [chData, setChData] = useState<Lobbies[] | null>(null);
+  const [tCopchase] = useTranslation("copchase")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,17 +27,17 @@ const Page = () => {
   }, []);
 
   return (
-    <PageWrapper title="Мониторинг копчейза">
+    <PageWrapper title={tCopchase("title")}>
       <Table>
         {isLoaded ? (
           <>
             <Thead>
               <Tr>
-                <Th>Номер</Th>
-                <Th>Статус</Th>
-                <Th>Время</Th>
-                <Th>Рейтинг</Th>
-                <Th>Игроков</Th>
+                <Th>{tCopchase("content.number")}</Th>
+                <Th>{tCopchase("content.status")}</Th>
+                <Th>{tCopchase("content.time")}</Th>
+                <Th>{tCopchase("content.rating")}</Th>
+                <Th>{tCopchase("content.players")}</Th>
               </Tr>
             </Thead>
             <TBody>

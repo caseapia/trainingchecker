@@ -2,7 +2,6 @@
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import BootstrapTooltip from "@/components/styles/TooltipStyles";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,8 +15,8 @@ import LandingLoader from "@/modules/Loaders/LandingLoader";
 
 import UserSearchIcon from "@/icons/page-main/userSearch.svg";
 import UserIcon from "@/icons/user.svg";
-import GithubIcon from "@/icons/page-main/github.svg";
 import { useTranslation } from "react-i18next";
+import Readme from "@/modules/readme/Readme";
 
 export default function Home() {
   const router = useRouter();
@@ -28,7 +27,6 @@ export default function Home() {
   };
 
   const [lastUpdate, setLastUpdate] = useState<string>("");
-  const [lastCommit, setLastCommit] = useState<string>("");
   const [isLoaded, setLoaded] = useState<boolean>(false);
   const [isLoading, setLoading] = useState<boolean>(false);
 
@@ -51,7 +49,6 @@ export default function Home() {
         const response = await getLastCommit();
 
         setLastUpdate(new Date(response.commit.author.date).toLocaleDateString("ru-RU", dateOptions));
-        setLastCommit(response.commit.message);
         setLoaded(true);
       } catch (error) {
         console.error(error);
@@ -93,44 +90,10 @@ export default function Home() {
       <PageWrapper classname={styles.gapped}>
         {isLoaded ? (
           <>
-            <div className={styles.readmeWrapper}>
-              <section style={{ textAlign: "center", marginBottom: "1rem" }}>
-                <p>
-                  SAMP сервер{" "}
-                  <Link href="https://training-server.com/"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    TRAINING
-                  </Link>{" "}
-                  не имеет отношения к созданию данного сайта. Этот сайт является частным и
-                  использует {trainingApiLink} с разрешения его создателя.
-                </p>
-              </section>
-              <section style={{ marginBottom: "1rem" }}>
-                <p>Разработано для упрощения работы с {trainingApiLink}.</p>
-              </section>
-              <section style={{ marginBottom: "1rem" }}>
-                <p>
-                  Этот проект имеет открытый исходный код. Вы можете дополнить или исправить его через{" "}
-                  <a
-                    href="https://github.com/1dontkillme/trainingchecker"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <GithubIcon width={16}
-                      height={16}/> исходный код на GitHub
-                  </a>.
-                </p>
-              </section>
-              <section>
-                <p>
-                  Последнее обновление было{" "}
-                  <BootstrapTooltip title={lastCommit}>
-                    <span className={styles.lastUpdate}>{lastUpdate}</span>
-                  </BootstrapTooltip>
-                </p>
-              </section>
-            </div>
+            <Readme
+              trainingApiLink={trainingApiLink}
+              lastUpdate={lastUpdate}
+            />
 
             <form
               onSubmit={handleSubmit(onSubmit)}

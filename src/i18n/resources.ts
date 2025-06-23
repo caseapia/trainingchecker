@@ -1,3 +1,5 @@
+import { ModerRole, VerifyRole } from "@/services/PlayerService";
+
 type BadgeTranslationEntry = {
   title: string;
   description?: string;
@@ -17,25 +19,45 @@ export type TranslationResources = {
     buttonLabel: string;
     no: string;
     yes: string;
+    landing: {
+      disclaimer_part1: string;
+      disclaimer_part2: string;
+      disclaimer_part3: string;
+      disclaimer_part4: string;
+      purpose: string;
+      open_source_message: string;
+      source_code_link: string;
+      last_update_prefix: string;
+      training_api_link: string;
+    }
+    loading: string;
   }
   playerinfo: {
-    success_dataUpdated: string;
-    info_id: string;
-    info_nickname: string;
-    info_verify: string;
-    info_status: string;
-    info_verifyText: string;
-    info_muteTime: string;
-    info_registerDate: string;
-    info_registerDateBefore2018: string;
-    info_lastConnect: string;
-    info_lastConnectNow: string;
-    info_timeAgo: string;
+    success: {
+      dataUpdated: string;
+    };
     title: string;
-    button_refresh: string;
-    button_punishments: string;
-    button_additional: string;
-  }
+    info: {
+      id: string;
+      nickname: string;
+      verify: string;
+      status: string;
+      verifyText: string;
+      muteTime: string;
+      registerDate: string;
+      registerDateBefore2018: string;
+      lastConnect: string;
+      lastConnectNow: string;
+      timeAgo: string;
+    };
+    button: {
+      refresh: string;
+      punishments: string;
+      additional: string;
+    };
+    verify: Record<VerifyRole, string>;
+    moderator: Record<ModerRole, string> & { admin: string };
+  };
   errors: {
     error_dataUpdate: string;
     error_nickname: string;
@@ -48,28 +70,36 @@ export type TranslationResources = {
   additionalinfo: {
     title: string;
     achievement: string;
-    bonus_points: number;
-    copchase_rate: number;
+    bonus_points: string;
+    copchase_rate: string;
     prefix: string;
-    social_credits: number;
+    social_credits: string;
     signs: string;
   }
-  punishment: {
+  punishments: {
     title: string;
-    punishment_list: string;
-    successfully_copied: string;
-    button_contentCopy: string;
-    button_contentClose: string;
-    content_admin: string;
-    content_reason: string;
-    content_date: string;
+    list: {
+      text: string;
+      copied: string;
+    };
+    button: {
+      copy: string;
+      close: string;
+    };
+    content: {
+      admin: string;
+      reason: string;
+      date: string;
+    };
   }
   admins: {
     title: string;
-    content_id: number;
-    content_nickname: string;
-    content_lastConnect: string;
-    content_warnsIssued: string;
+    content: {
+      id: string;
+      nickname: string;
+      lastConnect: string;
+      warnsIssued: string;
+    }
   }
   badges: {
     title: string;
@@ -90,6 +120,18 @@ export type TranslationResources = {
   }
   copchase: {
     title: string;
+    content: {
+      number: string;
+      status: string;
+      time: string;
+      rating: string;
+      players: string;
+    };
+    statuses: {
+      waiting: string;
+      inProgress: string;
+      waitingForPlayers: string;
+    };
   }
   players: {
     title: string;
@@ -98,21 +140,45 @@ export type TranslationResources = {
     connected: string;
   }
   worlds: {
-    usingSSMP: string;
-    static: string;
-    formatted_worldInfo: string;
-    sensitive_modeActive: string;
-    totalWorlds: string;
-    successfully_copied: string;
-    sensitive_modeDisabled: string;
     title: string;
-    button_copy: string;
-    button_enableSensitiveMode: string;
-    button_disableSensitiveMode: string;
-    table_name: string;
-    table_online: string;
-    table_tags: string;
-    no_tags: string;
-    ssmp: string;
+    status: {
+      usingSSMP: string;
+      static: string;
+      sensitive_modeActive: string;
+      sensitive_modeDisabled: string;
+      totalWorlds: string;
+    };
+    formatted: {
+      worldInfo: string;
+      totalWorlds: string;
+    };
+    message: {
+      successfully_copied: string;
+    };
+    button: {
+      copy: string;
+      enableSensitiveMode: string;
+      disableSensitiveMode: string;
+    };
+    table: {
+      name: string;
+      online: string;
+      tags: string;
+    };
+    other: {
+      no_tags: string;
+      ssmp: string;
+    };
+  }
+  suffixes: {
+    days: string;
+    day: string;
+    days1: string;
+    minutes: string;
+    minute: string;
+    minute1: string;
+    today: string;
+    yesterday: string;
+    now: string;
   }
 }

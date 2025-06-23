@@ -35,10 +35,10 @@ const Page = () => {
         {isLoaded ? (
           <>
             <Thead>
-              <Th>{tCopchase("content_id")}</Th>
-              <Th>{tCopchase("content_nickname")}</Th>
-              <Th>{tCopchase("content_lastConnect")}</Th>
-              <Th>{tCopchase("content_warnsIssued")}</Th>
+              <Th>{tCopchase("content.id")}</Th>
+              <Th>{tCopchase("content.nickname")}</Th>
+              <Th>{tCopchase("content.lastConnect")}</Th>
+              <Th>{tCopchase("content.warnsIssued")}</Th>
             </Thead>
             <TBody>
               {result?.map((item, index) => {

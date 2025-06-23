@@ -9,7 +9,7 @@ import { toast } from "@/utils/toast";
 import { useTranslation } from "react-i18next";
 
 const Punishment: FC<Types> = ({ id, login, warns, statusAction, status }) => {
-  const [tPunishment] = useTranslation("punishment");
+  const [tPunishment] = useTranslation("punishments");
   const [tErrors] = useTranslation("errors");
 
   const copyPunishments = async () => {
@@ -23,13 +23,13 @@ const Punishment: FC<Types> = ({ id, login, warns, statusAction, status }) => {
       .join(";\n");
 
     try {
-      await navigator.clipboard.writeText(tPunishment("punishment_list", {
+      await navigator.clipboard.writeText(tPunishment("list.text", {
         nickname: login,
         id: id,
         punishments: punishmentsText,
         length: warns.length
       }));
-      toast.success(tPunishment("successfully_copied", { nickname: login }), { isByModal: true });
+      toast.success(tPunishment("list.copied", { nickname: login }), { isByModal: true });
     } catch (error) {
       console.error(error);
       toast.error(tErrors("error_unexpectedCopyError"));
@@ -41,19 +41,19 @@ const Punishment: FC<Types> = ({ id, login, warns, statusAction, status }) => {
       isOpen={status}
       onClose={() => statusAction(false)}
       title={`${tPunishment("title")} ${login} (${id})`}
-      firstButtonContent={tPunishment("button_contentCopy")}
+      firstButtonContent={tPunishment("button.copy")}
       firstButtonIcon={CopyIcon}
       firstButtonAction={copyPunishments}
-      secondButtonContent={tPunishment("button_contentClose")}
+      secondButtonContent={tPunishment("button.close")}
       secondButtonIcon={CheckIcon}
       secondButtonAction={() => statusAction(false)}
     >
       <Table width={100}>
         <Thead>
           <Tr>
-            <Th>{tPunishment("content_admin")}</Th>
-            <Th>{tPunishment("content_reason")}</Th>
-            <Th>{tPunishment("content_date")}</Th>
+            <Th>{tPunishment("content.admin")}</Th>
+            <Th>{tPunishment("content.reason")}</Th>
+            <Th>{tPunishment("content.date")}</Th>
           </Tr>
         </Thead>
         <TBody>

@@ -1,7 +1,10 @@
-"use client";
+import i18n from "i18next";
+
 export default function formatUnixDate(unixTimestamp: number): string {
+  const t = i18n.getFixedT(null, "suffixes");
+
   if (!unixTimestamp) {
-    return "Сейчас";
+    return t("now");
   }
 
   const date = new Date(unixTimestamp * 1000);
@@ -17,9 +20,9 @@ export default function formatUnixDate(unixTimestamp: number): string {
   yesterdayStart.setDate(todayStart.getDate() - 1);
 
   if (date >= todayStart) {
-    return `сегодня в ${date.toLocaleTimeString("ru-RU", options)}`;
+    return `${t("today")} ${date.toLocaleTimeString("ru-RU", options)}`;
   } else if (date >= yesterdayStart) {
-    return `вчера в ${date.toLocaleTimeString("ru-RU", options)}`;
+    return `${t("yesterday")} ${date.toLocaleTimeString("ru-RU", options)}`;
   } else {
     const dateOptions: Intl.DateTimeFormatOptions = {
       day: "2-digit",

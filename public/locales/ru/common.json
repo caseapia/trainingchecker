@@ -2,5 +2,17 @@
   "inputLabel": "Введите никнейм игрока",
   "buttonLabel": "Проверить",
   "no": "Нет",
-  "yes": "Да"
+  "yes": "Да",
+  "landing": {
+    "disclaimer_part1": "SAMP сервер",
+    "disclaimer_part2": "TRAINING",
+    "disclaimer_part3": "не имеет отношения к созданию данного сайта. Этот сайт является частным и использует",
+    "disclaimer_part4": "с разрешения его создателя.",
+    "purpose": "Разработано для упрощения работы с",
+    "open_source_message": "Этот проект имеет открытый исходный код. Вы можете дополнить или исправить его через",
+    "source_code_link": "исходный код на GitHub",
+    "last_update_prefix": "Последнее обновление было",
+    "training_api_link": "Training API"
+  },
+  "loading": "Загрузка..."
 }

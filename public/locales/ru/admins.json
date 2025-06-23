@@ -1,7 +1,9 @@
 {
   "title": "Список администраторов",
-  "content_id": "ID",
-  "content_nickname": "Никнейм",
-  "content_lastConnect": "Последний вход",
-  "content_warnsIssued": "Выдано варнов"
+  "content": {
+    "id": "ID",
+    "nickname": "Никнейм",
+    "lastConnect": "Последнее подключение",
+    "warnsIssued": "Выдано варнов"
+  }
 }
