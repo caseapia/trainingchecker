@@ -31,7 +31,7 @@ const AdditionalInfo: FC<Types> = ({ nickname }) => {
       console.error(error);
 
       if (error?.response?.status !== 200) {
-        toast.error(tErrors("error_unexpected_console"), { lifeTime: 6000 })
+        toast.error(tErrors("error_unexpected"), { lifeTime: 6000 })
       }
 
       setLoading(false);
