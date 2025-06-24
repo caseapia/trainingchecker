@@ -63,7 +63,7 @@ export type TranslationResources = {
     error_nickname: string;
     error_dataLoading: string;
     error_symbols: string;
-    error_unexpected_console: string;
+    error_unexpected: string;
     error_playerHasNoPunishments: string;
     error_unexpectedCopyError: string;
   }
@@ -180,5 +180,12 @@ export type TranslationResources = {
     today: string;
     yesterday: string;
     now: string;
+  }
+  title: {
+    admins: string;
+    badges: string;
+    copchase: string;
+    players: string;
+    worldlist: string;
   }
 }

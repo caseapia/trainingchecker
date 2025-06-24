@@ -5,7 +5,7 @@ import { ToastProvider } from "@/components/Toast/context/ToastContext";
 import ToastInitializer from "@/components/Toast/ToastInitializer";
 import Toast from "@/components/Toast/Toast";
 import React, { ReactNode, Suspense } from "react";
-import settings from "@/consts/settings";
+import settings from "@/shared/constants/settings";
 import Snow from "@/modules/Snow/Snow";
 import DynamicTitle from "@/hooks/setTitle";
 import { Inter } from "next/font/google"

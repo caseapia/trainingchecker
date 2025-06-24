@@ -5,7 +5,7 @@ import styles from "./page.module.scss"
 import { Table, TBody, Td, Th, Thead, Tr } from "@/components/table/Table";
 import Chip from "@/components/chip/Chip";
 import Button from "@/components/button/Button";
-import worldBlockWorlds from "@/consts/worldBlockWords";
+import worldBlockWorlds from "@/shared/constants/worldBlockWords";
 import PageWrapper from "@/components/pageWrapper/PageWrapper";
 import { toast } from "@/utils/toast";
 import textFormatter from "@/utils/helpers/textFormatter";

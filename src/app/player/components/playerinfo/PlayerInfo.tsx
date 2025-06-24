@@ -84,6 +84,7 @@ const PlayerInfo = () => {
       setTimeout(() => setIsRefreshing(false), 5000);
     } catch (error: any) {
       await metric.send(`"Ошибка при обновлении информации о игроке", ${error}`, "Error")
+      toast.error(tErrors("error_unexpected", { nickname: nickname }), { lifeTime: 5000 });
     }
   };
 
@@ -103,7 +104,7 @@ const PlayerInfo = () => {
     online,
     playerid,
     warn = [],
-  } = playerData || {};
+  } = playerData;
 
   const information: Information[] = [
     { title: tPlayerInfo("info.id"), key: id },

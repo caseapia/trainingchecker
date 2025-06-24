@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import BadgeProps, { allBadges } from "@/consts/badges";
+import BadgeProps, { allBadges } from "@/shared/constants/badges";
 import styles from "./BadgeRenderer.module.scss";
 import BootstrapTooltip from "@/components/styles/TooltipStyles";
 import { Modal } from "@/components/modal/Modal";
