@@ -35,6 +35,7 @@
     "junior": "Junior Moderator",
     "regular": "Moderator",
     "senior": "Senior Moderator",
-    "admin": "Administrator"
+    "admin": "Administrator",
+    "bot": "Bot"
   }
 }
