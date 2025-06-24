@@ -18,7 +18,8 @@ const moderKeyMap = {
   0: "player",
   1: "junior",
   2: "regular",
-  3: "senior"
+  3: "senior",
+  997: "bot"
 };
 
 export type ModerRole = typeof moderKeyMap[keyof typeof moderKeyMap];
