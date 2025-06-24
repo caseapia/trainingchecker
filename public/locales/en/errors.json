@@ -1,6 +1,9 @@
 {
-  "error_nickname": "Player with nickname {{nickname}} was not found. Redirect to the main page.",
+  "error_nickname": "Player with nickname {{nickname}} was not found. Redirect to the main page",
   "error_dataUpdate": "Error updating player information",
-  "error_dataLoading": "Error loading data. Check console for details.",
-  "error_symbols": "These characters are not allowed to be entered"
+  "error_dataLoading": "Error loading data. Check console for details",
+  "error_symbols": "These characters are not allowed to be entered",
+  "error_unexpected": "An unexpected error occurred",
+  "error_playerHasNoPunishments": "Player {{nickname}} has no punishments",
+  "error_unexpectedCopyError": "Failed to copy to clipboard"
 }

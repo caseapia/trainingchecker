@@ -1,7 +1,7 @@
 "use client"
-import React, { createContext, useContext, useState, ReactNode, MouseEvent } from "react";
+import React, { createContext, MouseEvent, ReactNode, useContext, useState } from "react";
 import { Toast, ToastContextType } from "./types";
-import settings from "@/shared/consts/settings";
+import settings from "@/shared/constants/settings";
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
 

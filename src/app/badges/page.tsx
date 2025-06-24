@@ -1,7 +1,7 @@
 "use client"
 import React, { Suspense } from "react"
 import styles from "./page.module.scss";
-import { allBadges } from "@/shared/consts/badges";
+import { allBadges } from "@/shared/constants/badges";
 import { Table, TBody, Td, Thead, Tr } from "@/components/table/Table";
 import PageWrapper from "@/components/pageWrapper/PageWrapper";
 import { useTranslation } from "react-i18next";

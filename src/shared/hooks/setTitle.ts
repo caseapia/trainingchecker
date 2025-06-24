@@ -1,11 +1,13 @@
 "use client";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import i18n from "i18next";
 
 const DynamicTitle = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const nickname = searchParams.get("nickname");
+  const t = i18n.getFixedT(null, "title")
 
   useEffect(() => {
     switch (pathname) {
@@ -14,23 +16,23 @@ const DynamicTitle = () => {
         break;
       }
       case "/admins": {
-        document.title = "Список администраторов - TRAINING CHECKER"
+        document.title = `${t("admins")} - TRAINING CHECKER`
         break;
       }
       case "/badges": {
-        document.title = "Список значков - TRAINING CHECKER"
+        document.title = `${t("badges")} - TRAINING CHECKER`
         break;
       }
       case "/copchase": {
-        document.title = "Мониторинг копчейза - TRAINING CHECKER"
+        document.title = `${t("copchase")} - TRAINING CHECKER`
         break;
       }
       case "/players": {
-        document.title = "Список игроков - TRAINING CHECKER"
+        document.title = `${t("players")} - TRAINING CHECKER`
         break;
       }
       case "/worldlist": {
-        document.title = "Список миров - TRAINING CHECKER"
+        document.title = `${t("worldlist")} - TRAINING CHECKER`
         break;
       }
       default:
