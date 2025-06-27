@@ -63,7 +63,6 @@ export const Header = () => {
   };
 
   const getPlayers = async () => {
-    setIsBadgeLoading(true);
     try {
       const response = await fetchPlayersCounter();
       if (response !== undefined && response !== null) {
