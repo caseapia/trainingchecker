@@ -30,10 +30,12 @@ const inter = Inter({
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   const snow = settings.find(s => s.option === "SNOW")?.value || false;
-
+  
   return (
-    <html lang="ru"
-      className={inter.className}>
+    <html
+      lang="ru"
+      className={inter.className}
+    >
     <head>
       <link
         rel="shortcut icon"

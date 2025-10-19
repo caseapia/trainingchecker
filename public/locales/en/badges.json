@@ -35,10 +35,6 @@
     "bot": {
       "title": "Bot",
       "description": "This account is operated by a bot and is an official user bot of TRAINING SANDBOX"
-    },
-    "chronos": {
-      "title": "Legion of Chronos",
-      "description": "An entity embodying authority, control, and absolute order. Governed by the Chronos system, the legion seeks dominance over time and space, enforcing strict discipline and unwavering authority."
     }
   }
 }

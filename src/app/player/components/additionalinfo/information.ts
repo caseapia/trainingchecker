@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import { AdditionalUserData } from "@/models/Player";
-import textFormatter from "@/utils/helpers/textFormatter";
+import UserData from "@/models/Player";
+import { TFunction } from "i18next";
 
 type TranslationKeys =
   | "achievement"
@@ -8,38 +8,38 @@ type TranslationKeys =
   | "copchase_rate"
   | "prefix"
   | "social_credits"
+  | "premium"
+  | "premium_expires"
   | "signs";
 
 interface InformationInterface {
   labelKey: TranslationKeys;
   key: ReactNode;
+  condition?: boolean;
 }
 
 type InformationElement = Omit<InformationInterface, "label"> & { labelKey: TranslationKeys }
 
-export const information = (info: AdditionalUserData | null): InformationElement[] => [
-  {
-    labelKey: "achievement",
-    key: textFormatter(String(info?.achievement)),
-  },
-  {
-    labelKey: "bonus_points",
-    key: info?.bonus_points,
-  },
-  {
-    labelKey: "copchase_rate",
-    key: info?.cop_chase_rating,
-  },
-  {
-    labelKey: "prefix",
-    key: textFormatter(String(info?.prefix)),
-  },
-  {
-    labelKey: "social_credits",
-    key: info?.social_credits,
-  },
-  // {
-  //   label: "signs",
-  //   key: textFormatter(String(info?.descriptions)),
-  // },
-];
+export const information = (info: UserData | null, t: TFunction<"common">): InformationElement[] => {
+  if (!info) return [];
+
+  return [
+    {
+      labelKey: "bonus_points" as const,
+      key: info.bonuspoints,
+    },
+    {
+      labelKey: "copchase_rate" as const,
+      key: info.chase_rating,
+    },
+    {
+      labelKey: "premium" as const,
+      key: info.premium ? t("yes") : t("no"),
+    },
+    {
+      labelKey: "premium_expires" as const,
+      key: info.premium_expdate,
+      condition: info.premium !== 0,
+    },
+  ].filter(item => item.condition ?? true);
+};

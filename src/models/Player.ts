@@ -16,6 +16,10 @@ interface UserData {
   playerid: number;
   regdate: string; // ISO 8601
   lastlogin: string; // ISO 8601
+  bonuspoints: number;
+  premium: number; // ISO 8601
+  premium_expdate: number;
+  chase_rating: number;
   warn: WarnEntry[];
 }
 

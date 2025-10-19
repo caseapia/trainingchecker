@@ -12,6 +12,11 @@
   width: 100%;
 
   .label {
-    font-weight: 600;
+    background: linear-gradient(90deg, #c5d4e0, #9db0c3, #6e7e8f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+
+    text-shadow: 0 0 1px rgba(157, 176, 195, 0.6);
   }
 }
