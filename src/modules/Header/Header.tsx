@@ -97,9 +97,11 @@ export const Header = () => {
         className={activePage === el.id ? styles.active : ""}
       >
         {el.isDisabled ? (
-          <BootstrapTooltip title={el.tooltipText}>
-          <span className={styles.disabled_element}
-            style={el.style}>
+          <BootstrapTooltip title={t("tooltip.pageIsNotAvailable")}>
+          <span
+            className={styles.disabled_element}
+            style={el.style}
+          >
             <el.icon/>
             {t(el.textKey)}
             {el.isNew && <Badge type="danger"

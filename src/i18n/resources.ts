@@ -13,6 +13,9 @@ export type TranslationResources = {
     worldlist: string;
     copchase: string;
     admins: string;
+    tooltip: {
+      pageIsNotAvailable: string;
+    }
   }
   common: {
     inputLabel: string;

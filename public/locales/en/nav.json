@@ -4,5 +4,8 @@
   "badges": "Badge List",
   "worldlist": "World List",
   "copchase": "Copchase Monitoring",
-  "admins": "Administrators"
+  "admins": "Administrators",
+  "tooltip": {
+    "pageIsNotAvailable": "This tab is temporarily unavailable"
+  }
 }
