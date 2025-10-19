@@ -30,22 +30,6 @@ export async function getPlayer(nickname: string | null): Promise<UserData> {
   return response.data.data;
 }
 
-// export async function getAdditionalInfo(nickname: string | null): Promise<AdditionalUserData> {
-//   const response = await chronoApiClient.get(`/user?nickname=${nickname}`);
-//   const data = response.data;
-//
-//   return {
-//     premium: data.premium,
-//     bonus_points: data.bonus_points,
-//     social_credits: data.social_credits,
-//     cop_chase_rating: data.cop_chase_rating,
-//     achievement: data.achievement,
-//     prefix: data.prefix,
-//     descriptions: data.descriptions,
-//     updated_at: data.updated_at,
-//   };
-// }
-
 export function getVerify(verify: number): string {
   const role = verifyKeyMap[verify as keyof typeof verifyKeyMap];
 
