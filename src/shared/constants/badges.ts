@@ -72,7 +72,7 @@ export const staffBadges: BadgeProps[] = [
     translationKey: "site",
     category: "staff",
     icon: React.createElement(CodeIcon),
-    accid: [113145, 125043, 271552],
+    accid: [113145, 125043],
     color: "rgb(42 170 104)",
     textColor: "rgb(42 170 104)"
   },

@@ -22,7 +22,6 @@ type HeaderProps = {
   id: string;
   style?: CSSProperties;
   isNew: boolean;
-  tooltipText?: string;
   isDisabled: boolean;
   isMobileAvailable: boolean;
 };
@@ -65,7 +64,6 @@ export const Elements: HeaderElement[] = [
     isNew: false,
     isDisabled: true,
     isMobileAvailable: false,
-    tooltipText: "Эта вкладка временно недоступна"
   },
   {
     textKey: "copchase",
@@ -75,7 +73,6 @@ export const Elements: HeaderElement[] = [
     isNew: false,
     isDisabled: true,
     isMobileAvailable: false,
-    tooltipText: "Эта вкладка временно недоступна",
   },
   {
     textKey: "admins",
