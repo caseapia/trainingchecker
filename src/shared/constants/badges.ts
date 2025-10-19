@@ -2,7 +2,6 @@ import React, { ReactNode } from "react";
 import CodeIcon from "@/icons/badges/code.svg";
 import MedalIcon from "@/icons/medal.svg";
 import RobotIcon from "@/icons/badges/robot.svg";
-import SatelLiteIcon from "@/icons/badges/satelLite.svg";
 import UserCogIcon from "@/icons/badges/userCog.svg";
 import UserShieldIcon from "@/icons/badges/userShield.svg";
 import UserSlashIcon from "@/icons/badges/userSlash.svg";
@@ -18,7 +17,6 @@ type BadgeTranslationKey =
   | "youtuber"
   | "exteam"
   | "bot"
-  | "chronos";
 
 type BadgeProps = {
   id: number;
@@ -116,15 +114,6 @@ export const playerBadges: BadgeProps[] = [
     color: "rgb(144, 203, 255)",
     accid: [605187, 659622, 659678, 37707],
     textColor: "rgb(144, 203, 255)"
-  },
-  {
-    id: 7,
-    translationKey: "chronos",
-    category: "player",
-    icon: React.createElement(SatelLiteIcon),
-    color: "#b22424",
-    nicknameIncludes: "czo.ooo",
-    textColor: "#b22424"
   },
 ]
 export const allBadges = [
