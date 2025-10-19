@@ -73,7 +73,6 @@ export const Header = () => {
       }
     } catch (error) {
       console.error("Ошибка при получении счетчика игроков:", error);
-      setOnline(NaN);
     } finally {
       setIsBadgeLoading(false);
     }
