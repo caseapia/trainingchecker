@@ -36,7 +36,7 @@ const AdditionalInfo: FC<Types> = ({ data }) => {
                 key={item.labelKey}
                 className={styles.row}
               >
-                <p className={styles.label}>{tAdditional(item.labelKey)}</p>
+                <p className={styles.label}>{tAdditional(item.labelKey)}:</p>
                 <p className={styles.content}>{item.key}</p>
               </div>
             ))}
