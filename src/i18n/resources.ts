@@ -75,6 +75,8 @@ export type TranslationResources = {
     prefix: string;
     social_credits: string;
     signs: string;
+    premium: string;
+    premium_expires: string;
   }
   punishments: {
     title: string;

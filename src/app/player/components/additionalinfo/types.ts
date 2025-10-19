@@ -1,5 +1,7 @@
+import UserData from "@/models/Player";
+
 interface Types {
-  nickname: string | null;
+  data: UserData;
 }
 
 export default Types;

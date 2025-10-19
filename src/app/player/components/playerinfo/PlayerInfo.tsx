@@ -162,7 +162,7 @@ const PlayerInfo = () => {
             {tPlayerInfo("button.punishments")}
           </Button>
         </div>
-        <AdditionalInfo nickname={login}/>
+        <AdditionalInfo data={playerData}/>
       </section>
       <Punishment
         id={id}

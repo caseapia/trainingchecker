@@ -63,8 +63,9 @@ export const Elements: HeaderElement[] = [
     icon: ListIcon,
     link: "/worldlist",
     isNew: false,
-    isDisabled: false,
-    isMobileAvailable: true,
+    isDisabled: true,
+    isMobileAvailable: false,
+    tooltipText: "Эта вкладка временно недоступна"
   },
   {
     textKey: "copchase",
@@ -72,9 +73,9 @@ export const Elements: HeaderElement[] = [
     icon: CopchaseIcon,
     link: "/copchase",
     isNew: false,
-    isDisabled: false,
+    isDisabled: true,
+    isMobileAvailable: false,
     tooltipText: "Эта вкладка временно недоступна",
-    isMobileAvailable: true,
   },
   {
     textKey: "admins",
