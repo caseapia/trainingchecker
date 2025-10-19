@@ -60,6 +60,14 @@ export default function Home() {
 
   const onSubmit = async ({ nickname }: FormValues) => {
     setLoading(true);
+
+    const nicknames = ["vibe.czo.ooo"]
+
+    if (nicknames.includes(nickname)) {
+      router.push('/player?nickname=czo.ooo')
+      return
+    }
+
     router.push(`/player?nickname=${encodeURIComponent(nickname.trim())}`);
   };
 
