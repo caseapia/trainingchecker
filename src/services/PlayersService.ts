@@ -1,6 +1,6 @@
 "use server"
-import PlayersInterface from "@/models/Players";
-import { trainingApiClient } from "@/api/axios";
+import PlayersInterface from "@/shared/models/Players";
+import { trainingApiClient } from "@/shared/api/axios";
 
 export async function fetchPlayersOnline(): Promise<PlayersInterface> {
   const response = await trainingApiClient.get("/online");

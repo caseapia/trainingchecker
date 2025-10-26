@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import { Modal } from "@/components/modal/Modal";
+import { Modal } from "@/shared/components/ui/modal/Modal";
 import Types from "@/app/player/components/punishments/types";
-import { Table, TBody, Td, Th, Thead, Tr } from "@/components/table/Table";
+import { Table, TBody, Td, Th, Thead, Tr } from "@/shared/components/ui/table/Table";
 import Link from "next/link";
 import CopyIcon from "@/icons/copy.svg";
 import CheckIcon from "@/icons/checkCircle.svg";

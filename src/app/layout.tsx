@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import { Header } from "@/modules/Header/Header";
+import "../shared/styles/_globals.css";
+import { Header } from "@/widgets/Header/Header";
 import { ToastProvider } from "@/components/Toast/context/ToastContext";
 import ToastInitializer from "@/components/Toast/ToastInitializer";
 import Toast from "@/components/Toast/Toast";
 import React, { ReactNode, Suspense } from "react";
 import settings from "@/shared/constants/settings";
-import Snow from "@/modules/Snow/Snow";
+import Snow from "@/widgets/Snow/Snow";
 import DynamicTitle from "@/hooks/setTitle";
 import { Inter } from "next/font/google"
 import PageTracker from "@/utils/helpers/PageTracker";

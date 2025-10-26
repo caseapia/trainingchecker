@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import UserData from "@/models/Player";
+import UserData from "@/shared/models/Player";
 import { TFunction } from "i18next";
 
 type TranslationKeys =

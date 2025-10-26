@@ -8,15 +8,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import styles from "./page.module.scss";
 import { getLastCommit } from "@/services/LandingService";
 
-import { Input } from "@/components/input/Input";
-import Button from "@/components/button/Button";
-import PageWrapper from "@/components/pageWrapper/PageWrapper";
-import LandingLoader from "@/modules/Loaders/LandingLoader";
+import { Input } from "@/shared/components/ui/input/Input";
+import Button from "@/shared/components/ui/button/Button";
+import PageWrapper from "@/shared/layouts/pageWrapper/PageWrapper";
+import LandingLoader from "@/widgets/Loaders/LandingLoader";
 
 import UserSearchIcon from "@/icons/page-main/userSearch.svg";
 import UserIcon from "@/icons/user.svg";
 import { useTranslation } from "react-i18next";
-import Readme from "@/modules/readme/Readme";
+import Readme from "@/widgets/readme/Readme";
 
 export default function Home() {
   const router = useRouter();

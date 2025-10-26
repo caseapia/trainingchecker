@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import UserData from "@/models/Player";
+import UserData from "@/shared/models/Player";
 import { toast } from "@/utils/toast";
 import { getDaySuffix } from "@/utils/helpers/getSuffix";
 import { getModer, getPlayer, getVerify } from "@/services/PlayerService";
@@ -10,10 +10,10 @@ import Difference from "@/utils/helpers/difference";
 
 import styles from "./PlayerInfo.module.scss";
 import Color from "@/components/styles/colors.module.scss";
-import Chip from "@/components/chip/Chip";
-import Button from "@/components/button/Button";
-import { BadgeRenderer } from "@/components/badgeRenderer/BadgeRenderer";
-import Loader from "@/modules/Loaders/index";
+import Chip from "@/shared/components/ui/chip/Chip";
+import Button from "@/shared/components/ui/button/Button";
+import { BadgeRenderer } from "@/entities/player/badgeRenderer/BadgeRenderer";
+import Loader from "@/widgets/Loaders/index";
 
 import RefreshIcon from "@/icons/page-player/refresh.svg";
 import HammerIcon from "@/icons/hammer.svg";
@@ -63,7 +63,7 @@ const PlayerInfo = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [nickname, router]);
+  }, [nickname, router, isLoading, tErrors]);
 
   useEffect(() => {
     (async () => {

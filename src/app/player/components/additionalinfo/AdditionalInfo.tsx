@@ -1,9 +1,9 @@
 "use client";
 import React, { FC, useState } from "react";
 import Types from "./types";
-import Button from "@/components/button/Button";
+import Button from "@/shared/components/ui/button/Button";
 import EyeIcon from "@/icons/page-player/eye.svg";
-import { Modal } from "@/components/modal/Modal";
+import { Modal } from "@/shared/components/ui/modal/Modal";
 import styles from "./AdditionalInfo.module.scss";
 import { information } from "@/app/player/components/additionalinfo/information";
 import { useTranslation } from "react-i18next";
