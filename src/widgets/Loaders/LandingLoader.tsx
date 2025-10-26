@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import ContentLoader from "react-content-loader";
-import BootstrapTooltip from "@/components/styles/TooltipStyles";
+import { BootstrapTooltip } from "@/shared/components/ui/tooltip/TooltipStyles";
 
 interface Interface {
   loadingText?: string;

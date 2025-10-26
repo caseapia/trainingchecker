@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "../shared/styles/_globals.css";
 import { Header } from "@/widgets/Header/Header";
-import { ToastProvider } from "@/components/Toast/context/ToastContext";
-import ToastInitializer from "@/components/Toast/ToastInitializer";
-import Toast from "@/components/Toast/Toast";
+import { ToastProvider } from "@/entities/Toast/context/ToastContext";
+import ToastInitializer from "@/entities/Toast/ToastInitializer";
+import Toast from "@/entities/Toast/Toast";
 import React, { ReactNode, Suspense } from "react";
 import settings from "@/shared/constants/settings";
 import Snow from "@/widgets/Snow/Snow";

@@ -5,7 +5,8 @@ import types from "./styles/Types.module.scss";
 import sizes from "./styles/Sizes.module.scss";
 import Lottie from "lottie-react";
 import LoadingIcon from "@/icons/LoadingIcon.json";
-import BootstrapTooltip from "@/components/styles/TooltipStyles";
+import { BootstrapTooltip } from "../tooltip/TooltipStyles";
+import { clsx } from "clsx";
 
 const Badge = ({
   handler,
@@ -26,7 +27,7 @@ const Badge = ({
   }, [handler]);
 
   return (
-    <div className={`${styles.Badge} ${types[type]} ${sizes[size]} ${additionalClass}`}>
+    <div className={clsx(styles.Badge, types[type], sizes[size], additionalClass)}>
       <BootstrapTooltip title={isLoading && "Загрузка..."}>
         <span>
 					{!isLoading && (

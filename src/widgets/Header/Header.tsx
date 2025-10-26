@@ -5,13 +5,13 @@ import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useIsMobileDevice } from "@/hooks/isMobileDevice";
 import { Elements } from "@/shared/constants/headerElements";
-import BootstrapTooltip from "@/components/styles/TooltipStyles";
+import { BootstrapTooltip } from "@/shared/components/ui/tooltip/TooltipStyles";
 import BarsIcon from "@/icons/components/header/bars.svg";
 import Button from "@/shared/components/ui/button/Button";
 import LinkedButton from "@/shared/components/ui/button/LinkedButton";
 import Badge from "@/shared/components/ui/inlineBadge/Badge";
 import headerVariants from "./variant";
-import Color from "@/components/styles/colors.module.scss";
+import Color from "@/shared/styles/tokens";
 import { useTranslation } from "react-i18next";
 import { fetchPlayersCounter } from "@/services/PlayersService";
 
@@ -175,7 +175,7 @@ export const Header = () => {
         ) : (
           <>
             <h1 translate="no">
-              TRAINING <span className={Color.colorRed}>CHECKER</span>
+              TRAINING <span className={Color.red()}>CHECKER</span>
               {isDevToolsEnable && (
                 <Badge type="danger"
                   content="Dev"

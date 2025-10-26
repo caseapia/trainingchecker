@@ -9,7 +9,7 @@ import { getModer, getPlayer, getVerify } from "@/services/PlayerService";
 import Difference from "@/utils/helpers/difference";
 
 import styles from "./PlayerInfo.module.scss";
-import Color from "@/components/styles/colors.module.scss";
+import Color from "@/shared/styles/tokens";
 import Chip from "@/shared/components/ui/chip/Chip";
 import Button from "@/shared/components/ui/button/Button";
 import { BadgeRenderer } from "@/entities/player/badgeRenderer/BadgeRenderer";
@@ -119,7 +119,7 @@ const PlayerInfo = () => {
     {
       title: tPlayerInfo("info.muteTime"),
       key: `${mute ? mute : tCommon("no")}`,
-      className: mute ? Color.colorRed : Color.colorGreen
+      className: mute ? Color.red() : Color.green()
     },
     {
       title: tPlayerInfo("info.registerDate"),
@@ -128,7 +128,7 @@ const PlayerInfo = () => {
     {
       title: tPlayerInfo("info.lastConnect"),
       key: `${online ? tPlayerInfo("info.lastConnectNow", { playerid: playerid }) : `${lastlogin} (${Difference(lastlogin)} ${getDaySuffix(Difference(lastlogin))} ${tPlayerInfo("info.timeAgo")})`}`,
-      className: online ? Color.colorGreen : ""
+      className: online ? Color.green() : ""
     }
   ]
 
