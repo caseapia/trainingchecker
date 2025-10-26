@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import BadgeProps, { allBadges } from "@/shared/constants/badges";
 import styles from "./BadgeRenderer.module.scss";
-import BootstrapTooltip from "@/components/styles/TooltipStyles";
+import { BootstrapTooltip } from "@/shared/components/ui/tooltip/TooltipStyles";
 import { Modal } from "@/shared/components/ui/modal/Modal";
 import { useIsMobileDevice } from "@/hooks/isMobileDevice";
 import BadgeRendererProps from "./props";
