@@ -1,8 +1,8 @@
-import { metricApiClient } from "@/api/axios";
+import { metricApiClient } from "@/shared/api/axios";
 import { headers } from "next/headers";
 import { UAParser } from "ua-parser-js";
 import axios from "axios";
-import GeoResponse from "@/models/Geo";
+import GeoResponse from "@/shared/models/Geo";
 
 export const POST = async (req: Request) => {
   const hdr = await headers();

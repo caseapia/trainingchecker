@@ -1,5 +1,5 @@
-import UserData, { AdditionalUserData } from "@/models/Player";
-import { trainingApiClient } from "@/api/axios";
+import UserData from "@/shared/models/Player";
+import { trainingApiClient } from "@/shared/api/axios";
 import i18n from "i18next";
 
 const verifyKeyMap = {
